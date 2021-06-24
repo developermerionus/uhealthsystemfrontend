@@ -776,14 +776,7 @@
 							item: this.$lang('actived'),
 							value: this.bonus.actived == 1 ? '活跃' : '不活跃'
 						})
-						this.infoList1.push({
-							item: this.$lang('activedPV'),
-							value: this.bonus.activedPV
-						})
-						this.infoList1.push({
-							item: this.$lang('restPV'),
-							value: this.bonus.restPV
-						})
+
 						this.infoList1.push({
 							item: this.$lang('member_level_name'),
 							value: this.bonus.member_level_name
@@ -793,6 +786,14 @@
 						this.infoList1.push({
 							item: this.$lang('highest_level'),
 							value: this.bonus.highest_level
+						})
+						this.infoList1.push({
+							item: this.$lang('activedPV'),
+							value: this.bonus.activedPV
+						})
+						this.infoList1.push({
+							item: this.$lang('restPV'),
+							value: this.bonus.restPV
 						})
 						this.infoList1.push({
 							item: this.$lang('saleCV'),
