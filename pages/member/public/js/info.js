@@ -60,6 +60,7 @@ export default {
 		this.getRegisterConfig();
 		this.getCountryList();
 		// this.pushAddresss = !disabled;
+		this.initLang();
 	},
 	onShow() {
 		this.initLang();
