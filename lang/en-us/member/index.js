@@ -7,7 +7,7 @@ export const lang = {
 	moreAuthority: 'More Authority',
 	allOrders: 'All Orders',
 	seeAllOrders: 'View Orders',
-	waitPay: 'Pending Orders',
+	waitPay: 'Pending Payments',
 	readyDelivery: 'Pending Shipments',
 	waitDelivery: 'Shipping Info',
 	waitEvaluate: 'Comment',

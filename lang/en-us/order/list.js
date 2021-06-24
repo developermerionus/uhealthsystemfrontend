@@ -3,9 +3,9 @@ export const lang = {
 	title: 'Order List',
 	emptyTips: 'No Order',
 	all: 'All',
-	waitPay: 'Pending Orders',
-	readyDelivery: 'Order Status',
-	waitDelivery: 'Shipping Info',
+	waitPay: 'Pending Payments',
+	readyDelivery: 'Pending Shipments',
+	waitDelivery: 'Pending Receive',
 	waitEvaluate: '待评价',
 	update: "释放刷新",
 	updateIng: "loading..."
