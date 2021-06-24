@@ -1,0 +1,60 @@
+<template>
+	<uni-indexed-list :options="list" :show-select="false" @click="bindClick" />
+</template>
+
+<script>
+	// import airport from '@/common/airport.js'
+	import uniIndexedList from '@/components/uni-indexed-list/uni-indexed-list.vue'
+	export default {
+		components: {
+			uniIndexedList
+		},
+		data() {
+			return {
+				list:[],
+				// from: 0,  // 0 来自个人信息 1，收货地址
+				country_id: 172,
+			}
+		},
+		onLoad(option) {
+			console.log(option);
+			this.country_id = option.country;
+			// this.from = !option.from ? 0 : 1;
+			this.getUsStates(option.country);
+		},
+		methods: {
+			getUsStates(pid) {
+				this.$api.sendRequest({
+					url: '/api/member/getUsStates',
+					data: {
+						pid,
+					},
+					success: res => {
+						console.log(res);
+						if (res.code == 0) {
+							this.list = res.data;
+						}
+					},
+				})
+			},
+			bindClick(e) {
+				// console.log('点击item，返回数据' + JSON.stringify(e), e.item.name)
+				let pages = getCurrentPages();             //获取所有页面栈实例列表
+				let nowPage = pages[ pages.length - 1];    //当前页页面实例
+				let prevPage = pages[ pages.length - 2 ];  //上一页页面实例
+				// console.log(prevPage);
+				if (prevPage.__page__.path == "/otherpages/member/address_edit/address_edit") {
+					prevPage.formData.state = e.item.name;
+				} else if (prevPage.__page__.path == "/pages/member/info/info"){
+					// console.log(this.country_id)
+					prevPage.updateStateProvince(e.item.name, this.country_id);
+				}
+				uni.navigateBack({
+					delta: 1
+				})
+			}
+		}
+	}
+</script>
+
+<style></style>

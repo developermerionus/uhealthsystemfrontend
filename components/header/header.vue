@@ -1,0 +1,71 @@
+<template>
+	<view>
+	<view class="header-main">
+		<view class="top-bar">
+			header
+		</view>
+		<view class="menu-main">
+			<a>
+				<image class="image-logo" src="../../static/images/logo/oldUhealth-logo-g.png" @click="uploadImg" mode=""></image>
+			</a>
+		</view>
+	</view>
+	<view class="occupy-block"></view>
+	</view>
+</template>
+
+<script>
+</script>
+
+<style>
+	.header-main {
+		width:1000px;
+		position:fixed;
+		z-index:1000;
+		background-color: white;
+		color: #1767b3;
+		font-size: 18px;
+		font-weight: 500;
+		height: 80px;
+			.top-bar {
+				margin-left:-1000px;
+				width:12000px;
+				height:30px;
+				background-color: #f2f2f2;
+			}
+			a {
+				outline: none;
+				color: #30aae7;
+				text-decoration: none;
+				cursor: pointer;
+			}
+			
+			.menu-main {
+				background-color: white;
+				height: 100%;
+				width: 100%;
+				max-width: 1280px;
+				padding: 0 8px;
+				margin: 0 auto;
+				flex-direction: row;
+				box-sizing: border-box;
+				display: flex;
+				place-content: flex-start;
+				align-items: center;
+				height:63px;
+				width:12000px;
+				a {
+					height:50px;
+					.image-logo {
+						height: 50px;
+						    aspect-ratio: auto 50 / 50;
+						    width: 50px;
+					}
+				}
+			}
+		
+	}	
+	.occupy-block {
+		height:73.5px;
+	}
+</style>
