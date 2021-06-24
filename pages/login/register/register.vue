@@ -57,12 +57,14 @@
 				<text @click="switchRegisterMode" >使用用户名注册</text>
 				<text @click="switchRegisterMode" >使用手机号注册</text>
 			</view> -->
-			<view class="btn_view"><button type="primary" @click="register"
-					class="login-btn color-base-border color-base-bg">{{$lang('registered')}}</button></view>
+			<!-- <view class="btn_view"><button type="primary" @click="register"
+					class="login-btn color-base-border color-base-bg">{{$lang('registered')}}</button></view> -->
 			<view class="regisiter-agreement">
 				{{$lang('registerTips')}}
-				<text class="color-base-text" @click="openPopup">《注册协议》</text>
+				<text class="color-base-text" @click="openPopup">{{$lang('registerAgreement')}}</text>
 			</view>
+			<view class="btn_view"><button type="primary" @click="register"
+					class="login-btn color-base-border color-base-bg">{{$lang('registered')}}</button></view>
 		</view>
 
 		<view @touchmove.prevent>
@@ -172,7 +174,7 @@
 			// 刷新多语言
 			this.$langConfig.refresh();
 			// #ifdef MP
-			this.getCode();
+			this.getCode(); 
 			// #endif
 		},
 		onReady() {
