@@ -85,7 +85,7 @@
 						</view>
 						<view class="user-info-box no-log" v-if="!token"
 							@click="$util.redirectTo('/pages/login/login/login')">
-							<view class="user-head">
+							<view class="user-head" style="margin: auto;">
 								<image :src="$util.getDefaultImage().default_headimg"></image>
 							</view>
 
@@ -99,7 +99,7 @@
 						</view>
 
 					</view>
-					<view class="wallet-button-container">
+					<view class="wallet-button-container" v-if="token">
 						<button class="wallet-button" type="default"
 							@click="redirectToLink(bonusPageObject.link, bonusPageObject.index)">
 							<image class="wallet-icon" src="../../../static/images/icons/wallet.png"></image>
@@ -406,6 +406,13 @@
 		onLoad() {
 			this.columnNum = this.findColumnNum();
 			this.toolsColumnNum = this.toolsFindColumnNum();
+			
+			this.token = uni.getStorageSync('token');
+			if (!this.token) {
+				uni.redirectTo({
+					url: '/pages/login/login/login'
+				});
+			}
 
 
 			uni.hideTabBar();
