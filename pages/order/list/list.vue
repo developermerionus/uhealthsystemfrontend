@@ -2,7 +2,7 @@
 	<view class="order-container" :data-theme="themeStyle">
 		<view class="order-nav">
 			<view v-for="(statusItem, statusIndex) in statusList" :key="statusIndex" class="uni-tab-item order-nav-item" :id="statusItem.id" :data-current="statusIndex" @click="ontabtap">
-				<text class="uni-tab-item-title" :class="statusItem.status == orderStatus ? 'uni-tab-item-title-active color-base-border  color-base-text' : ''">
+				<text class="uni-tab-item-title order-nav-item-title" :class="statusItem.status == orderStatus ? 'uni-tab-item-title-active color-base-border  color-base-text' : ''">
 					{{ statusItem.name }}
 				</text>
 			</view>
