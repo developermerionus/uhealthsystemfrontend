@@ -13,7 +13,7 @@ export const lang = {
 
 	provinceCityPlaceHolder: '请输入省市区县',
 	cityPlaceHolder: '请输入城市',
-	address: 'Address',
+	// address: 'Address',
 	
 	address: '详细地址',
 	addressPlaceholder: '详细地址不能为空',
