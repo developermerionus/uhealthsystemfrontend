@@ -105,5 +105,7 @@ export const lang = {
 	
 	// Active Status - '活跃' : '不活跃'
 	'活跃' : 'Active',
-	'不活跃' : 'Non-Active'
+	'不活跃' : 'Non-Active',
+	
+	'待结算' : 'Pending'
 }

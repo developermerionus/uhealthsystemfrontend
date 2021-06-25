@@ -683,11 +683,11 @@
 
 						this.infoList2.push({
 							item: this.$lang('restLCV'),
-							value: this.bonus.restLCV == -1 ? '待结算' : this.bonus.restLCV
+							value: this.bonus.restLCV == -1 ? this.$lang('待结算') : this.bonus.restLCV
 						})
 						this.infoList2.push({
 							item: this.$lang('restRCV'),
-							value: this.bonus.restRCV == -1 ? '待结算' : this.bonus.restRCV
+							value: this.bonus.restRCV == -1 ? this.$lang('待结算') : this.bonus.restRCV
 						})
 
 						this.infoList2.push({
@@ -721,7 +721,7 @@
 
 						this.infoList3.push({
 							item: this.$lang('lastweek_bonus'),
-							value: this.bonus.lastweek_bonus == -1 ? '待结算' : this.bonus.lastweek_bonus
+							value: this.bonus.lastweek_bonus == -1 ? this.$lang('待结算') : this.bonus.lastweek_bonus
 						})
 						this.infoList3.push({
 							item: this.$lang('recommend_rtotal'),
@@ -809,7 +809,7 @@
 						})
 						this.infoList2.push({
 							item: this.$lang('restLCV'),
-							value: this.bonus.restLCV == -1 ? '待结算' : this.bonus.restLCV
+							value: this.bonus.restLCV == -1 ? this.$lang('待结算') : this.bonus.restLCV
 						})
 						this.infoList2.push({
 							item: this.$lang('RCV'),
@@ -822,7 +822,7 @@
 						})
 						this.infoList2.push({
 							item: this.$lang('restRCV'),
-							value: this.bonus.restRCV == -1 ? '待结算' : this.bonus.restRCV
+							value: this.bonus.restRCV == -1 ? this.$lang('待结算') : this.bonus.restRCV
 						})
 						this.infoList2.push({
 							item: this.$lang('activedLQV'),
@@ -857,7 +857,7 @@
 						})
 						this.infoList3.push({
 							item: this.$lang('lastweek_bonus'),
-							value: this.bonus.lastweek_bonus == -1 ? '待结算' : this.bonus.lastweek_bonus
+							value: this.bonus.lastweek_bonus == -1 ? this.$lang('待结算') : this.bonus.lastweek_bonus
 						})
 						this.infoList3.push({
 							item: this.$lang('epoint_balance'),
