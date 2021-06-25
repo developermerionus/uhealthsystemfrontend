@@ -76,7 +76,9 @@ import nsNavbar from '@/components/ns-navbar/ns-navbar.vue';
 import { Weixin } from 'common/js/wx-jssdk.js';
 import globalConfig from '@/common/js/golbalConfig.js';
 import nsCopyRight from '@/components/ns-copyright/ns-copyright.vue';
+
 let systemInfo = uni.getSystemInfoSync();
+
 export default {
 	components: {
 		uniPopup,

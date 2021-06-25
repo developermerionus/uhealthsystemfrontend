@@ -84,5 +84,18 @@ export const lang = {
 	thisweek: 'this week',
 	lastweek: 'last week',
 	
-	electronicwallet:'WALLET'
+	electronicwallet:'WALLET',
+	// 会员等级
+	'准会员' : 'Pre-Member',
+	'会员': 'Member',
+	'青铜' : 'Brown',
+	'白银' : 'Silver',
+	'黄金' : 'Gold',
+	'珍珠' : 'Pearl',
+	'翡翠' : 'Jade',
+	'蓝宝' : 'Sapphire',
+	'红宝' : 'Ruby',
+	'绿宝' : 'Emerald',
+	'钻石' : 'Diamond',
+	'皇冠钻石' : 'Crown Diamond'
 }

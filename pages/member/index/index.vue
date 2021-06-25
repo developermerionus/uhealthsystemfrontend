@@ -64,7 +64,7 @@
 											</view> -->
 										<view style='height:50rpx;line-height: 50rpx;'
 											class="user-member iconfont iconhuiyuan">
-											<text>{{ memberInfo.member_level_name }}</text>
+											<text>{{ $lang( memberInfo.member_level_name  )}}</text>
 										</view>
 										<view class="user-title-id">ID:{{ memberInfo.member_id }}</view>
 
