@@ -84,5 +84,28 @@ export const lang = {
 	thisweek: 'this week',
 	lastweek: 'last week',
 	
-	electronicwallet:'WALLET'
+	electronicwallet:'WALLET',
+	// 会员等级
+	'准会员' : 'Pre-Member',
+	'会员': 'Member',
+	'青铜' : 'Brown',
+	'白银' : 'Silver',
+	'黄金' : 'Gold',
+	'珍珠' : 'Pearl',
+	'翡翠' : 'Jade',
+	'蓝宝' : 'Sapphire',
+	'红宝' : 'Ruby',
+	'绿宝' : 'Emerald',
+	'钻石' : 'Diamond',
+	'皇冠钻石' : 'Crown Diamond',
+	
+	// 左/右区
+	'左区-left' : 'Left Branch',
+	'右区-right': 'Right Branch',
+	
+	// Active Status - '活跃' : '不活跃'
+	'活跃' : 'Active',
+	'不活跃' : 'Non-Active',
+	
+	'待结算' : 'Pending'
 }
