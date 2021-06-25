@@ -1,5 +1,7 @@
 <template>
 	<scroll-view scroll-y="true" class="container" :data-theme="themeStyle">
+		<view class="outer-container-wrap">
+			<navbar></navbar>
 		<!-- <view class="iconfont iconclose back-btn" @click="$util.goBack()"></view> -->
 		<view class="header-wrap">
 			<view class="title">{{title}}</view>
@@ -63,8 +65,8 @@
 				{{$lang('registerTips')}}
 				<text class="color-base-text" @click="openPopup">{{$lang('registerAgreement')}}</text>
 			</view>
-			<view class="btn_view"><button type="primary" @click="register"
-					class="login-btn color-base-border color-base-bg">{{$lang('registered')}}</button></view>
+			<view class="btn_view" id="pages_login_register_register-btn_view"><button type="primary" @click="register"
+					class="login-btn color-base-border color-base-bg"> {{$lang('registered')}}</button></view>
 		</view>
 
 		<view @touchmove.prevent>
@@ -84,6 +86,7 @@
 
 		<loading-cover ref="loadingCover"></loading-cover>
 		<register-reward ref="registerReward"></register-reward>
+		</view>
 	</scroll-view>
 </template>
 
@@ -594,6 +597,16 @@
 
 <style lang="scss">
 	@import '../public/css/common.scss';
+	#pages_login_register_register-btn_view {
+		float: none;
+		margin: 0 auto;
+	}
+	
+	.header-wrap, .body-wrap {
+		max-width: 750px;
+		margin: 0 auto;
+	}
+
 </style>
 <style scoped>
 	/deep/ .reward-popup .uni-popup__wrapper-box {
