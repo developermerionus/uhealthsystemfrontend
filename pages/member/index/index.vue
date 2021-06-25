@@ -476,11 +476,8 @@
 				let result = 0;
 				uni.getSystemInfo({
 					success: function(res) {
-						console.log(res.windowWidth);
 						result = res.windowWidth >= 800 ? 3 : 2;
-						console.log('result', result)
-						//console.log('screenGreaterSixHundredPx', this.screenGreaterSixHundredPx);
-					}
+						}
 				});
 				return result;
 			},
@@ -488,16 +485,12 @@
 				let result = 0;
 				uni.getSystemInfo({
 					success: function(res) {
-						console.log(res.windowWidth);
 						result = res.windowWidth >= 800 ? 4 : 2;
-						console.log('result', result)
-						//console.log('screenGreaterSixHundredPx', this.screenGreaterSixHundredPx);
-					}
+						}
 				});
 				return result;
 			},
 			radioChange(evt) {
-				// console.log(evt.detail.value);
 				this.lastweek = evt.detail.value;
 				this.getBonus()
 			},
@@ -551,8 +544,6 @@
 					this.defaultInfo.bgImg = res.data.bgImg;
 					this.defaultInfo.menuStyle = res.data.menuStyle;
 					this.defaultInfo.menuList = res.data.menuList;
-					console.log('menuList', this.defaultInfo.menuList);
-					console.log('menuList444', res.data.menuList);
 					let bonusObject = {};
 					this.defaultInfo.menuList.forEach((el, index) => {
 						if (el.text === "提现") {
@@ -561,8 +552,6 @@
 						}
 					});
 					this.bonusPageObject = bonusObject;
-					console.log('bonusObject', bonusObject)
-
 					this.defaultInfo.insertGap = res.data.insertGap;
 					this.defaultInfo.level = res.data.level || 1;
 				}
@@ -615,7 +604,6 @@
 					},
 					async: false
 				});
-				console.log(res);
 				if (res.code >= 0 && res.data) {
 					this.bonus = res.data[0];
 					// console.log(this.bonus);
