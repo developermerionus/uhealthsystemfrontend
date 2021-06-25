@@ -97,5 +97,13 @@ export const lang = {
 	'红宝' : 'Ruby',
 	'绿宝' : 'Emerald',
 	'钻石' : 'Diamond',
-	'皇冠钻石' : 'Crown Diamond'
+	'皇冠钻石' : 'Crown Diamond',
+	
+	// 左/右区
+	'左区-left' : 'Left Branch',
+	'右区-right': 'Right Branch',
+	
+	// Active Status - '活跃' : '不活跃'
+	'活跃' : 'Active',
+	'不活跃' : 'Non-Active'
 }

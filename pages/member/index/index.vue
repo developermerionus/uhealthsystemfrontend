@@ -66,7 +66,7 @@
 											class="user-member iconfont iconhuiyuan">
 											<text>{{ $lang( memberInfo.member_level_name  )}}</text>
 										</view>
-										<view class="user-title-id">ID:{{ memberInfo.member_id }}</view>
+										<view class="user-title-id">ID: {{ memberInfo.member_id }}</view>
 
 									</view>
 
@@ -78,7 +78,7 @@
 										 -->
 
 									<!-- <view class="user-label2" :style="defaultTextColor">{{ memberInfo.branch}}</view> -->
-									<view class="user-label2">{{ memberInfo.branch}}</view>
+									<view class="user-label2">{{ $lang( memberInfo.branch ) }}</view>
 								</view>
 							</view>
 
@@ -195,8 +195,11 @@
 								<block v-for="(item, index) in infoList1" :key="index">
 									<uni-grid-item class="makesameline">
 										<text class="text memberInforLabel">{{ item.item }}</text>
-										<text class="text memberInforContent"
-											:class="{color: item.value=='不活跃'}">{{ item.value}}</text>
+										<!-- <text class="text memberInforContent"
+											:class="{color: item.value=='不活跃' }">{{ item.value }}</text> -->
+											<text class="text memberInforContent"
+												:class="{color: item.value == '不活跃' || item.value == 'Non-Active'}">
+												{{ item.value }}</text>
 									</uni-grid-item>
 								</block>
 							</uni-grid>
@@ -611,7 +614,7 @@
 						this.infoList1 = [];
 						this.infoList1.push({
 							item: this.$lang('actived'),
-							value: this.bonus.actived == 1 ? '活跃' : '不活跃'
+							value: this.bonus.actived == 1 ? this.$lang('活跃') : this.$lang('不活跃')
 						})
 						this.infoList1.push({
 							item: this.$lang('activedPV'),
@@ -619,7 +622,7 @@
 						})
 						this.infoList1.push({
 							item: this.$lang('member_level_name'),
-							value: this.bonus.member_level_name
+							value: this.$lang(this.bonus.member_level_name)
 						})
 						this.infoList1.push({
 							item: this.$lang('restPV'),
@@ -628,7 +631,7 @@
 
 						this.infoList1.push({
 							item: this.$lang('highest_level'),
-							value: this.bonus.highest_level
+							value: this.$lang(this.bonus.highest_level)
 						})
 						this.infoList1.push({
 							item: this.$lang('saleCV'),
@@ -766,7 +769,7 @@
 						this.infoList1 = [];
 						this.infoList1.push({
 							item: this.$lang('actived'),
-							value: this.bonus.actived == 1 ? '活跃' : '不活跃'
+							value: this.bonus.actived == 1 ? this.$lang('活跃') : this.$lang('不活跃')
 						})
 
 						this.infoList1.push({
