@@ -774,13 +774,13 @@
 
 						this.infoList1.push({
 							item: this.$lang('member_level_name'),
-							value: this.bonus.member_level_name
+							value: this.$lang(this.bonus.member_level_name)
 						})
 
 
 						this.infoList1.push({
 							item: this.$lang('highest_level'),
-							value: this.bonus.highest_level
+							value: this.$lang(this.bonus.highest_level)
 						})
 						this.infoList1.push({
 							item: this.$lang('activedPV'),
