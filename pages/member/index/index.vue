@@ -406,15 +406,12 @@
 		onLoad() {
 			this.columnNum = this.findColumnNum();
 			this.toolsColumnNum = this.toolsFindColumnNum();
-			
 			this.token = uni.getStorageSync('token');
 			if (!this.token) {
 				uni.redirectTo({
 					url: '/pages/login/login/login'
 				});
 			}
-
-
 			uni.hideTabBar();
 			if (this.addonIsExit.memberwithdraw) {
 				this.getWithdrawConfig();
