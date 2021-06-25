@@ -2,9 +2,8 @@
 	<view>
 		<view class="header-main">
 			<view class="top-bar">
-				header
 			</view>
-			<view class="menu-main">
+			<view class="menu-main" @click="$util.redirectTo('/pages/member/index/index')">
 				<a>
 					<image class="image-logo" src="../../static/images/logo/oldUhealth-logo-g.png" @click="uploadImg" mode=""></image>
 				</a>

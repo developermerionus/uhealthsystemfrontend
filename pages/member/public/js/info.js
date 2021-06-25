@@ -48,6 +48,7 @@ export default {
 			],
 			country: {},
 			form: [],
+			showLang:''
 		};
 	},
 	onLoad(option) {
@@ -63,7 +64,6 @@ export default {
 		this.initLang();
 	},
 	onShow() {
-		this.initLang();
 		this.getMemberConfig();
 	},
 	onHide() {
@@ -117,7 +117,7 @@ export default {
 				nickname: this.form.find((item)=>{return item.name=='nickname'}).value,
 				// surname: this.form[13].value,
 			}
-			if (this.memberInfo.member_level = 1) {
+			if (this.memberInfo.member_level == 1) {
 				data.id_number = this.form.find((item)=>{return item.name=='id_number'}).value;
 			} else {
 				data.id_number = this.memberInfo.id_number;
@@ -173,7 +173,18 @@ export default {
 			this.langList = this.$langConfig.list();
 			if (!uni.getStorageSync("lang")) {
 				this.langIndex = 0;
+				this.showLang =  this.langList[0].name;
 			} else {
+				this.langList.forEach((el,index) => {
+					console.log('el.value',el.value);
+					console.log('uni.getStorageSync("lang")',uni.getStorageSync("lang"));
+					if(el.value==uni.getStorageSync("lang")){
+						console.log('i am in');
+						this.showLang = this.langList[index].name;
+						console.log('this.showLang',this.showLang);
+					}
+				})
+			    
 				for (let i = 0; i < this.langList.length; i++) {
 					if (this.langList[i].value == uni.getStorageSync("lang")) {
 						this.langIndex = i;
@@ -270,11 +281,10 @@ export default {
 						itemList: newArray,
 						success: function(res) {
 							if (that.langIndex != res.tapIndex) {
-								that.langIndex = res.tapIndex
-								if (that.memberInfo.language == that.langList[res.tapIndex].name) return;
-								that.save(item, that.langList[res.tapIndex].name)
-								// that.$language = that.langList[res.tapIndex].name
-								// console.log(that.$language)
+								that.langIndex = res.tapIndex;	
+								if (this.showLang === that.langList[res.tapIndex].name) {return}
+								this.showLang = that.langList[that.langIndex].name;
+								that.save(item, that.langList[res.tapIndex].name);
 								that.$langConfig.change(that.langList[res.tapIndex].value)
 								// that.$forceUpdate();
 							}
@@ -439,7 +449,6 @@ export default {
 					value,
 				},
 				success: res => {
-					// console.log(res, res.code);
 					if (res.code == 0) {
 						this.getInfo();
 						this.$util.showToast({

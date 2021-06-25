@@ -15,7 +15,8 @@
 				</view>
 				<view class="info-list-cell info-list-con" hover-class="cell-hover" @click="modifyInfo('language')">
 					<text class="cell-tit">{{ $lang('language')}}</text>
-					<text class="cell-tip ">{{memberInfo.language}}</text>
+					<!-- <text class="cell-tip ">{{memberInfo.language}}</text> -->
+					<text class="cell-tip ">{{showLang}}</text>
 					<!-- <text> {{language}}</text> -->
 					<text class="cell-more"></text>
 				</view>
