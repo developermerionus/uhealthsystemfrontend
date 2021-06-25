@@ -176,12 +176,8 @@ export default {
 				this.showLang =  this.langList[0].name;
 			} else {
 				this.langList.forEach((el,index) => {
-					console.log('el.value',el.value);
-					console.log('uni.getStorageSync("lang")',uni.getStorageSync("lang"));
 					if(el.value==uni.getStorageSync("lang")){
-						console.log('i am in');
 						this.showLang = this.langList[index].name;
-						console.log('this.showLang',this.showLang);
 					}
 				})
 			    
