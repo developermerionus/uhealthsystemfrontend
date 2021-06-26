@@ -7,5 +7,7 @@ export const lang = {
 	create_time: '创建时间',
 	close_time: '关闭时间',
 	delivery_type: '配送方式',
-	customer_service: '联系客服'
+	customer_service: '联系客服',
+	orderComments: '备注'
+	
 }
