@@ -32,7 +32,7 @@
 .header-main {
 		width:1000px;
 		position:fixed;
-		z-index:1000;
+		z-index:200;
 		background-color: white;
 		color: #1767b3;
 		font-size: 18px;
