@@ -267,9 +267,10 @@ uni-page-body {
 			place-content: center;
 			align-items: center;
 			flex-direction: column;
-			margin-left: 17rpx;
+			text-align: center;
 			height: 100%;
 			font-size:16px;
+			margin-left:10px;
 			text {
 				width: 300rpx;
 				overflow: hidden;
@@ -280,9 +281,6 @@ uni-page-body {
 				line-height: 1;
 			}
 			.user-title {
-				margin-left: 10rpx;
-				padding-left: 20rpx;
-			
 				width: 130px;
 				color: #fff;
 				line-height: 1.2;
@@ -717,18 +715,21 @@ uni-page-body {
 						font-size:18px!important;
 						flex-direction: row!important;
 						place-content: space-between!important;
-						.combineMemeberId {
-							
+						margin-left:30px!important;
+							.iconfont{
+								font-size: 18px!important;
+							}
 							.user-member {
-								width:100px;
+								color:#f49f4b!important;
 								margin-left:0px!important;
 								padding-left:0px!important;
 								padding-right:0px!important;
-								.iconfont{
-									font-size: 18px!important;
-								}
+								height:unset!important;
+								line-height:unset!important;
+								
 								uni-text {
 									font-size: 18px!important;
+									color:#f49f4b!important;
 								}
 							}
 							.user-title-id {
@@ -736,15 +737,23 @@ uni-page-body {
 								margin-left:0px!important;
 								padding-left:0px!important;
 								padding-right:0px!important;
+								line-height: unset!important;
+								height:unset!important;
 							}
-						}
+						
 						.user-title {
 							font-size: 18px!important;
 							margin-bottom:0px!important;
+							line-height:unset!important;
+							width:unset!important;
+							margin:unset!important;
+							padding:unset!important;
 						}
 						.user-label2 {
 							margin-top:0px!important;
 							font-size: 18px!important;
+							line-height:unset!important;
+							padding:0!important;
 						}
 						
 					}
@@ -753,15 +762,15 @@ uni-page-body {
 				}
 		}
 		
-@media screen and (min-width: 1280px){
-				// .dividerline {
-				// 	width:100%!important;
-				// }
-				// .user-info-box {
-				// 	width:800px;
-				// }
-	
-		}
+@media screen and (min-width: 800px){
+			.user-info-box {
+				min-width:800px;
+				.user-box{
+					margin-left:62px!important;
+				}
+			
+			}
+}
 
 
 @media screen and (max-width: 800px) {

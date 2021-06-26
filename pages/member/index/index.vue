@@ -55,10 +55,10 @@
 								</view> -->
 								<view class="user-box">
 
-									<view class="user-title">Hi, {{ memberInfo.username }}!</view>
+									<view class="user-title">Hi, {{ memberInfo.firstname }}!</view>
 									<!-- <view class="user-title-id" :style="defaultTextColor">ID:{{ memberInfo.member_id }}</view> -->
 									<!-- 	<view v-if="!screenGreaterSixHundredPx" class="combineMemeberId"> -->
-									<view class="combineMemeberId">
+									<view v-if="!screenGreaterSixHundredPx" class="combineMemeberId">
 										<!-- <view :style="defaultTextColor" style='height:50rpx;line-height: 50rpx;' class="user-member iconfont iconhuiyuan">
 												<text  :style="defaultTextColor">{{ memberInfo.member_level_name }}</text>
 											</view> -->
@@ -69,13 +69,15 @@
 										<view class="user-title-id">ID: {{ memberInfo.member_id }}</view>
 
 									</view>
+									
 
 									<!--if the width is >600px show these two -->
-									<!-- <view v-if="screenGreaterSixHundredPx" style='height:50rpx;line-height: 50rpx;' class="user-member iconfont iconhuiyuan">
-											<text>{{ memberInfo.member_level_name }}</text>
-										</view>
-										<view v-if="screenGreaterSixHundredPx" class="user-title-id" >ID:{{ memberInfo.member_id }}{{ memberInfo.member_level_name }}</view>
-										 -->
+									<view v-if="screenGreaterSixHundredPx" style='height:50rpx;line-height: 50rpx;' class="user-member iconfont iconhuiyuan">
+											<text>{{ $lang( memberInfo.member_level_name  )}}</text>
+									</view>
+									<view v-if="screenGreaterSixHundredPx" class="user-title-id" >ID:{{ memberInfo.member_id }}
+									</view>
+										
 
 									<!-- <view class="user-label2" :style="defaultTextColor">{{ memberInfo.branch}}</view> -->
 									<view class="user-label2">{{ $lang( memberInfo.branch ) }}</view>
@@ -353,6 +355,7 @@
 				bonusPageObject: {},
 				columnNum: 2,
 				toolsColumnNum: 2,
+				screenGreaterSixHundredPx:false
 
 			}
 		},
@@ -409,6 +412,7 @@
 		onLoad() {
 			this.columnNum = this.findColumnNum();
 			this.toolsColumnNum = this.toolsFindColumnNum();
+			this.screenGreaterSixHundredPx = this.findTitleFormat();
 			this.token = uni.getStorageSync('token');
 			if (!this.token) {
 				uni.redirectTo({
@@ -436,6 +440,7 @@
 			uni.onWindowResize((res) => {
 				this.columnNum = res.size.windowWidth >= 800 ? 3 : 2;
 				this.toolsColumnNum = res.size.windowWidth >= 800 ? 4 : 2;
+				this.findTitleFormat = res.size.windowWidth >= 600;
 				//console.log('this.columnNum', this.columnNum );
 				//console.log('变化后的窗口宽度=' + res.size.windowWidth);
 				//console.log('变化后的窗口高度=' + res.size.windowHeight)
@@ -475,6 +480,15 @@
 
 			/*****/
 			/*****/
+			findTitleFormat() {
+				let result = 0;
+				uni.getSystemInfo({
+					success: function(res) {
+						result = res.windowWidth >= 600;
+						}
+				});
+				return result;
+			},
 			findColumnNum() {
 				let result = 0;
 				uni.getSystemInfo({
