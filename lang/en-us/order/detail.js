@@ -7,5 +7,6 @@ export const lang = {
 	create_time: 'Created on',
 	close_time: 'Closed on',
 	delivery_type: 'Delivery Type',
-	customer_service: 'Customer Service'
+	customer_service: 'Customer Service',
+	orderComments: 'Comments'
 }
