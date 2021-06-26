@@ -8,6 +8,6 @@ export const lang = {
 	close_time: '关闭时间',
 	delivery_type: '配送方式',
 	customer_service: '联系客服',
-	orderComments: '备注'
+	orderComments: '备 注'
 	
 }
