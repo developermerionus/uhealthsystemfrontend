@@ -1,0 +1,28 @@
+export const lang = {
+	//title为每个页面的标题
+	// title: '提现申请'
+	title: 'Withdraw Apply',
+	wallet_description: 'Apply to withdraw the bonus into Masspay wallet. The application '
+	+ ' would be processed within 24 hours. Money within Masspay wallet can be transfer to '
+	+ 'your own bank account.',
+	wallet_title: 'Withdraw Bonus to Masspay wallet',
+	wallet_bottom_tip: 'Bonus Available to Withdraw',
+	buttonWords_toMasspay: 'to Masspay wallet',
+	withdrawal_details: 'Withdrawal Details',
+	
+	
+	'奖金' : 'Bonus',
+	'下线' : 'Downline',
+	'上线' : 'Upline',
+	
+	'分销' : 'Distribute',
+	'分销商' : 'Distributor',
+	
+	'团队' : 'Team',
+	'提现' : 'Withdraw',
+	
+	
+	
+	
+	
+}
