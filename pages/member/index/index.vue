@@ -85,17 +85,17 @@
 							</view>
 
 						</view>
-						<view class="user-info-box no-log" v-if="!token"
+						<!-- <view class="user-info-box no-log" v-if="!token"
 							@click="$util.redirectTo('/pages/login/login/login')">
 							<view class="user-head" style="margin: auto;">
 								<image :src="$util.getDefaultImage().default_headimg"></image>
-							</view>
+							</view> -->
 
 							<!-- 	<view class="user-box">
 								<text class="user-title" :style="defaultTextColor">{{ $lang('login') }}</text>
 								<text class="user-desc" :style="defaultTextColor">{{ $lang('loginTpis') }}</text>
 							</view> -->
-						</view>
+						<!-- </view> -->
 						<view @click="logout" class="user-set" v-if="token">
 							<view class="iconfont iconfenxiang1"></view>
 						</view>
@@ -413,12 +413,8 @@
 			this.columnNum = this.findColumnNum();
 			this.toolsColumnNum = this.toolsFindColumnNum();
 			this.screenGreaterSixHundredPx = this.findTitleFormat();
-			this.token = uni.getStorageSync('token');
-			if (!this.token) {
-				uni.redirectTo({
-					url: '/pages/login/login/login'
-				});
-			}
+			this.checkToken();
+			
 			uni.hideTabBar();
 			if (this.addonIsExit.memberwithdraw) {
 				this.getWithdrawConfig();
@@ -449,13 +445,7 @@
 			// 刷新多语言
 			this.$langConfig.refresh();
 
-			this.token = uni.getStorageSync('token');
-
-			if (!this.token) {
-				uni.redirectTo({
-					url: '/pages/login/login/login'
-				});
-			}
+			this.checkToken();
 
 			if (uni.getStorageSync('userInfo')) {
 				this.memberInfo = uni.getStorageSync('userInfo');
@@ -480,6 +470,15 @@
 
 			/*****/
 			/*****/
+			checkToken() {
+				this.token = uni.getStorageSync('token');
+				if (!this.token) {
+					console.log('call token');
+					uni.redirectTo({
+						url: '/pages/login/login/login'
+					});
+				}
+			},
 			findTitleFormat() {
 				let result = 0;
 				uni.getSystemInfo({

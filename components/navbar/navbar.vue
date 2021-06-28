@@ -5,7 +5,7 @@
 			</view>
 			<view class="menu-main" @click="$util.redirectTo('/pages/member/index/index')">
 				<a>
-					<image class="image-logo" src="../../static/images/logo/oldUhealth-logo-g.png" @click="uploadImg" mode=""></image>
+					<image class="image-logo" src="../../static/images/logo/oldUhealth-logo-g.png" mode=""></image>
 				</a>
 			</view>
 		</view>
