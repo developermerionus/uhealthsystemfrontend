@@ -172,8 +172,9 @@ export default {
 			//获取语言列表
 			this.langList = this.$langConfig.list();
 			if (!uni.getStorageSync("lang")) {
-				this.langIndex = 0;
-				this.showLang =  this.langList[0].name;
+				this.langIndex = 1;
+				this.showLang =  this.langList[1].name;
+				this.$langConfig.change(this.langList[1].value);
 			} else {
 				this.langList.forEach((el,index) => {
 					if(el.value==uni.getStorageSync("lang")){
