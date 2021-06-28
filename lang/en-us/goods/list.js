@@ -7,8 +7,8 @@ export const lang = {
 	seeAllOrders: 'View all',
 	waitPay: 'To be paid',
 	waitDelivery: 'To be deliveried',
-	waitEvaluate: '待评价',
+	waitEvaluate: 'To be evaluated', //'待评价',
 	refunding: 'Refunding',
 	withdraw: 'Withdraw',
-	withdrawing: 'Withdrawing',
+	withdrawing: 'Withdrawing'
 }

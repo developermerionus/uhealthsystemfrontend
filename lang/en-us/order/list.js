@@ -6,7 +6,7 @@ export const lang = {
 	waitPay: 'Pending Payments',
 	readyDelivery: 'Pending Shipments',
 	waitDelivery: 'Pending Receive',
-	waitEvaluate: '待评价',
+	waitEvaluate: 'To be evaluated', //'待评价',
 	update: "释放刷新",
 	updateIng: "loading..."
 }
