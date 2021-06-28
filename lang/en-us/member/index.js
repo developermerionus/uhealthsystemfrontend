@@ -97,7 +97,7 @@ export const lang = {
 	'红宝' : 'Ruby',
 	'绿宝' : 'Emerald',
 	'钻石' : 'Diamond',
-	'皇冠钻石' : 'Crown Diamond',
+	'皇冠' : 'Crown',
 	
 	// 左/右区
 	'左区-left' : 'Left Branch',
