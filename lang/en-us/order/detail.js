@@ -8,5 +8,5 @@ export const lang = {
 	close_time: 'Closed on',
 	delivery_type: 'Delivery Type',
 	customer_service: 'Customer Service',
-	orderComments: 'Comments'
+	orderComments: 'Remarks'
 }
