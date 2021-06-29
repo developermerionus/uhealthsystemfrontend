@@ -126,7 +126,7 @@
 
 								if (res.code >= 0) {
 									this.$util.showToast({
-										title: '提现申请成功'
+										title: this.$lang('withdraw_success') // '提现申请成功'
 									});
 									// setTimeout(() => {
 									// 	this.$util.redirectTo('/otherpages/fenxiao/withdraw_list/withdraw_list', {}, 'redirectTo');
@@ -155,7 +155,7 @@
 							console.log(res);
 							if (res.code >= 0) {
 								this.$util.showToast({
-									title: '提现申请成功'
+									title: this.$lang('withdraw_success') // '提现申请成功'
 								});
 								// setTimeout(() => {
 								// 	this.$util.redirectTo('/otherpages/fenxiao/withdraw_list/withdraw_list', {}, 'redirectTo');
@@ -177,19 +177,19 @@
 			verify() {
 				if (this.withdrawMoney == '' || this.withdrawMoney == 0 || isNaN(parseFloat(this.withdrawMoney))) {
 					this.$util.showToast({
-						title: '请输入提现金额'
+						title: this.$lang('verify_alerts_1') //'请输入提现金额'
 					});
 					return false;
 				}
 				if (parseFloat(this.withdrawMoney) > parseFloat(this.balance)) {
 					this.$util.showToast({
-						title: '提现金额超出可提现金额'
+						title: this.$lang('verify_alerts_2') // '提现金额超出可提现金额'
 					});
 					return false;
 				}
 				if (parseFloat(this.withdrawMoney) > 10000) {
 					this.$util.showToast({
-						title: '提现金额超出限额'
+						title: this.$lang('verify_alerts_3') // '提现金额超出限额'
 					});
 					return false;
 				}
