@@ -7,9 +7,7 @@ export const lang = {
 	wallet_bottom_tip: '可提现奖金',
 	buttonWords_toMasspay: '到Masspay钱包',
 	withdrawal_details: '提现明细',
-	
-	
-	
+
 	'奖金' : '奖金',
 	'下线' : '下线',
 	'上线' : '上线',

@@ -34,7 +34,7 @@
 				</view>
 				<view class="btn withdraw_btn" :class="{ disabled: withdrawMoney == '' || withdrawMoney == 0 }"
 					@click="withdraw">
-					{{ $lang(fenxiaoWords.withdraw) + ' ' + $lang('buttonWords_toMasspay') }}
+					{{ $lang(fenxiaoWords.withdraw) + $lang('buttonWords_toMasspay') }}
 				</view>
 				<view class="withdraw-list btn"
 					@click="$util.redirectTo('/otherpages/fenxiao/withdraw_list/withdraw_list')">

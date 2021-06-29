@@ -5,7 +5,7 @@
 				<block v-for="(item, index) in category" :key="index">
 					<view class="cate-li" :class="{ 'active color-base-text color-base-bg-before': status == item.id }" 
 					@click="slectCate(item.id)">
-						{{ item.name }}
+						{{ $lang(item.name) }}
 					</view>
 				</block>
 			</view>
@@ -16,28 +16,28 @@
 						<view class="li-box">
 							<view class="tixian-desc">
 								<view class="desc-info">
-									<view class="desc-info-name">申请{{ fenxiaoWords.withdraw }}</view>
+									<view class="desc-info-name">{{ $lang('apply_to') + $lang(fenxiaoWords.withdraw) }}</view>
 									<view class="desc-info-time">{{ item.apply_time }}</view>
 								</view>
 								<view class="desc-money" :style="withdrawState[item.status].color">
-									{{withdrawState[item.status].text}}
+									{{ $lang(withdrawState[item.status].text) }}
 								</view>
 							</view>
 							<view class="money-desc">
-								<text>提现金额：</text>
+								<text>{{ $lang('withdrawAmount') }}：</text>
 								<!-- <text>手续费：{{ item.withdraw_rate_money }}</text> -->
 								<text class="color-base-text">${{ item.apply_money }}</text>
 							</view>
 						</view>
 					</view>
 					<block v-if="withdrawList.length == 0 && emptyShow">
-						<ns-empty :text="'暂无' + fenxiaoWords.withdraw + '记录'" :isIndex="!1" v-if="status == 0">
+						<ns-empty :text="$lang('widthdrawRecordsEmpty_0') " :isIndex="!1" v-if="status == 0">
 						</ns-empty>
-						<ns-empty :text="'暂无待审核' + fenxiaoWords.withdraw + '记录'" :isIndex="!1" v-if="status == 1">
+						<ns-empty :text="$lang('widthdrawRecordsEmpty_1')" :isIndex="!1" v-if="status == 1">
 						</ns-empty>
-						<ns-empty :text="'暂无已审核' + fenxiaoWords.withdraw + '记录'" :isIndex="!1" v-if="status == 2">
+						<ns-empty :text="$lang('widthdrawRecordsEmpty_2')" :isIndex="!1" v-if="status == 2">
 						</ns-empty>
-						<ns-empty :text="'暂无已拒绝' + fenxiaoWords.withdraw + '记录'" :isIndex="!1" v-if="status == -1">
+						<ns-empty :text="$lang('widthdrawRecordsEmpty_-1')" :isIndex="!1" v-if="status == -1">
 						</ns-empty>
 					</block>
 				</block>
@@ -137,6 +137,7 @@
 						status: this.status
 					},
 					success: res => {
+						//console.log("response:",res);
 						this.emptyShow = true;
 						let newArr = [];
 						let msg = res.message;
@@ -161,6 +162,7 @@
 			},
 			slectCate(e) {
 				this.status = e;
+				// console.log("this.status:",this.status);
 				this.$refs.mescroll.refresh();
 			}
 		}

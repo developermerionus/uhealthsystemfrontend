@@ -7,7 +7,7 @@ export const lang = {
 	+ 'your own bank account.',
 	wallet_title: 'Withdraw Bonus to Masspay wallet',
 	wallet_bottom_tip: 'Bonus Available to Withdraw',
-	buttonWords_toMasspay: 'to Masspay wallet',
+	buttonWords_toMasspay: ' to Masspay wallet',
 	withdrawal_details: 'Withdrawal Details',
 	
 	
