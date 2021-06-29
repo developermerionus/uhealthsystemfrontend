@@ -91,7 +91,7 @@ export const lang = {
 		sales_volume: "销量",
 		price: "价格",
 		filter: "筛选",
-		sold: '已经售',
+		//sold: '已经售',
 		unit: '件',
 		exemption_from_postage_or_not: "是否包邮",
 		exemption_from_postage: "包邮",

@@ -1,3 +1,9 @@
+<!-- 
+ lang/en-us/fenxiao/withdraw_apply.js
+ lang/zh-cn/fenxiao/withdraw_apply.js
+ 
+ -->
+
 <template>
 	<view class="container" :data-theme="themeStyle">
 		<view class="outer-container-wrap">
@@ -5,29 +11,34 @@
 			<view class="container-body-wrap">
 				<view class="empty-box"></view>
 				<view class="withdraw-wrap">
-					<view class="title">{{ fenxiaoWords.account }}将{{ fenxiaoWords.withdraw }}到Masspay钱包</view>
+					<!-- <view class="title">{{ fenxiaoWords.account }}将{{ fenxiaoWords.withdraw }}到Masspay钱包 </view> -->
+					<view class="title">{{ $lang('wallet_title') }}</view>
 					<view class="money-wrap">
-						<text class="unit">{{ $lang('common.currencySymbol') }}</text>
+						<text class="unit">{{ $lang('common.currencySymbol') }} </text>
 						<input type="number" class="withdraw-money" v-model="withdrawMoney" />
 					</view>
 					<view class="bootom">
 						<view>
-							<text class="color-tip">
+<!-- 							<text class="color-tip">
 								可{{ fenxiaoWords.withdraw }}{{ fenxiaoWords.account }}：{{ $lang('common.currencySymbol') }}{{ balance | moneyFormat }}
+							</text> -->
+							<text class="color-tip">
+								{{ $lang('wallet_bottom_tip') }}：{{ $lang('common.currencySymbol') }}{{ balance | moneyFormat }}
 							</text>
 						</view>
 					</view>
 				</view>
 				<view class="desc">
-					<text>申请24小时内可提现到Masspay钱包，钱包中的金额可自行转到会员自己的银行卡上。</text>
+					<!-- <text>申请24小时内可提现到Masspay钱包，钱包中的金额可自行转到会员自己的银行卡上。</text> -->
+					<text>{{ $lang('wallet_description')}}</text>
 				</view>
 				<view class="btn withdraw_btn" :class="{ disabled: withdrawMoney == '' || withdrawMoney == 0 }"
 					@click="withdraw">
-					{{ fenxiaoWords.withdraw }}到Masspay钱包
+					{{ $lang(fenxiaoWords.withdraw) + $lang('buttonWords_toMasspay') }}
 				</view>
 				<view class="withdraw-list btn"
 					@click="$util.redirectTo('/otherpages/fenxiao/withdraw_list/withdraw_list')">
-					<view class="color-tip">{{ fenxiaoWords.withdraw + '明细' }}</view>
+					<view class="color-tip">{{ $lang('withdrawal_details') }}</view>
 				</view>
 			</view>
 			<loading-cover ref="loadingCover"></loading-cover>
@@ -51,7 +62,8 @@
 				},
 				withdrawMoney: '',
 				isSub: false,
-				balance: 0
+				balance: 0,
+				
 			};
 		},
 		components: {},
@@ -258,6 +270,8 @@
 		onReady() {
 			this.$refs.loadingCover.hide();
 		}
+		
+
 	};
 </script>
 
