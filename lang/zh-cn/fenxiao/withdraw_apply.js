@@ -1,7 +1,7 @@
 export const lang = {
 	//title为每个页面的标题
 	// title: '提现申请'
-	title: '',
+	title: '提现申请',
 	wallet_description: '申请24小时内可提现到Masspay钱包，钱包中的金额可自行转到会员自己的银行卡上。',
 	wallet_title: '提现奖金到Masspay钱包',
 	wallet_bottom_tip: '可提现奖金',

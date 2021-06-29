@@ -1,7 +1,7 @@
 export const lang = {
 	//title为每个页面的标题
 	// title: '提现记录'
-	title: '',
+	title: 'Withdraw List',
 	apply_to: 'Apply to ',
 	withdrawAmount: 'Withdrawal Amount',
 	
@@ -28,7 +28,5 @@ export const lang = {
 	
 	'团队' : 'Team',
 	'提现' : 'Withdraw',
-	
-	
 	
 }

@@ -1,6 +1,6 @@
 export const lang = {
 	//title为每个页面的标题
-	title: 'Withdrawal List',
+	title: '提现列表',
 	apply_to: '申请',
 	withdrawAmount: '提现金额',
 	
