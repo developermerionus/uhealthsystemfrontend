@@ -9,6 +9,10 @@ export const lang = {
 	wallet_bottom_tip: 'Bonus Available to Withdraw',
 	buttonWords_toMasspay: ' to Masspay wallet',
 	withdrawal_details: 'Withdrawal Details',
+	verify_alerts_1: 'Please input the amount to withdraw',
+	verify_alerts_2: 'The withdrawal amount is over the current available Bonus',
+	verify_alerts_3: 'The withdrawal amount is over the limit',
+	withdraw_success: 'Success Apply to Withdraw',
 	
 	
 	'奖金' : 'Bonus',
