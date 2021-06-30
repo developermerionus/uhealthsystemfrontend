@@ -86,8 +86,8 @@
 			//删除所有历史记录
 			deleteHistoryList() {
 				uni.showModal({
-					title: '提示',
-					content: '确认删除全部历史记录？',
+					title: this.$lang('reminder'), // '提示',
+					content: this.$lang('deleteHistoryTipAll'), // '确认删除全部历史记录？',
 					success: res => {
 						if (res.confirm) {
 							uni.setStorageSync('search', []);
@@ -99,8 +99,8 @@
 			//删除历史记录的某一项
 			deleteItem(e) {
 				uni.showModal({
-					title: '提示',
-					content: '确认删除该条历史记录？',
+					title:   this.$lang('reminder'), // '提示',
+					content: this.$lang('deleteHistoryTipOne'), // '确认删除该条历史记录？',
 					success: res => {
 						if (res.confirm) {
 							let array = uni.getStorageSync('search');
@@ -118,7 +118,13 @@
 				this.$api.sendRequest({
 					url: '/api/goods/defaultSearchWords',
 					success: res => {
-						this.placWords = res.data.words;
+						let placeWordsTemp = res.data.words;
+						if (placeWordsTemp === '搜索 商品') {
+							this.placWords = this.$lang('搜索 商品');
+							} else {
+								this.placWords = res.data.words;
+							}
+											
 					}
 				});
 			},
