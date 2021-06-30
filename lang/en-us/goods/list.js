@@ -10,5 +10,8 @@ export const lang = {
 	waitEvaluate: 'To be evaluated', //'待评价',
 	refunding: 'Refunding',
 	withdraw: 'Withdraw',
-	withdrawing: 'Withdrawing'
+	withdrawing: 'Withdrawing',
+	'主营产品' : 'Main',
+	'入会套餐' : 'Combo',
+	
 }

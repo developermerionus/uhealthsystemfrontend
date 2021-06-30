@@ -95,7 +95,7 @@
 					<view class="class-box">
 						<view @click="selectedCategory('')" class="list-wrap"><text :class="{ selected: !categoryId, 'color-base-text': !categoryId }">{{$lang('common.all')}}</text></view>
 						<view @click="selectedCategory(item.category_id)" v-for="(item, index) in categoryList" :key="index" class="list-wrap">
-							<text :class="{ selected: item.category_id == categoryId, 'color-base-text': item.category_id == categoryId }">{{ item.category_name }}</text>
+							<text :class="{ selected: item.category_id == categoryId, 'color-base-text': item.category_id == categoryId }">{{  $lang(item.category_name)  }}</text>
 						</view>
 					</view>
 				</view>
