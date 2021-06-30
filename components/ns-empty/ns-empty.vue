@@ -23,7 +23,7 @@ export default {
 		emptyBtn: {
 			type: Object,
 			default: () => {
-				return { text: "去逛逛" };
+				return { text: uni.getStorageSync('lang')=='en-us' ? "Browsing" : "去逛逛" };
 			}
 		},
 		fixed: {
