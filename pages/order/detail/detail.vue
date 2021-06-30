@@ -143,6 +143,7 @@
 				<text class="tit">{{$lang('orderComments')}}:</text>
 				<view class="box">
 					<text>{{ orderData.remark }}</text>
+					<view class="copy" @click="$util.copy(orderData.remark)">{{$lang('copy')}}</view>
 				</view>
 			</view>
 			<!-- 联系客服 -->
