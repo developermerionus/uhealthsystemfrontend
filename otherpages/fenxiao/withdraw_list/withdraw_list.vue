@@ -70,7 +70,7 @@
 						number: 0
 					},
 					{
-						id: -1,
+						id: 3, // 原为 ‘-1’
 						name: '已拒绝',
 						number: 0
 					}
@@ -84,7 +84,7 @@
 						color: 'color: rgb(17, 189, 100)',
 						text: '已提现'
 					},
-					'-1': {
+					'3': { // 原为 ‘-1’
 						color: 'color: rgb(255, 69, 68)',
 						text: '已拒绝'
 					}
@@ -137,7 +137,6 @@
 						status: this.status
 					},
 					success: res => {
-						//console.log("response:",res);
 						this.emptyShow = true;
 						let newArr = [];
 						let msg = res.message;
@@ -162,7 +161,6 @@
 			},
 			slectCate(e) {
 				this.status = e;
-				// console.log("this.status:",this.status);
 				this.$refs.mescroll.refresh();
 			}
 		}
