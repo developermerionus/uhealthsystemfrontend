@@ -157,9 +157,9 @@
 								this.$util.showToast({
 									title: this.$lang('withdraw_success') // '提现申请成功'
 								});
-								// setTimeout(() => {
-								// 	this.$util.redirectTo('/otherpages/fenxiao/withdraw_list/withdraw_list', {}, 'redirectTo');
-								// }, 1500);
+								setTimeout(() => {
+									this.$util.redirectTo('/otherpages/fenxiao/withdraw_list/withdraw_list', {}, 'redirectTo');
+								}, 1500);
 							} else {
 								this.isSub = false;
 								this.$util.showToast({
