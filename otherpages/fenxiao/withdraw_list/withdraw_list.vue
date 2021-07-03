@@ -1,6 +1,7 @@
 <template>
 	<view :data-theme="themeStyle">
 		<view class="outer-container-wrap">
+			
 			<view class="withdraw-cate">
 				<block v-for="(item, index) in category" :key="index">
 					<view class="cate-li" :class="{ 'active color-base-text color-base-bg-before': status == item.id }" 
@@ -203,7 +204,7 @@
 			}
 		}
 		
-		max-width: 1280px;
+		max-width: 1200px;
 		margin: 0 auto;
 	
 	}
@@ -222,7 +223,7 @@
 		padding: 0 30rpx;
 		box-sizing: border-box;
 		
-		max-width: 1280px;
+		max-width: 1200px;
 		margin: 0 auto;
 		
 		margin-top: 20rpx;
@@ -286,7 +287,7 @@
 	
 	
 	.outer-container-wrap {
-		max-width: 1280px;
+		max-width: 1200px;
 		margin: 0 auto;
 	}
 </style>
