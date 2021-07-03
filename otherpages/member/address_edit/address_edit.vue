@@ -719,12 +719,12 @@
 			#139fb9 34%,#14a5c0 47%,#139fb9 67%,#118ca3 89%,#10869c 100%);
 		}
 		
-		max-width: 1280px;
+		max-width: 1200px;
 	}
 	
 	
 	.outer-container-wrap {
-		max-width: 1280px;
+		max-width: 1200px;
 		margin: 0 auto;
 	
 	}
