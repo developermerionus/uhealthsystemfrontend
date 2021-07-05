@@ -620,6 +620,9 @@
 				if(this.countryList[this.index].id===0) {
 					this.checkSelfPickUp = true;
 				}
+				else {
+					this.checkSelfPickUp = false;
+				}
 				//刷新子组件的内容
 				this.setLocalType();
 				if (this.formData.country_id == 172)
