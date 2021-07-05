@@ -42,16 +42,19 @@
 					{{$lang('state')}}
 					<text>*</text>
 				</text>
-				<input class="uni-input" type="text" placeholder-class="placeholder-class" :placeholder="$lang('state')"
+				<input v-if="!checkSelfPickUp" class="uni-input" type="text" placeholder-class="placeholder-class" :placeholder="$lang('state')"
 				 maxlength="100" v-model="formData.state" @click="goState()"/>
+				 
+				 <input v-if="checkSelfPickUp" type="text" placeholder-class="placeholder-class selfPickUp" :placeholder="selfPickUpState" />
 			</view>
 			<view class="edit-item"  v-show="localType == 2">
 				<text class="tit" >
 					{{$lang('city')}}
 					<text>*</text>
 				</text>
-				<input class="uni-input" type="text" placeholder-class="placeholder-class" placeholder="请输入城市"
+				<input v-if="!checkSelfPickUp" class="uni-input" type="text" placeholder-class="placeholder-class" placeholder="请输入城市"
 				 maxlength="100" v-model="formData.city" /> 
+				  <input v-if="checkSelfPickUp" type="text" placeholder-class="placeholder-class selfPickUp" :placeholder="selfPickUpCity" />
 			</view>
 			<view class="edit-item" v-show="localType != 2">
 				<text class="tit">
@@ -62,6 +65,7 @@
 					<text class="select-address " :class="{ empty: !formData.full_address, 'color-tip': !formData.full_address }">
 						{{ formData.full_address ? formData.full_address :$lang('provinceCity') }}
 					</text>
+					
 				</pick-regions>
 			</view>
 			<view class="edit-item">
@@ -69,8 +73,9 @@
 					{{ $lang('address') }}
 					<text>*</text>
 				</text>
-				<input class="uni-input" type="text" placeholder-class="placeholder-class" :placeholder="$lang('addressPlaceholder')"
+				<input v-if="!checkSelfPickUp" class="uni-input" type="text" placeholder-class="placeholder-class" :placeholder="$lang('addressPlaceholder')"
 				 maxlength="50" v-model="formData.address" />
+				  <input v-if="checkSelfPickUp" type="text" placeholder-class="placeholder-class selfPickUp" :placeholder="selfPickUpStreet" />
 			</view>
 			<view class="edit-item" v-show="localType != 2">
 				<text class="tit" style="">
@@ -86,8 +91,9 @@
 						{{$lang('zipcode')}}
 						<text>*</text>
 					</text>
-						<input class="uni-input" type="text" placeholder-class="placeholder-class" placeholder="请输入邮政编码"
+						<input v-if="!checkSelfPickUp" class="uni-input" type="text" placeholder-class="placeholder-class" placeholder="请输入邮政编码"
 						 maxlength="20" v-model="formData.zipcode" />
+						  <input v-if="checkSelfPickUp" type="text" placeholder-class="placeholder-class selfPickUp" :placeholder="selfPickUpZipCode" />
 				</view>
 			</block>
 		</view>
@@ -152,6 +158,12 @@
 				index: 0,
 				memberInfo: {},
 				addressLength: 1,
+				checkSelfPickUp:false,
+				selfPickUpState:"California",
+				selfPickUpCity:"West Covina",
+				selfPickUpStreet:"100 N Barranca St. #100",
+				selfPickUpZipCode:"91791"
+				
 			};
 		},
 		onLoad(option) {
@@ -539,7 +551,7 @@
 						data: data,
 						success: res => {
 							this.flag = false;
-							console.log(res);
+							//console.log(res);
 							if (res.code == 0) {
 								if (this.back != '') {
 									let jump = true;
@@ -582,8 +594,8 @@
 					success: res => {
 						if (res.code >= 0 && res.data) {
 							this.countryList = res.data;
+							//console.log('this.countryList',this.countryList);
 							if (!this.formData.country_id && this.$refs.loadingCover) this.$refs.loadingCover.hide();
-
 							for (let v in this.countryList) {
 								this.tempCountryList.push(this.countryList[v].id);
 							}
@@ -603,7 +615,11 @@
 				// console.log(e);
 				this.formData.full_address = '';
 				this.index = e.detail.value;
+				//console.log('this.index',this.index);
 				this.formData.country_id = this.countryList[this.index].id;
+				if(this.countryList[this.index].id===0) {
+					this.checkSelfPickUp = true;
+				}
 				//刷新子组件的内容
 				this.setLocalType();
 				if (this.formData.country_id == 172)
@@ -727,5 +743,9 @@
 		max-width: 1280px;
 		margin: 0 auto;
 	
+	}
+	.selfPickUp{
+		font-size:15px;
+		color:#303133;
 	}
 </style>
