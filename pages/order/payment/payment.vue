@@ -231,8 +231,11 @@
 					<text class="operator">+</text>
 					<text class="unit">{{ $lang('common.currencySymbol') }}</text>
 					<text class="money">{{ orderPaymentData.delivery_money | moneyFormat }}</text>
+					
 				</view>
+				
 			</view>
+			<view class="selfPickUp" v-if="orderPaymentData.is_virtual == 0 && orderPaymentData.delivery_money > 0"><text>如可自取，免运费。只需修改您的邮寄地址，国家名一栏，选第一个选项 “selfPickUp 自取”</text></view>
 			<!-- <view class="order-cell" v-if="orderCreateData.is_invoice && orderPaymentData.invoice_money > 0"> -->
 			<view class="order-cell" v-if="orderPaymentData.invoice_money > 0">
 				<text class="tit">
@@ -243,7 +246,9 @@
 					<text class="operator">+</text>
 					<text class="unit">{{ $lang('common.currencySymbol') }}</text>
 					<text class="money">{{ orderPaymentData.invoice_money | moneyFormat }}</text>
+					
 				</view>
+		
 			</view>
 			<view class="order-cell" v-if="orderCreateData.is_invoice && orderPaymentData.invoice_delivery_money > 0">
 				<text class="tit">发票邮寄费</text>
@@ -546,6 +551,10 @@ export default {
 
 <style lang="scss">
 @import './../../../common/css/order_parment.scss';
+.selfPickUp {
+	display:block;
+	margin-bottom:16px;
+}
 </style>
 <style scoped>
 /deep/ .uni-popup__wrapper.uni-custom .uni-popup__wrapper-box {
