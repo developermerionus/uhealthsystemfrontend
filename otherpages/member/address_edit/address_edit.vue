@@ -619,6 +619,11 @@
 				this.formData.country_id = this.countryList[this.index].id;
 				if(this.countryList[this.index].id===0) {
 					this.checkSelfPickUp = true;
+					//console.log('this.formData',this.formData);
+					this.formData.city = this.selfPickUpCity;
+					 this.formData.zipcode = this.selfPickUpZipCode;
+					 this.formData.state = this.selfPickUpState;
+					 this.formData.address = this.selfPickUpStreet;
 				}
 				else {
 					this.checkSelfPickUp = false;
