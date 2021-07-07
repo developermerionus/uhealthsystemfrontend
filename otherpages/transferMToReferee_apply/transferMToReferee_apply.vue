@@ -4,27 +4,31 @@
 				<view class="outer-container-wrap">
 					<navbar></navbar>
 					<view class="container-body-wrap">
-						<view class="empty-box"></view>
 						<view class="transfer-wrap">
-							<view class="title">Transfer Money</view>
+							<view class="title">{{ $lang('transfer_money') }}</view>
 							<view class="input-wrap">
-								<label class="labelForInput">Referrer UserName 推荐人 : </label>
-								<input type="text" placeholder-class="input-placeholder" class="input" />
+								<label class="labelForInput">Referrer ID 推荐人ID: </label>
+								<input type="text" placeholder-class="input-placeholder" 
+								:value="referrerId" disabled
+								class="input" />
 							</view>
 							<view class="input-wrap">
 								<label class="labelForInput">Referee UserName 被推荐人: </label>
-								<input type="text" placeholder-class="input-placeholder" class="input" />
+								<input type="text" placeholder-class="input-placeholder" 
+								class="input" v-model="refereeName"/>
 							</view>
 							<view class="input-wrap">
-								<label class="labelForInput">Referrer ID 被推荐人ID: </label>
-								<input type="number" placeholder-class="input-placeholder" class="input" />
+								<label class="labelForInput">Referee ID 被推荐人ID: </label>
+								<input type="number" placeholder-class="input-placeholder" 
+								class="input" v-model="refereeId"/>
 							</view>
 							<view class="input-wrap">
 								<label class="labelForInput">Transfer Amount : </label>
 								<text class="unit">{{ $lang('common.currencySymbol') }} </text>
 								<!-- <input type="number" class="withdraw-money" v-model="withdrawMoney" /> -->
 								<input type="number" placeholder-class="input-placeholder" 
-								class="transfer-money" v-model="transferMoney"/>
+								class="transfer-money" :placeholder="`Current balance is ${balance}`"
+								v-model="transferMoney"/>
 							</view>
 						</view>
 						<!-- <view class="btn withdraw_btn" :class="{ disabled: withdrawMoney == '' || withdrawMoney == 0 }"
@@ -52,8 +56,9 @@
 			return {
 				
 				referrerName: '',
+				referrerId: 0,
 				refereeName: '',
-				refereeId: '',
+				refereeId: null,
 				transferMoney: '',
 				isSub: false, // 提交防重复
 				balance: 0,
@@ -61,15 +66,70 @@
 			}
 		},
 		mixins: [globalConfig],
+		onLoad() {
+			this.tokenCheck();
+			this.getBonus();
+		},
+		onShow() {
+			// 刷新多语言
+			// this.$langConfig.refresh();
+			// this.$langConfig.title('Transfer To Referee'; // 
+			
+			
+			// if (uni.getStorageSync('token')) {
+			// 	this.getFenxiaoInfo();
+			// 	this.getWithdrawConfig();
+			// } else {
+			// 	this.$util.redirectTo('/pages/login/login/login', {
+			// 		back: '/otherpages/fenxiao/withdraw_apply/withdraw_apply'
+			// 	});
+			// }
+		},
 		methods: {
+			// login token check
+			tokenCheck() {
+				if (uni.getStorageSync('token')) {
+				// 	this.getFenxiaoInfo();
+				// 	this.getWithdrawConfig();
+				} else {
+					this.$util.redirectTo('/pages/login/login/login', {
+						back: '/otherpages/fenxiao/withdraw_apply/withdraw_apply'
+					});
+				 }
+			},
+			
+			// 得到会员值 - ID，奖金值
+			getBonus() {
+				this.$api.sendRequest({
+					url: '/api/member/bonus',
+					data: {
+						lastweek: 0,
+					},
+					success: res => {
+						if (res.code >= 0) {
+							this.balance = res.data[0].epoint_balance;
+							this.referrerId = res.data[0].member_id;
+							}
+					}
+				})
+				
+				// this.loadData(this.referrerId);
+				// this.getTheEdge(0);
+				// this.getTheEdge(1);
+				
+			},
+			
+			// transfer apply
 			transfer() {
 				if (this.verify()) {
 					if (this.isSub) return;
 					this.isSub = true;
+					console.log('transferring...');
 				}
 			},
 			
 			verify() {
+				// check transfer amount
 				if (this.transferMoney == '' || this.transferMoney == 0 || isNaN(parseFloat(this.transferMoney))) {
 					this.$util.showToast({
 						title: '请输入提现金额'
@@ -92,8 +152,53 @@
 				// 	this.$util.showToast({ title: '提现金额小于最低提现金额' });
 				// 	return false;
 				// }
+				
+				// check referee ID and Name
+				//this.memberInfo = uni.getStorageSync('userInfo');
+				
 				return true;
 			},
+			
+			loadData(member_id){
+				this.list = []
+				// console.log('getTeamTree')
+				this.$api.sendRequest({
+					url: '/api/member/getTeamTree',
+					data: {
+						member_id,
+					},
+					success: res => {
+						
+						//if (this.$refs.loadingCover) this.$refs.loadingCover.hide();
+						console.log("loaddata",res);
+						// if (res.code >= 0) {	
+						// 	// this.list = res.data[0];
+						// 	console.log(res.data['0']);
+						// 	this.list.push(res.data['0']);
+						// 	this.width = res.data.width;
+						// 	this.height = res.data.height;
+						// 	this.prev_member_id = member_id;
+							
+						// }
+					}
+				})
+			},
+			
+			getTheEdge(branch){
+				this.$api.sendRequest({
+					url: '/api/member/getTheEdge',
+					data: {
+						member_id: this.referrerId,
+						branch,
+					},
+					success: res => {
+						console.log('the edge',res);
+						this.loadData(res.data[0].member_id);
+					}	
+				})
+			},
+			
+			
 		},
 		filters: {
 			/**
@@ -132,7 +237,7 @@
 	.container-body-wrap {
 		display: flex;
 		flex-direction: column;
-		min-height: 80vh;
+		min-height: 50vh;
 		justify-content: center;
 		
 		.title {
