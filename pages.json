@@ -1056,6 +1056,16 @@
 					}
                 
                 }
+                ,{
+                    "path" : "transferMToUpper_apply/transferMToUpper_apply",
+                    "style" :                                                                                    
+                {
+                    // #ifdef H5
+                    "navigationStyle": "custom"
+                    // #endif
+                }
+                
+                }
             ]
 		}
 	],
