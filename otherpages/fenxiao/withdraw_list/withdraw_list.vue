@@ -1,7 +1,7 @@
 <template>
 	<view :data-theme="themeStyle">
 		<view class="outer-container-wrap">
-			
+			<navbar></navbar>
 			<view class="withdraw-cate">
 				<block v-for="(item, index) in category" :key="index">
 					<view class="cate-li" :class="{ 'active color-base-text color-base-bg-before': status == item.id }" 
@@ -11,7 +11,7 @@
 				</block>
 			</view>
 
-			<mescroll-uni ref="mescroll" @getData="getData" top="90" class="member-point" :size="10">
+			<mescroll-uni ref="mescroll" @getData="getData" top="140px" class="member-point" :size="10">
 				<block slot="list">
 					<view class="withdraw-li" v-for="(item, index) in withdrawList" :key="index">
 						<view class="li-box">
@@ -38,7 +38,7 @@
 						</ns-empty>
 						<ns-empty :text="$lang('widthdrawRecordsEmpty_2')" :isIndex="!1" v-if="status == 2">
 						</ns-empty>
-						<ns-empty :text="$lang('widthdrawRecordsEmpty_3')" :isIndex="!1" v-if="status == -1">
+						<ns-empty :text="$lang('widthdrawRecordsEmpty_3')" :isIndex="!1" v-if="status == 3">
 						</ns-empty>
 					</block>
 				</block>
@@ -180,7 +180,7 @@
 		justify-content: space-around;
 		background: #fff;
 		position: fixed;
-		top: 0;
+		top: 80px;
 		z-index: 999;
 		box-sizing: border-box;
 
