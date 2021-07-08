@@ -361,6 +361,7 @@
 		flex-direction: column;
 		min-height: 70vh;
 		justify-content: center;
+		margin-top: 40px;
 
 		.local {
 			display: flex;
@@ -534,6 +535,7 @@
 		.address-list {
 			max-width: 750px;
 			margin: 0 auto;
+			margin-top:50px;
 		}
 
 	}

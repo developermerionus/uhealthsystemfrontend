@@ -110,6 +110,7 @@ export const lang = {
 		copy_successfully: "Copy successfully",
 		order_result: "View Order",
 		pay_time: "Paid on",
-		official_website: "Main Website"
+		official_website: "Main Website",
+		lang: "lang"
 	}
 }

@@ -79,9 +79,13 @@ export default {
 		locale = uni.getStorageSync('lang') || getBrowserLang(); //设置语言
 		// console.log(locale);
 		this.refresh();
-
+		var pages = getCurrentPages() //获取加载的页面
+		var currentPage = pages[pages.length - 1] //获取当前页面的对象
+		var url = '/'+currentPage.route //当前页面url
+		console.log('url', url);
 		uni.reLaunch({
-			url: '/pages/member/info/info'
+			//url: '/pages/member/info/info'
+			url: url
 		});
 	},
 	//刷新标题、tabbar
