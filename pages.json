@@ -1056,6 +1056,28 @@
 					}
                 
                 }
+                ,{
+                    "path" : "fenxiao/transferMToReferee_apply/transferMToReferee_apply",
+                    "style" :                                                                                    
+                {
+                    // #ifdef H5
+                    "navigationStyle": "custom"
+                    // #endif
+                }
+                
+                }
+                ,{
+                    "path" : "fenxiao/transferMToReferee_list/transferMToReferee_list",
+                    "style" :                                                                                    
+                {
+                    //"navigationBarTitleText": "",
+                    "enablePullDownRefresh": false,
+					// #ifdef H5
+					"navigationStyle": "custom"
+					// #endif
+                }
+                
+                }
             ]
 		}
 	],

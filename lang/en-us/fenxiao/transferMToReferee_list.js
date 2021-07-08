@@ -1,21 +1,21 @@
 export const lang = {
 	//title为每个页面的标题
 	// title: '提现记录'
-	title: 'Withdraw List',
+	title: 'Transfer List',
 	apply_to: 'Apply to ',
-	withdrawAmount: 'Withdrawal Amount',
+	transferAmount: 'Transfer Amount',
 	
-	//withdraw-cate item
+	//transfer-cate item
 	'全部' : 'All',
 	'待审核' : 'Pending',
 	'已提现' : 'Withdrawn',
 	'已拒绝' : 'Refused',
 	
 	// empty withdrawList
-	'widthdrawRecordsEmpty_0' : 'Empty',
-	'widthdrawRecordsEmpty_1' : 'No Pending Withdrawal application',
-	'widthdrawRecordsEmpty_2' : 'Withdrawn Records: Empty',
-	'widthdrawRecordsEmpty_3' : 'Refused: None',
+	'transferRecordsEmpty_0' : 'Empty',
+	'transferRecordsEmpty_1' : 'No Pending Transfer application',
+	'transferRecordsEmpty_2' : 'Transfer Records: Empty',
+	'transferRecordsEmpty_3' : 'Refused: None',
 	
 		
 	// fenxiaowords

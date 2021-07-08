@@ -1,7 +1,6 @@
 <!-- 
  lang/en-us/fenxiao/withdraw_apply.js
  lang/zh-cn/fenxiao/withdraw_apply.js
- 
  -->
 
 <template>

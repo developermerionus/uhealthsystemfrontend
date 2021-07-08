@@ -38,7 +38,7 @@
 						</ns-empty>
 						<ns-empty :text="$lang('widthdrawRecordsEmpty_2')" :isIndex="!1" v-if="status == 2">
 						</ns-empty>
-						<ns-empty :text="$lang('widthdrawRecordsEmpty_-1')" :isIndex="!1" v-if="status == -1">
+						<ns-empty :text="$lang('widthdrawRecordsEmpty_3')" :isIndex="!1" v-if="status == -1">
 						</ns-empty>
 					</block>
 				</block>

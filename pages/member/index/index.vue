@@ -102,13 +102,24 @@
 					</view>
 					<view class="wallet-button-container" v-if="token">
 						<button class="wallet-button" type="default"
-							@click="redirectToLink(bonusPageObject.link, bonusPageObject.index)">
+						@click="redirectToLink(bonusPageObject.link, bonusPageObject.index)">
 							<image class="wallet-icon" src="../../../static/images/icons/wallet.png"></image>
 							{{ $lang('electronicwallet') }}
 						</button>
-
 					</view>
 				</view>
+				
+				
+				<view class="transferToReferee-button-container" v-if="token">
+					<button class="transferToReferee-button" type="default"
+						@click="$util.redirectTo('/otherpages/fenxiao/transferMToReferee_apply/transferMToReferee_apply')"
+						>
+						<!-- <image class="wallet-icon" src="../../../static/images/icons/wallet.png"></image> -->
+						{{ $lang('common.transfer_to_referee') }}
+					</button>
+				</view>
+				
+				
 				<view class="member-body" v-if="token">
 					<!-- 订单模块 -->
 					<view class="order-section">

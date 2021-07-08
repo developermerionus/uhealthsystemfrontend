@@ -111,6 +111,14 @@ export const lang = {
 		order_result: "View Order",
 		pay_time: "Paid on",
 		official_website: "Main Website",
-		lang: "Lang"
+		lang: "Lang",
+		'transfer_to_referee' : 'Transfer Money to Referee Member',
+		'transfer_money' : 'Transfer Money',
+		'referrer_ID' : 'Referrer ID',
+		'referree_name' : 'Referree Name',
+		'referree_id' : 'Referree ID',
+		'transfer_amount' : 'Transfer Amount',
+		'transfer_amount_tip' : 'Current balance is $',
+		'transfer_money_list' : 'Transfer Details',
 	}
 }

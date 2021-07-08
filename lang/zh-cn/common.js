@@ -112,6 +112,14 @@ export const lang = {
 		order_result: "查看订单",
 		pay_time: "支付时间",
 		official_website: "主网站",
-		lang: "语言"
+		lang: "语言",
+		'transfer_to_referee' : '转账被推荐人',
+		'transfer_money' : '转账',
+		'referrer_ID' : '推荐人ID',
+		'referree_name' : '被推荐人用户名',
+		'referree_id' : '被推荐人ID',
+		'transfer_amount' : '转账金额',
+		'transfer_amount_tip' : '余额有 $',
+		'transfer_money_list' : '转账明细',
 	}
 }
