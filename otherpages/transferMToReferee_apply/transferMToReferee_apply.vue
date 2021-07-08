@@ -5,29 +5,29 @@
 					<navbar></navbar>
 					<view class="container-body-wrap">
 						<view class="transfer-wrap">
-							<view class="title">{{ $lang('transfer_money') }}</view>
+							<view class="title">{{ $lang('common.transfer_money') }}</view>
 							<view class="input-wrap">
-								<label class="labelForInput">Referrer ID 推荐人ID: </label>
+								<label class="labelForInput">{{ $lang('common.referrer_ID') }}: </label>
 								<input type="text" placeholder-class="input-placeholder" 
 								:value="referrerId" disabled
 								class="input" />
 							</view>
 							<view class="input-wrap">
-								<label class="labelForInput">Referee UserName 被推荐人: </label>
+								<label class="labelForInput">{{ $lang('common.referree_name') }}: </label>
 								<input type="text" placeholder-class="input-placeholder" 
 								class="input" v-model="refereeName"/>
 							</view>
 							<view class="input-wrap">
-								<label class="labelForInput">Referee ID 被推荐人ID: </label>
+								<label class="labelForInput">{{ $lang('common.referree_id') }}: </label>
 								<input type="number" placeholder-class="input-placeholder" 
 								class="input" v-model="refereeId"/>
 							</view>
 							<view class="input-wrap">
-								<label class="labelForInput">Transfer Amount : </label>
+								<label class="labelForInput">{{ $lang('common.transfer_amount') }}: </label>
 								<text class="unit">{{ $lang('common.currencySymbol') }} </text>
 								<!-- <input type="number" class="withdraw-money" v-model="withdrawMoney" /> -->
 								<input type="number" placeholder-class="input-placeholder" 
-								class="transfer-money" :placeholder="`Current balance is ${balance}`"
+								class="transfer-money" :placeholder="this.$lang('common.transfer_amount_tip') + this.balance"
 								v-model="transferMoney"/>
 							</view>
 						</view>
@@ -35,7 +35,7 @@
 							@click="withdraw"> -->
 						<view class="btn transfer_btn" :class="{ disabled: transferMoney == '' || transferMoney == 0 }"
 							@click="transfer">
-							transfer
+							{{ $lang('common.transfer_money') }}
 						</view>
 <!-- 						<view class="withdraw-list btn"
 							@click="$util.redirectTo('/otherpages/fenxiao/withdraw_list/withdraw_list')">
@@ -282,6 +282,7 @@
 			color: #bfbfbf;
 			line-height: 60rpx;
 			min-height: 60rpx;
+			font-size: 40rpx;
 			//border: solid blue 2px;
 		}
 		

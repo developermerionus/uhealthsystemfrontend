@@ -115,7 +115,7 @@
 						@click="$util.redirectTo('/otherpages/transferMToReferee_apply/transferMToReferee_apply')"
 						>
 						<!-- <image class="wallet-icon" src="../../../static/images/icons/wallet.png"></image> -->
-						Transfer Money to Referee Member
+						{{ $lang('common.transfer_to_referee') }}
 					</button>
 				</view>
 				
