@@ -111,6 +111,7 @@ export const lang = {
 		copy_successfully: "复制成功",
 		order_result: "查看订单",
 		pay_time: "支付时间",
-		official_website: "主网站"
+		official_website: "主网站",
+		lang: "语言"
 	}
 }
