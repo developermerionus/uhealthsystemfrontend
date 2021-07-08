@@ -134,6 +134,7 @@
 						}
 						.langWord{
 							margin-top: 2px;
+							color:$color-sub;
 						}
 					}
 				}
