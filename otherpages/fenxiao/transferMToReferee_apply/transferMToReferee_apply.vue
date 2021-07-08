@@ -6,22 +6,18 @@
 					<view class="container-body-wrap">
 						<view class="transfer-wrap">
 							<view class="title">{{ $lang('common.transfer_money') }}</view>
+							
 							<view class="input-wrap">
-								<label class="labelForInput">{{ $lang('common.referrer_ID') }}: </label>
-								<input type="text" placeholder-class="input-placeholder" 
-								:value="referrerId" disabled
-								class="input" />
+								<label class="labelForInput">{{ $lang('common.referree_id') }}: </label>
+								<input type="number" placeholder-class="input-placeholder" 
+								class="input" v-model="refereeId"/>
 							</view>
 							<view class="input-wrap">
 								<label class="labelForInput">{{ $lang('common.referree_name') }}: </label>
 								<input type="text" placeholder-class="input-placeholder" 
 								class="input" v-model="refereeName"/>
 							</view>
-							<view class="input-wrap">
-								<label class="labelForInput">{{ $lang('common.referree_id') }}: </label>
-								<input type="number" placeholder-class="input-placeholder" 
-								class="input" v-model="refereeId"/>
-							</view>
+							
 							<view class="input-wrap">
 								<label class="labelForInput">{{ $lang('common.transfer_amount') }}: </label>
 								<text class="unit">{{ $lang('common.currencySymbol') }} </text>
@@ -37,6 +33,9 @@
 							@click="transfer">
 							{{ $lang('common.transfer_money') }}
 						</view>
+						<view class="btn transfer_detail_btn" @click="$util.redirectTo('/otherpages/fenxiao/transferMToReferee_list/transferMToReferee_list')">
+							{{ $lang('common.transfer_money_list') }}
+						</view>
 <!-- 						<view class="withdraw-list btn"
 							@click="$util.redirectTo('/otherpages/fenxiao/withdraw_list/withdraw_list')">
 							<view class="color-tip">{{ $lang('withdrawal_details') }}</view>
@@ -46,7 +45,7 @@
 		
 				</view>
 		
-			</view>
+		</view>
 </template>
 
 <script>
@@ -55,8 +54,6 @@
 		data() {
 			return {
 				
-				referrerName: '',
-				referrerId: 0,
 				refereeName: '',
 				refereeId: null,
 				transferMoney: '',
@@ -71,9 +68,9 @@
 			this.getBonus();
 		},
 		onShow() {
-			// 刷新多语言
-			// this.$langConfig.refresh();
-			// this.$langConfig.title('Transfer To Referee'; // 
+			//刷新多语言
+			this.$langConfig.refresh();
+			//this.$langConfig.title('Transfer To Referee'; // 
 			
 			
 			// if (uni.getStorageSync('token')) {
@@ -93,7 +90,7 @@
 				// 	this.getWithdrawConfig();
 				} else {
 					this.$util.redirectTo('/pages/login/login/login', {
-						back: '/otherpages/fenxiao/withdraw_apply/withdraw_apply'
+						back: '/otherpages/fenxiao/transferMToReferee_apply/transferMToReferee_apply'
 					});
 				 }
 			},
@@ -111,12 +108,7 @@
 							this.referrerId = res.data[0].member_id;
 							}
 					}
-				})
-				
-				// this.loadData(this.referrerId);
-				// this.getTheEdge(0);
-				// this.getTheEdge(1);
-				
+				})			
 			},
 			
 			// transfer apply
@@ -125,6 +117,8 @@
 					if (this.isSub) return;
 					this.isSub = true;
 					console.log('transferring...');
+					
+					this.sendData();
 				}
 			},
 			
@@ -153,50 +147,43 @@
 				// 	return false;
 				// }
 				
-				// check referee ID and Name
-				//this.memberInfo = uni.getStorageSync('userInfo');
-				
 				return true;
 			},
 			
-			loadData(member_id){
-				this.list = []
-				// console.log('getTeamTree')
+			sendData(){
+				console.log('start sending');
 				this.$api.sendRequest({
-					url: '/api/member/getTeamTree',
+					url: '/api/member/transfer',
+					// data: {refereeID, username, amount}
 					data: {
-						member_id,
+						refereeID: this.refereeID,
+						username: this.refereeName,
+						amount: this.transferMoney,
 					},
+					
 					success: res => {
-						
-						//if (this.$refs.loadingCover) this.$refs.loadingCover.hide();
-						console.log("loaddata",res);
-						// if (res.code >= 0) {	
-						// 	// this.list = res.data[0];
-						// 	console.log(res.data['0']);
-						// 	this.list.push(res.data['0']);
-						// 	this.width = res.data.width;
-						// 	this.height = res.data.height;
-						// 	this.prev_member_id = member_id;
-							
-						// }
+						if (res.code >= 0) {
+							this.$util.showToast({
+								title: 'transfer success' //this.$lang('withdraw_success') // '提现申请成功'
+							});
+							setTimeout(() => {
+								this.$util.redirectTo('/otherpages/fenxiao/transferMToReferee_apply/transferMToReferee_apply', 
+								{}, 'redirectTo');
+							}, 1500);
+						} else {
+							console.log('success else', res);							this.isSub = false;
+							this.$util.showToast({
+								title: res.message
+							});
+						}
+					},
+					fail: res => {
+						console.log('fail', res);
+						this.isSub = false;
 					}
-				})
+				});
 			},
 			
-			getTheEdge(branch){
-				this.$api.sendRequest({
-					url: '/api/member/getTheEdge',
-					data: {
-						member_id: this.referrerId,
-						branch,
-					},
-					success: res => {
-						console.log('the edge',res);
-						this.loadData(res.data[0].member_id);
-					}	
-				})
-			},
 			
 			
 		},
@@ -300,6 +287,12 @@
 			flex: 1;
 			font-weight: 500;
 			vertical-align: middle;
+			
+			// .input-placeholder {
+			// 	color: red;
+			// 	font-size: 20rpx;
+			// }
+			
 		}
 		
 		
@@ -316,7 +309,7 @@
 		text-align: center;
 		border-radius: 10rpx;
 	
-		&.disabled {
+		 &.disabled {
 			background: #ccc;
 			border-color: #ccc;
 			color: #fff;
@@ -328,6 +321,12 @@
 		//border: solid red 2px;
 		background: linear-gradient(to right, #10869c 0%, #118ca3 12%, 
 		#139fb9 34%, #14a5c0 47%, #139fb9 67%, #118ca3 89%, #10869c 100%);
+	}
+	
+	.transfer_detail_btn {
+		background: #ccc;
+		border-color: #ccc;
+		color: #fff;
 	}
 	
 	@media screen and (min-width: 750px) {

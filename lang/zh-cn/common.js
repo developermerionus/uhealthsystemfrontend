@@ -120,6 +120,7 @@ export const lang = {
 		'referree_id' : '被推荐人ID',
 		'transfer_amount' : '转账金额',
 		'transfer_amount_tip' : '余额有 $',
+		'transfer_money_list' : '转账明细',
 		
 	}
 }

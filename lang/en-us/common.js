@@ -119,6 +119,7 @@ export const lang = {
 		'referree_id' : 'Referree ID',
 		'transfer_amount' : 'Transfer Amount',
 		'transfer_amount_tip' : 'Current balance is $',
+		'transfer_money_list' : 'Transfer Details',
 		
 	
 	}

@@ -13,7 +13,7 @@ export const lang = {
 	'widthdrawRecordsEmpty_0' : '暂无',
 	'widthdrawRecordsEmpty_1' : '暂无待审核',
 	'widthdrawRecordsEmpty_2' : '暂无已审核',
-	'widthdrawRecordsEmpty_-1' : '暂无已拒绝',
+	'widthdrawRecordsEmpty_3' : '暂无已拒绝',
 	
 	// fenxiaoWords
 	'奖金' : '奖金',
