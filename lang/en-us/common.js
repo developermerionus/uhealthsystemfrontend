@@ -111,6 +111,6 @@ export const lang = {
 		order_result: "View Order",
 		pay_time: "Paid on",
 		official_website: "Main Website",
-		lang: "lang"
+		lang: "Lang"
 	}
 }
