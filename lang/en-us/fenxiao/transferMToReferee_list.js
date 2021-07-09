@@ -4,6 +4,7 @@ export const lang = {
 	title: 'Transfer List',
 	apply_to: 'Apply to ',
 	transferAmount: 'Transfer Amount',
+	transfer: 'Transfer',
 	
 	//transfer-cate item
 	'全部' : 'All',
@@ -28,5 +29,6 @@ export const lang = {
 	
 	'团队' : 'Team',
 	'提现' : 'Withdraw',
+	'转账' : 'transfer',
 	
 }

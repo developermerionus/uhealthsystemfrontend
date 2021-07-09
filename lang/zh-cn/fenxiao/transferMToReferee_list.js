@@ -4,6 +4,8 @@ export const lang = {
 	title: '转账列表',
 	apply_to: 'Apply to ',
 	transferAmount: '转账金额',
+	transfer: '转账',
+	
 	
 	//transfer-cate item
 	'全部' : '全部',
@@ -28,5 +30,6 @@ export const lang = {
 	
 	'团队' : '团队',
 	'提现' : '提现',
+	'转账' : '转账',
 	
 }

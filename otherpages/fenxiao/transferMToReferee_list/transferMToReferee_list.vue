@@ -17,7 +17,24 @@
 				<mescroll-uni ref="mescroll" @getData="getData" top="140px" 
 				class="member-point" :size="10">
 				<block slot="list">
-					
+					<view class="transfer-li" v-for="(item, index) in transferList" :key="index">
+						<view class="li-box">
+							<view class="transfer-desc">
+								<view class="desc-info">
+									<view class="desc-info-name">{{ $lang('apply_to') + $lang('transfer') }}</view>
+									<view class="desc-info-time">{{ item.apply_time }}</view>
+								</view>
+								<view class="desc-money" :style="transferState[item.status].color">
+									{{ $lang(transferState[item.status].text) }}
+								</view>
+							</view>
+							<view class="money-desc">
+								<text>{{ $lang('transferAmount') }}：</text>
+								<!-- <text>手续费：{{ item.withdraw_rate_money }}</text> -->
+								<text class="color-base-text">${{ item.apply_money }}</text>
+							</view>
+						</view>
+					</view>
 					
 					
 					<block v-if="transferList.length == 0 && emptyShow">
@@ -65,7 +82,7 @@
 					}
 				],
 
-				withdrawState: {
+				transferState: {
 					'1': {
 						color: 'color: rgb(255, 160, 68)',
 						text: '待审核'
@@ -83,7 +100,7 @@
 				transferList: [],
 				emptyShow: false
 
-			}
+			};
 		},
 		mixins: [globalConfig],
 
@@ -93,9 +110,39 @@
 				this.emptyShow = false;
 				if (mescroll.num == 1) {
 					this.transferList = [];
-				}
+				};
 				
-				this.emptyShow = true;
+				this.$api.sendRequest({
+					url: '/api/memberwithdraw/page',
+					data: {
+						page_size: mescroll.size,
+						page: mescroll.num,
+						status: this.status
+					},
+					success: res => {
+						console.log(res);
+						this.emptyShow = true;
+						let newArr = [];
+						let msg = res.message;
+						if (res.code == 0 && res.data && res.data.list) {
+							newArr = res.data.list;
+						} else {
+							this.$util.showToast({
+								title: msg
+							});
+						}
+						mescroll.endSuccess(newArr.length);
+						//设置列表数据
+						if (mescroll.num == 1) this.transferList = []; //如果是第一页需手动制空列表
+						this.transferList = this.transferList.concat(newArr); //追加新数据
+						if (this.$refs.loadingCover) this.$refs.loadingCover.hide();
+					},
+					fail: res => {
+						mescroll.endErr();
+						if (this.$refs.loadingCover) this.$refs.loadingCover.hide();
+					}
+				});
+				
 			},
 			
 			selectCate(e) {
@@ -145,11 +192,42 @@
 				bottom: 0;
 				background-color: red;
 			} */
-
 		}
-		
-		
-		
-
 	}
+	
+	.transfer-li {
+		width: 100%;
+		padding: 0 30rpx;
+		box-sizing: border-box;
+		
+		max-width: 1200px;
+		margin: 0 auto;
+		
+		margin-top: 20rpx;
+		border: solid red 1px;
+		
+		.li-box {
+			width: 100%;
+			height: 100%;
+			padding: 30rpx;
+			background-color: #fff;
+			box-sizing: border-box;
+		/* 	border-radius: $border-radius; */
+			border: solid yellow 1px;
+			
+			}
+		
+			.money-desc {
+				width: 100%;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				margin-top: 20rpx;
+				line-height: 1;
+				color: $color-title;
+				font-size: $font-size-tag;
+			}
+		
+	}
+	
 </style>

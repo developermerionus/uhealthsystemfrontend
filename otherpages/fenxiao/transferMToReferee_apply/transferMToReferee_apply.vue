@@ -164,7 +164,7 @@
 					success: res => {
 						if (res.code >= 0) {
 							this.$util.showToast({
-								title: 'transfer success' //this.$lang('withdraw_success') // '提现申请成功'
+								title: 'transfer success' //this.$lang('withdraw_success') // ''
 							});
 							setTimeout(() => {
 								this.$util.redirectTo('/otherpages/fenxiao/transferMToReferee_apply/transferMToReferee_apply', 
