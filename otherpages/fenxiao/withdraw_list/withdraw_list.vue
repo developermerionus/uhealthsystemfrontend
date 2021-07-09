@@ -11,7 +11,7 @@
 				</block>
 			</view>
 
-			<mescroll-uni ref="mescroll" @getData="getData" top="140px" class="member-point" :size="10">
+			<mescroll-uni ref="mescroll" @getData="getData" top="150px" class="member-point" :size="10">
 				<block slot="list">
 					<view class="withdraw-li" v-for="(item, index) in withdrawList" :key="index">
 						<view class="li-box">
@@ -180,7 +180,7 @@
 		justify-content: space-around;
 		background: #fff;
 		position: fixed;
-		top: 80px;
+		top: 100px;
 		z-index: 999;
 		box-sizing: border-box;
 
