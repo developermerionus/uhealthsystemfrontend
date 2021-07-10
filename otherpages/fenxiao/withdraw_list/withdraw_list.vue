@@ -242,6 +242,7 @@
 				display: flex;
 				justify-content: space-between;
 				border-bottom: 2rpx solid $color-line;
+				
 
 				.desc-info {
 					display: flex;

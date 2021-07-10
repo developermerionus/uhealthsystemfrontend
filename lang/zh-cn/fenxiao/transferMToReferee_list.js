@@ -6,12 +6,10 @@ export const lang = {
 	transferAmount: '转账金额',
 	transfer: '转账',
 	
-	
 	//transfer-cate item
-	'全部' : '全部',
-	'待审核' : '待审核',
-	'已提现' : '已提现',
-	'已拒绝' : '已拒绝',
+	'all' : '全部',
+	'received' : '收到',
+	'transferred' : '转出',
 	
 	// empty withdrawList
 	'transferRecordsEmpty_0' : '暂无',

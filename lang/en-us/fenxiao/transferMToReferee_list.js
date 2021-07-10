@@ -7,10 +7,9 @@ export const lang = {
 	transfer: 'Transfer',
 	
 	//transfer-cate item
-	'全部' : 'All',
-	'待审核' : 'Pending',
-	'已提现' : 'Withdrawn',
-	'已拒绝' : 'Refused',
+	'all' : 'All',
+	'received' : 'Received',
+	'transferred' : 'Transferred',
 	
 	// empty withdrawList
 	'transferRecordsEmpty_0' : 'Empty',

@@ -114,7 +114,7 @@
 					<button class="transferToReferee-button" type="default"
 						@click="$util.redirectTo('/otherpages/fenxiao/transferMToReferee_apply/transferMToReferee_apply')"
 						>
-						<!-- <image class="wallet-icon" src="../../../static/images/icons/wallet.png"></image> -->
+						<image class="wallet-icon" src="../../../static/images/icons/transferMToReferee.png"></image>
 						{{ $lang('common.transfer_to_referee') }}
 					</button>
 				</view>

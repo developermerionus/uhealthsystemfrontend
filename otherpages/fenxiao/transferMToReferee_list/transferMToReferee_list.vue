@@ -18,19 +18,16 @@
 				class="member-point" :size="10">
 				<block slot="list">
 					<view class="transfer-li" v-for="(item, index) in transferList" :key="index">
-						<view class="li-box">
+						<view class="transfer-li-box">
 							<view class="transfer-desc">
 								<view class="desc-info">
-									<view class="desc-info-name">{{ $lang('apply_to') + $lang('transfer') }}</view>
+									<view class="desc-info-name" :style="transferState[item.status].color">
+									{{ $lang(transferState[item.status].text) }}</view>
 									<view class="desc-info-time">{{ item.apply_time }}</view>
-								</view>
-								<view class="desc-money" :style="transferState[item.status].color">
-									{{ $lang(transferState[item.status].text) }}
 								</view>
 							</view>
 							<view class="money-desc">
 								<text>{{ $lang('transferAmount') }}：</text>
-								<!-- <text>手续费：{{ item.withdraw_rate_money }}</text> -->
 								<text class="color-base-text">${{ item.apply_money }}</text>
 							</view>
 						</view>
@@ -44,8 +41,8 @@
 						</ns-empty>
 						<ns-empty :text="$lang('transferRecordsEmpty_2')" :isIndex="!1" v-if="status == 2">
 						</ns-empty>
-						<ns-empty :text="$lang('transferRecordsEmpty_3')" :isIndex="!1" v-if="status == 3">
-						</ns-empty>
+						<!-- <ns-empty :text="$lang('transferRecordsEmpty_3')" :isIndex="!1" v-if="status == 3">
+						</ns-empty> -->
 					</block>
 				</block>
 				</mescroll-uni>
@@ -62,39 +59,39 @@
 			return {
 				category: [{
 						id: 0,
-						name: '全部',
+						name: 'all', // '全部',
 						number: 2
 					},
 					{
 						id: 1,
-						name: '待审核',
+						name: 'received', // '收到', 
 						number: 0
 					},
 					{
 						id: 2,
-						name: '已提现',
+						name: 'transferred', //'转出',
 						number: 0
 					},
-					{
-						id: 3,
-						name: '已拒绝',
-						number: 0
-					}
+					// {
+					// 	id: 3,
+					// 	name: '已拒绝',
+					// 	number: 0
+					// }
 				],
 
 				transferState: {
 					'1': {
-						color: 'color: rgb(255, 160, 68)',
-						text: '待审核'
+						color: 'color: rgb(17, 189, 100)',
+						text: 'received'//'收到'
 					},
 					'2': {
-						color: 'color: rgb(17, 189, 100)',
-						text: '已提现'
-					},
-					'3': {
 						color: 'color: rgb(255, 69, 68)',
-						text: '已拒绝'
-					}
+						text: 'transferred'//'转出' 
+					},
+					// '3': {
+					// 	color: 'color: ,
+					// 	text: '已拒绝'
+					// }
 				},
 				status: 0,
 				transferList: [],
@@ -113,7 +110,8 @@
 				};
 				
 				this.$api.sendRequest({
-					url: '/api/memberwithdraw/page',
+					//url: '/api/memberwithdraw/page', 
+					url: '/api/member/transfer_detail',
 					data: {
 						page_size: mescroll.size,
 						page: mescroll.num,
@@ -153,7 +151,7 @@
 	}
 </script>
 
-<style>
+<style lang="scss">
 	.outer-container-wrap {
 		max-width: 1200px;
 		margin: 0 auto;
@@ -181,7 +179,7 @@
 			position: relative;
 			line-height: 88rpx;
 
-			/* &.active:after {
+			&.active:after {
 				content: '';
 				display: block;
 				width: 100%;
@@ -191,7 +189,7 @@
 				left: 0;
 				bottom: 0;
 				background-color: red;
-			} */
+			}
 		}
 	}
 	
@@ -199,35 +197,47 @@
 		width: 100%;
 		padding: 0 30rpx;
 		box-sizing: border-box;
-		
 		max-width: 1200px;
 		margin: 0 auto;
-		
 		margin-top: 20rpx;
-		border: solid red 1px;
-		
-		.li-box {
+	}
+	
+	.transfer-li-box {
 			width: 100%;
 			height: 100%;
 			padding: 30rpx;
 			background-color: #fff;
 			box-sizing: border-box;
-		/* 	border-radius: $border-radius; */
-			border: solid yellow 1px;
-			
-			}
 		
-			.money-desc {
+			.transfer-desc {
 				width: 100%;
 				display: flex;
 				justify-content: space-between;
-				align-items: center;
-				margin-top: 20rpx;
-				line-height: 1;
-				color: $color-title;
-				font-size: $font-size-tag;
+				border-bottom: 2rpx solid $color-line;
+				
+			
+				.desc-info {
+					display: flex;
+					justify-content: center;
+					flex-direction: column;
+			
+					.desc-info-name {
+						font-size: $font-size-base;
+						color: $color-title;
+						line-height: 1;
+						margin-bottom: 10rpx;
+					}
+			
+					.desc-info-time {
+						margin-bottom: 10rpx;
+						font-size: $font-size-tag;
+						color: $color-tip;
+					}
+				}
 			}
-		
+			
+			
+	
 	}
 	
 </style>

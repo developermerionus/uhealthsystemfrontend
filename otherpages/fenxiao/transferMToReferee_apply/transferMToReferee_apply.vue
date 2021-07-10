@@ -8,14 +8,14 @@
 							<view class="title">{{ $lang('common.transfer_money') }}</view>
 							
 							<view class="input-wrap">
-								<label class="labelForInput">{{ $lang('common.referree_id') }}: </label>
+								<label class="labelForInput">{{ $lang('common.referee_id') }}: </label>
 								<input type="number" placeholder-class="input-placeholder" 
-								class="input" v-model="refereeId"/>
+								class="input" v-model="referee_id"/>
 							</view>
 							<view class="input-wrap">
-								<label class="labelForInput">{{ $lang('common.referree_name') }}: </label>
+								<label class="labelForInput">{{ $lang('common.referee_username') }}: </label>
 								<input type="text" placeholder-class="input-placeholder" 
-								class="input" v-model="refereeName"/>
+								class="input" v-model="referee_username"/>
 							</view>
 							
 							<view class="input-wrap">
@@ -54,8 +54,8 @@
 		data() {
 			return {
 				
-				refereeName: '',
-				refereeId: null,
+				referee_username: '',
+				referee_id: '',
 				transferMoney: '',
 				isSub: false, // 提交防重复
 				balance: 0,
@@ -105,7 +105,6 @@
 					success: res => {
 						if (res.code >= 0) {
 							this.balance = res.data[0].epoint_balance;
-							this.referrerId = res.data[0].member_id;
 							}
 					}
 				})			
@@ -142,6 +141,20 @@
 					});
 					return false;
 				}
+				if (this.referee_username == '') {
+					this.$util.showToast({
+						title: '请输入被推荐人用户名'
+					});
+					return false;
+				}
+				if (this.referee_id == '') {
+					this.$util.showToast({
+						title: '请输入被推荐人ID'
+					});
+					return false;
+				}
+				
+				
 				// if (parseFloat(this.withdrawMoney) < parseFloat(this.withdrawConfig.withdraw)) {
 				// 	this.$util.showToast({ title: '提现金额小于最低提现金额' });
 				// 	return false;
@@ -151,13 +164,11 @@
 			},
 			
 			sendData(){
-				console.log('start sending');
 				this.$api.sendRequest({
 					url: '/api/member/transfer',
-					// data: {refereeID, username, amount}
 					data: {
-						refereeID: this.refereeID,
-						username: this.refereeName,
+						referee_id: this.referee_id, 
+						username: this.referee_username,
 						amount: this.transferMoney,
 					},
 					
@@ -170,15 +181,14 @@
 								this.$util.redirectTo('/otherpages/fenxiao/transferMToReferee_apply/transferMToReferee_apply', 
 								{}, 'redirectTo');
 							}, 1500);
-						} else {
-							console.log('success else', res);							this.isSub = false;
+						} else {						
+							this.isSub = false;
 							this.$util.showToast({
 								title: res.message
 							});
 						}
 					},
 					fail: res => {
-						console.log('fail', res);
 						this.isSub = false;
 					}
 				});
@@ -288,10 +298,9 @@
 			font-weight: 500;
 			vertical-align: middle;
 			
-			// .input-placeholder {
-			// 	color: red;
-			// 	font-size: 20rpx;
-			// }
+			.input-placeholder {
+				font-size: 35rpx;
+			}
 			
 		}
 		
