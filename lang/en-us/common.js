@@ -119,5 +119,10 @@ export const lang = {
 		'transfer_amount' : 'Transfer Amount',
 		'transfer_amount_tip' : 'Current balance is $',
 		'transfer_money_list' : 'Transfer Details',
+		'transfer_verify_alerts_1': 'Input transfer amount',
+		'transfer_verify_alerts_2': 'Transfer amount is over wallet available balance',
+		'transfer_verify_alerts_3': 'Transfer amount is over the limit',
+		'transfer_verify_alerts_4': 'Input referee member username',
+		'transfer_verify_alerts_5': 'Input referee member ID',
 	}
 }

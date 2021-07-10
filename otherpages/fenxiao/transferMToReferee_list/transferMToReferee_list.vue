@@ -6,10 +6,13 @@
 			<view class="container-body-wrap">
 				<view class="transfer-cate">
 					<block v-for="(item, index) in category" :key="index">
-						<view class="cate-li"
+					<!-- 	<view class="cate-li"
 							:class="{ 'active color-base-text color-base-bg-before': status == item.id }"
-							@click="selectCate(item.id)">
-							{{ $lang(item.name) }}
+							@click="selectCate(item.id)"> -->
+							<view class="cate-li"
+								:class="{ 'active color-base-bg-before': status == item.id }"
+								@click="selectCate(item.id)">
+							{{ $lang(item.name) }} 
 						</view>
 					</block>
 				</view>
@@ -21,15 +24,19 @@
 						<view class="transfer-li-box">
 							<view class="transfer-desc">
 								<view class="desc-info">
-									<view class="desc-info-name" :style="transferState[item.status].color">
-									{{ $lang(transferState[item.status].text) }}</view>
-									<view class="desc-info-time">{{ item.apply_time }}</view>
+									<!-- <view class="desc-info-name" :style="transferState[item.status].color">
+									{{ $lang(transferState[item.status].text) }}</view> -->
+									<text :style="transferState[item.status].color">{{ item.memo }} : </text>
+									<view class="desc-info-time">{{ item.trans_time }}</view>
+								</view>
+								<view class="desc-money" :style="transferState[item.status].color">
+									${{ Math.abs(item.amount) }}
 								</view>
 							</view>
-							<view class="money-desc">
-								<text>{{ $lang('transferAmount') }}：</text>
-								<text class="color-base-text">${{ item.apply_money }}</text>
-							</view>
+						<!-- 	<view class="money-desc">
+								<text :style="transferState[item.status].color">{{ item.memo }}：</text>
+								<text class="color-base-text">${{ Math.abs(item.amount) }}</text>
+							</view> -->
 						</view>
 					</view>
 					
@@ -62,16 +69,16 @@
 						name: 'all', // '全部',
 						number: 2
 					},
-					{
-						id: 1,
-						name: 'received', // '收到', 
-						number: 0
-					},
-					{
-						id: 2,
-						name: 'transferred', //'转出',
-						number: 0
-					},
+					// {
+					// 	id: 1,
+					// 	name: 'transferred', 
+					// 	number: 0
+					// },
+					// {
+					// 	id: 2,
+					// 	name: 'received', 
+					// 	number: 0
+					// },
 					// {
 					// 	id: 3,
 					// 	name: '已拒绝',
@@ -81,12 +88,12 @@
 
 				transferState: {
 					'1': {
-						color: 'color: rgb(17, 189, 100)',
-						text: 'received'//'收到'
+						color: 'color: rgb(255, 69, 68)',
+						text: 'transferred'
 					},
 					'2': {
-						color: 'color: rgb(255, 69, 68)',
-						text: 'transferred'//'转出' 
+						color: 'color: rgb(17, 189, 100)',
+						text: 'received'
 					},
 					// '3': {
 					// 	color: 'color: ,
@@ -110,7 +117,6 @@
 				};
 				
 				this.$api.sendRequest({
-					//url: '/api/memberwithdraw/page', 
 					url: '/api/member/transfer_detail',
 					data: {
 						page_size: mescroll.size,
@@ -118,12 +124,11 @@
 						status: this.status
 					},
 					success: res => {
-						console.log(res);
 						this.emptyShow = true;
 						let newArr = [];
 						let msg = res.message;
-						if (res.code == 0 && res.data && res.data.list) {
-							newArr = res.data.list;
+						if (res.code == 0 && res.data) {
+							newArr = res.data;
 						} else {
 							this.$util.showToast({
 								title: msg
@@ -178,6 +183,7 @@
 			font-size: 30rpx;
 			position: relative;
 			line-height: 88rpx;
+			
 
 			&.active:after {
 				content: '';

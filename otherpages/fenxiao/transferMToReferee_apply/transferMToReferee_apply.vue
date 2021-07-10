@@ -115,8 +115,6 @@
 				if (this.verify()) {
 					if (this.isSub) return;
 					this.isSub = true;
-					console.log('transferring...');
-					
 					this.sendData();
 				}
 			},
@@ -125,40 +123,34 @@
 				// check transfer amount
 				if (this.transferMoney == '' || this.transferMoney == 0 || isNaN(parseFloat(this.transferMoney))) {
 					this.$util.showToast({
-						title: '请输入提现金额'
+						title: this.$lang('common.transfer_verify_alerts_1')
 					});
 					return false;
 				}
 				if (parseFloat(this.transferMoney) > parseFloat(this.balance)) {
 					this.$util.showToast({
-						title: '提现金额超出可提现金额'
+						title: this.$lang('common.transfer_verify_alerts_2')
 					});
 					return false;
 				}
 				if (parseFloat(this.withdrawMoney) > 10000) {
 					this.$util.showToast({
-						title: '提现金额超出限额'
+						title: this.$lang('common.transfer_verify_alerts_3')
 					});
 					return false;
 				}
 				if (this.referee_username == '') {
 					this.$util.showToast({
-						title: '请输入被推荐人用户名'
+						title: this.$lang('common.transfer_verify_alerts_4') //'请输入被推荐人用户名'
 					});
 					return false;
 				}
 				if (this.referee_id == '') {
 					this.$util.showToast({
-						title: '请输入被推荐人ID'
+						title: this.$lang('common.transfer_verify_alerts_5') //'请输入被推荐人ID'
 					});
 					return false;
 				}
-				
-				
-				// if (parseFloat(this.withdrawMoney) < parseFloat(this.withdrawConfig.withdraw)) {
-				// 	this.$util.showToast({ title: '提现金额小于最低提现金额' });
-				// 	return false;
-				// }
 				
 				return true;
 			},
@@ -175,7 +167,7 @@
 					success: res => {
 						if (res.code >= 0) {
 							this.$util.showToast({
-								title: 'transfer success' //this.$lang('withdraw_success') // ''
+								title: 'transfer success'
 							});
 							setTimeout(() => {
 								this.$util.redirectTo('/otherpages/fenxiao/transferMToReferee_apply/transferMToReferee_apply', 

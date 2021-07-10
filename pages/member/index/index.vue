@@ -586,7 +586,7 @@
 				if (!uni.getStorageSync('token')) {
 					this.$refs.login.open(url);
 				} else {
-					if (index > 1 && this.memberInfo.member_level < 2) return this.$util.msg('会员才能进入！');
+					// if (index > 1 && this.memberInfo.member_level < 2) return this.$util.msg('会员才能进入！');
 					if (index == 3) url = '/otherpages/fenxiao/withdraw_apply/withdraw_apply';
 					// console.log(url)
 					// if ( index == 3)  url = '/otherpages/member/tree/tree_copy';

@@ -120,5 +120,11 @@ export const lang = {
 		'transfer_amount' : '转账金额',
 		'transfer_amount_tip' : '余额有 $',
 		'transfer_money_list' : '转账明细',
+		'transfer_verify_alerts_1': '请输入转账金额',
+		'transfer_verify_alerts_2': '转账金额超出可钱包金额',
+		'transfer_verify_alerts_3': '转账金额超出限额',
+		'transfer_verify_alerts_4': '请输入被推荐人用户名',
+		'transfer_verify_alerts_5': '请输入被推荐人ID',
+		
 	}
 }
