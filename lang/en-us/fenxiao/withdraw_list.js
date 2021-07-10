@@ -15,7 +15,7 @@ export const lang = {
 	'widthdrawRecordsEmpty_0' : 'Empty',
 	'widthdrawRecordsEmpty_1' : 'No Pending Withdrawal application',
 	'widthdrawRecordsEmpty_2' : 'Withdrawn Records: Empty',
-	'widthdrawRecordsEmpty_-1' : 'Refused: None',
+	'widthdrawRecordsEmpty_3' : 'Refused: None',
 	
 		
 	// fenxiaowords
