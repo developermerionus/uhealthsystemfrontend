@@ -1,6 +1,7 @@
 <template>
 	<view :data-theme="themeStyle">
 		<view scroll-y="true" class="goods-detail" :class="isIphoneX ? 'active' : ''">
+			<navbar></navbar>
 			<view class="goods-container">
 				<!-- 商品媒体信息 -->
 				<view class="goods-media">
@@ -530,7 +531,7 @@
 		<ns-login ref="login"></ns-login>
 
 		<!-- 商品底部导航 -->
-		<ns-goods-action :safeArea="isIphoneX">
+		<ns-goods-action :safeArea="isIphoneX" class="goodBottom">
 			<template v-if="goodsSkuDetail.goods_state == 1">
 				<ns-goods-action-icon :text="$lang('common.go_index')" icon="iconshouye1" @click="goHome" />
 

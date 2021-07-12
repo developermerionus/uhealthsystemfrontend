@@ -125,6 +125,8 @@ export const lang = {
 		'transfer_verify_alerts_3': '转账金额超出限额',
 		'transfer_verify_alerts_4': '请输入被推荐人用户名',
 		'transfer_verify_alerts_5': '请输入被推荐人ID',
-		
+		selfpickup: "自提取",
+		delivery: "物流配送",
+		deliverymethod: "配送方式",
 	}
 }
