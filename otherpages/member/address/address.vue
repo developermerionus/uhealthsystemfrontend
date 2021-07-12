@@ -1,10 +1,10 @@
 <template>
 	<view :data-theme="themeStyle" class="container">
 		<view class="outer-container-wrap">
-			<navbar></navbar>
 			<mescroll-uni ref="mescroll" @getData="getListData">
 				<block slot="list">
-					<view class="address-list">
+					<navbar></navbar>
+					<view class="address-list">	
 						<template v-if="addressList.length !== 0">
 							<view class="address-item" v-for="(item, index) in addressList" :key="index">
 								<view class="address-item-top" @click="setDefault(item.id)">
@@ -17,12 +17,12 @@
 									<view class="address-info" v-else>{{ item.address }} {{ item.full_address }}</view>
 								</view>
 								<view class="address-item-bottom">
-									<view class="address-default">
+									<view class="address-default" @click="setDefault(item.id)">
 										<view class="iconfont"
 											:class="item.is_default == 1 ? 'iconyuan_checked color-base-text' : 'iconyuan_checkbox'">
 										</view>
 										<text class="default" :class="{ 'color-base-text': item.is_default == 1 }"
-											@click="setDefault(item.id)">{{ $lang('defaultAddress')}}</text>
+											>{{ $lang('defaultAddress')}}</text>
 									</view>
 									<view class="address-btn">
 										<text class="edit" @click="addAddress('edit', item.id)">
@@ -130,6 +130,7 @@
 						type: this.localType
 					},
 					success: res => {
+						
 						this.showEmpty = true;
 						let newArr = [];
 						let msg = res.message;
@@ -361,7 +362,7 @@
 		flex-direction: column;
 		min-height: 70vh;
 		justify-content: center;
-		margin-top: 40px;
+		margin-top: 10px;
 
 		.local {
 			display: flex;
@@ -535,8 +536,9 @@
 		.address-list {
 			max-width: 750px;
 			margin: 0 auto;
-			margin-top:50px;
+			margin-top:10px;
 		}
 
 	}
+	
 </style>

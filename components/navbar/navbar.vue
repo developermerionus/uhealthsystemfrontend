@@ -183,6 +183,8 @@
 		width:90%;
 		margin:0 auto;
 		z-index:0;
+		max-width:1200px;
+		
 	}
 	
 	.header-content {

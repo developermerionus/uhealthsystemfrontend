@@ -1,5 +1,6 @@
 <template>
-	<view :data-theme="themeStyle" class="allPage" :class="{ bottom: hasData }">
+	<view :data-theme="themeStyle" class="allPage" :class="{ bottom: hasData }" >
+		<navbar></navbar>
 		<view class="cart-header fixed" v-if="cartData.length">
 			<view class="num-wrap font-size-toolbar">
 				{{ $lang('common.total')}}
@@ -612,6 +613,8 @@ export default {
 	height: calc(100vh - 110rpx);
 	padding-bottom: 110rpx;
 	overflow-y: auto;
+	max-width: 1200px;
+	margin: 0 auto;
 	&.bottom {
 		height: calc(100vh - 210rpx);
 		padding-bottom: 210rpx;
@@ -818,14 +821,17 @@ export default {
 	}
 }
 .cart-bottom {
+	max-width:1200px;
+	margin: 0 auto;
 	position: fixed;
 	z-index: 5;
-	width: 100vw;
+	width: 100%;
 	height: 100rpx;
 	background: #fff;
 	bottom: var(--window-bottom);
 	overflow: hidden;
 	display: flex;
+	justify-content: space-between;
 	bottom: 56px;
 	z-index: 9;
 
@@ -902,6 +908,7 @@ export default {
 		line-height: 70rpx !important;
 		font-size: $font-size-base;
 	}
+	
 }
 </style>
 <style scoped>

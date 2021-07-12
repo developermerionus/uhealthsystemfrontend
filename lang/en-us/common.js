@@ -124,5 +124,8 @@ export const lang = {
 		'transfer_verify_alerts_3': 'Transfer amount is over the limit',
 		'transfer_verify_alerts_4': 'Input referee member username',
 		'transfer_verify_alerts_5': 'Input referee member ID',
+		selfpickup: "Self Pickup",
+		delivery: "Delivery",
+		deliverymethod: "How To Get Orders"
 	}
 }
