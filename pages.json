@@ -6,7 +6,7 @@
 	    		// #ifdef H5
 	    		"navigationStyle": "custom",
 	    		// #endif
-	    		"enablePullDownRefresh": true,
+	    		// "enablePullDownRefresh": true,
 	    		"navigationBarTitleText": "会员中心"
 	    	}
 	    },
