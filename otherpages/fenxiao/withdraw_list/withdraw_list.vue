@@ -88,6 +88,10 @@
 					'3': { // 原为 ‘-1’
 						color: 'color: rgb(255, 69, 68)',
 						text: '已拒绝'
+					},
+					'-1': { 
+						color: 'color: rgb(255, 69, 68)',
+						text: '已拒绝'
 					}
 				},
 				status: 0,
