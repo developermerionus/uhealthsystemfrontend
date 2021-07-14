@@ -687,6 +687,6 @@ export default {
 	//width: 100vw;
 	width: 100%;
 	//height: 10vh;
-	min-height: 90rpx;
+	min-height: 200rpx;
 }
 </style>
