@@ -787,7 +787,9 @@
 		.selfPickup {
 			margin-right: 50px;
 		}
+		
 	}
+	
 </style>
 <style scoped>
 	/deep/ .uni-popup__wrapper.uni-custom .uni-popup__wrapper-box {
@@ -801,6 +803,6 @@
 	}
 
 	>>>.uni-popup {
-		z-index: 8;
+		z-index: 1000;
 	}
 </style>
