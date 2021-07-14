@@ -141,15 +141,17 @@ export default {
 					if (res.code >= 0) {
 						this.orderPaymentData = res.data;
 						let newArr = res.data;
-						//console.log('newArr', newArr);
+						console.log('newArr', newArr);
 						
-						if(res.data.member_address.country_id===0){
-							this.selfPickupExistInList = true;
-							this.current = "selfpickup"
+						if (res.data.member_address){
+							if(res.data.member_address.country_id===0){
+								this.selfPickupExistInList = true;
+								this.current = "selfpickup"
+							}
+							else {
+								this.current = 'delivery'
 						}
-						else {
-							this.current = 'delivery'
-						}
+					}
 						
 						this.orderPaymentData.timestamp = res.timestamp;
 						this.handlePaymentData();
