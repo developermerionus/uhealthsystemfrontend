@@ -35,10 +35,14 @@
 						<view class="user-section-box">
 							<view class="user-info-box" v-if="token">
 								<view @click="$util.redirectTo('/pages/member/info/info')" class="user-head">
-									<image
+									<!-- <image
 										:src="memberInfo.headimg ? $util.img(memberInfo.headimg) : $util.getDefaultImage().default_headimg"
 										mode="aspectFill"
-										@error="memberInfo.headimg = $util.getDefaultImage().default_headimg"></image>
+										@error="memberInfo.headimg = $util.getDefaultImage().default_headimg"></image> -->
+										<image
+											:src="$util.getDefaultImage().default_headimg"
+											mode="aspectFill"
+											@error="memberInfo.headimg = $util.getDefaultImage().default_headimg"></image>
 								</view>
 								<!-- <view class="user-box">
 									<view class="user-label-up" style = "margin-left: 20rpx;">
@@ -245,6 +249,7 @@
 					</view>
 					<view v-if='token&&infoList3.length>0' class="example-body"
 						style="margin-top: -20rpx; background: rgb(255, 255, 255);">
+						<text @click="$util.redirectTo('/pages/bonusDetail/bonusDetail')">Bonus Detail</text>
 						<!-- 会员信息模块 -->
 						<view style="margin 20rpx, 20rpx;">
 							<uni-grid :column="columnNum" :show-border="false" :square="false">

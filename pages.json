@@ -245,7 +245,16 @@
 				// #endif
 			}
 		}
-	],
+	    ,{
+            "path" : "pages/bonusDetail/bonusDetail",
+            "style" :                                                                                    
+            {
+				"navigationStyle": "custom",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"subPackages": [{
 
 			//******************营销活动模块（26）******************
