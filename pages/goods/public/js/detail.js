@@ -392,16 +392,25 @@ export default {
 				// 关键字 - '套餐'
 				if (!this.goodsSkuDetail.goods_name.includes("套餐")) {
 					isProductAllowToBuy = false;
+					this.$util.showToast({
+						title: this.$lang('isAllowedToBuyTip1') // "会员才可购买"
+					});
 				}
 				if (this.goodsSkuDetail.goods_name.includes("仅限美国境外")) {
 					if (uni.getStorageSync('userInfo').marketCountryId === 0 ||
 					 uni.getStorageSync('userInfo').marketCountryId === 1) {;
 							isProductAllowToBuy = false;
+							this.$util.showToast({
+								title: this.$lang('isAllowedToBuyTip2') // "仅限美国境外"
+							});
 					 }
 				}
 			} else { // member_level > 1
 				if (this.goodsSkuDetail.goods_name.includes("套餐")) {
 					isProductAllowToBuy = false;
+					this.$util.showToast({
+						title: this.$lang('isAllowedToBuyTip3') // "仅限非会员购买"
+					});
 				}
 			}
 			
