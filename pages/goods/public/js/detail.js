@@ -362,26 +362,51 @@ export default {
 				this.$refs.login.open('/pages/goods/detail/detail?sku_id=' + this.skuId);
 				return;
 			}
-			this.$refs.goodsSku.show("join_cart", () => {
-				this.getCartCount();
-			});
+			if (this.isAllowedToBuy()) {
+				this.$refs.goodsSku.show("join_cart", () => {
+					this.getCartCount();
+				});
+			}
 		},
 		// 立即购买
 		buyNow() {
-			
 			if (!uni.getStorageSync('token') && this.preview == 0) {
 				this.$refs.login.open('/pages/goods/detail/detail?sku_id=' + this.skuId);
 				return;
 			}
-			// console.log(this.$refs);
-			this.$refs.goodsSku.show("buy_now", () => {
-				this.getCartCount();
-			});
+			if (this.isAllowedToBuy()) {
+				this.$refs.goodsSku.show("buy_now", () => {
+					this.getCartCount();
+				});
+			}
+			
 		},
 		swiperChange(e) {
 			this.swiperCurrent = e.detail.current + 1;
 		},
-
+		// 检查物品关键字 - “套餐”，“国家”
+		isAllowedToBuy() {
+			let isProductAllowToBuy = true; // 检验物品可否被该用户购买
+			
+			if (uni.getStorageSync('userInfo').member_level === 1) {
+				// 关键字 - '套餐'
+				if (!this.goodsSkuDetail.goods_name.includes("套餐")) {
+					isProductAllowToBuy = false;
+				}
+				if (this.goodsSkuDetail.goods_name.includes("仅限美国境外")) {
+					if (uni.getStorageSync('userInfo').marketCountryId === 0 ||
+					 uni.getStorageSync('userInfo').marketCountryId === 1) {;
+							isProductAllowToBuy = false;
+					 }
+				}
+			} else { // member_level > 1
+				if (this.goodsSkuDetail.goods_name.includes("套餐")) {
+					isProductAllowToBuy = false;
+				}
+			}
+			
+			return isProductAllowToBuy;
+		},
 
 		//-------------------------------------优惠券-------------------------------------
 

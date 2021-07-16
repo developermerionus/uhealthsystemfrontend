@@ -453,7 +453,7 @@
 					</view>
 				</view>
 
-				<view v-if="preview == 0"><nsGoodsRecommend ref="goodrecommend"></nsGoodsRecommend></view>
+				<!-- <view v-if="preview == 0"><nsGoodsRecommend ref="goodrecommend"></nsGoodsRecommend></view> -->
 
 				<!-- SKU选择 -->
 				<ns-goods-sku
