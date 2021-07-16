@@ -167,6 +167,7 @@
 						style="margin-top: -10rpx; background: rgb(255, 255, 255);">
 						<!-- 会员信息模块 -->
 						<view class="bonusDetail" @click="$util.redirectTo('/pages/bonusDetail/bonusDetail')">
+							<image class="redflag-icon" src="../../../static/images/icons/red-flag.png"></image>
 							<text class="bonus-tip">{{ $lang('common.seeBonusDetails') }}</text>
 							<text class="view-more iconfont iconright"></text>
 						</view>
@@ -1044,6 +1045,11 @@
 		display:flex;
 		justify-content: flex-end;
 		margin-right: 30rpx;
+		.redflag-icon{
+			width: 25px;
+			height: 25px;
+			margin-right: 5px;
+		}
 		.bonus-tip {
 			margin-right: 6rpx;
 			color: $color-tip;

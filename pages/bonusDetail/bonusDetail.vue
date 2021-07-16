@@ -60,6 +60,9 @@
 		    </view>
 			</view>
 			</view>
+			<view class="copyRight">
+				<ns-copy-right></ns-copy-right>
+			</view>
 	</view>
 </template>
 
@@ -68,13 +71,15 @@
 	import tTh from '@/components/t-table/t-th.vue';
 	import tTr from '@/components/t-table/t-tr.vue';
 	import tTd from '@/components/t-table/t-td.vue';
+	import nsCopyRight from '@/components/ns-copyright/ns-copyright.vue';
 	var _self;
 	export default {
 			components: {
 				tTable,
 				tTh,
 				tTr,
-				tTd
+				tTd,
+				nsCopyRight
 			},
 			data() {
 				return {
@@ -218,6 +223,10 @@
 
 <style lang="scss">
 	@import './css/bonusDetail.scss';
+	.copyRight {
+		margin: 20px 0;
+		padding-bottom: 3px;
+	}
 	.payTime {
 		padding-top: 5px;
 		font-weight: 400;
