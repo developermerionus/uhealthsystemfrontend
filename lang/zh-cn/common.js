@@ -111,6 +111,22 @@ export const lang = {
 		copy_successfully: "复制成功",
 		order_result: "查看订单",
 		pay_time: "支付时间",
-		official_website: "主网站"
+		official_website: "主网站",
+		//bonus more_detail
+		bonus_report: "佣金报告",
+		bonus_totoal: "佣金总数",
+		your_bonus: "您的佣金",
+		week_of_bonus: "周次",
+		start_bonus: "开始",
+		end_bonus: "结束",
+		retail_bonus: "零售奖",
+		fast_bonus:"分享奖",
+		leadership_bonus: "领导分享奖",
+		team_bonus: "团队奖",
+		ranking_bonus:"级别奖",
+		cash_bonus: "全球现金奖",
+		pay_time_bonus: "付款日期",
+		seeBonusDetails:"查看奖金明细",
+		
 	}
 }

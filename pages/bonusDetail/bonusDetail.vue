@@ -4,10 +4,11 @@
 		<view>
         <view class="content">
 			<view class="bonusReport">
-				<text>佣金报告</text>	
+				<text>{{$lang('common.bonus_report')}}</text>	
 			</view>
 		<view class="bonusTotal">
-			<text class="bonusText">佣金总额：${{totalBonus}}</text>	
+			
+			<text class="bonusText">{{$lang('common.bonus_totoal')}}：${{totalBonus}}</text>	
 			<!-- <select class="payTime minimal" @change="change">
 			    <option value="" class="optionText">付款日期</option>
 			    <option value="4weeks">Past 4 Weeks</option>
@@ -23,23 +24,23 @@
 		 <view class="wrap">
 			<scroll-view scroll-x="true" class="kite-classify-scroll">
 			 <view class="yourBonus">
-				您的佣金
+				{{$lang('common.your_bonus')}}
 			 </view>
 		        <view class="box">
 		            <t-table border="0" border-color="#95b99e">
-		                <u-sticky offset-top:200>
+		               
 						<t-tr class="tableHeader">
-		                    <t-th>周次</t-th>
-		                    <t-th>开始</t-th>
-		                    <t-th>结束</t-th>
-		                    <t-th>Retail Bonus</t-th>
-							<t-th>Fast Bonus</t-th>
-							<t-th>Leadership Bonus</t-th>
-							<t-th>Team Bonus</t-th>
-							<t-th>Ranking Bonus</t-th>
-							<t-th>Cash Bonus</t-th>
+		                    <t-th>{{$lang('common.week_of_bonus')}}</t-th>
+		                    <t-th>{{$lang('common.start_bonus')}}</t-th>
+		                    <t-th>{{$lang('common.end_bonus')}}</t-th>
+		                    <t-th>{{$lang('common.retail_bonus')}}</t-th>
+							<t-th>{{$lang('common.fast_bonus')}}</t-th>
+							<t-th>{{$lang('common.leadership_bonus')}}</t-th>
+							<t-th>{{$lang('common.team_bonus')}}</t-th>
+							<t-th>{{$lang('common.ranking_bonus')}}</t-th>
+							<t-th>{{$lang('common.cash_bonus')}}</t-th>
 		                </t-tr>
-						</u-sticky>
+						
 						<view class="dividLine"></view>
 						<!-- <t-tr v-for="item in num" :key="item"><t-td>{{item}}</t-td></t-tr> -->
 		                <t-tr v-for="(item,index) in showListOption" :key="item.start">
@@ -56,23 +57,6 @@
 		            </t-table>
 		        </view>
 			</scroll-view>
-		        <!-- <view class="box">
-		            <view class="title">自定义样式</view>
-		            <t-table border="2" border-color="#95b99e" :is-check="true" @change="change">
-		                <t-tr font-size="14" color="#95b99e" align="left">
-		                    <t-th align="left">姓名</t-th>
-		                    <t-th align="left">年龄</t-th>
-		                    <t-th align="left">爱好</t-th>
-		                    <t-th align="center">操作</t-th>
-		                </t-tr>
-		                <t-tr font-size="12" color="#5d6f61" align="right" v-for="item in tableList" :key="item.id">
-		                    <t-td align="left">{{ item.name }}</t-td>
-		                    <t-td align="left">{{ item.age }}</t-td>
-		                    <t-td align="left">{{ item.hobby }}</t-td>
-		                    <t-td align="left"><button @click="edit(item)">编辑</button></t-td>
-		                </t-tr>
-		            </t-table>
-		        </view> -->
 		    </view>
 			</view>
 			</view>
@@ -94,7 +78,6 @@
 			},
 			data() {
 				return {
-					num:[1,3,4,1,3,4,1,3,4,1,3,4,1,3,4,1,3,4,1,3,4,1,3,4,1,3,4,1,3,4,1,3,4,1,3,4,1,3,4,1,3,4,1,3,4,1,3,4,1,3,4,1,3,4,1,3,4,1,3,4,1,3,4,1,3,4,1,3,4,1,3,4,1,3,4,1,3,4,1,3,4,1,3,4,1,3,4,1,3,4,1,3,4,1,3,4,1,3,4,1,3,4],
 					showDefualtTextNum:-1,
 					totalBonus: 0,
 					showListOption: [],
@@ -104,7 +87,7 @@
 					pastTwelvelWeeks: [],
 					pastSixteenWeeks: [],
 					allWeeksList : [],
-					past_N_weeks:0,
+					past_N_weeks:0,//0 stand for get all bonus detail
 					selectTypeLists:[
 										{value:"0",name:'银行卡提现（默认方式）'},
 										{value:"1",name:'微信提现'}
@@ -215,7 +198,7 @@
 					},
 					addRange (fourW, eightW, twelW,sixtW ){
 						let rangeArr = [];
-						rangeArr.push({value: _self.showDefualtTextNum, text:"付款日期", date: ''})
+						rangeArr.push({value: _self.showDefualtTextNum, text: this.$lang("common.pay_time_bonus"), date: ''})
 						rangeArr.push({value: 4, text:"Past 04 Weeks", date: fourW[fourW.length-1].start +" - "+ fourW[0].end })
 						if(eightW.length>4 && eightW.length<9) {
 						 rangeArr.push({value: 8, text:"Past 08 Weeks",  date: eightW[eightW.length-1].start +" - "+ eightW[0].end })

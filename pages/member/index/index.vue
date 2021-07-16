@@ -1,30 +1,7 @@
 <template>
 	<view :data-theme="themeStyle">
 		<view class="container">
-			<!-- <view class="header-main">
-				<view class="top-bar">
-					
-				</view>
-				<view class="menu-main">
-					<a>
-						<image class="image-logo" src="../../../static/images/logo/oldUhealth-logo-g.png" @click="uploadImg" mode=""></image>
-					</a>
-				</view>
-			</view>
-			<view class="occupy-block"></view>
-			<view class="dividerline"></view> -->
 			<navbar></navbar>
-
-
-			<!-- <view>
-				<view class="user-info-box no-log" v-if="!token" @click="redirectToLink('/pages/member/index/index')">
-					<view class="user-head"><image :src="$util.getDefaultImage().default_headimg"></image></view>
-					<view class="user-box">
-						<text class="user-title" :style="defaultTextColor">{{ $lang('login') }}</text>
-						<text class="user-desc" :style="defaultTextColor">{{ $lang('loginTpis') }}</text>
-					</view>
-				</view> 
-			</view> -->
 
 			<view class="member-container">
 				<!-- <view class="user-section ns-gradient-pages-member-index-index" :data-theme="defaultInfo.topStyle == 'default' ? themeStyle : ''" :style="defaultBgColor"> -->
@@ -35,71 +12,34 @@
 						<view class="user-section-box">
 							<view class="user-info-box" v-if="token">
 								<view @click="$util.redirectTo('/pages/member/info/info')" class="user-head">
-									<!-- <image
-										:src="memberInfo.headimg ? $util.img(memberInfo.headimg) : $util.getDefaultImage().default_headimg"
-										mode="aspectFill"
-										@error="memberInfo.headimg = $util.getDefaultImage().default_headimg"></image> -->
-										<image
+									<image
 											:src="$util.getDefaultImage().default_headimg"
 											mode="aspectFill"
 											@error="memberInfo.headimg = $util.getDefaultImage().default_headimg"></image>
 								</view>
-								<!-- <view class="user-box">
-									<view class="user-label-up" style = "margin-left: 20rpx;">
-										<view class="user-title" :style="defaultTextColor">Hi, {{ memberInfo.username }}</view>
-										<view class="user-label2" :style="defaultTextColor">{{ memberInfo.branch}}</view>
-			
-									</view>
-									<view class="user-label-up">
-										<view class="user-title-id" :style="defaultTextColor">ID:{{ memberInfo.member_id }}</view>
-										<view :style="defaultTextColor" style='height:50rpx;line-height: 50rpx;' class="user-member iconfont iconhuiyuan">
-											<text  :style="defaultTextColor">{{ memberInfo.member_level_name }}</text>
-										</view>
-									</view>
-								</view> -->
+	
 								<view class="user-box">
 
 									<view class="user-title">Hi, {{ memberInfo.firstname }}!</view>
-									<!-- <view class="user-title-id" :style="defaultTextColor">ID:{{ memberInfo.member_id }}</view> -->
-									<!-- 	<view v-if="!screenGreaterSixHundredPx" class="combineMemeberId"> -->
-									<view v-if="!screenGreaterSixHundredPx" class="combineMemeberId">
-										<!-- <view :style="defaultTextColor" style='height:50rpx;line-height: 50rpx;' class="user-member iconfont iconhuiyuan">
-												<text  :style="defaultTextColor">{{ memberInfo.member_level_name }}</text>
-											</view> -->
+										<view v-if="!screenGreaterSixHundredPx" class="combineMemeberId">
 										<view style='height:50rpx;line-height: 50rpx;'
 											class="user-member iconfont iconhuiyuan">
 											<text>{{ $lang( memberInfo.member_level_name  )}}</text>
 										</view>
 										<view class="user-title-id">ID: {{ memberInfo.member_id }}</view>
-
 									</view>
-									
-
 									<!--if the width is >600px show these two -->
 									<view v-if="screenGreaterSixHundredPx" style='height:50rpx;line-height: 50rpx;' class="user-member iconfont iconhuiyuan">
 											<text>{{ $lang( memberInfo.member_level_name  )}}</text>
 									</view>
 									<view v-if="screenGreaterSixHundredPx" class="user-title-id" >ID:{{ memberInfo.member_id }}
 									</view>
-										
-
-									<!-- <view class="user-label2" :style="defaultTextColor">{{ memberInfo.branch}}</view> -->
-									<view class="user-label2">{{ $lang( memberInfo.branch ) }}</view>
+							<view class="user-label2">{{ $lang( memberInfo.branch ) }}</view>
 								</view>
 							</view>
 
 						</view>
-						<!-- <view class="user-info-box no-log" v-if="!token"
-							@click="$util.redirectTo('/pages/login/login/login')">
-							<view class="user-head" style="margin: auto;">
-								<image :src="$util.getDefaultImage().default_headimg"></image>
-							</view> -->
-
-							<!-- 	<view class="user-box">
-								<text class="user-title" :style="defaultTextColor">{{ $lang('login') }}</text>
-								<text class="user-desc" :style="defaultTextColor">{{ $lang('loginTpis') }}</text>
-							</view> -->
-						<!-- </view> -->
+						
 						<view @click="logout" class="user-set" v-if="token">
 							<view class="iconfont iconfenxiang1"></view>
 						</view>
@@ -214,8 +154,12 @@
 						<view class="mat-progress-bar"></view>
 					</view>
 					<view v-if='token&&infoList4.length>0' class="example-body"
-						style="margin-top: -20rpx; background: rgb(255, 255, 255);">
+						style="margin-top: -10rpx; background: rgb(255, 255, 255);">
 						<!-- 会员信息模块 -->
+						<view class="bonusDetail" @click="$util.redirectTo('/pages/bonusDetail/bonusDetail')">
+							<text class="bonus-tip">{{ $lang('common.seeBonusDetails') }}</text>
+							<text class="view-more iconfont iconright"></text>
+						</view>
 						<view style="margin 30rpx, 30rpx;">
 							<uni-grid :column="columnNum" :show-border="false" :square="false">
 								<block v-for="(item, index) in infoList4" :key="index">
@@ -249,9 +193,8 @@
 					</view>
 					<view v-if='token&&infoList3.length>0' class="example-body"
 						style="margin-top: -20rpx; background: rgb(255, 255, 255);">
-						<text @click="$util.redirectTo('/pages/bonusDetail/bonusDetail')">Bonus Detail</text>
 						<!-- 会员信息模块 -->
-						<view style="margin 20rpx, 20rpx;">
+						<view style="margin 30rpx, 30rpx;">
 							<uni-grid :column="columnNum" :show-border="false" :square="false">
 								<block v-for="(item, index) in infoList3" :key="index">
 									<uni-grid-item>
@@ -1087,6 +1030,22 @@
 		/* 隐藏滚动条，但依旧具备可以滚动的功能 */
 		display: none
 	}
+	.bonusDetail {
+		display:flex;
+		justify-content: flex-end;
+		margin-right: 30rpx;
+		.bonus-tip {
+			margin-right: 6rpx;
+			color: $color-tip;
+			font-size: $font-size-tag;
+			letter-spacing: 3rpx;
+		}
+		.view-more {
+			color: lighten($color-tip, 10%);
+			font-size: $font-size-tag;
+		}
+	}
+	
 </style>
 <style scoped>
 	/deep/ .reward-popup .uni-popup__wrapper-box {
