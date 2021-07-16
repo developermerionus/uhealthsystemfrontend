@@ -1,7 +1,6 @@
 <!-- 
  lang/en-us/fenxiao/withdraw_apply.js
  lang/zh-cn/fenxiao/withdraw_apply.js
- 
  -->
 
 <template>
@@ -157,9 +156,9 @@
 								this.$util.showToast({
 									title: this.$lang('withdraw_success') // '提现申请成功'
 								});
-								// setTimeout(() => {
-								// 	this.$util.redirectTo('/otherpages/fenxiao/withdraw_list/withdraw_list', {}, 'redirectTo');
-								// }, 1500);
+								setTimeout(() => {
+									this.$util.redirectTo('/otherpages/fenxiao/withdraw_list/withdraw_list', {}, 'redirectTo');
+								}, 1500);
 							} else {
 								this.isSub = false;
 								this.$util.showToast({
@@ -287,7 +286,7 @@
 		// -webkit-box-sizing: border-box;
 		// -moz-box-sizing: border-box;
 		// box-sizing: border-box;
-		max-width: 1280px;
+		max-width: 1200px;
 		margin: 0 auto;
 	}
 

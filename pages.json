@@ -6,7 +6,7 @@
 	    		// #ifdef H5
 	    		"navigationStyle": "custom",
 	    		// #endif
-	    		"enablePullDownRefresh": true,
+	    		// "enablePullDownRefresh": true,
 	    		"navigationBarTitleText": "会员中心"
 	    	}
 	    },
@@ -926,6 +926,22 @@
 						// #ifdef H5
 						"navigationStyle": "custom"
 						// #endif
+					}
+				},
+				{
+				    "path" : "fenxiao/transferMToReferee_apply/transferMToReferee_apply",
+				    "style" :{
+				    // #ifdef H5
+				    "navigationStyle": "custom"
+				    // #endif
+					}
+				}
+				,{
+				    "path" : "fenxiao/transferMToReferee_list/transferMToReferee_list",
+				    "style" : {
+					// #ifdef H5
+					"navigationStyle": "custom"
+					// #endif
 					}
 				},
 				{

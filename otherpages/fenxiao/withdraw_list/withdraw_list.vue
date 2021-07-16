@@ -1,6 +1,7 @@
 <template>
 	<view :data-theme="themeStyle">
 		<view class="outer-container-wrap">
+			<navbar></navbar>
 			<view class="withdraw-cate">
 				<block v-for="(item, index) in category" :key="index">
 					<view class="cate-li" :class="{ 'active color-base-text color-base-bg-before': status == item.id }" 
@@ -10,7 +11,7 @@
 				</block>
 			</view>
 
-			<mescroll-uni ref="mescroll" @getData="getData" top="90" class="member-point" :size="10">
+			<mescroll-uni ref="mescroll" @getData="getData" top="150px" class="member-point" :size="10">
 				<block slot="list">
 					<view class="withdraw-li" v-for="(item, index) in withdrawList" :key="index">
 						<view class="li-box">
@@ -37,7 +38,7 @@
 						</ns-empty>
 						<ns-empty :text="$lang('widthdrawRecordsEmpty_2')" :isIndex="!1" v-if="status == 2">
 						</ns-empty>
-						<ns-empty :text="$lang('widthdrawRecordsEmpty_-1')" :isIndex="!1" v-if="status == -1">
+						<ns-empty :text="$lang('widthdrawRecordsEmpty_3')" :isIndex="!1" v-if="status == 3">
 						</ns-empty>
 					</block>
 				</block>
@@ -70,7 +71,7 @@
 						number: 0
 					},
 					{
-						id: -1,
+						id: 3, // 原为 ‘-1’
 						name: '已拒绝',
 						number: 0
 					}
@@ -84,7 +85,11 @@
 						color: 'color: rgb(17, 189, 100)',
 						text: '已提现'
 					},
-					'-1': {
+					'3': { // 原为 ‘-1’
+						color: 'color: rgb(255, 69, 68)',
+						text: '已拒绝'
+					},
+					'-1': { 
 						color: 'color: rgb(255, 69, 68)',
 						text: '已拒绝'
 					}
@@ -137,7 +142,6 @@
 						status: this.status
 					},
 					success: res => {
-						//console.log("response:",res);
 						this.emptyShow = true;
 						let newArr = [];
 						let msg = res.message;
@@ -162,7 +166,6 @@
 			},
 			slectCate(e) {
 				this.status = e;
-				// console.log("this.status:",this.status);
 				this.$refs.mescroll.refresh();
 			}
 		}
@@ -181,7 +184,7 @@
 		justify-content: space-around;
 		background: #fff;
 		position: fixed;
-		top: 0;
+		top: 100px;
 		z-index: 999;
 		box-sizing: border-box;
 
@@ -205,7 +208,7 @@
 			}
 		}
 		
-		max-width: 1280px;
+		max-width: 1200px;
 		margin: 0 auto;
 	
 	}
@@ -224,7 +227,7 @@
 		padding: 0 30rpx;
 		box-sizing: border-box;
 		
-		max-width: 1280px;
+		max-width: 1200px;
 		margin: 0 auto;
 		
 		margin-top: 20rpx;
@@ -243,6 +246,7 @@
 				display: flex;
 				justify-content: space-between;
 				border-bottom: 2rpx solid $color-line;
+				
 
 				.desc-info {
 					display: flex;
@@ -284,11 +288,14 @@
 				font-size: $font-size-tag;
 			}
 		}
+		
+		
+		
 	}
 	
 	
 	.outer-container-wrap {
-		max-width: 1280px;
+		max-width: 1200px;
 		margin: 0 auto;
 	}
 </style>

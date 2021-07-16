@@ -127,6 +127,21 @@ export const lang = {
 		cash_bonus: "全球现金奖",
 		pay_time_bonus: "付款日期",
 		seeBonusDetails:"查看奖金明细",
-		
+		lang: "语言",
+		'transfer_to_referee' : '转账被推荐人',
+		'transfer_money' : '转账',
+		'referee_username' : '被推荐人用户名',
+		'referee_id' : '被推荐人会员ID',
+		'transfer_amount' : '转账金额',
+		'transfer_amount_tip' : '余额有 $',
+		'transfer_money_list' : '转账明细',
+		'transfer_verify_alerts_1': '请输入转账金额',
+		'transfer_verify_alerts_2': '转账金额超出可钱包金额',
+		'transfer_verify_alerts_3': '转账金额超出限额',
+		'transfer_verify_alerts_4': '请输入被推荐人用户名',
+		'transfer_verify_alerts_5': '请输入被推荐人ID',
+		selfpickup: "自提取",
+		delivery: "物流配送",
+		deliverymethod: "配送方式",
 	}
 }

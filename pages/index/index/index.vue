@@ -1,5 +1,6 @@
 <template>
-	<view :data-theme="themeStyle" :style="{ backgroundColor: bgColor, backgroundImage: bgImg, minHeight: 'calc(100vh - 55px)' }" class="page_img">
+	<view :data-theme="themeStyle" :style="{backgroundImage: bgImg, minHeight: 'calc(100vh - 55px)' }" class="page_img allPage">
+		<navbar></navbar>
 		<!-- #ifndef H5 -->
 		<view class="page-header">
 			<ns-navbar
@@ -482,6 +483,10 @@ export default {
 </script>
 
 <style lang="scss">
+.allPage {
+	max-width: 1200px;
+	margin: 0 auto;
+}
 .collectPopupWindow {
 	position: relative;
 	height: 113rpx;

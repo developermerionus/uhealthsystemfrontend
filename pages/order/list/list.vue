@@ -1,15 +1,15 @@
 <template>
 	<view class="order-container" :data-theme="themeStyle">
-		<view class="order-nav">
-			<view v-for="(statusItem, statusIndex) in statusList" :key="statusIndex" class="uni-tab-item order-nav-item" :id="statusItem.id" :data-current="statusIndex" @click="ontabtap">
-				<text class="uni-tab-item-title order-nav-item-title" :class="statusItem.status == orderStatus ? 'uni-tab-item-title-active color-base-border  color-base-text' : ''">
-					{{ statusItem.name }}
-				</text>
-			</view>
-		</view>
-
-		<mescroll-uni ref="mescroll" @getData="getListData" top="100rpx">
+		<mescroll-uni ref="mescroll" @getData="getListData" >
 			<block slot="list">
+				<navbar></navbar>
+				<view class="order-nav">
+					<view v-for="(statusItem, statusIndex) in statusList" :key="statusIndex" class="uni-tab-item order-nav-item" :id="statusItem.id" :data-current="statusIndex" @click="ontabtap">
+						<text class="uni-tab-item-title order-nav-item-title" :class="statusItem.status == orderStatus ? 'uni-tab-item-title-active color-base-border  color-base-text' : ''">
+							{{ statusItem.name }}
+						</text>
+					</view>
+				</view>
 				<view class="order-list" v-if="orderList.length > 0">
 					<view class="order-item" v-for="(orderItem, orderIndex) in orderList" :key="orderIndex">
 						<view class="order-header" :class="{ waitpay: orderStatus == 'waitpay' && orderItem.order_status == 0 }">

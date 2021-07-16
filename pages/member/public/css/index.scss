@@ -31,7 +31,6 @@ uni-page-body {
 	background-color: white;
 	position:relative;
 	margin: 0 auto;
-
 .occupy-block {
 	height:73.5px;
 }
@@ -72,18 +71,19 @@ uni-page-body {
 	flex-direction: column;
 	place-content: center;
 	align-items: center;
-	box-sizing: border-box;
 	position: relative;
+	
 	.wallet-button-container{
 		//margin-bottom: 20px;
 		width: 100%;
 		box-sizing: border-box;
 		position: absolute;
-		  left: 0;
-		  bottom: 0;
-		  text-align: center;
-		  display:flex;
-		  place-content: center;
+		left: 0;
+		bottom: 0;
+		text-align: center;
+		display:flex;
+		place-content: center;
+		  
 		.wallet-button {
 			box-sizing: border-box;
 			position: relative;
@@ -314,6 +314,7 @@ uni-page-body {
 		}
 	}
 }
+
 .member-body {
 	position: relative;
 	// margin-top: -58rpx;
@@ -628,7 +629,7 @@ uni-page-body {
 		}
 	}
 }
-}
+
 
 @media screen and (min-width: 600px){
 	.uni-grid-item__box-item[data-v-c05ffd80] {
@@ -640,7 +641,7 @@ uni-page-body {
 						flex-direction: row;
 					}
 				}
-		        .wallet-button{
+		        .wallet-button, .transferToReferee-button{
 					width:50%!important;
 				}
 				.user-info-box {
@@ -696,6 +697,7 @@ uni-page-body {
 					
 				}
 		}
+		}
 		
 @media screen and (min-width: 800px){
 			.user-info-box {
@@ -737,6 +739,51 @@ uni-page-body {
 		-moz-box-sizing: border-box;
 		box-sizing: border-box;
 		
-		max-width: 1280px;
+		max-width: 1200px;
 		margin: 0 auto;
+	}
+	
+	 
+	.transferToReferee-button-container {
+		width: 100%;
+		box-sizing: border-box;
+		
+		.transferToReferee-button {
+			box-sizing: border-box;
+			position: relative;
+			user-select: none;
+			cursor: pointer;
+			outline: 0;
+			border: none;
+			-webkit-tap-highlight-color: transparent;
+			display: inline-block;
+			white-space: nowrap;
+			text-decoration: none;
+			vertical-align: baseline;
+			text-align: center;
+			margin: 0;
+			min-width: 64px;
+			line-height: 36px;
+			padding: 0 16px;
+			border-radius: 4px;
+			overflow: visible;
+			color: #fff;
+			background-color: #1767b3;
+			width: 90%;
+			height: 50px;
+			font-family: "Gotham SSm A","Gotham SSm B","Raleway",sans-serif;
+			display:flex;
+			place-content: center;
+			align-items:center;
+			font-size: 14px;
+			margin: 2px auto;
+			
+			.wallet-icon {
+				width: 25px;
+				height: 25px;
+				padding:0 5px;
+			}
+			
+		}
+		
 	}

@@ -68,10 +68,10 @@
 					<text class="iconfont iconunfold" :style="{ color: value.textColor ? value.textColor : 'rgba(0,0,0,0)' }"></text>
 				</view>
 -->
-				<view class="store-right-search">
+				<!-- <view class="store-right-search">
 					<input type="text" class="uni-input font-size-tag" disabled :placeholder="$lang('common.search')" @click.stop="search()" />
 					<text class="iconfont iconsousuo2" @click.stop="search()"></text>
-				</view>
+				</view> -->
 			</view>
 
 		</block>
@@ -226,9 +226,6 @@ export default {
 				Map.openMap(Number(this.store.latitude), Number(this.store.longitude), this.store.store_name, 'wgs84');
 			}
 		},
-		search() {
-			this.$util.redirectTo('/otherpages/goods/search/search');
-		}
 	}
 };
 </script>

@@ -71,7 +71,9 @@ export default {
 				showTimeBar: false
 			},
 			canLocalDelicery: true,
-			deliveryWeek: ""
+			deliveryWeek: "",
+			selfPickupExistInList: false,
+			current:'delivery',
 		};
 	},
 	methods: {
@@ -138,6 +140,19 @@ export default {
 				success: res => {
 					if (res.code >= 0) {
 						this.orderPaymentData = res.data;
+						let newArr = res.data;
+						console.log('newArr', newArr);
+						
+						if (res.data.member_address){
+							if(res.data.member_address.country_id===0){
+								this.selfPickupExistInList = true;
+								this.current = "selfpickup"
+							}
+							else {
+								this.current = 'delivery'
+						}
+					}
+						
 						this.orderPaymentData.timestamp = res.timestamp;
 						this.handlePaymentData();
 						if (this.$refs.loadingCover) this.$refs.loadingCover.hide();
@@ -917,6 +932,7 @@ export default {
 		}
 		this.getTime();
 		this.isIphoneX = this.$util.uniappIsIPhoneX()
+		
 	},
 	onHide() {
 		if (this.$refs.loadingCover) this.$refs.loadingCover.show();
