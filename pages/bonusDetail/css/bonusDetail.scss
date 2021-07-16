@@ -1,0 +1,99 @@
+.container {
+	max-width: 1200px;
+	margin: 0 auto;
+	.content {
+		width:100%;
+		margin:0  auto;
+		.bonusReport {
+			margin:10px 0px 10px 15px;
+			font: 500 24px/36px Roboto,Helvetica,Arial,sans-serif;
+			font-weight: 400;
+			color: #444;
+		}
+		.bonusTotal {
+			box-shadow: 0 2px 1px -1px #00000033, 0 1px 1px 0 #00000024, 0 1px 3px 0 #0000001f;
+			background: #fafafa;
+			color: rgba(0,0,0,.54);
+			position: relative;
+			z-index: 101;
+			font-weight: 500!important;
+			font-family: gotham ssm a,gotham ssm b,raleway,sans-serif!important;
+			height: 64px;
+			flex-direction: column;
+			box-sizing: border-box;
+			display: flex;
+			align-items: stretch;
+			max-width: 100%;
+			display:flex;
+			align-items: center;
+			place-content: stretch space-between;
+			flex-direction: row;
+			padding:0 15px;
+		}
+		.bonusText {
+			color: rgba(0,0,0,.54);
+			font: 500 20px/32px Roboto,Helvetica,Arial,sans-serif;
+		}
+		.wrap {
+			margin-top:60px;
+			flex-direction: column;
+			box-sizing: border-box;
+			display: flex;
+			flex: 1 1 100%;
+			max-width: 100%;
+			position: relative;
+			z-index: 1;
+			display: block;
+			height: 100%;
+			overflow: auto;
+			font-size: 14px;
+			font-family: gotham ssm a,gotham ssm b,raleway,sans-serif!important;
+			line-height: 18px;
+			box-shadow: 0 3px 1px -2px #00000033, 0 2px 2px 0 #00000024, 0 1px 5px 0 #0000001f;
+			.yourBonus {
+				background: #fafafa;
+				color: rgba(0,0,0,.54);
+				position: relative;
+				z-index: 101;
+				flex-direction: row;
+				box-sizing: border-box;
+				display: flex;
+				place-content: center space-between;
+				align-items: center;
+				min-height: 44px !important;
+				max-height: 44px !important;
+				height: 44px !important;
+				padding: 0 16px;
+				width: 100%;
+				white-space: nowrap;
+				font-weight: 500!important;
+				font-family: gotham ssm a,gotham ssm b,raleway,sans-serif!important;
+				font: 500 20px/32px Roboto,Helvetica,Arial,sans-serif;
+				margin: 0;
+				box-shadow: 0 2px 1px -1px #00000033, 0 1px 1px 0 #00000024, 0 1px 3px 0 #0000001f;
+			}
+			.dividLine {
+				border-bottom: solid 0.00001px rgba(0, 0, 0, 0.12);
+			}
+			.tableHeader {
+				.t-th {
+					color: #1767b3;
+					font-size: 12px;
+					font-weight: 500;
+					
+				}
+				    
+			}
+		}
+		
+	}
+}
+
+@media screen and (min-width: 600px) and (max-width: 1000px){
+	   .container {
+			.content {
+				width:95%;
+			}
+		}
+	
+	}

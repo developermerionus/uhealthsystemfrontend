@@ -111,6 +111,21 @@ export const lang = {
 		order_result: "View Order",
 		pay_time: "Paid on",
 		official_website: "Main Website",
+		//bonus detail
+		bonus_report: "Bonus Report",
+		bonus_totoal: "Bonus Total",
+		your_bonus: "Your Bonus",
+		week_of_bonus: "Week",
+		start_bonus: "Start",
+		end_bonus: "End",
+		retail_bonus: "Retail Bonus",
+		fast_bonus:"Fast Bonus",
+		leadership_bonus: "Leadership Bonus",
+		team_bonus: "Team Bonus",
+		ranking_bonus:"Ranking Bonus",
+		cash_bonus: "Cash Bonus",
+		pay_time_bonus: "Payment Date",
+		seeBonusDetails: "View Bonus Details",
 		lang: "Lang",
 		'transfer_to_referee' : 'Transfer Money to Referee Member',
 		'transfer_money' : 'Transfer Money',
@@ -126,6 +141,6 @@ export const lang = {
 		'transfer_verify_alerts_5': 'Input referee member ID',
 		selfpickup: "Self Pickup",
 		delivery: "Delivery",
-		deliverymethod: "How To Get Orders"
+		deliverymethod: "How To Get Orders",
 	}
 }
