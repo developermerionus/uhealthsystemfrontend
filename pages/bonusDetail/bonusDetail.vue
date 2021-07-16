@@ -143,8 +143,8 @@
 						past_N_weeks: showWeeks,
 					},
 					success(res) {
-						_self.totalBonus = res.data[0].total;
-						console.log('sum',res.data);
+						_self.totalBonus = res.data[0].total? res.data[0].total:0;
+						console.log('sum',_self.totalBonus);
 						},
 					fail: (err) => {
 						// alert("关闭2")
@@ -162,17 +162,15 @@
 							let newArr=[];
 							// alert("关闭1")
 							console.log('res detail', res);
-							if (res.code >= 0 && res.data) {
+							if (res.code >= 0 && res.data && res.data.length!==0) {
 								 newArr = res.data;
+								 _self.showListOption = newArr;
+								 _self.allWeeksList = [...newArr]; 
+								 _self.dividToRange(newArr);
 								}	
-								_self.showListOption = newArr;
-								_self.allWeeksList = [...newArr] ; 
-								_self.dividToRange(newArr);
-							
 						},
 						fail: (err) => {
 							// alert("关闭2")
-							
 						}
 					});
 					
