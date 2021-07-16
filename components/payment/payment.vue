@@ -180,6 +180,7 @@ export default {
 			
 			if(payType.type == 'authorizenetpay' && num == 1){
 				this.setCard = true;
+				this.close()
 				return false;
 			}
 			
@@ -674,7 +675,7 @@ export default {
 	}
 }
 .set-card{
-	background-color: #f8f8f8;
+	background-color: #ffffff;
 	position: fixed;
 	width: 100vw;
 	min-height: 100vh;
