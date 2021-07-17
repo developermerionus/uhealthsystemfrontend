@@ -205,9 +205,9 @@
 					url: '/api/address/country',
 					success: res => {
 						if (res.code >= 0 && res.data) {
-						      this.countryList = res.data.filter(item=> item.id!=0);
-							if (!this.formData.country_id && this.$refs.loadingCover) this.$refs.loadingCover
-								.hide();
+							this.countryList = res.data;
+						 //      this.countryList = res.data.filter(item=> item.id!=0);
+							 if (!this.formData.country_id && this.$refs.loadingCover) this.$refs.loadingCover.hide();
 							// this.formData.market = this.countryList[0].name;
 						}
 					}
