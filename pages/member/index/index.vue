@@ -127,8 +127,9 @@
 						</view>
 					</view>
 
-					<view v-if='token&&infoList1.length>0' class="example-body memberInforContainer"
+					<view v-if='token&&memberInfo.member_level>1&&infoList1.length>0' class="example-body memberInforContainer"
 						style="background: rgb(255, 255, 255);">
+						
 						<!-- 会员信息模块 -->
 						<view class="example-body-head memberInfo">
 							<text class="example-tit memberInfoTitle">{{$lang('memberInfo')}}</text>
@@ -163,7 +164,7 @@
 
 						<view class="mat-progress-bar"></view>
 					</view>
-					<view v-if='token&&infoList4.length>0' class="example-body"
+					<view v-if='token&&memberInfo.member_level>1&&infoList4.length>0' class="example-body"
 						style="margin-top: -10rpx; background: rgb(255, 255, 255);">
 						<!-- 会员信息模块 -->
 						<view class="bonusDetail" @click="$util.redirectTo('/pages/bonusDetail/bonusDetail')">
@@ -184,7 +185,7 @@
 						</view>
 						<view class="mat-progress-bar"></view>
 					</view>
-					<view v-if='token&&infoList2.length>0' class="example-body"
+					<view v-if='token&&memberInfo.member_level>1&&infoList2.length>0' class="example-body"
 						style="margin-top: -20rpx;background: rgb(255, 255, 255);">
 						<!-- 会员信息模块 -->
 						<view style="margin 30rpx, 30rpx;">
@@ -201,7 +202,7 @@
 						</view>
 						<view class="mat-progress-bar"></view>
 					</view>
-					<view v-if='token&&infoList3.length>0' class="example-body"
+					<view v-if='token&&memberInfo.member_level>1&&infoList3.length>0' class="example-body"
 						style="margin-top: -20rpx; background: rgb(255, 255, 255);">
 						<!-- 会员信息模块 -->
 						<view style="margin 30rpx, 30rpx;">
@@ -210,7 +211,6 @@
 									<uni-grid-item>
 										<text class="text memberInforLabel">{{ item.item }}</text>
 										<text class="text memberInforContent">{{ item.value}}</text>
-
 									</uni-grid-item>
 								</block>
 							</uni-grid>
@@ -313,8 +313,7 @@
 				bonusPageObject: {},
 				columnNum: 2,
 				toolsColumnNum: 2,
-				screenGreaterSixHundredPx:false
-
+				screenGreaterSixHundredPx:false,
 			}
 		},
 		mixins: [scroll, fenxiaoWords, globalConfig],
@@ -372,7 +371,7 @@
 			this.toolsColumnNum = this.toolsFindColumnNum();
 			this.screenGreaterSixHundredPx = this.findTitleFormat();
 			this.checkToken();
-			
+			console.log("onloading");
 			uni.hideTabBar();
 			if (this.addonIsExit.memberwithdraw) {
 				this.getWithdrawConfig();
@@ -383,6 +382,7 @@
 			this.getEvaluateConfig();
 		},
 		async onReady() {
+			console.log("onreadying");
 			if (this.addonIsExit.membersignin) {
 				await this.getSignState();
 			}
@@ -390,7 +390,6 @@
 			if (this.$refs.loadingCover) this.$refs.loadingCover.hide();
 		},
 		async onShow() {
-
 			uni.onWindowResize((res) => {
 				this.columnNum = res.size.windowWidth >= 800 ? 3 : 2;
 				this.toolsColumnNum = res.size.windowWidth >= 800 ? 4 : 2;
@@ -399,6 +398,8 @@
 				//console.log('变化后的窗口宽度=' + res.size.windowWidth);
 				//console.log('变化后的窗口高度=' + res.size.windowHeight)
 			})
+			
+			console.log("onshowiiing");
 
 			// 刷新多语言
 			this.$langConfig.refresh();
@@ -425,9 +426,6 @@
 			}
 		},
 		methods: {
-
-			/*****/
-			/*****/
 			checkToken() {
 				this.token = uni.getStorageSync('token');
 				if (!this.token) {
@@ -599,7 +597,6 @@
 							item: this.$lang('restPV'),
 							value: this.bonus.restPV
 						})
-
 						this.infoList1.push({
 							item: this.$lang('highest_level'),
 							value: this.$lang(this.bonus.highest_level)
@@ -609,29 +606,7 @@
 							value: this.bonus.saleCV
 						})
 						// console.log(this.infoList1);
-
-						// this.infoList2 = [];
-						// this.infoList2.push({item: this.$lang('LCV'), value: this.bonus.LCV})
-						// this.infoList2.push({item: this.$lang('addedLCV'), value: this.bonus.addedLCV, url: '/otherpages/member/bill/bill?class=cv&branch=L'})
-						// this.infoList2.push({item: this.$lang('restLCV'), value: this.bonus.restLCV==-1?'待结算':this.bonus.restLCV})
-						// this.infoList2.push({item: this.$lang('RCV'), value: this.bonus.RCV})
-						// this.infoList2.push({item: this.$lang('addedRCV'), value: this.bonus.addedRCV, url: '/otherpages/member/bill/bill?class=cv&branch=R'})
-						// this.infoList2.push({item: this.$lang('restRCV'), value: this.bonus.restRCV==-1?'待结算':this.bonus.restRCV})
-						// this.infoList2.push({item: this.$lang('activedLQV'), value: this.bonus.activedLQV})
-						// this.infoList2.push({item: this.$lang('activedRQV'), value: this.bonus.activedRQV})
-						// this.infoList2.push({item: this.$lang('c7bonus'), value: this.bonus.c7bonus==-1?0:this.bonus.c7bonus})
-						// // console.log(this.infoList2);
-
-						// this.infoList3 = [];
-						// this.infoList3.push({item: this.$lang('recommend_total'), value: this.bonus.recommend_total})
-						// this.infoList3.push({item: this.$lang('recommend_ltotal'), value: this.bonus.recommend_ltotal})
-						// this.infoList3.push({item: this.$lang('recommend_rtotal'), value: this.bonus.recommend_rtotal})
-						// this.infoList3.push({item: this.$lang('bonus'), value: this.bonus.bonus})
-						// this.infoList3.push({item: this.$lang('lastweek_bonus'), value: this.bonus.lastweek_bonus==-1?'待结算':this.bonus.lastweek_bonus})
-						// this.infoList3.push({item: this.$lang('epoint_balance'), value: this.bonus.epoint_balance})
-
 						this.infoList2 = [];
-
 						this.infoList2.push({
 							item: this.$lang('LCV'),
 							value: this.bonus.LCV
@@ -640,7 +615,6 @@
 							item: this.$lang('RCV'),
 							value: this.bonus.RCV
 						})
-
 						this.infoList2.push({
 							item: this.$lang('addedLCV'),
 							value: this.bonus.addedLCV,
@@ -651,7 +625,6 @@
 							value: this.bonus.addedRCV,
 							url: '/otherpages/member/bill/bill?class=cv&branch=R'
 						})
-
 						this.infoList2.push({
 							item: this.$lang('restLCV'),
 							value: this.bonus.restLCV == -1 ? this.$lang('待结算') : this.bonus.restLCV
@@ -669,8 +642,6 @@
 							item: this.$lang('activedRQV'),
 							value: this.bonus.activedRQV
 						})
-
-
 						this.infoList2.push({
 							item: this.$lang('c7bonus'),
 							value: this.bonus.c7bonus == -1 ? 0 : this.bonus.c7bonus
@@ -689,7 +660,6 @@
 							item: this.$lang('recommend_ltotal'),
 							value: this.bonus.recommend_ltotal
 						})
-
 						this.infoList3.push({
 							item: this.$lang('lastweek_bonus'),
 							value: this.bonus.lastweek_bonus == -1 ? this.$lang('待结算') : this.bonus.lastweek_bonus
@@ -702,8 +672,7 @@
 							item: this.$lang('bonus'),
 							value: this.bonus.bonus
 						})
-						// // console.log(this.infoList3);
-
+						// console.log(this.infoList3);
 						this.infoList4 = [];
 						this.infoList4.push({
 							item: this.$lang('retail_bonus'),
@@ -736,19 +705,15 @@
 						// console.log(this.infoList4);
 						this.$forceUpdate();
 					} else {
-
 						this.infoList1 = [];
 						this.infoList1.push({
 							item: this.$lang('actived'),
 							value: this.bonus.actived == 1 ? this.$lang('活跃') : this.$lang('不活跃')
 						})
-
 						this.infoList1.push({
 							item: this.$lang('member_level_name'),
 							value: this.$lang(this.bonus.member_level_name)
 						})
-
-
 						this.infoList1.push({
 							item: this.$lang('highest_level'),
 							value: this.$lang(this.bonus.highest_level)
@@ -765,9 +730,7 @@
 							item: this.$lang('saleCV'),
 							value: this.bonus.saleCV
 						})
-
 						// console.log(this.infoList1);
-
 						this.infoList2 = [];
 						this.infoList2.push({
 							item: this.$lang('LCV'),
@@ -808,7 +771,6 @@
 							value: this.bonus.c7bonus == -1 ? 0 : this.bonus.c7bonus
 						})
 						// console.log(this.infoList2);
-
 						this.infoList3 = [];
 						this.infoList3.push({
 							item: this.$lang('recommend_total'),
@@ -834,9 +796,7 @@
 							item: this.$lang('epoint_balance'),
 							value: this.bonus.epoint_balance
 						})
-
-						// // console.log(this.infoList3);
-
+						// console.log(this.infoList3);
 						this.infoList4 = [];
 						this.infoList4.push({
 							item: this.$lang('retail_bonus'),
@@ -878,12 +838,9 @@
 					async: false
 				});
 				if (res.code >= 0 && res.data) {
-					// console.log(res.data);
 					this.getBonus();
 					this.token = uni.getStorageSync('token');
 					this.memberInfo = res.data;
-					//console.log("SongCh",res.data);
-					//
 
 					uni.setStorageSync('userInfo', this.memberInfo);
 					if (this.addonIsExit.supermember && this.memberInfo.member_level_type == 0) this
