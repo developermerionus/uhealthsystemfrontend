@@ -124,7 +124,7 @@
 					},
 					success: res => {
 						if (this.$refs.loadingCover) this.$refs.loadingCover.hide();
-						console.log(res);
+					//	console.log(res);
 						if (res.code >= 0) {	
 							// this.list = res.data[0];
 							// console.log(this.list);

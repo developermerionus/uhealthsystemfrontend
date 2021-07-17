@@ -109,11 +109,11 @@
 			        },
 			methods: {
 				selectTypeChange(){
-								 console.log('this.$refs.addRequestState.value',this.$refs.addRequestState.value)
+								// console.log('this.$refs.addRequestState.value',this.$refs.addRequestState.value)
 								 if(this.$refs.addRequestState.value==4){
 									 this.showListOption = _self.pastFourWeeks;
 									 this.getBonusSum(4);
-									 console.log('_self.pastFourWeeks',_self.pastFourWeeks);
+									// console.log('_self.pastFourWeeks',_self.pastFourWeeks);
 								 }
 								 else if (this.$refs.addRequestState.value==8){
 									 this.showListOption = _self.pastEightWeeks;
@@ -149,7 +149,7 @@
 					},
 					success(res) {
 						_self.totalBonus = res.data[0].total? res.data[0].total:0;
-						console.log('sum',_self.totalBonus);
+					//	console.log('sum',_self.totalBonus);
 						},
 					fail: (err) => {
 						// alert("关闭2")
@@ -166,7 +166,7 @@
 						success(res) {
 							let newArr=[];
 							// alert("关闭1")
-							console.log('res detail', res);
+						//	console.log('res detail', res);
 							if (res.code >= 0 && res.data && res.data.length!==0) {
 								 newArr = res.data;
 								 _self.showListOption = newArr;
@@ -197,7 +197,7 @@
 						}
 					})
 					_self.addRange (_self.pastFourWeeks, _self.pastEightWeeks, _self.pastTwelvelWeeks,_self.pastSixteenWeeks );
-					console.log(_self.pastSixteenWeeks);
+				//	console.log(_self.pastSixteenWeeks);
 					},
 					addRange (fourW, eightW, twelW,sixtW ){
 						let rangeArr = [];
@@ -215,7 +215,7 @@
 						rangeArr.push({value: 0, text:"All", date:'' })
 						
 						_self.optionRangeArr = rangeArr;
-							console.log(rangeArr);
+					//		console.log(rangeArr);
 					}
 				}
 		};

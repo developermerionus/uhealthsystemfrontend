@@ -57,9 +57,9 @@
 						yearweek: 202114
 					},
 					success: res => {
-						console.log(res.data);
-						console.log(res.data[0]);
-						console.log(res.data[1]);
+					//	console.log(res.data);
+					//	console.log(res.data[0]);
+					//	console.log(res.data[1]);
 						if (res.code == 0) {
 							this.contents = res.data;
 						}

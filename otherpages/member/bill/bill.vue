@@ -40,7 +40,7 @@
 			};
 		},
 		onLoad(e) {
-			console.log(e)
+		//	console.log(e)
 			this.showClass = e.class
 			this.branch = e.branch == 'L' ?  '左区-left' :  '右区-right'
 			this.bonusType = e.type
@@ -66,7 +66,7 @@
 						page_size: mescroll.size
 					},
 					success: res => {
-						console.log(res);
+					//	console.log(res);
 						let newArr = [];
 						let msg = res.message;
 						if (res.code == 0 && res.data ) {
