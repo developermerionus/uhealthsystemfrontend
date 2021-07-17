@@ -141,7 +141,7 @@ export default {
 					if (res.code >= 0) {
 						this.orderPaymentData = res.data;
 						let newArr = res.data;
-						console.log('newArr', newArr);
+					//	console.log('newArr', newArr);
 						
 						if (res.data.member_address){
 							if(res.data.member_address.country_id===0){

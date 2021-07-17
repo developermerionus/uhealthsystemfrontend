@@ -387,7 +387,7 @@ export default {
 			} else {
 				data.member_address = JSON.stringify(data.member_address);
 			}
-			console.log(this.orderCreateData, data);
+			//console.log(this.orderCreateData, data);
 			return;
 			// data.member_address = JSON.stringify(data.member_address);
 			this.$api.sendRequest({
@@ -821,7 +821,7 @@ export default {
 		},
 		// 保存发票信息
 		saveInvoice() {
-			console.log('daozhel')
+		//	console.log('daozhel')
 			if (this.orderCreateData.is_invoice == 1) {
 				if (this.invoiceVerify()) {
 					this.closePopup('invoicePopup');

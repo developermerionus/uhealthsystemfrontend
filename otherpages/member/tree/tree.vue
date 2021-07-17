@@ -149,7 +149,7 @@
 				
 						if (res.code >= 0) {	
 							// this.list = res.data[0];
-							console.log(res.data['0']);
+						//	console.log(res.data['0']);
 							this.list.push(res.data['0']);
 							this.width = res.data.width;
 							this.height = res.data.height;

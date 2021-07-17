@@ -109,7 +109,7 @@ export default {
 						page_size: this.auto ? this.size : size
 					},
 					success: res => {
-						console.log(res);
+				//		console.log(res);
 						this.showLoading = false;
 						this.isClick = true;
 						if (res.code == 0) {

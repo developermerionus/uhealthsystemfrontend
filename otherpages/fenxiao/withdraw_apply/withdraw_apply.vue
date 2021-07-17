@@ -151,7 +151,7 @@
 							money: this.withdrawMoney
 						},
 						success: res => {
-							console.log(res);
+						//	console.log(res);
 							if (res.code >= 0) {
 								this.$util.showToast({
 									title: this.$lang('withdraw_success') // '提现申请成功'
@@ -241,7 +241,7 @@
 							uni.requestSubscribeMessage({
 								tmplIds: res.data,
 								fail: res => {
-									console.log('fail', res);
+							//		console.log('fail', res);
 								},
 								complete: () => {
 									callback();

@@ -137,7 +137,7 @@ export default {
 	mixins: [auth, globalConfig],
 	onLoad(option) {
 		// a==1 代为注册
-		console.log(option);
+	//	console.log(option);
 		this.title = option ? this.$lang('registered_representative') : this.$lang('registered')
 	    if (option){
 			this.represent = true;
