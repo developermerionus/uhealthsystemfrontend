@@ -10,6 +10,7 @@
 }
 
 .order-nav {
+	
 	width: 100vw;
 	height: 90rpx;
 	display: flex;
@@ -28,8 +29,12 @@
 	// padding-bottom: 20rpx;
 	/* #endif */
 	position: fixed;
+	margin: 0 auto;
 	left: 0;
+	right: 0;
 	z-index: 998;
+	max-width: 1200px;
+	
 
 	.uni-tab-item {
 		flex: 1;
@@ -312,6 +317,12 @@
 	white-space: nowrap;
 	flex: 1;
 }
+
+.order-list {
+	margin: 45px auto 0px;
+	max-width: 1200px;
+}
+
 
 
 @media screen and (max-width: 1000px) {
