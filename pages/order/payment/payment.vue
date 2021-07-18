@@ -695,11 +695,26 @@
 					data: data,
 					success: res => {
 						this.selfPickupExistInList = true;
-						uni.redirectTo({
-							url: '/pages/order/payment/payment'
-						});
+						 if(!this.formData.mobile) {
+							this.fillOutSelfPickUpInfo(res.data);
+						 }
+						 else {
+							uni.redirectTo({
+								url: '/pages/order/payment/payment'
+							});
+						}
 					}
 				})
+			},
+			fillOutSelfPickUpInfo(selfpickupid){
+				let data = {
+						type: 1,
+						addressLength: 3,
+						back:'/pages/order/payment/payment',//come back address
+						id: selfpickupid
+					};
+					this.$util.redirectTo('/otherpages/member/address_edit/address_edit', data);
+				
 			},
 			checkSelfPickupExist() {
 				this.$api.sendRequest({
@@ -718,7 +733,7 @@
 								if(this.addressIdArr.indexOf(el.id) === -1){
 									this.addressIdArr.push(el.id);
 								}
-								if (el.full_address === "West Covina, California 91791, SelfPickUp") {
+								if (el.country_id === 0) {
 									this.selfPickupExistInList = true;
 									this.selfPickUPIdForDefault = el.id;
 								}
