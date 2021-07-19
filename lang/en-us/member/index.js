@@ -47,7 +47,7 @@ export const lang = {
 	restPV: 'Remaining PV',
 	member_level_name: 'Current Rank',
 	highest_level: 'Highest Rank',
-	saleCV: 'Customer CV',
+	nextRecurringDate: 'Next Repurchase Date',
 	
 	LCV: 'Total Left Leg CV',
 	addedLCV: 'Weekly Left CV',

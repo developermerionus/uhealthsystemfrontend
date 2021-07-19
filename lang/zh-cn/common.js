@@ -126,7 +126,7 @@ export const lang = {
 		ranking_bonus:"级别奖",
 		cash_bonus: "全球现金奖",
 		pay_time_bonus: "付款日期",
-		seeBonusDetails:"查看奖金明细",
+		seeBonusDetails:"查看奖金历史",
 		lang: "语言",
 		'transfer_to_referee' : '转账被推荐人',
 		'transfer_money' : '转账',

@@ -125,7 +125,7 @@ export const lang = {
 		ranking_bonus:"Ranking Bonus",
 		cash_bonus: "Cash Bonus",
 		pay_time_bonus: "Payment Date",
-		seeBonusDetails: "View Bonus Details",
+		seeBonusDetails: "View Bonus Histroy",
 		lang: "Lang",
 		'transfer_to_referee' : 'Transfer Money to Referee Member',
 		'transfer_money' : 'Transfer Money',

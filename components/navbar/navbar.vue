@@ -135,6 +135,7 @@
 						.langWord{
 							margin-top: 2px;
 							color:$color-sub;
+							font-size:14px;
 						}
 					}
 				}
