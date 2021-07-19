@@ -138,6 +138,8 @@
 						//设置列表数据
 						if (mescroll.num == 1) this.transferList = []; //如果是第一页需手动制空列表
 						this.transferList = this.transferList.concat(newArr); //追加新数据
+						this.transferList = this.transferList.slice().reverse();
+						console.log(this.transferList);
 						if (this.$refs.loadingCover) this.$refs.loadingCover.hide();
 					},
 					fail: res => {
