@@ -151,7 +151,8 @@
 							<uni-grid :column="columnNum" :show-border="false" :square="false">
 								<block v-for="(item, index) in infoList1" :key="index">
 									<uni-grid-item class="makesameline">
-										<text class="text memberInforLabel">{{ item.item }}</text>
+									
+										<text class="text memberInforLabel"><image v-if="item.item===$lang('nextRecurringDate')" class="redflag-icon" src="../../../static/images/icons/red-flag.png"></image>{{ item.item }}</text>
 										<!-- <text class="text memberInforContent"
 											:class="{color: item.value=='不活跃' }">{{ item.value }}</text> -->
 											<text class="text memberInforContent"
@@ -603,8 +604,8 @@
 							value: this.$lang(this.bonus.highest_level)
 						})
 						this.infoList1.push({
-							item: this.$lang('saleCV'),
-							value: this.bonus.saleCV
+							item: this.$lang('nextRecurringDate'),
+							value: this.bonus.recurringDate
 						})
 						// console.log(this.infoList1);
 						this.infoList2 = [];
@@ -728,8 +729,8 @@
 							value: this.bonus.restPV
 						})
 						this.infoList1.push({
-							item: this.$lang('saleCV'),
-							value: this.bonus.saleCV
+							item: this.$lang('nextRecurringDate'),
+							value: this.bonus.recurringDate
 						})
 						// console.log(this.infoList1);
 						this.infoList2 = [];
@@ -998,15 +999,16 @@
 		/* 隐藏滚动条，但依旧具备可以滚动的功能 */
 		display: none
 	}
+	.redflag-icon{
+		width: 25px;
+		height: 25px;
+		margin-right: 5px;
+	}
 	.bonusDetail {
 		display:flex;
 		justify-content: flex-end;
 		margin-right: 30rpx;
-		.redflag-icon{
-			width: 25px;
-			height: 25px;
-			margin-right: 5px;
-		}
+		
 		.bonus-tip {
 			margin-right: 6rpx;
 			color: $color-tip;
