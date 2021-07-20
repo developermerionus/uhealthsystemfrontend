@@ -15,7 +15,7 @@ export const lang = {
 	cancellation: '注销账号',
 	lang: "语言",
 	logout: '退出登录',
-	save: "Save",
+	save: "Save and Continue",
 	cancel: 'Cancel',
 	noset: '未设置',
 	member_id: 'Member ID',
@@ -90,6 +90,12 @@ export const lang = {
 	SAMEVALUE: '值相同，无需修改',
 	FORBID1: '1号会员不能修改此项参数',
 	browse_mode: '浏览模式不能修改',
-	goHome: 'Continue',
-	goCenter: 'Go Dashboard'
+	goHome: 'Continue without Save',
+	goCenter: 'Back to Dashboard',
+	
+	fieldsEmptyTips: "Can Not Be Empty!",
+	
+	saveSuccess: 'Successfully Saved!',
+	
+	
 }

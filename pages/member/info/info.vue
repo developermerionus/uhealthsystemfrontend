@@ -29,16 +29,17 @@
 				<block v-for="(item, index) in form" :key='index+100'>
 					<view class="info-list-cell info-list-con" hover-class="cell-hover" @click="modifyInfo(item.name)">
 						<text class="cell-tit">{{ $lang( item.name) }}
-							<text style='color: #FF0000;' v-if="item.name!='joint_applicant'&&item.name!='company'&&item.name!='nickname'">*</text></text>
-						<input v-if="item.name!='birthdate'" :disabled='locked(item.name)' class="cell-tip"
+							<text style='color: #FF0000;' v-if="item.name!='joint_applicant'&&item.name!='company'
+							&&item.name!='nickname'">*</text></text>
+						<input v-if="item.name!='birthdate' || memberInfo.member_level>1" :disabled='locked(item.name)' class="cell-tip"
 							style="text-align:end; font-size: 24rpx;  width:350rpx; color:#606266;" maxlength="500px"
 							:placeholder="$lang(item.name)" v-model="item.value" />
-
-						<picker v-if="item.name=='birthdate'" mode="date" :value="item.value" :start="startDate"
-							:end="endDate" @change="bindDateChange">
-							<view class="uni-input" style='text-align: end;'>{{ item.value ? 
-						item.value : $lang('input') +$lang('birthdate') }}</view>
+						<picker v-if="item.name=='birthdate' && memberInfo.member_level==1" mode="date" :value="item.value" 
+						:start="startDate" :end="endDate" @change="bindDateChange">
+							<view class="uni-input" style='text-align: end;'>{{ item.value ? item.value 
+							: $lang('input') +$lang('birthdate') }}</view>
 						</picker>
+						
 					</view>
 				</block>
 				<view class="info-list-cell info-list-con" hover-class="cell-hover" @click="modifyInfo('password')">
@@ -153,7 +154,7 @@
 		},
 		methods: {
 			goHome() {
-				this.saveData();
+				//this.saveData();
 				this.$util.redirectTo('/pages/index/index/index');
 			},
 			goCenter() {

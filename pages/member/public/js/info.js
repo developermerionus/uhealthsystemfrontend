@@ -98,7 +98,10 @@ export default {
 	
 	methods: {
 		locked(item) {
-			return (this.memberInfo.member_level > 1) && (item=='email' ||item=='mobile' ||item == 'firstname' || item =='surname'||item =='joint_applicant'||item =='company'||item =='id_number'||item=='birthdate')
+			return (this.memberInfo.member_level > 1) 
+			&& (item=='email' ||item=='mobile' ||item == 'firstname' 
+			|| item =='surname'||item =='joint_applicant'||item =='company'
+			||item =='id_number'||item=='birthdate')
 		},
 		saveData() {
 			let data = {
@@ -117,36 +120,54 @@ export default {
 				nickname: this.form.find((item)=>{return item.name=='nickname'}).value,
 				// surname: this.form[13].value,
 			}
+			
+			// 保存身份实体id
 			if (this.memberInfo.member_level == 1) {
 				data.id_number = this.form.find((item)=>{return item.name=='id_number'}).value;
 			} else {
 				data.id_number = this.memberInfo.id_number;
 			}
 			
-			
 			if('Taiwan,China,Hong Kong Area,Macau'.includes(this.country.name)){
 				data.firstnamePY = this.form.find((item)=>{return item.name=='firstnamePY'}).value;
 				data.surnamePY = this.form.find((item)=>{return item.name=='surnamePY'}).value;
 			}
-			// console.log(data);
-			this.$api.sendRequest({
-				url: '/api/member/modifyMember',
-				data,
-				success: res => {
-					// console.log(res)
-					if (res.code >= 0) {
-						this.$util.msg('修改成功')
-					}
-				},
-			})
+			
+			// 检查data fields数值是否为空
+			let isAllRequiredFieldFilled = true;
+			for (const [itemName, itemValue] of Object.entries(data)) {
+			 // console.log(`${key}: ${value}`);
+			  if (itemValue == '' && itemName !== "company" && itemName !== "joint_applicant" && itemName !== "nickname") {
+				//  this.$util.msg(`${itemName} Can Not Be Empty`); 
+					this.$util.msg(this.$lang(itemName) + this.$lang("fieldsEmptyTips")); 
+					isAllRequiredFieldFilled = false;
+			  }
+			}
+			
+			if (isAllRequiredFieldFilled) {
+				this.$api.sendRequest({
+					url: '/api/member/modifyMember',
+					data,
+					success: res => {
+						// console.log(res)
+						if (res.code >= 0) {
+							this.$util.msg(this.$lang("saveSuccess"));
+							
+							setTimeout(() => {
+								this.$util.redirectTo('/pages/index/index/index', {}, 'redirectTo');
+							}, 1500);
+						}
+					},
+				})
+			}
 			
 		},
+		
+		
 		/**
 		 * 获取国家
 		 */
-		
 		updateStateProvince(state, country_id) {
-		
 			this.form.forEach((item)=>{if (item.name=='state') {
 				item.value = state;
 			} })
@@ -156,14 +177,10 @@ export default {
 					url: '/api/address/country',
 					async: false,
 			});
-				
 			if (res.code >= 0 && res.data) {
 				this.countryList = res.data;
-				// console.log(this.countryList);
 				this.getInfo();
 				if (!this.formData.country_id && this.$refs.loadingCover) this.$refs.loadingCover.hide();
-				
-				// console.log(this.countryList);
 			}
 			
 		},
@@ -194,6 +211,7 @@ export default {
 		infoListPush(name, arrow, value, init_value){
 			this.infoList.push({value, name, arrow, init_value});
 		},
+		
 		// 初始化用户信息
 		getInfo() {
 			// console.log('get info...')
@@ -209,7 +227,6 @@ export default {
 						let input = this.$lang('input');
 						this.indent = 'all';
 						this.memberInfo = res.data;
-						// console.log(this.memberInfo.member_level)
 						this.$language = this.memberInfo.language;
 						this.infoList = [];
 						this.infoListPush('member_id', false, this.memberInfo.member_id)
@@ -229,10 +246,13 @@ export default {
 						this.form.push({name:'company', value: this.memberInfo.company});
 						if(this.memberInfo.member_level > 1){
 							this.form.push({name:'id_number', value: this.replaceStart(this.memberInfo.id_number, 0, 4)});
+							//this.form.push({name:'id_number', value: this.memberInfo.id_number});
 						} else {
 							this.form.push({name:'id_number', value: this.memberInfo.id_number});
 						}
-						this.form.push({name:'birthdate', value: this.memberInfo.birthdate?this.memberInfo.birthdate.substr(0, 10):''});
+						// this.form.push({name:'birthdate', value: this.memberInfo.birthdate ?  this.memberInfo.birthdate.substr(0, 10) : this.getDate({ format: true }) }); 
+					//    this.form.push({name:'birthdate', value: '' }); 
+						this.form.push({name:'birthdate', value: this.memberInfo.birthdate ?  this.memberInfo.birthdate.substr(0, 10) : '' }); 
 						this.form.push({name:'email', value: this.memberInfo.email});
 						this.form.push({name:'mobile', value: this.memberInfo.mobile});
 						this.form.push({name:'state', value: this.memberInfo.state});
@@ -240,7 +260,7 @@ export default {
 						this.form.push({name:'address', value: this.memberInfo.address});
 						this.form.push({name:'zipcode', value: this.memberInfo.zipcode});
 						this.form.push({name:'nickname', value: this.memberInfo.nickname});
-						// console.log(this.form)
+						// console.log(this.form);
 					}
 					if (this.$refs.loadingCover) this.$refs.loadingCover.hide();
 				},

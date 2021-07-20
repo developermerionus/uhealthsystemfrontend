@@ -58,6 +58,8 @@ export default {
 				}
 			}],
 			memberId: 0,
+			memberLevel: 0,
+			memberMarketCountryId: '',
 			contactData: {
 				title: '',
 				path: '',
@@ -110,6 +112,7 @@ export default {
 		this.preview = data.preview || 0;
 		this.isIphoneX = this.$util.uniappIsIPhoneX()
 		if (data.source_member) uni.setStorageSync('source_member', data.source_member);
+		this.getMemberLevel();
 		// 小程序扫码进入
 		if (data.scene) {
 			var sceneParams = decodeURIComponent(data.scene);
@@ -387,8 +390,9 @@ export default {
 		// 检查物品关键字 - “套餐”，“国家”
 		isAllowedToBuy() {
 			let isProductAllowToBuy = true; // 检验物品可否被该用户购买
+		//	this.getMemberLevel();
 			
-			if (uni.getStorageSync('userInfo').member_level === 1) {
+			if (this.memberLevel && this.memberLevel === 1) {
 				// 关键字 - '套餐'
 				if (!this.goodsSkuDetail.goods_name.includes("套餐")) {
 					isProductAllowToBuy = false;
@@ -397,8 +401,8 @@ export default {
 					});
 				}
 				if (this.goodsSkuDetail.goods_name.includes("仅限美国境外")) {
-					if (uni.getStorageSync('userInfo').marketCountryId === 0 ||
-					 uni.getStorageSync('userInfo').marketCountryId === 1) {;
+					// memberMarketCountryId - 0: selfpickup, 1: united states
+					if (this.memberMarketCountryId === 0 || this.memberMarketCountryId === 1) {
 							isProductAllowToBuy = false;
 							this.$util.showToast({
 								title: this.$lang('isAllowedToBuyTip2') // "仅限美国境外"
@@ -1034,6 +1038,16 @@ export default {
 					}
 				}
 			});
-		}
+		},
+		// get member_level and marketCountryId
+		getMemberLevel() {
+			this.$api.sendRequest({
+				url: '/api/member/info',
+				success: res => {
+					this.memberLevel = res.data.member_level;
+					this.memberMarketCountryId = res.data.marketCountryId;
+				}
+			});
+		},
 	}
 }

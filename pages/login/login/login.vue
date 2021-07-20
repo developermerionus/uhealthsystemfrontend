@@ -329,7 +329,6 @@
 										this.$api.sendRequest({
 											url: '/api/member/info',
 											success: res => {
-												console.log(res)
 												if (res.code == 0) {
 													let goUrl = res.data
 														.member_level == 1 ?

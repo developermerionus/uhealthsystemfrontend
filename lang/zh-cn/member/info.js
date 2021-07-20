@@ -15,7 +15,7 @@ export const lang = {
 	cancellation: '注销账号',
 	lang: "语言",
 	logout: '退出登录',
-	save: "保存",
+	save: "保存，浏览商品",
 	cancel: '取消',
 	noset: '未设置',
 	member_id: '会员ID',
@@ -89,7 +89,12 @@ export const lang = {
 	SAMEVALUE: '值相同，无需修改',
 	FORBID1: '1号会员不能修改此项参数',
 	browse_mode: '浏览模式不能修改',
-	goHome: '保存并继续购买套餐',
-	goCenter: '前往个人中心',
-	state: '州/省'
+	goHome: '不保存继续',
+	goCenter: '返回个人中心',
+	state: '州/省',
+	
+	fieldsEmptyTips: "不能为空",
+	saveSuccess: '修改成功',
+	
+	
 }

@@ -132,7 +132,7 @@ export const lang = {
 		'referee_username' : 'Referee Username',
 		'referee_id' : 'Referee Memeber ID',
 		'transfer_amount' : 'Transfer Amount',
-		'transfer_amount_tip' : 'Current balance is $',
+		'transfer_amount_tip' : 'Balance is $',
 		'transfer_money_list' : 'Transfer Details',
 		'transfer_verify_alerts_1': 'Input transfer amount',
 		'transfer_verify_alerts_2': 'Transfer amount is over wallet available balance',
