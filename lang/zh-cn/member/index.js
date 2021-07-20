@@ -50,7 +50,7 @@ export const lang = {
 	restPV: 'PV值',
 	member_level_name: '当前职级',
 	highest_level: '最高职级',
-	nextRecurringDate: '下次复购日期',
+	nextRecurringDate: '复购结算日期',
 	
 	LCV: '左区总CV',
 	addedLCV: '左区新增CV',
