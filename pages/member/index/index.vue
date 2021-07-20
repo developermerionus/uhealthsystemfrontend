@@ -151,8 +151,11 @@
 							<uni-grid :column="columnNum" :show-border="false" :square="false">
 								<block v-for="(item, index) in infoList1" :key="index">
 									<uni-grid-item class="makesameline">
-									
-										<text class="text memberInforLabel"><image v-if="item.item===$lang('nextRecurringDate')" class="redflag-icon" src="../../../static/images/icons/red-flag.png"></image>{{ item.item }}</text>
+									<view class="recurringDate">
+										<image v-if="item.item===$lang('nextRecurringDate')" class="redflag-icon" 
+										src="../../../static/images/icons/red-flag.png"></image>
+										<text class="text memberInforLabel">{{ item.item }}</text>
+									</view>
 										<!-- <text class="text memberInforContent"
 											:class="{color: item.value=='不活跃' }">{{ item.value }}</text> -->
 											<text class="text memberInforContent"
@@ -998,6 +1001,11 @@
 	/deep/.uni-scroll-view::-webkit-scrollbar {
 		/* 隐藏滚动条，但依旧具备可以滚动的功能 */
 		display: none
+	}
+	.recurringDate {
+		display:flex;
+		flex-direction: row;
+		align-items: center;
 	}
 	.redflag-icon{
 		width: 25px;
