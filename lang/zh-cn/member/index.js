@@ -15,6 +15,7 @@ export const lang = {
 	withdraw: '提现',
 	withdrawing: '提现中',
 	electronicwallet: '电子钱包',
+	 	tools: '工具', 
 	
 	// 会员中心入口
 	sign: '签到',
