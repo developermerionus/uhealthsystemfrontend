@@ -118,6 +118,7 @@ export const lang = {
 		week_of_bonus: "Week",
 		start_bonus: "Start",
 		end_bonus: "End",
+		week_bonus: 'Week Total Bonus',
 		retail_bonus: "Retail Bonus",
 		fast_bonus:"Fast Bonus",
 		leadership_bonus: "Leadership Bonus",

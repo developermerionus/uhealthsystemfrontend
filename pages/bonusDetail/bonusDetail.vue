@@ -34,6 +34,7 @@
 		                    <t-th>{{$lang('common.start_bonus')}}</t-th>
 		                    <t-th>{{$lang('common.end_bonus')}}</t-th>
 		                  <!--  <t-th>{{$lang('common.retail_bonus')}}</t-th> -->
+						    <t-th>{{$lang('common.week_bonus')}}</t-th>
 							<t-th>{{$lang('common.fast_bonus')}}</t-th>
 							<t-th>{{$lang('common.leadership_bonus')}}</t-th>
 							<t-th>{{$lang('common.team_bonus')}}</t-th>
@@ -48,6 +49,7 @@
 		                    <t-td>{{ item.start}}</t-td>
 		                    <t-td>{{ item.end}}</t-td>
 							<!-- <t-td>{{ item.retail_bonus }}</t-td> -->
+							<t-td>{{ item.bonus }}</t-td>
 		                    <t-td>{{ item.fast_bonus }}</t-td>
 							<t-td>{{ item.leadership_bonus }}</t-td>
 							<t-td>{{ item.team_bonus }}</t-td>
@@ -91,19 +93,19 @@
 					// pastEightWeeks: [],
 					// pastTwelvelWeeks: [],
 					// pastSixteenWeeks: [],
-					//allWeeksList : [],
+					allWeeksList : [],
 					pastOneWeeks : [],
 					pastTwoWeeks: [],
 					pastThreeWeeks: [],
 					pastFourWeeks: [],
-					past_N_weeks:4,//0 stand for get all bonus detail
+					past_N_weeks:0,//0 stand for get all bonus detail
 				};
 			},
 		    onShow(){
 				_self = this;
 				this.getBonusDetail();
-				//this.getBonusSum(0);
-				this.getBonusSum(4);
+				this.getBonusSum(0); //0 means show all greater than 25 weeks
+				
 			},
 			created() {
 						this.editSelectTypeLists = _self.showDefualtTextNum; /* 默认选中 */
@@ -147,6 +149,10 @@
 								 	 this.showListOption = _self.pastFourWeeks;
 									 this.getBonusSum(4);
 								 }
+								 else if (this.$refs.addRequestState.value==0){
+								  	  this.showListOption = _self.allWeeksList;
+								 	  this.getBonusSum(0);
+								   }
 								 },
 				change(e) {
 					//console.log('this.$refs.addRequestState.value',e.detail);
@@ -252,7 +258,7 @@
 						if(fourW.length>3 && fourW.length<5) {
 						 rangeArr.push({value: 4, text:"Past 04 Weeks", date:fourW[fourW.length-1].start +" - "+ fourW[0].end })
 						}
-						//rangeArr.push({value: 0, text:"All", date:'' })
+						rangeArr.push({value: 0, text:"All", date:'' })
 						
 						_self.optionRangeArr = rangeArr;
 					//		console.log(rangeArr);

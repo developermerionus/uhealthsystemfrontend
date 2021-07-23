@@ -119,6 +119,7 @@ export const lang = {
 		week_of_bonus: "周次",
 		start_bonus: "开始",
 		end_bonus: "结束",
+		week_bonus: '周总奖金',
 		retail_bonus: "零售奖",
 		fast_bonus:"分享奖",
 		leadership_bonus: "领导分享奖",
