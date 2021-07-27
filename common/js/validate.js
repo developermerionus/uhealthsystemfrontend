@@ -155,6 +155,13 @@ module.exports = {
 						return false;
 					}
 					break;
+				case 'idnumbercheck':
+				   // console.log('idnumbercheck',data[rule[i].name].length)
+					if (data[rule[i].name].length !== 18) {
+						this.error = rule[i].errorMsg;
+						return false;
+					}
+					break;
 			}
 		}
 		return true;
