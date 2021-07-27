@@ -566,10 +566,19 @@
 		</uni-popup>
 
 		<!-- 选择支付方式弹窗 -->
-		<ns-payment ref="choosePaymentPopup" :isBalance="orderCreateData.is_balance" @useBalance="useBalance"
+		<!-- <ns-payment ref="choosePaymentPopup" :isBalance="orderCreateData.is_balance" @useBalance="useBalance"
 			:isPayPassWord="orderPaymentData.member_account.is_pay_password"
 			:balanceDeduct="orderPaymentData.order_money > 0 && orderPaymentData.member_account.balance_total > 0 ? balanceDeduct : '0'"
-			:payMoney="orderPaymentData.pay_money" @confirm="orderCreate"></ns-payment>
+			:payMoney="orderPaymentData.pay_money" @confirm="orderCreate"></ns-payment> -->
+			<ns-payment
+				ref="choosePaymentPopup"
+				:isBalance="orderCreateData.is_balance"
+				@useBalance="useBalance"
+				:isPayPassWord="orderPaymentData.member_account.is_pay_password"
+				:balanceDeduct="orderPaymentData.order_money < orderPaymentData.member_account.balance_total ? balanceDeduct : '0'"
+				:payMoney="orderPaymentData.pay_money"
+				@confirm="orderCreate"
+			></ns-payment>
 
 		<loading-cover ref="loadingCover"></loading-cover>
 	</view>

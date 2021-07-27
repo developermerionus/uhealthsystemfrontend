@@ -570,7 +570,7 @@
 						idName: idName
 					},
 					success: res => {
-						console.log('res',res, res.code, res.message);
+						//console.log('res',res, res.code, res.message);
 						
 						if(res.code !=="0") {
 							this.$refs.loadingCover.hide();
