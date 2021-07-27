@@ -581,9 +581,9 @@
 					},
 					async: false
 				});
-				if (res.code >= 0 && res.data) {
+				if (res.code >= 0 && res.data[0]) {
 					this.bonus = res.data[0];
-					// console.log(this.bonus);
+					//console.log('this.bonus',this.bonus);
 					if (this.columnNum < 3) {
 						this.infoList1 = [];
 						this.infoList1.push({

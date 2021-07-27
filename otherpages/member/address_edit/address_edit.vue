@@ -112,6 +112,7 @@
 	import validate from 'common/js/validate.js';
 	import globalConfig from '@/common/js/golbalConfig.js';
 	import Config from '@/common/js/config.js';
+	var self;
 	export default {
 		components: {
 			pickRegions
@@ -138,7 +139,7 @@
 					is_default: 1,
 					idNumber:'',
 					firstname: '',
-					lastname: ''
+					lastname: '',
 				},
 				address: '',
 				addressValue: '',
@@ -147,6 +148,7 @@
 				flag: false, //防重复标识
 				defaultRegions: [],
 				localType: 1,
+				goflag:'',
 				
 				countryList: [
 					{
@@ -196,7 +198,6 @@
 			uni.setStorageSync('addressInfo', '');
 		},
 		onShow() {
-			// 刷新多语言
 			this.$langConfig.refresh();
 			if (this.formData.id) {
 				uni.setNavigationBarTitle({
@@ -301,7 +302,8 @@
 						if (this.$refs.loadingCover) this.$refs.loadingCover.hide();
 					}
 				});
-			},
+			},			
+		
 			//获取详细地址
 			getAddress(value) {
 				// console.log('getAddress')
@@ -421,13 +423,14 @@
 				}
 				return false;
 			},
-			vertify() {
+			verify() {
 				this.formData.name = this.formData.name.trim();
 				this.formData.mobile = this.formData.mobile.trim();
 				this.formData.address = this.formData.address.trim();
 				let rule =[];
 				if (this.formData.country_id == 172){
-					rule = [{
+					rule = [
+						{
 							name: 'name',
 							checkType: 'required',
 							errorMsg: '请输入姓名'
@@ -451,6 +454,11 @@
 							name: 'idNumber',
 							checkType: 'required',
 							errorMsg: '身份证号码不能为空'
+						},
+						{
+							name: 'idNumber',
+							checkType: 'idnumbercheck',
+							errorMsg: '您的身份证号码不是18位'
 						}
 					];
 					
@@ -486,10 +494,9 @@
 							errorMsg: '详细地址不能为空'
 						},
 					];
-					
 				}
 				
-				var checkRes = validate.check(this.formData, rule);
+				var checkRes = validate.check(this.formData, rule, this.$api);
 				if (checkRes) {
 					return true;
 				} else {
@@ -500,7 +507,102 @@
 					return false;
 				}
 			},
+			
 			saveAddress() {
+				if (this.flag) return;
+				this.flag = true;
+				this.gocheck();
+			},
+			gocheck() {
+				
+				let result = this.verify();
+				if(result&&this.formData.country_id===172) {
+					this.checkChineseIdInDatabase(this.formData.idNumber,this.formData.name);
+				}
+				else if(result&&this.formData.country_id!==172) {
+					this.processSaveAdress()
+				}
+				else {
+					this.flag = false;
+				}
+			},
+			checkChineseIdInDatabase (idNumber, idName) {
+				//console.log(idNumber,idName);
+				this.$refs.loadingCover.show();
+				this.$api.sendRequest({
+					url: '/api/member/checkChineseIdInDatabase',
+					data: {
+						idNumber: idNumber,
+						idName: idName
+					},
+					success: res => {
+						//console.log('res', res);
+						if(res.data && res.data.length === 1&& res.data[0].idName===idName) {
+							console.log('Chinese name and id in database');
+							this.processSaveAdress(); 
+						}
+						else if (res.data && res.data.length === 0){
+							console.log('this is a new chinese id and name. check if it is real')
+							this.checkIdNameReal (idNumber, idName)
+						}
+						else if (res.data && res.data.length === 1&& res.data[0].idName!==idName) {
+							this.$refs.loadingCover.hide();
+							console.log('the name is not right for this chinese id');
+							this.$util.showToast({
+								title: "你的名字不匹配你的身份证号码。 The name is not match the Chinese ID",
+							});
+						}
+						else {
+							this.$refs.loadingCover.hide();
+							this.$util.showToast({
+								title: "请核对你的名字和你的身份证号码。 Please Check Your Chinese Name and Your Chinese ID ",
+							});
+						}
+						this.flag=false;
+					},
+				})
+			},
+			checkIdNameReal (idNumber, idName) {
+			 this.$api.sendRequest({
+					url: '/api/member/checkIdNameReal',
+					data: {
+						idNumber: idNumber,
+						idName: idName
+					},
+					success: res => {
+						console.log('res',res, res.code, res.message);
+						
+						if(res.code !=="0") {
+							this.$refs.loadingCover.hide();
+							console.log('chinese id and name did not pass alibaba check');
+							this.$util.showToast({
+								title: res.message
+							});
+						}
+						else if(res.code === "0" && res.result && res.result.description==="一致") {
+							console.log('name and chinese id pass alibaba  check');
+							this.addChineseIdNameInDatabase(idNumber, idName);
+							this.processSaveAdress();
+						}
+						else if(res.code === "0" && res.result && res.result.description!=="一致") {
+							console.log('hee',res.result.description!=="一致");
+							this.$refs.loadingCover.hide();
+							this.$util.showToast({
+								title: "身份证号码和名字不一致"
+							});
+						}
+						else {
+							this.$refs.loadingCover.hide();
+							this.$util.showToast({
+								title: res.message
+							});
+						}
+						this.flag=false;
+					},
+				})
+			},
+			
+			processSaveAdress () {
 				let full_address ='';
 				if (this.countryList[this.index].id == 172){
 					full_address = this.countryList[this.index].name +'-'+this.formData.full_address;
@@ -509,10 +611,6 @@
 					full_address = this.formData.city +', '+this.formData.state
 										+ ' ' + this.formData.zipcode + ', ' + this.countryList[this.index].name;
 				}
-				
-				if (this.flag) return;
-				this.flag = true;
-				if (this.vertify()) {
 					let addressValueArr = this.addressValue.split('-'),
 						data = {},
 						url = '';
@@ -538,7 +636,7 @@
 						data['state'] = this.formData.state;
 						data['zipcode'] = this.formData.zipcode;
 					}
-
+				
 					url = 'add';
 					if (this.formData.id) {
 						url = 'edit';
@@ -550,6 +648,7 @@
 						url: '/api/memberaddress/' + url,
 						data: data,
 						success: res => {
+							this.$refs.loadingCover.hide();
 							this.flag = false;
 							//console.log(res);
 							if (res.code == 0) {
@@ -583,9 +682,27 @@
 							this.flag = false;
 						}
 					});
-				}
 			},
-			/**
+			addChineseIdNameInDatabase (idNumber, idName) {
+				console.log('save ',idNumber,idName);
+				this.$api.sendRequest({
+					url: '/api/member/addChineseIdNameInDatabase',
+					data: {
+						idNumber: idNumber,
+						idName: idName
+					},
+					success: res => {
+						if(res.code ===0) {
+							console.log('Chinese Id Number and Chinese Name get saved');
+						}
+						else {
+							console.log('Chinese Id Number and Chinese Name did not get saved');
+						}
+					},
+				})
+			},
+			
+ 			/**
 			 * 获取国家
 			 */
 			getCountryList() {
