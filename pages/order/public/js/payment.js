@@ -85,12 +85,12 @@ export default {
 	},
 	methods: {
 		getWrongChineseIdInfo(){
-			console.log('getWrongChineseIdInfo');
+			//console.log('getWrongChineseIdInfo');
 			//self.avoidRepeatClick = uni.getStorage('wrongChineseIdInfo');
 			uni.getStorage({
 			    key: 'wrongChineseIdInfo',
 			    success: function (res) {
-					console.log('get wrongChineseIdInfo',res.data)
+					//console.log('get wrongChineseIdInfo',res.data)
 			       self.avoidRepeatClick=res.data;
 			    }
 			});
@@ -889,7 +889,7 @@ export default {
 		},
 		// 显示选择支付方式弹框
 		openChoosePayment() {
-			console.log('orderPaymentData',this.orderPaymentData);
+			//console.log('orderPaymentData',this.orderPaymentData);
 			
 			if(!this.orderPaymentData.member_address.mobile){
 				// this.$util.showToast({
@@ -945,7 +945,7 @@ export default {
 						this.runPaymentPopup();
 					}
 					else if (res.data && res.data.length === 0){
-						console.log('self.avoidRepeatClick',self.avoidRepeatClick);
+						//console.log('self.avoidRepeatClick',self.avoidRepeatClick);
 						if(this.checkConstantClickWrongIdName(idName,idNumber)){
 							console.log('this is a new chinese id and name. check if it is real')
 							this.checkIdNameReal (idNumber, idName)
@@ -964,7 +964,7 @@ export default {
 		},
 		checkConstantClickWrongIdName(idName,idNumber){
 			
-			console.log('this.avaoid',self.avoidRepeatClick);
+			//console.log('this.avaoid',self.avoidRepeatClick);
 			for(let item of self.avoidRepeatClick) {
 				if(item.idName===idName && item.idNumber===idNumber){
 					console.log('this is repeated mistakes');

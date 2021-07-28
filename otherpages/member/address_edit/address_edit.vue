@@ -220,8 +220,24 @@
 		},
 		mixins: [globalConfig],
 		methods: {
+			nameFormat(data) {
+							console.log('data.marketCountryId',data.marketCountryId);
+							if( data.marketCountryId === 172 || 
+								data.marketCountryId === 228 ||
+								data.marketCountryId === 10||
+								data.marketCountryId === 131||
+								data.marketCountryId === 139||
+								data.marketCountryId === 144||
+								data.marketCountryId === 221
+								) {
+									return data.surname + data.firstname;
+								}
+								else{
+									return data.firstname +' '+data.surname;
+								}
+						},
 			getWrongChineseIdInfo(){
-				console.log('getWrongChineseIdInfo');
+				//console.log('getWrongChineseIdInfo');
 				//self.avoidRepeatClick = uni.getStorage('wrongChineseIdInfo');
 				uni.getStorage({
 				    key: 'wrongChineseIdInfo',
@@ -250,7 +266,7 @@
 							this.formData.state = res.data.state;
 							this.formData.city = res.data.city;
 							this.formData.zipcode = res.data.zipcode;
-							this.formData.name = res.data.surname + '.' + res.data.firstname;
+							this.formData.name = this.nameFormat(res.data);// .marketCountryId===172?res.data.surname + res.data.firstname:res.data.surname + ' ' + res.data.firstname;
 							this.formData.mobile = res.data.mobile;
 							this.formData.telephone = '';
 							this.formData.address = res.data.address;

@@ -643,6 +643,23 @@
 			this.checkSelfPickupExist();
 		},
 		methods: {
+			nameFormat(data) {
+							console.log('data.marketCountryId',data.marketCountryId);
+							//this.formData.name = res.data.marketCountryId===172?res.data.surname + res.data.firstname:res.data.surname + ' ' + res.data.firstname;
+							if( data.marketCountryId === 172 || 
+								data.marketCountryId === 228 ||
+								data.marketCountryId === 10||
+								data.marketCountryId === 131||
+								data.marketCountryId === 139||
+								data.marketCountryId === 144||
+								data.marketCountryId === 221
+								) {
+									return data.surname + data.firstname;
+								}
+								else{
+									return data.firstname +' '+data.surname;
+								}
+						},
 			radioChange(evt) {
 				this.current = evt.detail.value;
 				if (!this.selfPickupExistInList && this.current === "selfpickup") {
@@ -766,7 +783,7 @@
 					success: res => {
 						if (res.code == 0) {
 							this.formData.idNumber = res.data.id_number;
-							this.formData.name = res.data.surname + '.' + res.data.firstname;
+							this.formData.name = this.nameFormat(res.data);
 							this.formData.mobile = res.data.mobile;
 							this.formData.telephone = '';
 							this.formData.latitude = 0;
