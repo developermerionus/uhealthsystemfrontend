@@ -575,7 +575,7 @@
 				:isBalance="orderCreateData.is_balance"
 				@useBalance="useBalance"
 				:isPayPassWord="orderPaymentData.member_account.is_pay_password"
-				:balanceDeduct="orderPaymentData.order_money < orderPaymentData.member_account.balance_total ? balanceDeduct : '0'"
+				:balanceDeduct="orderPaymentData.order_money <= orderPaymentData.member_account.balance_total ? balanceDeduct : '0'"
 				:payMoney="orderPaymentData.pay_money"
 				@confirm="orderCreate"
 			></ns-payment>
@@ -643,6 +643,23 @@
 			this.checkSelfPickupExist();
 		},
 		methods: {
+			nameFormat(data) {
+							console.log('data.marketCountryId',data.marketCountryId);
+							//this.formData.name = res.data.marketCountryId===172?res.data.surname + res.data.firstname:res.data.surname + ' ' + res.data.firstname;
+							if( data.marketCountryId === 172 || 
+								data.marketCountryId === 228 ||
+								data.marketCountryId === 10||
+								data.marketCountryId === 131||
+								data.marketCountryId === 139||
+								data.marketCountryId === 144||
+								data.marketCountryId === 221
+								) {
+									return data.surname + data.firstname;
+								}
+								else{
+									return data.firstname +' '+data.surname;
+								}
+						},
 			radioChange(evt) {
 				this.current = evt.detail.value;
 				if (!this.selfPickupExistInList && this.current === "selfpickup") {
@@ -705,7 +722,7 @@
 					success: res => {
 						this.selfPickupExistInList = true;
 						 if(!this.formData.mobile) {
-							this.fillOutSelfPickUpInfo(res.data);
+							this.fillupAddressInfo(res.data);
 						 }
 						 else {
 							uni.redirectTo({
@@ -715,12 +732,12 @@
 					}
 				})
 			},
-			fillOutSelfPickUpInfo(selfpickupid){
+			fillupAddressInfo(selectedItemId){
 				let data = {
 						type: 1,
 						addressLength: 3,
 						back:'/pages/order/payment/payment',//come back address
-						id: selfpickupid
+						id: selectedItemId
 					};
 					this.$util.redirectTo('/otherpages/member/address_edit/address_edit', data);
 				
@@ -766,7 +783,7 @@
 					success: res => {
 						if (res.code == 0) {
 							this.formData.idNumber = res.data.id_number;
-							this.formData.name = res.data.surname + '.' + res.data.firstname;
+							this.formData.name = this.nameFormat(res.data);
 							this.formData.mobile = res.data.mobile;
 							this.formData.telephone = '';
 							this.formData.latitude = 0;

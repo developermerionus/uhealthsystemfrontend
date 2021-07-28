@@ -29,7 +29,7 @@ module.exports = {
 					break;
 				case 'required':
 					var reg = new RegExp('/[\S]+/');
-					if (reg.test(data[rule[i].name])) {
+					if (reg.test(data[rule[i].name])||data[rule[i].name]==='.') {
 						this.error = rule[i].errorMsg;
 						return false;
 					}

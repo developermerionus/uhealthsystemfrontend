@@ -384,6 +384,24 @@ export default {
 		if (params.success) params.success();
 	},
 	/**
+	 * 显示消息提示框
+	 *  @param {Object} params 参数
+	 */
+	showToastLonger(params = {},time) {
+		params.title = params.title || "";
+		params.icon = params.icon || "none";
+		// params.position = params.position || 'bottom';
+		params.duration = time;
+		uni.showToast(params);
+		// store.commit('updateShowToastValue', params)
+		// setTimeout(() => {
+			  
+		// }, time);
+		if (params.success){
+			params.success();	           
+		} 
+	},
+	/**
 	 * 检测苹果X以上的手机
 	 */
 	isIPhoneX() {

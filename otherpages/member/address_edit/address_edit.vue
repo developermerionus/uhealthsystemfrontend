@@ -164,7 +164,8 @@
 				selfPickUpState:"California",
 				selfPickUpCity:"West Covina",
 				selfPickUpStreet:"100 N Barranca St. #100",
-				selfPickUpZipCode:"91791"
+				selfPickUpZipCode:"91791",
+				avoidRepeatClick:[]
 				
 			};
 		},
@@ -198,6 +199,8 @@
 			uni.setStorageSync('addressInfo', '');
 		},
 		onShow() {
+			self = this;
+			this.getWrongChineseIdInfo();
 			this.$langConfig.refresh();
 			if (this.formData.id) {
 				uni.setNavigationBarTitle({
@@ -217,6 +220,43 @@
 		},
 		mixins: [globalConfig],
 		methods: {
+			nameFormat(data) {
+							console.log('data.marketCountryId',data.marketCountryId);
+							if( data.marketCountryId === 172 || 
+								data.marketCountryId === 228 ||
+								data.marketCountryId === 10||
+								data.marketCountryId === 131||
+								data.marketCountryId === 139||
+								data.marketCountryId === 144||
+								data.marketCountryId === 221
+								) {
+									return data.surname + data.firstname;
+								}
+								else{
+									return data.firstname +' '+data.surname;
+								}
+						},
+			getWrongChineseIdInfo(){
+				//console.log('getWrongChineseIdInfo');
+				//self.avoidRepeatClick = uni.getStorage('wrongChineseIdInfo');
+				uni.getStorage({
+				    key: 'wrongChineseIdInfo',
+				    success: function (res) {
+						console.log('get wrongChineseIdInfo',res.data)
+				       self.avoidRepeatClick=res.data;
+				    }
+				});
+			},
+			setWrongChineseIdInfo(wrongIdInfoArr){
+				uni.setStorage({
+				    key: 'wrongChineseIdInfo',
+				    data: wrongIdInfoArr,
+				    success: function () {
+				        console.log('wrong chinese id infor get saved success');
+				    }
+				});
+			},
+			
 			getMemberInfo() {
 				this.$api.sendRequest({
 					url: '/api/member/info',
@@ -226,7 +266,7 @@
 							this.formData.state = res.data.state;
 							this.formData.city = res.data.city;
 							this.formData.zipcode = res.data.zipcode;
-							this.formData.name = res.data.surname + '.' + res.data.firstname;
+							this.formData.name = this.nameFormat(res.data);// .marketCountryId===172?res.data.surname + res.data.firstname:res.data.surname + ' ' + res.data.firstname;
 							this.formData.mobile = res.data.mobile;
 							this.formData.telephone = '';
 							this.formData.address = res.data.address;
@@ -542,8 +582,11 @@
 							this.processSaveAdress(); 
 						}
 						else if (res.data && res.data.length === 0){
-							console.log('this is a new chinese id and name. check if it is real')
-							this.checkIdNameReal (idNumber, idName)
+							console.log('self.avoidRepeatClick',self.avoidRepeatClick);
+							if(this.checkConstantClickWrongIdName(idName,idNumber)){
+								console.log('this is a new chinese id and name. check if it is real')
+								this.checkIdNameReal (idNumber, idName)
+							}
 						}
 						else if (res.data && res.data.length === 1&& res.data[0].idName!==idName) {
 							this.$refs.loadingCover.hide();
@@ -562,6 +605,19 @@
 					},
 				})
 			},
+			checkConstantClickWrongIdName(idName,idNumber){
+				console.log('this is repeated mistakes');
+				for(let item of self.avoidRepeatClick) {
+					if(item.idName===idName && item.idNumber===idNumber){
+						this.$refs.loadingCover.hide();
+						this.$util.showToast({
+							title: "请核对你的名字和你的身份证号码。"
+						});
+						return false
+					}
+				}
+				return true;
+			},
 			checkIdNameReal (idNumber, idName) {
 			 this.$api.sendRequest({
 					url: '/api/member/checkIdNameReal',
@@ -573,6 +629,8 @@
 						//console.log('res',res, res.code, res.message);
 						
 						if(res.code !=="0") {
+							self.avoidRepeatClick.push({idName:idName,idNumber:idNumber, message:res.message})
+							this.setWrongChineseIdInfo(self.avoidRepeatClick);
 							this.$refs.loadingCover.hide();
 							console.log('chinese id and name did not pass alibaba check');
 							this.$util.showToast({
@@ -585,6 +643,8 @@
 							this.processSaveAdress();
 						}
 						else if(res.code === "0" && res.result && res.result.description!=="一致") {
+							self.avoidRepeatClick.push({idName:idName,idNumber:idNumber, message:res.result.description})
+							this.setWrongChineseIdInfo(self.avoidRepeatClick);
 							console.log('hee',res.result.description!=="一致");
 							this.$refs.loadingCover.hide();
 							this.$util.showToast({
