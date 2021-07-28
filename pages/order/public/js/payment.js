@@ -1,6 +1,9 @@
+var self;
 export default {
 	data() {
 		return {
+			chineseIdCheckFlag:false,
+			avoidRepeatClick:[],
 			isIphoneX: false,
 			orderCreateData: {
 				is_balance: 0,
@@ -74,9 +77,33 @@ export default {
 			deliveryWeek: "",
 			selfPickupExistInList: false,
 			current:'delivery',
+			warningCheckChineseId:"请核对你的名字和你的身份证号码，否则无法通过中国海关",
+			fillupName:"请您在地址栏中填写您的名字",
+			fillupPhonenum:"请您在地址栏中填写手机号",
 		};
+		
 	},
 	methods: {
+		getWrongChineseIdInfo(){
+			console.log('getWrongChineseIdInfo');
+			//self.avoidRepeatClick = uni.getStorage('wrongChineseIdInfo');
+			uni.getStorage({
+			    key: 'wrongChineseIdInfo',
+			    success: function (res) {
+					console.log('get wrongChineseIdInfo',res.data)
+			       self.avoidRepeatClick=res.data;
+			    }
+			});
+		},
+		setWrongChineseIdInfo(wrongIdInfoArr){
+			uni.setStorage({
+			    key: 'wrongChineseIdInfo',
+			    data: wrongIdInfoArr,
+			    success: function () {
+			        console.log('wrong chinese id infor get saved success');
+			    }
+			});
+		},
 		// 显示弹出层
 		openPopup(ref) {
 			this.$refs[ref].open();
@@ -862,14 +889,173 @@ export default {
 		},
 		// 显示选择支付方式弹框
 		openChoosePayment() {
+			console.log('orderPaymentData',this.orderPaymentData);
+			
+			if(!this.orderPaymentData.member_address.mobile){
+				// this.$util.showToast({
+				// 	title: "请您在地址栏中填写手机号"
+				// });
+				this.showWaringCheck(4000,this.fillupPhonenum)
+			}
+			else if (this.orderPaymentData.member_address.name==='.') {
+				// this.$util.showToast({
+				// 	title: "请您在地址栏中填写姓名"
+				// });
+				this.showWaringCheck(4000,this.fillupName)
+			}
+			else {
+				if(this.orderPaymentData.member_address.country_id===172){
+					let chineseIdNumber = this.orderPaymentData.member_address.idNumber;
+					let chineseIdName = this.orderPaymentData.member_address.name;
+					this.checkChineseIdInDatabase(chineseIdNumber,chineseIdName);
+					}
+					else{
+						this.runPaymentPopup();
+					}
+				 
+			}
+		},
+		
+		runPaymentPopup() {
+			this.$refs.loadingCover.hide();
 			uni.setStorageSync('paySource', '');
 			if (this.verify()) {
 				// #ifdef MP-WEIXIN
 				this.subscribeMessage();
 				// #endif
 				this.$refs.choosePaymentPopup.open();
+				this.chineseIdCheckFlag = false;
 			}
 		},
+		checkChineseIdInDatabase (idNumber, idName) {
+			if (this.chineseIdCheckFlag) return;
+			this.chineseIdCheckFlag = true;
+			//console.log(idNumber,idName);
+			this.$refs.loadingCover.show();
+			this.$api.sendRequest({
+				url: '/api/member/checkChineseIdInDatabase',
+				data: {
+					idNumber: idNumber,
+					idName: idName
+				},
+				success: res => {
+					//console.log('res', res);
+					if(res.data && res.data.length === 1&& res.data[0].idName===idName) {
+						console.log('Chinese name and id in database');
+						this.runPaymentPopup();
+					}
+					else if (res.data && res.data.length === 0){
+						console.log('self.avoidRepeatClick',self.avoidRepeatClick);
+						if(this.checkConstantClickWrongIdName(idName,idNumber)){
+							console.log('this is a new chinese id and name. check if it is real')
+							this.checkIdNameReal (idNumber, idName)
+						}
+					}
+					else if (res.data && res.data.length === 1&& res.data[0].idName!==idName) {
+						console.log('the name is not right for this chinese id');
+						this.showWaringCheck(5000,this.warningCheckChineseId);
+					}
+					else {
+						this.showWaringCheck(5000,this.warningCheckChineseId);
+					}
+					this.chineseIdCheckFlag=false;
+				},
+			})
+		},
+		checkConstantClickWrongIdName(idName,idNumber){
+			
+			console.log('this.avaoid',self.avoidRepeatClick);
+			for(let item of self.avoidRepeatClick) {
+				if(item.idName===idName && item.idNumber===idNumber){
+					console.log('this is repeated mistakes');
+					this.showWaringCheck(5000,this.warningCheckChineseId);
+					return false
+				}
+			}
+			return true;
+		},
+		showWaringCheck(time,text) {
+			let addressId = this.orderPaymentData.member_address.id;
+			this.$refs.loadingCover.hide();
+				this.$util.showToastLonger({
+					title: text
+				},time);
+				setTimeout(() => {
+					this.fillupAddressInfo(addressId);
+				}, time);
+				
+		},
+		//this.showWaringCheck(5000,this.warningCheckChineseId); 
+		// showWaringChineseIdCheck() {
+		// 	let time = 5000;
+		// 	let addressId = this.orderPaymentData.member_address.id;
+		// 	this.$refs.loadingCover.hide();
+		// 		this.$util.showToastLonger({
+		// 			title: "请核对你的名字和你的身份证号码，否则无法通过中国海关"
+		// 		},time);
+		// 		setTimeout(() => {
+		// 			this.fillupAddressInfo(addressId);
+		// 		}, time);
+				
+		// },
+		checkIdNameReal (idNumber, idName) {
+		 this.$api.sendRequest({
+				url: '/api/member/checkIdNameReal',
+				data: {
+					idNumber: idNumber,
+					idName: idName
+				},
+				success: res => {
+					//console.log('res',res, res.code, res.message);
+					
+					if(res.code !=="0") {
+						self.avoidRepeatClick.push({idName:idName,idNumber:idNumber, message:res.message})
+						this.setWrongChineseIdInfo(self.avoidRepeatClick);
+						this.$refs.loadingCover.hide();
+						console.log('chinese id and name did not pass alibaba check');
+						this.$util.showToast({
+							title: res.message
+						});
+					}
+					else if(res.code === "0" && res.result && res.result.description==="一致") {
+						console.log('name and chinese id pass alibaba  check');
+						this.addChineseIdNameInDatabase(idNumber, idName);
+						this.processSaveAdress();
+						this.runPaymentPopup();
+					}
+					else if(res.code === "0" && res.result && res.result.description!=="一致") {
+						self.avoidRepeatClick.push({idName:idName,idNumber:idNumber, message:res.result.description})
+						this.setWrongChineseIdInfo(self.avoidRepeatClick);
+						//console.log('hee',res.result.description!=="一致");
+						this.showWaringCheck(5000,this.warningCheckChineseId);
+					}
+					else {
+						// this.$refs.loadingCover.hide();
+						// this.$util.showToast({
+						// 	title: res.message
+						// });
+						this.showWaringCheck(5000,this.warningCheckChineseId);
+					}
+					this.chineseIdCheckFlag=false;
+				},
+			})
+		},
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		/**
 		 * 微信订阅消息
 		 */
@@ -918,6 +1104,8 @@ export default {
 	},
 	onShow() {
 		// 刷新多语言
+		self = this;
+		this.getWrongChineseIdInfo();
 		this.$langConfig.refresh();
 
 		if (uni.getStorageSync('addressBack')) {

@@ -575,7 +575,7 @@
 				:isBalance="orderCreateData.is_balance"
 				@useBalance="useBalance"
 				:isPayPassWord="orderPaymentData.member_account.is_pay_password"
-				:balanceDeduct="orderPaymentData.order_money < orderPaymentData.member_account.balance_total ? balanceDeduct : '0'"
+				:balanceDeduct="orderPaymentData.order_money <= orderPaymentData.member_account.balance_total ? balanceDeduct : '0'"
 				:payMoney="orderPaymentData.pay_money"
 				@confirm="orderCreate"
 			></ns-payment>
@@ -705,7 +705,7 @@
 					success: res => {
 						this.selfPickupExistInList = true;
 						 if(!this.formData.mobile) {
-							this.fillOutSelfPickUpInfo(res.data);
+							this.fillupAddressInfo(res.data);
 						 }
 						 else {
 							uni.redirectTo({
@@ -715,12 +715,12 @@
 					}
 				})
 			},
-			fillOutSelfPickUpInfo(selfpickupid){
+			fillupAddressInfo(selectedItemId){
 				let data = {
 						type: 1,
 						addressLength: 3,
 						back:'/pages/order/payment/payment',//come back address
-						id: selfpickupid
+						id: selectedItemId
 					};
 					this.$util.redirectTo('/otherpages/member/address_edit/address_edit', data);
 				
