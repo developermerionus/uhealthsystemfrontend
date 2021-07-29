@@ -224,7 +224,7 @@
 		mixins: [globalConfig],
 		methods: {
 			nameFormat(data) {
-							console.log('data.marketCountryId',data.marketCountryId);
+							//console.log('data.marketCountryId',data.marketCountryId);
 							if( data.marketCountryId === 172 || 
 								data.marketCountryId === 228 ||
 								data.marketCountryId === 10||
@@ -245,7 +245,7 @@
 				uni.getStorage({
 				    key: 'wrongChineseIdInfo',
 				    success: function (res) {
-						console.log('get wrongChineseIdInfo',res.data)
+						//console.log('get wrongChineseIdInfo',res.data)
 				       self.avoidRepeatClick=res.data;
 				    }
 				});
@@ -585,7 +585,7 @@
 							this.processSaveAdress(); 
 						}
 						else if (res.data && res.data.length === 0){
-							console.log('self.avoidRepeatClick',self.avoidRepeatClick);
+							//console.log('self.avoidRepeatClick',self.avoidRepeatClick);
 							if(this.checkConstantClickWrongIdName(idName,idNumber)){
 								console.log('this is a new chinese id and name. check if it is real')
 								this.checkIdNameReal (idNumber, idName)
@@ -648,7 +648,7 @@
 						else if(res.code === "0" && res.result && res.result.description!=="一致") {
 							self.avoidRepeatClick.push({idName:idName,idNumber:idNumber, message:res.result.description})
 							this.setWrongChineseIdInfo(self.avoidRepeatClick);
-							console.log('hee',res.result.description!=="一致");
+							//console.log('hee',res.result.description!=="一致");
 							this.$refs.loadingCover.hide();
 							this.$util.showToast({
 								title: "身份证号码和名字不一致"
@@ -747,7 +747,7 @@
 					});
 			},
 			addChineseIdNameInDatabase (idNumber, idName) {
-				console.log('save ',idNumber,idName);
+				//console.log('save ',idNumber,idName);
 				this.$api.sendRequest({
 					url: '/api/member/addChineseIdNameInDatabase',
 					data: {

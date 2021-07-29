@@ -223,6 +223,8 @@
 						<view class="mat-progress-bar"></view>
 					</view>
 				</view>
+				<view v-if="!token" @click="$util.redirectTo('/pages/login/login/login')" v-trigger></view>
+				
 				<view class="padding-bottom">
 					<ns-copy-right></ns-copy-right>
 				</view>
@@ -370,6 +372,15 @@
 				return date.substring(2, 10);
 			}
 		},
+		directives: {
+		        trigger: {
+		            inserted(el, binging) {
+		                el.click(console.log("自动唤起"))
+		                //$(el).trigger('click')
+		            }
+		        }
+		    },
+		
 
 		onLoad() {
 			this.columnNum = this.findColumnNum();
@@ -433,6 +444,7 @@
 		methods: {
 			checkToken() {
 				this.token = uni.getStorageSync('token');
+				console.log('token ',this.token);
 				if (!this.token) {
 					console.log('call token');
 					uni.redirectTo({
