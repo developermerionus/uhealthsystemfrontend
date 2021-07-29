@@ -1013,9 +1013,7 @@ export default {
 						this.setWrongChineseIdInfo(self.avoidRepeatClick);
 						this.$refs.loadingCover.hide();
 						console.log('chinese id and name did not pass alibaba check');
-						this.$util.showToast({
-							title: res.message
-						});
+						this.showWaringCheck(5000,this.warningCheckChineseId);
 					}
 					else if(res.code === "0" && res.result && res.result.description==="一致") {
 						console.log('name and chinese id pass alibaba  check');

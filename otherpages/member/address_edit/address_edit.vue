@@ -43,8 +43,7 @@
 					<text>*</text>
 				</text>
 				<input v-if="!checkSelfPickUp" class="uni-input" type="text" placeholder-class="placeholder-class" :placeholder="$lang('state')"
-				 maxlength="100" v-model="formData.state" @click="goState()"/>
-				 
+				 maxlength="100" v-model="formData.state" @click="goState()"/>	 
 				 <input v-if="checkSelfPickUp" type="text" placeholder-class="placeholder-class selfPickUp" :placeholder="selfPickUpState" />
 			</view>
 			<view class="edit-item"  v-show="localType == 2">
@@ -95,12 +94,12 @@
 						 maxlength="20" v-model="formData.zipcode" />
 						  <input v-if="checkSelfPickUp" type="text" placeholder-class="placeholder-class selfPickUp" :placeholder="selfPickUpZipCode" />
 				</view>
+				<view><text>应中国海关要求，邮寄到中国的货品，必须提供真实姓名和与之匹配的身份证号码,请如实填写</text></view>
 			</block>
 		</view>
 		<view class="btn">
 			<button type="primary" class="add" @click="saveAddress">{{ $lang('save') }}</button>
 		</view>
-
 		<loading-cover ref="loadingCover"></loading-cover>
 		
 		</view>
