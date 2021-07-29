@@ -76,13 +76,18 @@
 				 maxlength="50" v-model="formData.address" />
 				  <input v-if="checkSelfPickUp" type="text" placeholder-class="placeholder-class selfPickUp" :placeholder="selfPickUpStreet" />
 			</view>
-			<view class="edit-item" v-show="localType != 2">
-				<text class="tit" style="">
-					{{ $lang('idNumber') }}
-					<text>*</text>
-				</text>
-				<input class="uni-input" type="text" placeholder-class="placeholder-class" :placeholder="$lang('idNumberPlaceholder')"
-				 maxlength="50" v-model="formData.idNumber" />
+			<view v-show="localType != 2">
+				<view class="edit-item" >
+					<text class="tit" style="">
+						{{ $lang('idNumber') }}
+						<text>*</text>
+					</text>
+					<input class="uni-input" type="text" placeholder-class="placeholder-class" :placeholder="$lang('idNumberPlaceholder')"
+					 maxlength="50" v-model="formData.idNumber" />
+				 </view>
+			<view class="edit-item redColor"><text>注意：应中国海关要求，邮寄到中国的货品，必须提供真实姓名和与之匹配的身份证号码, 请如实填写!</text></view>
+			<view class="edit-item"><text>姓名：张三 （名字中间不要有空格）</text></view>
+			<view class="edit-item"><text>身份证号：18位（号码中间不要有空格）</text></view>
 			</view>
 			<block v-if="localType == 2">
 				<view class="edit-item">
@@ -94,7 +99,6 @@
 						 maxlength="20" v-model="formData.zipcode" />
 						  <input v-if="checkSelfPickUp" type="text" placeholder-class="placeholder-class selfPickUp" :placeholder="selfPickUpZipCode" />
 				</view>
-				<view><text>应中国海关要求，邮寄到中国的货品，必须提供真实姓名和与之匹配的身份证号码,请如实填写</text></view>
 			</block>
 		</view>
 		<view class="btn">
@@ -892,7 +896,9 @@
 	.edit-wrap>.edit-item+.edit-item {
 		border-top: 2rpx solid #ebedf0;
 	}
-
+    .redColor {
+		color:red;
+	}
 	.add {
 		margin-top: 60rpx;
 		height: 80rpx;
