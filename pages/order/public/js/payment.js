@@ -419,6 +419,7 @@ export default {
 				url: '/api/ordercreate/calculate',
 				data,
 				success: res => {
+					console.log('slfjksdfjlsfls',res);
 					if (res.code >= 0) {
 						this.orderPaymentData.member_address = res.data.member_address;
 						this.orderPaymentData.delivery_money = res.data.delivery_money;

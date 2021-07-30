@@ -42,18 +42,26 @@
 					{{$lang('state')}}
 					<text>*</text>
 				</text>
-				<input v-if="!checkSelfPickUp" class="uni-input" type="text" placeholder-class="placeholder-class" :placeholder="$lang('state')"
+				<input v-if="!checkSelfPickUp && formData.country_id!==0" class="uni-input" type="text" placeholder-class="placeholder-class" :placeholder="$lang('state')"
 				 maxlength="100" v-model="formData.state" @click="goState()"/>	 
-				 <input v-if="checkSelfPickUp" type="text" placeholder-class="placeholder-class selfPickUp" :placeholder="selfPickUpState" />
+				<!-- <input v-if="checkSelfPickUp" type="text" placeholder-class="placeholder-class selfPickUp" :placeholder="selfPickUpState" /> -->
+				 <text v-if="checkSelfPickUp || formData.country_id===0">{{ selfPickUpState }}</text> 
 			</view>
 			<view class="edit-item"  v-show="localType == 2">
 				<text class="tit" >
 					{{$lang('city')}}
 					<text>*</text>
 				</text>
-				<input v-if="!checkSelfPickUp" class="uni-input" type="text" placeholder-class="placeholder-class" placeholder="请输入城市"
-				 maxlength="100" v-model="formData.city" /> 
-				  <input v-if="checkSelfPickUp" type="text" placeholder-class="placeholder-class selfPickUp" :placeholder="selfPickUpCity" />
+				<picker v-if="formData.country_id===1 && formData.state==='California'" 
+				@change="bindPickerChangeCity" :value="cityIndex" :range="cityListCA" class="picker" range-key="City">
+					<text class="desc uni-input">{{ formData.city ? formData.city : [cityIndex].City }}</text>
+				</picker>
+				<input v-if="formData.country_id!==0 && (formData.country_id!==1 || formData.state!=='California')" 
+				class="uni-input" type="text" placeholder-class="placeholder-class" placeholder="请输入城市" 
+				maxlength="100" v-model="formData.city" />
+				<!-- <input v-if="checkSelfPickUp" type="text" placeholder-class="placeholder-class selfPickUp" 
+				:placeholder="selfPickUpCity" /> -->
+				<text v-if="checkSelfPickUp || formData.country_id===0">{{ selfPickUpCity }}</text> 
 			</view>
 			<view class="edit-item" v-show="localType != 2">
 				<text class="tit">
@@ -152,15 +160,24 @@
 				defaultRegions: [],
 				localType: 1,
 				goflag:'',
-				
 				countryList: [
 					{
 						"id":0,
 						"name":"China"
 					}
 				],
-				tempCountryList:[],
 				index: 0,
+				cityListCA: [
+					{
+						"City": "West Covina",
+						"County": "Los Angeles",
+						"Rate": 0.095,
+						"IsIncorporated": true
+					}
+				],
+				tempCountryList:[],
+				cityIndex: 0,
+				
 				memberInfo: {},
 				addressLength: 1,
 				checkSelfPickUp:false,
@@ -173,13 +190,14 @@
 			};
 		},
 		onLoad(option) {
-			// console.log(option)
+			 console.log("sss",option);
 			if (option.back) this.back = option.back;
 			if (option.redirect) this.redirect = option.redirect;
 			if (option.type) this.localType = option.type;
 			if (option.id && !option.name) {
 				this.formData.id = option.id;
 				this.getAddressDetail();
+				console.log("ss",this.formData, this.formData.city);
 			} else if (option.name) {
 				if (uni.getStorageSync('addressInfo')) this.formData = uni.getStorageSync('addressInfo');
 				this.formData.address = option.name;
@@ -191,6 +209,7 @@
 				this.formData.longitude = tempArr[1];
 			} else {
 				this.getCountryList();
+				this.getCityListCA();
 				if (option.addressLength == 0){
 					this.addressLength = 0;
 					this.getMemberInfo();
@@ -280,6 +299,8 @@
 							
 							this.formData.full_address = '';
 							this.index = this.countryList.findIndex((item)=>{return item.id==res.data.marketCountryId});
+							console.log("member info state",this.formData.state);
+							
 							
 							// if (this.index == 0 || this.index != ''){
 								this.formData.country_id = res.data.marketCountryId;
@@ -302,7 +323,7 @@
 			},
 			// 获取地址信息
 			getAddressDetail() {
-				// console.log('getAddressDetail')
+				 console.log('getAddressDetail')
 				this.$api.sendRequest({
 					url: '/api/memberaddress/info',
 					data: {
@@ -338,6 +359,8 @@
 							this.localType = data.type;
 							this.defaultRegions = [data.province_id, data.city_id, data.district_id];
 							this.getCountryList();
+							this.getCityListCA();
+							
 						}
 						if (this.$refs.loadingCover) this.$refs.loadingCover.hide();
 					},
@@ -788,6 +811,20 @@
 					}
 				});
 			},
+			getCityListCA() {
+				uni.request({
+				    url: 'https://www.cdtfa.ca.gov/dataportal/api/odata/Effective_Sales_Tax_Rates',
+					success: res => {
+						console.log(res.data);
+						if (res.data.value) {
+							this.cityListCA = res.data.value;
+							this.setLocalType();
+						}
+						console.log(this.cityListCA);
+						//this.text = 'request success';
+					}
+				});
+			},
 			setLocalType() {
 				this.localType = this.formData.country_id == 172 ? 1 : 2;
 			},
@@ -808,11 +845,36 @@
 				else {
 					this.checkSelfPickUp = false;
 				}
+				
 				//刷新子组件的内容
 				this.setLocalType();
 				if (this.formData.country_id == 172)
 					// console.log(this.$refs.pickRegions);
 					this.$refs.pickregions.refreshAddress(this.formData.country_id);
+			},
+			bindPickerChangeCity(e) {
+				 console.log('bindpicker',e);
+				// this.formData.full_address = '';
+				this.cityIndex = e.detail.value;
+				// //console.log('this.index',this.index);
+				 this.formData.city = this.cityListCA[this.cityIndex].City;
+				 console.log(this.cityIndex, this.formData.city );
+				// if(this.countryList[this.index].id===0) {
+				// 	this.checkSelfPickUp = true;
+				// 	//console.log('this.formData',this.formData);
+				// 	this.formData.city = this.selfPickUpCity;
+				// 	 this.formData.zipcode = this.selfPickUpZipCode;
+				// 	 this.formData.state = this.selfPickUpState;
+				// 	 this.formData.address = this.selfPickUpStreet;
+				// }
+				// else {
+				// 	this.checkSelfPickUp = false;
+				// }
+				// //刷新子组件的内容
+				// this.setLocalType();
+				// if (this.formData.country_id == 172)
+				// 	// console.log(this.$refs.pickRegions);
+				// 	this.$refs.pickregions.refreshAddress(this.formData.country_id);
 			},
 		}
 	};
