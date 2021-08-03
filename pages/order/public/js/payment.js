@@ -975,8 +975,8 @@ export default {
 			return true;
 		},
 		showWaringCheck(time,text) {
-			let addressId = this.orderPaymentData.member_address.id;
 			this.$refs.loadingCover.hide();
+			let addressId = this.orderPaymentData.member_address.id;
 				this.$util.showToastLonger({
 					title: text
 				},time);
@@ -1018,7 +1018,6 @@ export default {
 					else if(res.code === "0" && res.result && res.result.description==="一致") {
 						console.log('name and chinese id pass alibaba  check');
 						this.addChineseIdNameInDatabase(idNumber, idName);
-						this.processSaveAdress();
 						this.runPaymentPopup();
 					}
 					else if(res.code === "0" && res.result && res.result.description!=="一致") {
@@ -1038,6 +1037,25 @@ export default {
 				},
 			})
 		},
+		addChineseIdNameInDatabase (idNumber, idName) {
+			//console.log('save ',idNumber,idName);
+			this.$api.sendRequest({
+				url: '/api/member/addChineseIdNameInDatabase',
+				data: {
+					idNumber: idNumber,
+					idName: idName
+				},
+				success: res => {
+					if(res.code ===0) {
+						console.log('Chinese Id Number and Chinese Name get saved');
+					}
+					else {
+						console.log('Chinese Id Number and Chinese Name did not get saved');
+					}
+				},
+			})
+		},
+		
 		
 		
 		
