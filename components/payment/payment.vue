@@ -1,6 +1,5 @@
 <template>
 	<view>
-		
 		<view class="set-card" v-if="setCard">
 			<view class="empty-bar-view"></view>
 			<view class="edit-info-box">
@@ -22,6 +21,14 @@
 			<view class="edit-info-box">
 				<text class="info-name">{{$lang('common.first_name')}}</text>
 				<input class="uni-input info-content input-len" type="text" maxlength="30" :placeholder="$lang('common.first_name')" v-model="formData.last_name" />
+			</view>
+			<view class="credit-card-icon-box">
+				<text>We only accept following major credit or debit cards:</text>
+				<br>
+				<img src="https://img.icons8.com/color/48/000000/visa.png"/>
+				<img src="https://img.icons8.com/color/48/000000/mastercard.png"/>
+				<img src="https://img.icons8.com/color/48/000000/amex.png"/>
+				<img src="https://img.icons8.com/color/48/000000/discover.png"/>
 			</view>
 			<br>
 			<view class="save-item" @click="confirm(2)">
@@ -61,6 +68,7 @@
 								<text class="name">{{ item.name }}</text>
 								<text class="iconfont" :class="payIndex == index ? 'iconyuan_checked color-base-text' : 'iconcheckboxblank'"></text>
 							</view>
+							
 						</block>
 						<block v-else><view class="empty">平台尚未配置支付方式！</view></block>
 					</block>
@@ -477,8 +485,11 @@ export default {
 </script>
 
 <style lang="scss">
+
+
 .popup {
 	width: 75vw;
+	max-width: 700px;
 	background: #fff;
 	border-top-left-radius: $border-radius;
 	border-top-right-radius: $border-radius;
@@ -674,11 +685,20 @@ export default {
 		height: 32rpx;
 	}
 }
+
+.credit-card-icon-box {
+	margin: 15px;
+}
+
 .set-card{
 	background-color: #ffffff;
 	position: fixed;
 	width: 100vw;
 	min-height: 100vh;
+	max-width: 1200px;
+	right: 0;
+	left: 0;
+	margin: 0 auto;
 	z-index: 100;
 	top: 0;
 	left: 0;
@@ -690,4 +710,6 @@ export default {
 	//height: 10vh;
 	min-height: 200rpx;
 }
+
+
 </style>
