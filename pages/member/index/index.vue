@@ -170,7 +170,7 @@
 					</view>
 					<view v-if='token&&memberInfo.member_level>1&&infoList4.length>0' class="example-body"
 						style="margin-top: -10rpx; background: rgb(255, 255, 255);">
-						<!-- 会员信息模块 -->
+						<!-- 会员奖金模块 -->
 						<view class="bonusDetail" @click="$util.redirectTo('/pages/bonusDetail/bonusDetail')">
 							<image class="redflag-icon" src="../../../static/images/icons/red-flag.png"></image>
 							<text class="bonus-tip">{{ $lang('common.seeBonusDetails') }}</text>
@@ -250,7 +250,7 @@
 	import fenxiaoWords from 'common/js/fenxiao-words.js';
 	import globalConfig from '@/common/js/golbalConfig.js';
 
-
+   let self;
 	export default {
 		components: {
 			// navBar,
@@ -383,10 +383,11 @@
 		
 
 		onLoad() {
+			//self = this;
 			this.columnNum = this.findColumnNum();
 			this.toolsColumnNum = this.toolsFindColumnNum();
 			this.screenGreaterSixHundredPx = this.findTitleFormat();
-			this.checkToken();
+			//this.checkToken();
 			console.log("onloading");
 			uni.hideTabBar();
 			if (this.addonIsExit.memberwithdraw) {
@@ -406,6 +407,7 @@
 			if (this.$refs.loadingCover) this.$refs.loadingCover.hide();
 		},
 		async onShow() {
+			self = this;
 			uni.onWindowResize((res) => {
 				this.columnNum = res.size.windowWidth >= 800 ? 3 : 2;
 				this.toolsColumnNum = res.size.windowWidth >= 800 ? 4 : 2;
@@ -425,7 +427,7 @@
 			if (uni.getStorageSync('userInfo')) {
 				this.memberInfo = uni.getStorageSync('userInfo');
 			}
-			if (this.token) {
+			if (self.token) {
 				if (this.addonIsExit.membersignin) {
 					await this.getSignState();
 				}
@@ -443,9 +445,10 @@
 		},
 		methods: {
 			checkToken() {
-				this.token = uni.getStorageSync('token');
-				console.log('token ',this.token);
-				if (!this.token) {
+				
+				self.token = uni.getStorageSync('token');
+				console.log('self token ',self.token);
+				if (!self.token) {
 					console.log('call token');
 					uni.redirectTo({
 						url: '/pages/login/login/login'
@@ -557,6 +560,7 @@
 				}
 			},
 			redirectToList(url, value) {
+				console.log('check the value url', url, value);
 				if (value > 0) {
 					// if (this.lastweek == 1) return this.$util.msg('上周明细近日上线，敬请期待');
 					this.$util.redirectTo(url + '&lastweek=' + this.lastweek);
@@ -564,7 +568,7 @@
 			},
 
 			initInfo() {
-				this.token = '';
+				self.token = '';
 				this.memberInfo = {
 					balance: '0.00',
 					balance_money: '0.00',
@@ -856,14 +860,13 @@
 				});
 				if (res.code >= 0 && res.data) {
 					this.getBonus();
-					this.token = uni.getStorageSync('token');
+					self.token = uni.getStorageSync('token');
 					this.memberInfo = res.data;
 
 					uni.setStorageSync('userInfo', this.memberInfo);
 					if (this.addonIsExit.supermember && this.memberInfo.member_level_type == 0) this
 						.getMemberCardInfo();
 				} else {
-					this.token = '';
 					this.initInfo();
 					uni.removeStorageSync('token');
 					uni.removeStorageSync('userInfo');
