@@ -24,7 +24,7 @@
 									<view class="delete-price font-size-activity-tag color-tip">
 										<text class="unit">{{ $lang('common.currencySymbol') }}</text>{{ item.market_price > 0 ? item.market_price : item.price }}
 									</view>
-									<view class="sale font-size-activity-tag color-tip">已售{{ item.sale_num }}{{ item.unit ? item.unit : "件" }}</view>
+									<!-- <view class="sale font-size-activity-tag color-tip">已售{{ item.sale_num }}{{ item.unit ? item.unit : "件" }}</view> -->
 								</view>
 								<view class="lineheight-clear">
 									<view class="discount-price">

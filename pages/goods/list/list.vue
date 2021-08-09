@@ -50,7 +50,7 @@
 										{{ item.market_price > 0 ? item.market_price : item.price }}
 									</block>
 								</view>
-								<view class="sale font-size-activity-tag color-tip">{{$lang('common.sold')}} {{ item.sale_num }} {{ item.unit ? item.unit : $lang('common.unit') }}</view>
+							<!-- 	<view class="sale font-size-activity-tag color-tip">{{$lang('common.sold')}} {{ item.sale_num }} {{ item.unit ? item.unit : $lang('common.unit') }}</view> -->
 							</view>
 							<view class="lineheight-clear">
 								<view class="discount-price">
