@@ -72,15 +72,10 @@
 						number: 0
 					},
 					{
-						id: -1, 
+						id: 3, 
 						name: '已拒绝',
 						number: 0
 					},
-					{
-						id: 3, 
-						name: '异常',
-						number: 0
-					}
 				],
 				withdrawState: {
 					'1': {
