@@ -891,20 +891,20 @@ export default {
 		openChoosePayment() {
 			//console.log('orderPaymentData',this.orderPaymentData);
 			
-			if(!this.orderPaymentData.member_address.mobile){
+			if(this.orderPaymentData&&this.orderPaymentData.member_address&&!this.orderPaymentData.member_address.mobile){
 				// this.$util.showToast({
 				// 	title: "请您在地址栏中填写手机号"
 				// });
 				this.showWaringCheck(4000,this.fillupPhonenum)
 			}
-			else if (this.orderPaymentData.member_address.name==='.') {
+			else if (this.orderPaymentData&&this.orderPaymentData.member_address&&this.orderPaymentData.member_address.name==='') {
 				// this.$util.showToast({
 				// 	title: "请您在地址栏中填写姓名"
 				// });
 				this.showWaringCheck(4000,this.fillupName)
 			}
 			else {
-				if(this.orderPaymentData.member_address.country_id===172){
+				if(this.orderPaymentData.member_address&&this.orderPaymentData.member_address.country_id===172){
 					let chineseIdNumber = this.orderPaymentData.member_address.idNumber;
 					let chineseIdName = this.orderPaymentData.member_address.name;
 					this.checkChineseIdInDatabase(chineseIdNumber,chineseIdName);
