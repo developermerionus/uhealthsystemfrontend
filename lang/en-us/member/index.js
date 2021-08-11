@@ -43,7 +43,7 @@ export const lang = {
 	itemUndefined: 'undefined',
 	
 	actived: 'Active Status',
-	activedPV: 'Personal Volume',
+	activedPV: 'Required PV',
 	restPV: 'Remaining PV',
 	member_level_name: 'Current Rank',
 	highest_level: 'Highest Rank',

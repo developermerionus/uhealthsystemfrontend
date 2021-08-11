@@ -144,5 +144,8 @@ export const lang = {
 		selfpickup: "自提取",
 		delivery: "物流配送",
 		deliverymethod: "配送方式",
+		day:"天",
+		points:"分",
+		activerequirement:"活跃要求"
 	}
 }
