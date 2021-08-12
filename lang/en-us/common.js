@@ -143,6 +143,10 @@ export const lang = {
 		selfpickup: "Self Pickup",
 		delivery: "Delivery",
 		deliverymethod: "How To Get Orders",
+		day: "day",
+		points:" points",
+		activerequirement:"Active Requirement",
 		creditCardRequirement: "We only accept following major credit or debit cards"
+
 	}
 }
