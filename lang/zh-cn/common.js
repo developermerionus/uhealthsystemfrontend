@@ -146,6 +146,7 @@ export const lang = {
 		deliverymethod: "配送方式",
 		day:"天",
 		points:"分",
-		activerequirement:"活跃要求"
+		activerequirement:"活跃要求",
+		creditCardRequirement: "我们只接受以下信用卡和借记卡"
 	}
 }

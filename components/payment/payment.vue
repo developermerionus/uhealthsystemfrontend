@@ -23,7 +23,7 @@
 				<input class="uni-input info-content input-len" type="text" maxlength="30" :placeholder="$lang('common.first_name')" v-model="formData.last_name" />
 			</view>
 			<view class="credit-card-icon-box">
-				<text>We only accept following major credit or debit cards:</text>
+				<text>{{$lang('common.creditCardRequirement')}}:</text>
 				<br>
 				<img src="https://img.icons8.com/color/48/000000/visa.png"/>
 				<img src="https://img.icons8.com/color/48/000000/mastercard.png"/>
