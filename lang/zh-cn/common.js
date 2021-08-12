@@ -144,5 +144,6 @@ export const lang = {
 		selfpickup: "自提取",
 		delivery: "物流配送",
 		deliverymethod: "配送方式",
+		creditCardRequirement: "我们只接受以下信用卡和借记卡"
 	}
 }

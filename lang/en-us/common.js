@@ -143,5 +143,6 @@ export const lang = {
 		selfpickup: "Self Pickup",
 		delivery: "Delivery",
 		deliverymethod: "How To Get Orders",
+		creditCardRequirement: "We only accept following major credit or debit cards"
 	}
 }
