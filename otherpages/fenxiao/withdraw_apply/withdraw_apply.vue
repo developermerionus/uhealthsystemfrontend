@@ -263,7 +263,7 @@
 			 * @param {Object} money
 			 */
 			moneyFormat(money) {
-				return parseInt(money);
+				return Number(money).toFixed(2);
 			}
 		},
 		onReady() {
