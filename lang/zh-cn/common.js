@@ -144,5 +144,6 @@ export const lang = {
 		selfpickup: "自提取",
 		delivery: "物流配送",
 		deliverymethod: "配送方式",
+		membername: "名字"
 	}
 }
