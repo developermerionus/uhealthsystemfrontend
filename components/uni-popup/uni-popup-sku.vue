@@ -114,7 +114,7 @@ export default {
 	left: 0;
 	right: 0;
 	z-index: 998;
-	background: rgba(0, 0, 0, 0.4);
+	background: rgba(0, 0, 0, 0.6);
 	opacity: 0;
 }
 
@@ -152,6 +152,9 @@ export default {
 	bottom: -30px;
 	left: 0;
 	width: 100%;
+	max-width: 1024px;
+	right: 0;
+	margin: 0 auto;
 	transform: translateY(100%);
 }
 
@@ -220,4 +223,11 @@ export default {
 	padding-bottom: constant(safe-area-inset-bottom);
 	padding-bottom: env(safe-area-inset-bottom);
 }
+
+@media only screen and (min-width: 1200px) {
+	  .uni-popup__wrapper-box {
+	  	padding: 10px 10px 0px 30px;
+	  }
+	}
+	
 </style>

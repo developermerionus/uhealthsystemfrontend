@@ -151,6 +151,10 @@ export const lang = {
 		 deliveryCompany:"Delivery Company",
 	     search:"Search",
 		 visit:"Visit",
-		  copy:"copy"
+		  copy:"copy",
+		day: "day",
+		points:" points",
+		activerequirement:"Active Requirement",
+		creditCardRequirement: "We only accept following major credit or debit cards"
 	}
 }

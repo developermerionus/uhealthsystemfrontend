@@ -1033,6 +1033,14 @@ export default {
 };
 </script>
 <style lang="scss">
+
+// .sku-layer {
+// 	right: 0;
+// 	left: 0;
+// 	margin: 0 auto;
+// 	max-width: 1200px;
+// }
+	
 .sku-layer .sku-info {
 	height: 75vh !important;
 	position: relative;
@@ -1234,6 +1242,10 @@ export default {
 	display: flex;
 	justify-content: center;
 	align-items: flex-start;
+	max-width: 600px;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
 
 	button {
 		width: 100%;

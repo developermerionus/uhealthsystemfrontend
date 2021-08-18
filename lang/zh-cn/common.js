@@ -152,6 +152,10 @@ export const lang = {
 		 deliveryCompany:"承运公司",
 		 search:"查询",
 		 visit:"访问",
-		 copy:"复制"
+		 copy:"复制",
+		day:"天",
+		points:"分",
+		activerequirement:"活跃要求",
+		creditCardRequirement: "我们只接受以下信用卡和借记卡"
 	}
 }

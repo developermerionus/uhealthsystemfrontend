@@ -48,7 +48,7 @@ export const lang = {
 	
 	actived: '活跃会员',
 	activedPV: '级别PV要求值',
-	restPV: 'PV值',
+	restPV: '剩余PV值',
 	member_level_name: '当前职级',
 	highest_level: '最高职级',
 	nextRecurringDate: '复购结算日期',

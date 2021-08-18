@@ -407,6 +407,7 @@ export default {
 		// 订单计算
 		orderCalculate() {
 			var data = this.$util.deepClone(this.orderCreateData);
+			
 			data.delivery = JSON.stringify(data.delivery);
 			data.coupon = JSON.stringify(data.coupon);
 			if (this.orderCreateData.delivery.delivery_type == 'store') {
@@ -414,8 +415,8 @@ export default {
 			} else {
 				data.member_address = JSON.stringify(data.member_address);
 			}
-
 			this.$api.sendRequest({
+				// url: '/api/ordercreate/calculateTest',
 				url: '/api/ordercreate/calculate',
 				data,
 				success: res => {
@@ -891,20 +892,20 @@ export default {
 		openChoosePayment() {
 			//console.log('orderPaymentData',this.orderPaymentData);
 			
-			if(!this.orderPaymentData.member_address.mobile){
+			if(this.orderPaymentData&&this.orderPaymentData.member_address&&!this.orderPaymentData.member_address.mobile){
 				// this.$util.showToast({
 				// 	title: "请您在地址栏中填写手机号"
 				// });
 				this.showWaringCheck(4000,this.fillupPhonenum)
 			}
-			else if (this.orderPaymentData.member_address.name==='.') {
+			else if (this.orderPaymentData&&this.orderPaymentData.member_address&&this.orderPaymentData.member_address.name==='') {
 				// this.$util.showToast({
 				// 	title: "请您在地址栏中填写姓名"
 				// });
 				this.showWaringCheck(4000,this.fillupName)
 			}
 			else {
-				if(this.orderPaymentData.member_address.country_id===172){
+				if(this.orderPaymentData.member_address&&this.orderPaymentData.member_address.country_id===172){
 					let chineseIdNumber = this.orderPaymentData.member_address.idNumber;
 					let chineseIdName = this.orderPaymentData.member_address.name;
 					this.checkChineseIdInDatabase(chineseIdNumber,chineseIdName);
