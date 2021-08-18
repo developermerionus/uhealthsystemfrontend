@@ -575,8 +575,7 @@
 						if (!this.cityListCA_string.includes(this.formData.city)) 
 						{
 							this.$util.showToast({
-								title: "不是有效的加州城市名(要有县名），请重新输入并选取正确的加州城市名" 
-								+ "Invalid California State city (with county name).",
+								title: this.$lang("californiaCityAlert"),
 							});
 							return;
 						}
@@ -618,7 +617,7 @@
 							//console.log('self.avoidRepeatClick',self.avoidRepeatClick);
 							if(this.checkConstantClickWrongIdName(idName,idNumber)){
 								console.log('this is a new chinese id and name. check if it is real')
-								this.checkIdNameReal (idNumber, idName)
+								this.checkIdNameReal (idNumber, idName);
 							}
 						}
 						else if (res.data && res.data.length === 1&& res.data[0].idName!==idName) {

@@ -22,5 +22,7 @@ export const lang = {
 	idNumber:'身份证号',
 	zipcode: '邮政编码',
 	country: '国家',
-	state: '州/省'
+	state: '州/省',
+	californiaCityAlert: '不是有效的美国加州城市(包含县)名.' +
+				 ' 请重新输入并选择有效的城市名。 ',
 }
