@@ -574,9 +574,11 @@
 				if (this.formData.country_id===1 && this.formData.state==='California') {
 						if (!this.cityListCA_string.includes(this.formData.city)) 
 						{
-							this.$util.showToast({
+							// this.$util.showToast({);
+							this.$util.showToastLonger( 
+							{
 								title: this.$lang("californiaCityAlert"),
-							});
+							}, 2000);
 							return;
 						}
 				}
