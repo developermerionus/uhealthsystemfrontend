@@ -1,15 +1,18 @@
 <template>
 	<view :data-theme="themeStyle">
+		<navbar></navbar>
+		<view class="main">
 		<scroll-view class="order-nav" :scroll-x="true" :show-scrollbar="false">
+			
 			<view v-for="(packageItem, packageIndex) in packageList" :key="packageIndex" class="uni-tab-item" @click="ontabtap(packageIndex)">
 				<text class="uni-tab-item-title" :class="packageIndex == currIndex ? 'uni-tab-item-title-active color-base-border  color-base-text' : ''">
-					{{ packageItem.package_name }}
+					{{ $lang(`common.${packageItem.package_name}`) }}
 				</text>
 			</view>
 		</scroll-view>
 		<view v-for="(packageItem, packageIndex) in packageList" :key="packageIndex" class="swiper-item" v-show="packageIndex == currIndex">
 			<view class="container">
-				<view class="goods-wrap">
+				<view class="goods-wrap" v-if=" packageItem.goods_list">
 					<view class="body">
 						<view class="goods" v-for="(goodsItem, goodsIndex) in packageItem.goods_list" :key="goodsIndex">
 							<view class="goods-img" @click="toGoodsDetail(goodsItem.sku_id)">
@@ -30,24 +33,44 @@
 					</view>
 				</view>
 
-				<view class="express-company-wrap">
-					<view class="company-logo"><image :src="$util.img(packageItem.express_company_image)"></image></view>
-					<view class="info">
+				<view class="express-company-wrap" v-if="packageItem.express_company_name">
+					<!-- <view class="company-logo"><image :src="$util.img(packageItem.express_company_image)"></image></view> -->
+					<view class="info" >
 						<view class="company">
-							<text>承运公司： {{ packageItem.express_company_name }}</text>
+							<text >{{$lang('common.deliveryCompany')}}： {{ companyInfo[packageItem.express_company_name].realName }}</text>
 						</view>
-						<view class="no">
-							<text>
-								运单号：
-								<text class="color-tip">{{ packageItem.delivery_no }}</text>
-							</text>
-							<text class="iconfont iconfuzhi" @click="$util.copy(packageItem.delivery_no)"></text>
+						<view class="goods" v-for="(deliveryNumItem, deliveryNoIndex) in deliveryNoArr" :key="deliveryNoIndex">
+							<view v-if="companyInfo[packageItem.express_company_name].redirectUrl">
+								<text>
+									{{$lang('common.deliveryNumber')}}：
+									<text class="color-tip">{{ deliveryNumItem}}</text>
+								</text>
+								<text class="copy" @click="findDeliveryDetail( deliveryNumItem)">{{$lang('common.search')}}</text>
+							</view>
+						</view>
+						<view class="no" v-if="!companyInfo[packageItem.express_company_name].redirectUrl">
+							<view >
+								<text>
+									{{$lang('common.deliveryCompanyUrl')}}：
+									<text class="color-tip">{{  companyInfo[packageItem.express_company_name].url }}</text>
+									 <!-- <web-view :webview-styles="webviewStyles" :src="packageItem.express_company_url">{{ packageItem.express_company_url }}</web-view> -->
+								</text>
+								<text class="copy" @click="visitSite( companyInfo[packageItem.express_company_name].url)">{{$lang('common.visit')}}</text>
+							</view>
+							
+							<view class="goods" v-for="(deliveryNumItem, deliveryNoIndex) in deliveryNoArr" :key="deliveryNoIndex+'copy'">
+									<text>
+										{{$lang('common.deliveryNumber')}}：
+										<text class="color-tip">{{ deliveryNumItem}}</text>
+									</text>
+									<text class="copy" @click="$util.copy(packageItem.delivery_no)">{{$lang('common.copy')}}</text>
+							</view>
 						</view>
 					</view>
 				</view>
 
 				<view class="track-wrap">
-					<block v-if="packageItem.trace.success && packageItem.trace.list.length != 0">
+					<!-- <block v-if="packageItem.trace.success && packageItem.trace.list.length != 0">
 						<view
 							class="track-item"
 							v-for="(traceItem, traceIndex) in packageItem.trace.list"
@@ -61,14 +84,15 @@
 								<view class="time" :class="traceIndex == 0 ? 'color-base-text' : ''">{{ traceItem.datetime }}</view>
 							</view>
 						</view>
-					</block>
-					<block v-else-if="packageItem.trace.success && packageItem.trace.list.length == 0">
+					</block> -->
+					<!-- <block v-else-if="packageItem.trace.success && packageItem.trace.list.length == 0">
 						<view class="fail-wrap font-size-base">{{ packageItem.trace.reason }}</view>
-					</block>
-					<block v-else>
-						<view class="fail-wrap font-size-base">{{ packageItem.trace.reason }}</view>
-					</block>
+					</block> -->
+					<!-- <block v-else>
+						<!-- <view class="fail-wrap font-size-base">{{ packageItem.trace.reason }}</view> -->
+					<!-- </block> -->
 				</view>
+			</view>
 			</view>
 		</view>
 		<loading-cover ref="loadingCover"></loading-cover>
@@ -77,6 +101,7 @@
 
 <script>
 import globalConfig from '@/common/js/golbalConfig.js';
+let self;
 export default {
 	data() {
 		return {
@@ -84,7 +109,15 @@ export default {
 			packageList: [],
 			isIphoneX: false,
 			currIndex: 0,
-			status: 0
+			status: 0,
+			deliveryNoArr:[],
+			companyInfo:{
+				sundaexpress:{url:"www.shundaexpress.com", realName: "顺达",redirectUrl:''},
+				sundaexpress_nmn:{url:"www.postalinkex.com", realName:"POSTALINK",redirectUrl:'https://www.postalinkex.com/SelectOrder.aspx?OrderNum=' },
+				ups:{url:'www.ups.com', name:"UPS",redirectUrl:''},
+				ezgo:{url:"www.t-cat.com.tw/Inquire/International.aspx", realName:"黑猫宅急便",redirectUrl:''},
+				baitong:{url:"www.buytong.cn/newindex/waybillquery", realName: '百通',redirectUrl:''}
+			}
 		};
 	},
 	mixins: [globalConfig],
@@ -92,6 +125,7 @@ export default {
 		if (option.order_id) this.orderId = option.order_id;
 	},
 	onShow() {
+		self = this;
 		// 刷新多语言
 		this.$langConfig.refresh();
 		// 判断登录
@@ -103,6 +137,20 @@ export default {
 		this.isIphoneX = this.$util.uniappIsIPhoneX();
 	},
 	methods: {
+		findCompanyUrl(deliveryNo) {
+			let companyName = self.packageList[0].express_company_name;
+			let url = this.companyInfo[companyName].redirectUrl;
+			url += deliveryNo;
+			return url;
+		},
+ 		findDeliveryDetail(deliveryNo) {
+			let url = this.findCompanyUrl(deliveryNo);
+			window.location.href = url;
+		},
+		visitSite(goUrl) {
+			goUrl = 'https://'+goUrl;
+			window.location.href = goUrl;
+		},
 		ontabtap(e) {
 			this.currIndex = e;
 			// let index = e.target.dataset.current || e.currentTarget.dataset.current;
@@ -110,6 +158,10 @@ export default {
 			// if (this.orderStatus == '') this.mergePayOrder = [];
 			// this.$refs.loadingCover.show();
 			// this.$refs.mescroll.refresh();
+		},
+		getDeliveryNoArr() {
+			let arr = self.packageList[0].delivery_no.split(', ');
+			this.deliveryNoArr = arr;
 		},
 		getPackageInfo() {
 			this.$api.sendRequest({
@@ -119,11 +171,12 @@ export default {
 				},
 				success: res => {
 					if (res.code >= 0) {
-						this.packageList = res.data;
-						this.packageList.forEach(item => {
-							if (item.trace.list) {
-								item.trace.list = item.trace.list.reverse();
-							}
+						self.packageList = res.data;
+						this.getDeliveryNoArr();
+						self.packageList.forEach(item => {
+							// if (item.trace.list) {
+							// 	item.trace.list = item.trace.list.reverse();
+							// }
 							item.status = this.status++;
 						});
 						if (this.$refs.loadingCover) this.$refs.loadingCover.hide();
@@ -154,6 +207,24 @@ export default {
 
 <style lang="scss">
 @import '../public/css/logistics.scss';
+.order-nav {
+	margin-left:4%;
+}
+.main {
+	margin:0 auto;
+	max-width: 1200px;
+}
+.copy {
+		font-size: $font-size-tag;
+		display: inline-block;
+		color: #666;
+		background: #f7f7f7;
+		line-height: 1;
+		padding: 6rpx 14rpx;
+		margin-left: 10rpx;
+		border-radius: 18rpx;
+		border: 0.5px solid #666;
+		}
 /deep/.uni-scroll-view ::-webkit-scrollbar {
 	/* 隐藏滚动条，但依旧具备可以滚动的功能 */
 	display: none;

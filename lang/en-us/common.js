@@ -143,6 +143,14 @@ export const lang = {
 		selfpickup: "Self Pickup",
 		delivery: "Delivery",
 		deliverymethod: "How To Get Orders",
-		membername: "Name"
+		membername: "Name",
+		包裹:'Package',
+		无需物流:'No Need to Delivery',
+		 deliveryNumber:"Delivery Number",
+		deliveryCompanyUrl:"Delivery Company Url",
+		 deliveryCompany:"Delivery Company",
+	     search:"Search",
+		 visit:"Visit",
+		  copy:"copy"
 	}
 }

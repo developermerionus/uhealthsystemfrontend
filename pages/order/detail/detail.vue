@@ -139,7 +139,7 @@
 					<text class="color-title">{{ orderData.waybillno }}</text>
 				</view>
 			</view>
-			<view class="order-cell" v-if="orderData.remark !== ''">
+			<view class="order-cell" v-if="orderData.remark">
 				<text class="tit">{{$lang('orderComments')}}:</text>
 				<view class="box">
 					<text>{{ orderData.remark }}</text>
