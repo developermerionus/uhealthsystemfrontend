@@ -407,6 +407,7 @@ export default {
 		// 订单计算
 		orderCalculate() {
 			var data = this.$util.deepClone(this.orderCreateData);
+			
 			data.delivery = JSON.stringify(data.delivery);
 			data.coupon = JSON.stringify(data.coupon);
 			if (this.orderCreateData.delivery.delivery_type == 'store') {
@@ -414,8 +415,8 @@ export default {
 			} else {
 				data.member_address = JSON.stringify(data.member_address);
 			}
-
 			this.$api.sendRequest({
+				// url: '/api/ordercreate/calculateTest',
 				url: '/api/ordercreate/calculate',
 				data,
 				success: res => {

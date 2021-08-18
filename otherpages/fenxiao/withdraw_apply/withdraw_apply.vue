@@ -122,11 +122,11 @@
 								money: this.withdrawMoney
 							},
 							success: res => {
-
 								if (res.code >= 0) {
-									this.$util.showToast({
-										title: this.$lang('withdraw_success') // '提现申请成功'
-									});
+									// this.$util.showToast({
+									// 	title: this.$lang('withdraw_success') // '提现申请成功'
+									// });
+									this.$util.redirectTo('/otherpages/fenxiao/withdraw_list/withdraw_list', {}, 'redirectTo');
 									// setTimeout(() => {
 									// 	this.$util.redirectTo('/otherpages/fenxiao/withdraw_list/withdraw_list', {}, 'redirectTo');
 									// }, 1500);
@@ -153,12 +153,13 @@
 						success: res => {
 						//	console.log(res);
 							if (res.code >= 0) {
-								this.$util.showToast({
-									title: this.$lang('withdraw_success') // '提现申请成功'
-								});
-								setTimeout(() => {
-									this.$util.redirectTo('/otherpages/fenxiao/withdraw_list/withdraw_list', {}, 'redirectTo');
-								}, 1500);
+								// this.$util.showToast({
+								// 	title: this.$lang('withdraw_success') // '提现申请成功'
+								// });
+								this.$util.redirectTo('/otherpages/fenxiao/withdraw_list/withdraw_list', {}, 'redirectTo');
+								// setTimeout(() => {
+								// 	this.$util.redirectTo('/otherpages/fenxiao/withdraw_list/withdraw_list', {}, 'redirectTo');
+								// }, 1500);
 							} else {
 								this.isSub = false;
 								this.$util.showToast({

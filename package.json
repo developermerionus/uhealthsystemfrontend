@@ -1,0 +1,12 @@
+{
+    "id": "str-autocomplete",
+    "name": "str-autocomplete",
+    "version": "1.11",
+    "description": "文字自动检索高亮补全，支持字符串和对象数组",
+    "keywords": [
+        "autocomplete",
+        "自动完成",
+        "自动补全",
+        "自动提示"
+    ]
+}

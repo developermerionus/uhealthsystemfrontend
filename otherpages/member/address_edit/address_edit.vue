@@ -1,7 +1,6 @@
 <template>
 	<view class="address-edit-content" :data-theme="themeStyle">
 		<view class="outer-container-wrap">
-		
 				<view class="edit-wrap">
 			<view class="tip">{{$lang('address')}}</view>
 			<view class="edit-item">
@@ -28,7 +27,7 @@
 				<input class="uni-input" type="number" placeholder-class="placeholder-class" :placeholder="$lang('mobilePlaceholder')"
 				 maxlength="12" v-model="formData.mobile" />
 			</view>
-
+			
 			<view class="edit-item">
 				<text class="tit" style='width: 235rpx;'>{{$lang('country')}}<text>*</text></text>
 				<picker @change="bindPickerChange" :value="index" :range="countryList" class="picker" range-key="name">
@@ -42,18 +41,23 @@
 					{{$lang('state')}}
 					<text>*</text>
 				</text>
-				<input v-if="!checkSelfPickUp" class="uni-input" type="text" placeholder-class="placeholder-class" :placeholder="$lang('state')"
+				<input v-if="!checkSelfPickUp && formData.country_id!==0" class="uni-input" type="text" placeholder-class="placeholder-class" :placeholder="$lang('state')"
 				 maxlength="100" v-model="formData.state" @click="goState()"/>	 
-				 <input v-if="checkSelfPickUp" type="text" placeholder-class="placeholder-class selfPickUp" :placeholder="selfPickUpState" />
+				<!-- <input v-if="checkSelfPickUp" type="text" placeholder-class="placeholder-class selfPickUp" :placeholder="selfPickUpState" /> -->
+				 <text v-if="checkSelfPickUp || formData.country_id===0" style='margin-left: 10px;'>{{ selfPickUpState }}</text> 
 			</view>
 			<view class="edit-item"  v-show="localType == 2">
 				<text class="tit" >
 					{{$lang('city')}}
 					<text>*</text>
 				</text>
-				<input v-if="!checkSelfPickUp" class="uni-input" type="text" placeholder-class="placeholder-class" placeholder="请输入城市"
-				 maxlength="100" v-model="formData.city" /> 
-				  <input v-if="checkSelfPickUp" type="text" placeholder-class="placeholder-class selfPickUp" :placeholder="selfPickUpCity" />
+				<str-autocomplete v-if="formData.country_id===1 && formData.state==='California'"
+				  :importvalue="formData.city" :list="cityListCA_string" @select="selectOneCity"
+				  highlightColor="#FF0000" style='min-width: 225px; margin-left: 10px;'></str-autocomplete>
+				<input v-if="formData.country_id!==0 && (formData.country_id!==1 || formData.state!=='California')" 
+				class="uni-input" type="text" placeholder-class="placeholder-class" placeholder="请输入城市" 
+				maxlength="100" v-model="formData.city" />
+				<text v-if="checkSelfPickUp || formData.country_id===0" style='margin-left: 10px;'>{{ selfPickUpCity }}</text> 
 			</view>
 			<view class="edit-item" v-show="localType != 2">
 				<text class="tit">
@@ -74,7 +78,7 @@
 				</text>
 				<input v-if="!checkSelfPickUp" class="uni-input" type="text" placeholder-class="placeholder-class" :placeholder="$lang('addressPlaceholder')"
 				 maxlength="50" v-model="formData.address" />
-				  <input v-if="checkSelfPickUp" type="text" placeholder-class="placeholder-class selfPickUp" :placeholder="selfPickUpStreet" />
+				<input v-if="checkSelfPickUp" type="text" placeholder-class="placeholder-class selfPickUp" :placeholder="selfPickUpStreet" />
 			</view>
 			<view v-show="localType != 2">
 				<view class="edit-item" >
@@ -115,6 +119,7 @@
 	import validate from 'common/js/validate.js';
 	import globalConfig from '@/common/js/golbalConfig.js';
 	import Config from '@/common/js/config.js';
+	import strAutocomplete from '@/components/str-autocomplete/str-autocomplete.vue';
 	var self;
 	export default {
 		components: {
@@ -152,15 +157,24 @@
 				defaultRegions: [],
 				localType: 1,
 				goflag:'',
-				
 				countryList: [
 					{
 						"id":0,
 						"name":"China"
 					}
 				],
-				tempCountryList:[],
 				index: 0,
+				cityListCA: [
+					{
+						"City": "West Covina",
+						"County": "Los Angeles",
+						"Rate": 0.095,
+						"IsIncorporated": true
+					}
+				],
+				cityListCA_string: [],
+				tempCountryList:[],
+				
 				memberInfo: {},
 				addressLength: 1,
 				checkSelfPickUp:false,
@@ -173,7 +187,6 @@
 			};
 		},
 		onLoad(option) {
-			// console.log(option)
 			if (option.back) this.back = option.back;
 			if (option.redirect) this.redirect = option.redirect;
 			if (option.type) this.localType = option.type;
@@ -191,6 +204,7 @@
 				this.formData.longitude = tempArr[1];
 			} else {
 				this.getCountryList();
+				this.getCityListCA();
 				if (option.addressLength == 0){
 					this.addressLength = 0;
 					this.getMemberInfo();
@@ -204,6 +218,7 @@
 		onShow() {
 			self = this;
 			this.getWrongChineseIdInfo();
+			this.getCityListCA();
 			this.$langConfig.refresh();
 			if (this.formData.id) {
 				uni.setNavigationBarTitle({
@@ -280,6 +295,8 @@
 							
 							this.formData.full_address = '';
 							this.index = this.countryList.findIndex((item)=>{return item.id==res.data.marketCountryId});
+							console.log("member info state",this.formData.state);
+							
 							
 							// if (this.index == 0 || this.index != ''){
 								this.formData.country_id = res.data.marketCountryId;
@@ -302,7 +319,6 @@
 			},
 			// 获取地址信息
 			getAddressDetail() {
-				// console.log('getAddressDetail')
 				this.$api.sendRequest({
 					url: '/api/memberaddress/info',
 					data: {
@@ -338,6 +354,8 @@
 							this.localType = data.type;
 							this.defaultRegions = [data.province_id, data.city_id, data.district_id];
 							this.getCountryList();
+							this.getCityListCA();
+							
 						}
 						if (this.$refs.loadingCover) this.$refs.loadingCover.hide();
 					},
@@ -552,6 +570,18 @@
 			},
 			
 			saveAddress() {
+				
+				if (this.formData.country_id===1 && this.formData.state==='California') {
+						if (!this.cityListCA_string.includes(this.formData.city)) 
+						{
+							this.$util.showToast({
+								title: "不是有效的加州城市名(要有县名），请重新输入并选取正确的加州城市名" 
+								+ "Invalid California State city (with county name).",
+							});
+							return;
+						}
+				}
+				
 				if (this.flag) return;
 				this.flag = true;
 				this.gocheck();
@@ -714,7 +744,7 @@
 							this.$refs.loadingCover.hide();
 							this.flag = false;
 							//console.log(res);
-							if (res.code == 0) {
+							if (res.code == 0) {	
 								if (this.back != '') {
 									let jump = true;
 									let arr = getCurrentPages().reverse();
@@ -788,6 +818,26 @@
 					}
 				});
 			},
+			getCityListCA() {
+				uni.request({
+				    url: 'https://www.cdtfa.ca.gov/dataportal/api/odata/Effective_Sales_Tax_Rates',
+					success: res => {
+						if (res.data.value) {
+							this.cityListCA_string = [];
+							for ( var i=0; i<res.data.value.length; i++) {
+								this.cityListCA_string.push(res.data.value[i].City + ", " + res.data.value[i].County);
+							}
+							//this.cityListCA = res.data.value;
+							this.setLocalType();
+						}
+					}
+				});
+			},
+			selectOneCity(opt) {
+			  this.formData.city = opt;
+			},
+			
+			
 			setLocalType() {
 				this.localType = this.formData.country_id == 172 ? 1 : 2;
 			},
@@ -808,6 +858,7 @@
 				else {
 					this.checkSelfPickUp = false;
 				}
+				
 				//刷新子组件的内容
 				this.setLocalType();
 				if (this.formData.country_id == 172)
@@ -935,7 +986,8 @@
 	
 	}
 	.selfPickUp{
-		font-size:15px;
+		//font-size:15px;
+		font-size: $font-size-base;
 		color:#303133;
 	}
 </style>
