@@ -33,8 +33,8 @@
 			<view><span class="star">*</span> 第二栏 名字 必须是 ordernum <text class="copy" @click="$util.copy('ordernum')">copy{{$lang('copy')}}</text></view>
 			<view><span class="star">*</span> 第三栏 名字 必须是 companyName <text class="copy" @click="$util.copy('companyName')">copy{{$lang('copy')}}</text></view>
 			<view><span >快递公司名称：</span> 
-			sundaexpress <text class="copy" @click="$util.copy('sundaexpress')">copy{{$lang('copy')}}</text>
-			sundaexpress_nmn <text class="copy" @click="$util.copy('sundaexpress_nmn')">copy{{$lang('copy')}}</text>
+			shundaexpress <text class="copy" @click="$util.copy('shundaexpress')">copy{{$lang('copy')}}</text>
+			shundaexpress_nmn <text class="copy" @click="$util.copy('shundaexpress_nmn')">copy{{$lang('copy')}}</text>
 			ups <text class="copy" @click="$util.copy('ups')">copy{{$lang('copy')}}</text>
 			ezgo <text class="copy" @click="$util.copy('ezgo')">copy{{$lang('copy')}}</text>
 			baitong <text class="copy" @click="$util.copy('baitong')">copy{{$lang('copy')}}</text>
@@ -72,7 +72,7 @@
 		//Upload
 		methods: {
 			upFile(input, event) {
-				console.log('ffff', this.$config.baseUrl);
+				//console.log('ffff', this.$config.baseUrl);
 				let url = this.$config.baseUrl + '/api/upload/uploadCsvFile';
 				var _self = this;
 				uni.uploadFile({
@@ -82,7 +82,7 @@
 						uri: event.srcElement.value
 					}],
 					success: (uploadFileRes) => {
-						console.log('success', uploadFileRes, JSON.parse(uploadFileRes.data));
+					//	console.log('success', uploadFileRes, JSON.parse(uploadFileRes.data));
 						let res = JSON.parse(uploadFileRes.data);
 						//console.log('res',res);
 						if (res.code == 10066) {
@@ -110,7 +110,7 @@
 				this.$api.sendRequest({
 					url: '/api/order/scanDeliveryTable',
 					success(res) {
-						console.log('res', res);
+						console.log('数据更新', res);
 						if (res === 'success') {
 							_self.$util.showToastLonger({
 								title: '数据更新成功'

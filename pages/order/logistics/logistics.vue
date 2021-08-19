@@ -49,6 +49,13 @@
 							</view>
 						</view>
 						<view class="no" v-if="!companyInfo[packageItem.express_company_name].redirectUrl">
+							<view class="goods" v-for="(deliveryNumItem, deliveryNoIndex) in deliveryNoArr" :key="deliveryNoIndex+'copy'">
+									<text>
+										{{$lang('common.deliveryNumber')}}：
+										<text class="color-tip">{{ deliveryNumItem}}</text>
+									</text>
+									<text class="copy" @click="$util.copy(deliveryNumItem)">{{$lang('common.copy')}}</text>
+							</view>
 							<view >
 								<text>
 									{{$lang('common.deliveryCompanyUrl')}}：
@@ -56,14 +63,6 @@
 									 <!-- <web-view :webview-styles="webviewStyles" :src="packageItem.express_company_url">{{ packageItem.express_company_url }}</web-view> -->
 								</text>
 								<text class="copy" @click="visitSite( companyInfo[packageItem.express_company_name].url)">{{$lang('common.visit')}}</text>
-							</view>
-							
-							<view class="goods" v-for="(deliveryNumItem, deliveryNoIndex) in deliveryNoArr" :key="deliveryNoIndex+'copy'">
-									<text>
-										{{$lang('common.deliveryNumber')}}：
-										<text class="color-tip">{{ deliveryNumItem}}</text>
-									</text>
-									<text class="copy" @click="$util.copy(packageItem.delivery_no)">{{$lang('common.copy')}}</text>
 							</view>
 						</view>
 					</view>
@@ -112,8 +111,8 @@ export default {
 			status: 0,
 			deliveryNoArr:[],
 			companyInfo:{
-				sundaexpress:{url:"www.shundaexpress.com", realName: "顺达",redirectUrl:''},
-				sundaexpress_nmn:{url:"www.postalinkex.com", realName:"POSTALINK",redirectUrl:'https://www.postalinkex.com/SelectOrder.aspx?OrderNum=' },
+				shundaexpress:{url:"www.shundaexpress.com", realName: "顺达",redirectUrl:''},
+				shundaexpress_nmn:{url:"www.postalinkex.com", realName:"POSTALINK",redirectUrl:'https://www.postalinkex.com/SelectOrder.aspx?OrderNum=' },
 				ups:{url:'www.ups.com', name:"UPS",redirectUrl:''},
 				ezgo:{url:"www.t-cat.com.tw/Inquire/International.aspx", realName:"黑猫宅急便",redirectUrl:''},
 				baitong:{url:"www.buytong.cn/newindex/waybillquery", realName: '百通',redirectUrl:''}
