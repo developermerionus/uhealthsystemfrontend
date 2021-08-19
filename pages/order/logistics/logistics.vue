@@ -111,8 +111,8 @@ export default {
 			status: 0,
 			deliveryNoArr:[],
 			companyInfo:{
-				shundaexpress:{url:"www.shundaexpress.com", realName: "顺达",redirectUrl:''},
-				shundaexpress_nmn:{url:"www.postalinkex.com", realName:"POSTALINK",redirectUrl:'https://www.postalinkex.com/SelectOrder.aspx?OrderNum=' },
+				shundaexpress:{url:"www.postalinkex.com", realName:"POSTALINK" ,redirectUrl:'https://www.postalinkex.com/SelectOrder.aspx?OrderNum='},
+				shundaexpress_nmn:{url:"www.shundaexpress.com", realName: "顺达" , redirectUrl:'http://www.shundaexpress.com/select/?num='},
 				ups:{url:'www.ups.com', name:"UPS",redirectUrl:''},
 				ezgo:{url:"www.t-cat.com.tw/Inquire/International.aspx", realName:"黑猫宅急便",redirectUrl:''},
 				baitong:{url:"www.buytong.cn/newindex/waybillquery", realName: '百通',redirectUrl:''}
