@@ -9,6 +9,7 @@ export const lang = {
 	'待审核' : '待审核',
 	'已提现' : '已提现',
 	'已拒绝' : '已拒绝',
+	'异常' : '异常',
 	
 	'widthdrawRecordsEmpty_0' : '暂无',
 	'widthdrawRecordsEmpty_1' : '暂无待审核',

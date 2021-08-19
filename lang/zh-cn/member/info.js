@@ -15,7 +15,7 @@ export const lang = {
 	cancellation: '注销账号',
 	lang: "语言",
 	logout: '退出登录',
-	save: "保存，浏览商品",
+	save: "保存继续",
 	cancel: '取消',
 	noset: '未设置',
 	member_id: '会员ID',

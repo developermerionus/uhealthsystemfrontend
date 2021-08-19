@@ -19,5 +19,7 @@ export const lang = {
 	idNumber:'ID Number',
 	zipcode: 'Zip/Postal Code',
 	country: 'Country',
-	state: 'State/Province'
+	state: 'State/Province',
+	californiaCityAlert: 'Invalid California City(with County) name.' +
+				 ' Please re-enter and repick. ',
 }

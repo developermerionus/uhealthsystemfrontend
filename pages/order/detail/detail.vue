@@ -15,7 +15,7 @@
 			<view class="icon"><view class="iconfont iconlocation"></view></view>
 			<view class="address-info">
 				<view class="info">
-					<text class="font-size-base">{{ member_name }}; {{ orderData.mobile }} {{ orderData.member_id}}</text>
+					<text class="font-size-base">{{ orderData.name }}; {{ orderData.mobile }} {{ orderData.member_id}}</text>
 				</view>
 				<view class="detail">
 					<view v-if = 'orderData.country_id == 172'>
@@ -44,7 +44,7 @@
 						<view class="sku" v-if="goodsItem.sku_spec_format">
 							<view class="goods-spec">
 								<block v-for="(x, i) in goodsItem.sku_spec_format" :key="i">
-									{{ x.spec_value_name }} {{ i < goodsItem.sku_spec_format.length - 1 ? '; ' : '' }}
+									{{ x.spec_value_name }} {{ (goodsItem.sku_spec_format.length - 1) > i ? '; ' : '' }}
 								</block>
 							</view>
 						</view>

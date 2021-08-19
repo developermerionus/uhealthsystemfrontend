@@ -160,7 +160,7 @@
 						<view class="sku" v-if="goodsItem.sku_spec_format">
 							<view class="goods-spec">
 								<block v-for="(x, i) in goodsItem.sku_spec_format" :key="i">
-									{{ x.spec_value_name }} {{ i < goodsItem.sku_spec_format.length - 1 ? '; ' : '' }}
+									{{ x.spec_value_name }} {{  goodsItem.sku_spec_format.length - 1  > i ? '; ' : '' }}
 								</block>
 							</view>
 						</view>
@@ -271,7 +271,8 @@
 			<!-- <view class="selfPickUp" v-if="orderPaymentData.is_virtual == 0 && orderPaymentData.delivery_money > 0">
 				<text>如可自取，免运费。只需修改您的邮寄地址，国家名一栏，选第一个选项 “selfPickUp 自取”</text></view> -->
 			<!-- <view class="order-cell" v-if="orderCreateData.is_invoice && orderPaymentData.invoice_money > 0"> -->
-			<view class="order-cell" v-if="orderPaymentData.invoice_money > 0">
+		<!-- 	<view class="order-cell" v-if="orderPaymentData.invoice_money > 0"> -->
+			<view class="order-cell" >
 				<text class="tit">
 					<text>{{ $lang('common.tax')}}</text>
 					<!-- <text class="color-base-text font-bold">({{ orderPaymentData.shop_goods_list.invoice.invoice_rate }}%)</text> -->
@@ -641,10 +642,10 @@
 		},
 		onShow() {
 			this.checkSelfPickupExist();
+			
 		},
 		methods: {
 			nameFormat(data) {
-							console.log('data.marketCountryId',data.marketCountryId);
 							//this.formData.name = res.data.marketCountryId===172?res.data.surname + res.data.firstname:res.data.surname + ' ' + res.data.firstname;
 							if( data.marketCountryId === 172 || 
 								data.marketCountryId === 228 ||
@@ -797,9 +798,7 @@
 		// onLoad() {
 		// 	console.log(this.orderCreateData.is_invoice , this.orderPaymentData.invoice_money)
 		// }, 
-		// onShow() {
-		// 	console.log(this.orderCreateData.is_invoice , this.orderPaymentData.invoice_money)
-		// }
+
 
 	}
 </script>

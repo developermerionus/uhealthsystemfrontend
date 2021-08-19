@@ -152,7 +152,7 @@
 								<block v-for="(item, index) in infoList1" :key="index">
 									<uni-grid-item class="makesameline">
 									<view class="recurringDate">
-										<image v-if="item.item===$lang('nextRecurringDate')" class="redflag-icon" 
+										<image v-if="item.item===$lang('common.activerequirement')" class="redflag-icon" 
 										src="../../../static/images/icons/red-flag.png"></image>
 										<text class="text memberInforLabel">{{ item.item }}</text>
 									</view>
@@ -608,7 +608,7 @@
 						})
 						this.infoList1.push({
 							item: this.$lang('activedPV'),
-							value: this.bonus.activedPV
+							value: this.bonus.activedPV/30+" PV/"+this.$lang('common.day')
 						})
 						this.infoList1.push({
 							item: this.$lang('member_level_name'),
@@ -623,9 +623,13 @@
 							value: this.$lang(this.bonus.highest_level)
 						})
 						this.infoList1.push({
-							item: this.$lang('nextRecurringDate'),
-							value: this.bonus.recurringDate
+							item: this.$lang('common.activerequirement'),
+							value: this.$lang('restPV')+" > 0"
 						})
+						// this.infoList1.push({
+						// 	item: this.$lang('nextRecurringDate'),
+						// 	value: this.bonus.recurringDate
+						// })
 						// console.log(this.infoList1);
 						this.infoList2 = [];
 						this.infoList2.push({
@@ -741,16 +745,20 @@
 						})
 						this.infoList1.push({
 							item: this.$lang('activedPV'),
-							value: this.bonus.activedPV
+							value: this.bonus.activedPV/30+" PV/"+this.$lang('common.day')
 						})
 						this.infoList1.push({
 							item: this.$lang('restPV'),
 							value: this.bonus.restPV
 						})
 						this.infoList1.push({
-							item: this.$lang('nextRecurringDate'),
-							value: this.bonus.recurringDate
+							item: this.$lang('common.activerequirement'),
+							value: this.$lang('restPV')+" > 0"
 						})
+						// this.infoList1.push({
+						// 	item: this.$lang('nextRecurringDate'),
+						// 	value: this.bonus.recurringDate
+						// })
 						// console.log(this.infoList1);
 						this.infoList2 = [];
 						this.infoList2.push({

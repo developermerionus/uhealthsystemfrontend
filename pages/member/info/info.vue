@@ -58,12 +58,13 @@
 			</view> -->
 
 				<view class="info-list-cell info-btn_view">
-					<button size="mini" type="primary" :disabled=disabled @click="saveData">{{ $lang('save') }}</button>
 					<view v-if='memberInfo.member_level == 1'>
 						<button size="mini" type="primary" :disabled=disabled
 							@click="goHome">{{ $lang('goHome') }}</button>
 					</view>
 					<button type="primary" @click="goCenter" v-else>{{ $lang('goCenter') }}</button>
+					
+					<button size="mini" type="primary" :disabled=disabled @click="saveData">{{ $lang('save') }}</button>
 				</view>
 				<!-- <view style='height: 50rpx;'></view> -->
 			</view>
