@@ -11,6 +11,7 @@ export const lang = {
 	verify_alerts_2: '提现金额超出可提现金额',
 	verify_alerts_3: '提现金额超出限额',
 	withdraw_success: '提现申请成功',
+	verify_alerts_4: '提现金额要大于0',
 
 	'奖金' : '奖金',
 	'下线' : '下线',
