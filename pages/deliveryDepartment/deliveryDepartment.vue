@@ -51,7 +51,7 @@
 	export default {
 		data() {
 			return {
-
+                token:''
 			}
 		},
 		// uni-app input does not support type="file" type so it needs to be created by js
@@ -68,9 +68,20 @@
 		},
 		onShow() {
 			_self = this;
+			this.checkToken();
 		},
 		//Upload
 		methods: {
+			checkToken() {		
+				_self.token = uni.getStorageSync('token');
+				console.log('self token ',_self.token);
+				if (!_self.token) {
+					console.log('call token');
+					uni.redirectTo({
+						url: '/pages/login/login/login'
+					});
+				}
+			},
 			upFile(input, event) {
 				//console.log('ffff', this.$config.baseUrl);
 				let url = this.$config.baseUrl + '/api/upload/uploadCsvFile';
