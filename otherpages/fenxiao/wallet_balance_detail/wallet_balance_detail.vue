@@ -97,7 +97,7 @@
 				};
 				
 				this.$api.sendRequest({
-					url: '/api/member/wallet_balance_detail_detailTest',
+					url: '/api/member/wallet_balance_detail',
 					data: {
 						page_size: mescroll.size,
 						page: mescroll.num,
