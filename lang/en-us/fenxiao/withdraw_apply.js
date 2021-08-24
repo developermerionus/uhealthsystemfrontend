@@ -3,7 +3,7 @@ export const lang = {
 	// title: '提现申请'
 	title: 'Withdraw Apply',
 	wallet_description: 'Apply to withdraw the bonus into Masspay wallet. The application '
-	+ ' would be processed within 24 hours. Money within Masspay wallet can be transfer to '
+	+ ' would be processed within 3 to 7 business days. Money within Masspay wallet can be transfer to '
 	+ 'your own bank account.',
 	wallet_title: 'Withdraw Bonus to Masspay wallet',
 	wallet_bottom_tip: 'Bonus Available to Withdraw',
@@ -15,19 +15,13 @@ export const lang = {
 	verify_alerts_4: 'The withdrawal amount should larger than 0.',
 	withdraw_success: 'Success Apply to Withdraw',
 	
-	
 	'奖金' : 'Bonus',
 	'下线' : 'Downline',
 	'上线' : 'Upline',
-	
 	'分销' : 'Distribute',
 	'分销商' : 'Distributor',
-	
 	'团队' : 'Team',
 	'提现' : 'Withdraw',
 	
-	
-	
-	
-	
+	wallet_balance_details: 'Wallet Balance Details',
 }
