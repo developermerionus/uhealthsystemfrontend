@@ -127,6 +127,12 @@
 					});
 					return false;
 				}
+				if (this.transferMoney < 0) {
+					this.$util.showToast({
+						title: this.$lang('common.transfer_verify_alerts_6') //'转账金额不能为负值'
+					});
+					return false;
+				}
 				if (parseFloat(this.transferMoney) > parseFloat(this.balance)) {
 					this.$util.showToast({
 						title: this.$lang('common.transfer_verify_alerts_2')

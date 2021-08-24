@@ -254,6 +254,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/deliveryDepartment/deliveryDepartment",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"subPackages": [{
 

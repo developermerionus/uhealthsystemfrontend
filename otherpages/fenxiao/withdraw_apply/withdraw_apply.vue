@@ -185,6 +185,12 @@
 					});
 					return false;
 				}
+				if (this.withdrawMoney < 0) {
+					this.$util.showToast({
+						title: this.$lang('verify_alerts_4') //'提现金额不能为负值'
+					});
+					return false;
+				}
 				if (parseFloat(this.withdrawMoney) > parseFloat(this.balance)) {
 					this.$util.showToast({
 						title: this.$lang('verify_alerts_2') // '提现金额超出可提现金额'
@@ -268,7 +274,7 @@
 			 * @param {Object} money
 			 */
 			moneyFormat(money) {
-				return parseInt(money);
+				return Number(money).toFixed(2);
 			}
 		},
 		onReady() {

@@ -90,7 +90,7 @@
 								<text v-if="goodsSkuDetail.is_free_shipping">快递 包邮</text>
 								<text v-else>{{$lang('common.delivery_type')}}</text>
 							</block>
-							<text>{{$lang('common.sold')}} {{ goodsSkuDetail.sale_num }} {{ goodsSkuDetail.unit }}</text>
+							<!-- <text>{{$lang('common.sold')}} {{ goodsSkuDetail.sale_num }} {{ goodsSkuDetail.unit }}</text> -->
 						</view>
 						<!-- 会员卡 -->
 						<view class="member-card-wrap" @click="$util.redirectTo('/otherpages/member/card_buy/card_buy')" v-if="membercard">

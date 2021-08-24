@@ -18,7 +18,8 @@
 							<view class="tixian-desc">
 								<view class="desc-info">
 									<view class="desc-info-name">{{ $lang('apply_to') + $lang(fenxiaoWords.withdraw) }}</view>
-									<view class="desc-info-time">{{ item.apply_time }}</view>
+									<view class="desc-info-time">{{ item.apply_time }} {{ item.memo }}</view>
+									<!-- <view class="desc-info-time">{{ item.apply_time }}</view> -->
 								</view>
 								<view class="desc-money" :style="withdrawState[item.status].color">
 									{{ $lang(withdrawState[item.status].text) }}
@@ -79,7 +80,7 @@
 						id: -1, 
 						name: '已拒绝',
 						number: 0
-					}
+					},
 				],
 				withdrawState: {
 					'1': {
@@ -147,11 +148,13 @@
 						status: this.status
 					},
 					success: res => {
+						//console.log(res);
 						this.emptyShow = true;
 						let newArr = [];
 						let msg = res.message;
 						if (res.code == 0 && res.data && res.data.list) {
 							newArr = res.data.list;
+							//console.log(newArr);
 						} else {
 							this.$util.showToast({
 								title: msg

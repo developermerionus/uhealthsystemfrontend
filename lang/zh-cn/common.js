@@ -141,8 +141,22 @@ export const lang = {
 		'transfer_verify_alerts_3': '转账金额超出限额',
 		'transfer_verify_alerts_4': '请输入被推荐人用户名',
 		'transfer_verify_alerts_5': '请输入被推荐人ID',
+		'transfer_verify_alerts_6': '转账金额要大于0',
 		selfpickup: "自提取",
 		delivery: "物流配送",
 		deliverymethod: "配送方式",
+		membername: "名字",
+		 包裹:'包裹',
+		 无需物流:'无需物流',
+		 deliveryNumber:"运单号",
+		deliveryCompanyUrl:"物流公司链接",
+		 deliveryCompany:"承运公司",
+		 search:"查询",
+		 visit:"访问",
+		 copy:"复制",
+		day:"天",
+		points:"分",
+		activerequirement:"活跃要求",
+		creditCardRequirement: "我们只接受以下信用卡和借记卡"
 	}
 }

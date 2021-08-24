@@ -10,11 +10,12 @@
 						
 						<text v-if="item.type < 3">订单号: {{ item.order_no }}</text>
 						<text>{{$lang('common.member')}}ID: {{item.member_id}}</text>
+						<text>{{$lang('common.membername')}}: {{item.surname}}{{item.firstname}}</text>
 						<text v-if="item.type == 3">左区总CV: {{item.lcv}}</text>
 						<text v-if="item.type == 3">右区总CV: {{item.rcv}}</text>
 					</view>
 					<view class="balances-num">
-						<text :class="item.bonus > 0 ? 'color-base-text' : ''">{{ item.bonus > 0 ? '+' + item.bonus : item.bonus }}</text>
+						<text :class="item.bonus > 0 ? 'color-base-text' : ''">{{ item.bonus > 0 ? '+' + item.bonus :(item.bonus==0 ? '': '-'+item.bonus) }}</text>
 					</view>
 				</view>
 				<ns-empty v-if="!accountList.length && showEmpty" text="暂无奖金信息" :isIndex="!1"></ns-empty>

@@ -892,20 +892,20 @@ export default {
 		openChoosePayment() {
 			//console.log('orderPaymentData',this.orderPaymentData);
 			
-			if(!this.orderPaymentData.member_address.mobile){
+			if(this.orderPaymentData&&this.orderPaymentData.member_address&&!this.orderPaymentData.member_address.mobile){
 				// this.$util.showToast({
 				// 	title: "请您在地址栏中填写手机号"
 				// });
 				this.showWaringCheck(4000,this.fillupPhonenum)
 			}
-			else if (this.orderPaymentData.member_address.name==='.') {
+			else if (this.orderPaymentData&&this.orderPaymentData.member_address&&this.orderPaymentData.member_address.name==='') {
 				// this.$util.showToast({
 				// 	title: "请您在地址栏中填写姓名"
 				// });
 				this.showWaringCheck(4000,this.fillupName)
 			}
 			else {
-				if(this.orderPaymentData.member_address.country_id===172){
+				if(this.orderPaymentData.member_address&&this.orderPaymentData.member_address.country_id===172){
 					let chineseIdNumber = this.orderPaymentData.member_address.idNumber;
 					let chineseIdName = this.orderPaymentData.member_address.name;
 					this.checkChineseIdInDatabase(chineseIdNumber,chineseIdName);
@@ -976,8 +976,8 @@ export default {
 			return true;
 		},
 		showWaringCheck(time,text) {
-			let addressId = this.orderPaymentData.member_address.id;
 			this.$refs.loadingCover.hide();
+			let addressId = this.orderPaymentData.member_address.id;
 				this.$util.showToastLonger({
 					title: text
 				},time);
@@ -1019,7 +1019,6 @@ export default {
 					else if(res.code === "0" && res.result && res.result.description==="一致") {
 						console.log('name and chinese id pass alibaba  check');
 						this.addChineseIdNameInDatabase(idNumber, idName);
-						this.processSaveAdress();
 						this.runPaymentPopup();
 					}
 					else if(res.code === "0" && res.result && res.result.description!=="一致") {
@@ -1039,6 +1038,25 @@ export default {
 				},
 			})
 		},
+		addChineseIdNameInDatabase (idNumber, idName) {
+			//console.log('save ',idNumber,idName);
+			this.$api.sendRequest({
+				url: '/api/member/addChineseIdNameInDatabase',
+				data: {
+					idNumber: idNumber,
+					idName: idName
+				},
+				success: res => {
+					if(res.code ===0) {
+						console.log('Chinese Id Number and Chinese Name get saved');
+					}
+					else {
+						console.log('Chinese Id Number and Chinese Name did not get saved');
+					}
+				},
+			})
+		},
+		
 		
 		
 		

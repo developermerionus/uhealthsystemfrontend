@@ -140,8 +140,22 @@ export const lang = {
 		'transfer_verify_alerts_3': 'Transfer amount is over the limit',
 		'transfer_verify_alerts_4': 'Input referee member username',
 		'transfer_verify_alerts_5': 'Input referee member ID',
+		'transfer_verify_alerts_6': 'Transfer ammount should be larger than 0',
 		selfpickup: "Self Pickup",
 		delivery: "Delivery",
 		deliverymethod: "How To Get Orders",
+		membername: "Name",
+		包裹:'Package',
+		无需物流:'No Need to Delivery',
+		 deliveryNumber:"Delivery Number",
+		deliveryCompanyUrl:"Delivery Company Url",
+		 deliveryCompany:"Delivery Company",
+	     search:"Search",
+		 visit:"Visit",
+		  copy:"copy",
+		day: "day",
+		points:" points",
+		activerequirement:"Active Requirement",
+		creditCardRequirement: "We only accept following major credit or debit cards"
 	}
 }
