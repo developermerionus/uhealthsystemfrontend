@@ -140,9 +140,7 @@
 						this.transferList = [];
 						this.transferList = this.transferList.concat(newArr); //追加新数据
 						this.transferList = this.transferList.filter(item => !item.memo.startsWith("提现"));
-						console.log(this.transferList);
 						this.transferList = this.transferList.slice().reverse();
-						console.log(this.transferList);
 						if (this.$refs.loadingCover) this.$refs.loadingCover.hide();
 					},
 					fail: res => {
