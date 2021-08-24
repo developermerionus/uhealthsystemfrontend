@@ -945,6 +945,14 @@
 					}
 				},
 				{
+					"path": "fenxiao/wallet_balance_detail/wallet_balance_detail",
+					"style": {
+						// #ifdef H5
+						"navigationStyle": "custom"
+						// #endif
+					}
+				},
+				{
 					"path": "fenxiao/promote_code/promote_code",
 					"style": {
 						// #ifdef H5

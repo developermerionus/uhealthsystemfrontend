@@ -10,6 +10,7 @@ export const lang = {
 	'待审核' : 'Pending',
 	'已提现' : 'Withdrawn',
 	'已拒绝' : 'Refused',
+	'异常' : 'Cancelled',
 	
 	// empty withdrawList
 	'widthdrawRecordsEmpty_0' : 'Empty',

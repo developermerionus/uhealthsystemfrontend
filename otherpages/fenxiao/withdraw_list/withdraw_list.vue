@@ -71,7 +71,12 @@
 						number: 0
 					},
 					{
-						id: 3, // 原为 ‘-1’
+						id: 3, 
+						name: '异常',
+						number: 0
+					},
+					{
+						id: -1, 
 						name: '已拒绝',
 						number: 0
 					}
@@ -85,9 +90,9 @@
 						color: 'color: rgb(17, 189, 100)',
 						text: '已提现'
 					},
-					'3': { // 原为 ‘-1’
+					'3': { 
 						color: 'color: rgb(255, 69, 68)',
-						text: '已拒绝'
+						text: '异常'
 					},
 					'-1': { 
 						color: 'color: rgb(255, 69, 68)',

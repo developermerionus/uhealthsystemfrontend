@@ -28,7 +28,7 @@
 					</view>
 				</view>
 				<view class="desc">
-					<!-- <text>申请24小时内可提现到Masspay钱包，钱包中的金额可自行转到会员自己的银行卡上。</text> -->
+					<!-- <text>申请3-7个工作日内可提现到Masspay钱包，钱包中的金额可自行转到会员自己的银行卡上。</text> -->
 					<text>{{ $lang('wallet_description')}}</text>
 				</view>
 				<view class="btn withdraw_btn" :class="{ disabled: withdrawMoney == '' || withdrawMoney == 0 }"
@@ -38,6 +38,10 @@
 				<view class="withdraw-list btn"
 					@click="$util.redirectTo('/otherpages/fenxiao/withdraw_list/withdraw_list')">
 					<view class="color-tip">{{ $lang('withdrawal_details') }}</view>
+				</view>
+				<view class="withdraw-list btn"
+					@click="$util.redirectTo('/otherpages/fenxiao/wallet_balance_detail/wallet_balance_detail')">
+					<view class="color-tip">{{ $lang('wallet_balance_details') }}</view>
 				</view>
 			</view>
 			<loading-cover ref="loadingCover"></loading-cover>
