@@ -167,13 +167,14 @@
 			this.getCaptcha();
 			this.getRegisiterAggrement();
 			this.getRegisterConfig();
-			this.getCountryList();
+			//this.getCountryList();
 
 			if (uni.getStorageSync('authInfo')) {
 				this.authInfo = uni.getStorageSync('authInfo');
 			}
 		},
 		onShow() {
+			this.getCountryList();
 			// 刷新多语言
 			this.$langConfig.refresh();
 			// #ifdef MP
