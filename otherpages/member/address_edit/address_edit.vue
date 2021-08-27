@@ -47,12 +47,17 @@
 				 <text v-if="checkSelfPickUp || formData.country_id===0" style='margin-left: 10px;'>{{ selfPickUpState }}</text> 
 			</view>
 			<view class="edit-item"  v-show="localType == 2">
-				<text class="tit" >
+				<text class="tit" v-if="formData.country_id===1 && formData.state==='California'">
+					{{$lang('cityCounty')}}
+					<text>*</text>
+				</text>
+				<text class="tit" v-if="formData.country_id!==1 || formData.state!=='California'">
 					{{$lang('city')}}
 					<text>*</text>
 				</text>
 				<str-autocomplete v-if="formData.country_id===1 && formData.state==='California'"
-				  :importvalue="formData.city" :list="cityListCA_string" @select="selectOneCity"
+				  :importvalue="formData.city" :list="cityListCA_string" @select="selectOneCity" 
+				  :placeholderValue="$lang('cityCountyPlaceholder')"
 				  highlightColor="#FF0000" style='min-width: 225px; margin-left: 10px;'></str-autocomplete>
 				<input v-if="formData.country_id!==0 && (formData.country_id!==1 || formData.state!=='California')" 
 				class="uni-input" type="text" placeholder-class="placeholder-class" placeholder="请输入城市" 
