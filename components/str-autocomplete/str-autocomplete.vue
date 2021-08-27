@@ -1,6 +1,6 @@
 <template>
   <view class="auto-complete-container">
-    <input class="uni-input" placeholder-class="placeholder-class" placeholder="请输入并选取加利福尼亚州城市" :value="value" @input="onInput" @blur="hideList" />
+    <input class="uni-input" placeholder-class="placeholder-class" :placeholder="placeholderValue" :value="value" @input="onInput" @blur="hideList" />
     <view class="str-auto-complete-container" v-if="isShow">
       <view v-for="(item, index) in showList" :key="index" class="str-auto-complete-item" @tap="selectThisItem(item)" v-html="item.showString"></view>
     </view>
@@ -27,7 +27,11 @@ export default {
     highlightColor: {
       type: String,
       default: 'lightcoral'
-    }
+    },
+	placeholderValue: {
+		type: String,
+		default: '加州城市(包含县名)'
+	}
   },
   data() {
 	 
