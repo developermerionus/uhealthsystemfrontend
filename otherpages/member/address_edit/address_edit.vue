@@ -57,7 +57,7 @@
 				</text>
 				<str-autocomplete v-if="formData.country_id===1 && formData.state==='California'"
 				  :importvalue="formData.city" :list="cityListCA_string" @select="selectOneCity" 
-				  :placeholderValue="$lang('cityCountyPlaceholder')"
+				  :placeholderValue="$lang('cityCountyPlaceholder')" :focusValue="cityCountyFocusValue"
 				  highlightColor="#FF0000" style='min-width: 225px; margin-left: 10px;'></str-autocomplete>
 				<input v-if="formData.country_id!==0 && (formData.country_id!==1 || formData.state!=='California')" 
 				class="uni-input" type="text" placeholder-class="placeholder-class" placeholder="请输入城市" 
@@ -179,6 +179,7 @@
 				],
 				cityListCA_string: [],
 				tempCountryList:[],
+				cityCountyFocusValue: false,
 				
 				memberInfo: {},
 				addressLength: 1,
@@ -575,7 +576,6 @@
 			},
 			
 			saveAddress() {
-				
 				if (this.formData.country_id===1 && this.formData.state==='California') {
 						if (!this.cityListCA_string.includes(this.formData.city)) 
 						{
@@ -584,6 +584,10 @@
 							{
 								title: this.$lang("californiaCityAlert"),
 							}, 2000);
+							this.cityCountyFocusValue = false;
+							this.$nextTick(function() {
+												this.cityCountyFocusValue = true;
+											});
 							return;
 						}
 				}
