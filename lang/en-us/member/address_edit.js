@@ -9,7 +9,7 @@ export const lang = {
 	telephonePlaceholder: '收货人固定电话（选填）',
 	receivingCity: 'City',
 	city: 'City',
-	cityCounty: 'city (with County)',
+	cityCounty: 'city, County',
 	provinceCity: 'State/Province',
 	provinceCityPlaceHolder: 'Input State/Province',
 	cityPlaceHolder: 'Input City',
@@ -21,6 +21,6 @@ export const lang = {
 	zipcode: 'Zip/Postal Code',
 	country: 'Country',
 	state: 'State/Province',
-	californiaCityAlert: 'Please re-enter and repick California City(with County) name.',
+	californiaCityAlert: 'Please re-enter and repick California City with County.',
 	cityCountyPlaceholder: 'City(with County) name',
 }

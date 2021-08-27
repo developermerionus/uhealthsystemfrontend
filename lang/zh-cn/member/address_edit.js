@@ -10,7 +10,7 @@ export const lang = {
 	receivingCity: '省市区县',
 	provinceCity: '省市区县',
 	city: '城市',
-	cityCounty: '城市(包含县名)',
+	cityCounty: '城市，县名',
 	provinceCityPlaceHolder: '请输入省市区县',
 	cityPlaceHolder: '请输入城市',
 	// address: 'Address',
@@ -23,6 +23,6 @@ export const lang = {
 	zipcode: '邮政编码',
 	country: '国家',
 	state: '州/省',
-	californiaCityAlert: '请重新输入并选择加州城市(包含县)名.',
-	cityCountyPlaceholder: '请输入并选取城市(包含县名)',
+	californiaCityAlert: '请重新输入并选择城市名(包含县名).',
+	cityCountyPlaceholder: '请输入并选取城市及县名',
 }
