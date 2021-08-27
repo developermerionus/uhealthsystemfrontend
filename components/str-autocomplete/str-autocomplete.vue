@@ -1,6 +1,7 @@
 <template>
   <view class="auto-complete-container">
-    <input class="uni-input" placeholder-class="placeholder-class" :placeholder="placeholderValue" :value="value" @input="onInput" @blur="hideList" />
+    <input class="uni-input" placeholder-class="placeholder-class" :placeholder="placeholderValue" 
+	:value="value" @input="onInput" @blur="hideList" :focus="focusValue"/>
     <view class="str-auto-complete-container" v-if="isShow">
       <view v-for="(item, index) in showList" :key="index" class="str-auto-complete-item" @tap="selectThisItem(item)" v-html="item.showString"></view>
     </view>
@@ -31,6 +32,10 @@ export default {
 	placeholderValue: {
 		type: String,
 		default: '加州城市(包含县名)'
+	},
+	focusValue: {
+		type: Boolean,
+		default: false
 	}
   },
   data() {
