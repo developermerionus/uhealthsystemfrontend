@@ -75,6 +75,7 @@
 			this.getBonus();
 		},
 		onShow() {
+			if (this.$refs.loadingCover) this.$refs.loadingCover.hide();
 			// if (!this.addonIsExit.fenxiao) {
 			// 	this.$util.showToast({
 			// 		title: '商家未开启分销',
@@ -115,6 +116,7 @@
 			},
 			withdraw() {
 				if (this.verify()) {
+					this.$refs.loadingCover.show();
 					if (this.isSub) return;
 					this.isSub = true;
 
@@ -127,6 +129,7 @@
 							},
 							success: res => {
 								if (res.code >= 0) {
+									this.$refs.loadingCover.hide();
 									// this.$util.showToast({
 									// 	title: this.$lang('withdraw_success') // '提现申请成功'
 									// });
@@ -134,7 +137,9 @@
 									// setTimeout(() => {
 									// 	this.$util.redirectTo('/otherpages/fenxiao/withdraw_list/withdraw_list', {}, 'redirectTo');
 									// }, 1500);
+									
 								} else {
+									this.$refs.loadingCover.hide();
 									this.isSub = false;
 									this.$util.showToast({
 										title: res.message
@@ -143,6 +148,7 @@
 							},
 							fail: res => {
 								this.isSub = false;
+								this.$refs.loadingCover.hide();
 							}
 						});
 					});
