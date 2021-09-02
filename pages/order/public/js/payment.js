@@ -80,6 +80,7 @@ export default {
 			warningCheckChineseId:"请核对你的名字和你的身份证号码，否则无法通过中国海关",
 			fillupName:"请您在地址栏中填写您的名字",
 			fillupPhonenum:"请您在地址栏中填写手机号",
+			usStateList: [],
 		};
 		
 	},
@@ -888,9 +889,37 @@ export default {
 				sku_id
 			});
 		},
+		
+		
+		getUsStates(pid) {
+			this.$api.sendRequest({
+				url: '/api/member/getUsStates',
+				data: {
+					pid, // if USA, pid = 1
+				},
+				success: res => {
+				//	console.log(res);
+					let usStateListTemp = [];
+					this.usStateList = [];
+					if (res.code == 0) {
+						usStateListTemp = res.data;
+						console.log(typeof(usStateListTemp));
+						console.log(usStateListTemp);
+						for ( var i=0; i<usStateListTemp.length; i++) {
+							for (var j=0; j<usStateListTemp[i].data.length; j++) {
+								this.usStateList.push(usStateListTemp[i].data[j]);
+							}
+						}
+					}
+					console.log(this.usStateList);
+				},
+			})
+		},
 		// 显示选择支付方式弹框
 		openChoosePayment() {
 			//console.log('orderPaymentData',this.orderPaymentData);
+			
+			console.log("sssss", this.orderPaymentData.member_address);
 			
 			if(this.orderPaymentData&&this.orderPaymentData.member_address&&!this.orderPaymentData.member_address.mobile){
 				// this.$util.showToast({
@@ -905,15 +934,24 @@ export default {
 				this.showWaringCheck(4000,this.fillupName)
 			}
 			else {
-				if(this.orderPaymentData.member_address&&this.orderPaymentData.member_address.country_id===172){
+				if (this.orderPaymentData.member_address&&this.orderPaymentData.member_address.country_id===1) {
+					// Country USA
+					if (!this.usStateList.includes(this.orderPaymentData.member_address.state)){
+						// this.showWaringCheck(4000, this.$lang('common.currencySymbol'));
+						this.showWaringCheck(4000, this.$lang('uscountryAlert'));
+					} else {
+						this.runPaymentPopup();
+					}
+				} 
+				else if(this.orderPaymentData.member_address&&this.orderPaymentData.member_address.country_id===172){
+					// Country China
 					let chineseIdNumber = this.orderPaymentData.member_address.idNumber;
 					let chineseIdName = this.orderPaymentData.member_address.name;
 					this.checkChineseIdInDatabase(chineseIdNumber,chineseIdName);
-					}
+					} 
 					else{
 						this.runPaymentPopup();
 					}
-				 
 			}
 		},
 		
@@ -984,7 +1022,6 @@ export default {
 				setTimeout(() => {
 					this.fillupAddressInfo(addressId);
 				}, time);
-				
 		},
 		//this.showWaringCheck(5000,this.warningCheckChineseId); 
 		// showWaringChineseIdCheck() {
@@ -1124,6 +1161,7 @@ export default {
 		self = this;
 		this.getWrongChineseIdInfo();
 		this.$langConfig.refresh();
+		this.getUsStates(1);// 1: usa Country code;
 
 		if (uni.getStorageSync('addressBack')) {
 			uni.removeStorageSync('addressBack');

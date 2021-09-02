@@ -48,7 +48,8 @@ export default {
 			],
 			country: {},
 			form: [],
-			showLang:''
+			showLang:'',
+			cityListCA_string: [],
 		};
 	},
 	onLoad(option) {
@@ -60,10 +61,12 @@ export default {
 		this.getCaptcha();
 		this.getRegisterConfig();
 		this.getCountryList();
+		this.getCityListCA();
 		// this.pushAddresss = !disabled;
 		this.initLang();
 	},
 	onShow() {
+		this.getCityListCA();
 		this.getMemberConfig();
 	},
 	onHide() {
@@ -184,6 +187,26 @@ export default {
 			}
 			
 		},
+		getCityListCA() {
+			uni.request({
+			    url: 'https://www.cdtfa.ca.gov/dataportal/api/odata/Effective_Sales_Tax_Rates',
+				success: res => {
+					if (res.data.value) {
+						this.cityListCA_string = [];
+						for ( var i=0; i<res.data.value.length; i++) {
+							this.cityListCA_string.push(res.data.value[i].City + ", " + res.data.value[i].County);
+						}
+						//this.cityListCA = res.data.value;
+					}
+				}
+			});
+		},
+		selectOneCity(city) {
+			this.form.forEach((item)=>{if (item.name=='city') {
+				item.value = city;
+			} })
+		},
+		
 		// 初始化语言
 		initLang() {
 			//获取语言列表

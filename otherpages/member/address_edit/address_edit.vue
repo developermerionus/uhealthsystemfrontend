@@ -166,7 +166,7 @@
 					{
 						"id":0,
 						"name":"China"
-					}
+					},
 				],
 				index: 0,
 				cityListCA: [
@@ -180,6 +180,7 @@
 				cityListCA_string: [],
 				tempCountryList:[],
 				cityCountyFocusValue: false,
+				usStateList:[],
 				
 				memberInfo: {},
 				addressLength: 1,
@@ -211,10 +212,12 @@
 			} else {
 				this.getCountryList();
 				this.getCityListCA();
+				this.getUsStates();
 				if (option.addressLength == 0){
 					this.addressLength = 0;
 					this.getMemberInfo();
 				}
+				
 				if (this.$refs.loadingCover) this.$refs.loadingCover.hide();
 			}
 		},
@@ -225,6 +228,8 @@
 			self = this;
 			this.getWrongChineseIdInfo();
 			this.getCityListCA();
+			this.getUsStates();
+			
 			this.$langConfig.refresh();
 			if (this.formData.id) {
 				uni.setNavigationBarTitle({
@@ -318,7 +323,7 @@
 			goState() {
 				uni.navigateTo({
 					url: `/otherpages/member/indexed-list/indexed-list?country=${this.countryList[this.index].id}&from=1`
-				})
+				});
 			},
 			loadAddressFromMemberInfo() {
 				
@@ -361,7 +366,7 @@
 							this.defaultRegions = [data.province_id, data.city_id, data.district_id];
 							this.getCountryList();
 							this.getCityListCA();
-							
+							this.getUsStates();
 						}
 						if (this.$refs.loadingCover) this.$refs.loadingCover.hide();
 					},
@@ -576,6 +581,19 @@
 			},
 			
 			saveAddress() {
+				if (this.formData.country_id===1) {
+					// 查看州名是否正确
+					if (!this.usStateList.includes(this.formData.state)){
+						// this.showWaringCheck(4000, this.$lang('common.currencySymbol'));
+						this.$util.showToastLonger(
+						{
+							title: this.$lang("usStateAlert"),
+						}, 3000);
+						return;
+					}
+				}
+				
+				// 查看CityCounty名是否准确
 				if (this.formData.country_id===1 && this.formData.state==='California') {
 						if (!this.cityListCA_string.includes(this.formData.city)) 
 						{
@@ -583,15 +601,16 @@
 							this.$util.showToastLonger( 
 							{
 								title: this.$lang("californiaCityAlert"),
-							}, 2000);
+							}, 3000);
 							this.cityCountyFocusValue = false;
 							this.$nextTick(function() {
-												this.cityCountyFocusValue = true;
-											});
+								this.cityCountyFocusValue = true;
+								});
 							return;
 						}
 				}
 				
+				// 查看是否是自提取
 				if (this.flag) return;
 				this.flag = true;
 				this.gocheck();
@@ -814,12 +833,10 @@
 					success: res => {
 						if (res.code >= 0 && res.data) {
 							this.countryList = res.data;
-							//console.log('this.countryList',this.countryList);
 							if (!this.formData.country_id && this.$refs.loadingCover) this.$refs.loadingCover.hide();
 							for (let v in this.countryList) {
 								this.tempCountryList.push(this.countryList[v].id);
 							}
-							
 							if (this.tempCountryList.length) {
 								this.index = this.$util.inArray(this.formData.country_id, this.tempCountryList);
 								this.setLocalType()
@@ -827,6 +844,29 @@
 						}
 					}
 				});
+			},
+			getUsStates() {
+				this.$api.sendRequest({
+					url: '/api/member/getUsStates',
+					data: {
+						pid: 1, // if USA, pid = 1
+					},
+					success: res => {
+					//	console.log(res);
+						let usStateListTemp = [];
+						this.usStateList = [];
+						if (res.code == 0) {
+							usStateListTemp = res.data;
+							console.log(usStateListTemp);
+							for ( var i=0; i<usStateListTemp.length; i++) {
+								for (var j=0; j<usStateListTemp[i].data.length; j++) {
+									this.usStateList.push(usStateListTemp[i].data[j]);
+								}
+							}
+						}
+						console.log(this.usStateList);
+					},
+				})
 			},
 			getCityListCA() {
 				uni.request({
@@ -855,7 +895,6 @@
 				// console.log(e);
 				this.formData.full_address = '';
 				this.index = e.detail.value;
-				//console.log('this.index',this.index);
 				this.formData.country_id = this.countryList[this.index].id;
 				if(this.countryList[this.index].id===0) {
 					this.checkSelfPickUp = true;
@@ -868,7 +907,6 @@
 				else {
 					this.checkSelfPickUp = false;
 				}
-				
 				//刷新子组件的内容
 				this.setLocalType();
 				if (this.formData.country_id == 172)

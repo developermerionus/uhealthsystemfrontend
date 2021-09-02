@@ -25,4 +25,5 @@ export const lang = {
 	state: '州/省',
 	californiaCityAlert: '请重新输入并选择城市名(包含县名).',
 	cityCountyPlaceholder: '请输入并选取城市及县名',
+	usStateAlert: '无效美国州名。请选择美国州名(全称)。',
 }
