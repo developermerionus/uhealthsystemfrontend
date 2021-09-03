@@ -315,7 +315,7 @@
 					{
 						name: 'address',
 						checkType: 'required',
-						errorMsg: '详细地址不能为空'
+						errorMsg: '街道不能为空'
 					}
 				];
 				var checkRes = validate.check(this.formData, rule);

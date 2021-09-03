@@ -270,7 +270,7 @@
 											province: res.provinceName, // 省
 											city: res.cityName, // 市
 											district: res.countryName, // 县
-											address: res.detailInfo, // 详细地址
+											address: res.detailInfo, // 街道
 											full_address: res.provinceName + '-' + res
 												.cityName + '-' + res.countryName
 										});
@@ -300,7 +300,7 @@
 								province: res.provinceName, // 省
 								city: res.cityName, // 市
 								district: res.countyName, // 县
-								address: res.detailInfo, // 详细地址
+								address: res.detailInfo, // 街道地址
 								full_address: res.provinceName + '-' + res.cityName + '-' + res
 									.countyName
 							});

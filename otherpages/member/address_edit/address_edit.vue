@@ -520,7 +520,7 @@
 						{
 							name: 'address',
 							checkType: 'required',
-							errorMsg: '详细地址不能为空'
+							errorMsg: '街道不能为空'
 						},
 						{
 							name: 'idNumber',
@@ -563,7 +563,7 @@
 						{
 							name: 'address',
 							checkType: 'required',
-							errorMsg: '详细地址不能为空'
+							errorMsg: '街道不能为空'
 						},
 					];
 				}
@@ -863,7 +863,7 @@
 								}
 							}
 						}
-						console.log(this.usStateList);
+						//console.log(this.usStateList);
 					},
 				})
 			},
