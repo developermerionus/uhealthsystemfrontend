@@ -97,6 +97,8 @@ export const lang = {
 	saveSuccess: '保存成功',
 	
 	cityCountyPlaceholder: '城市及县名',
+	'city, county': '城市, 县名',
+	californiaCityAlert: '请重新输入并选择城市名(包含县名).',
 	
 	
 }

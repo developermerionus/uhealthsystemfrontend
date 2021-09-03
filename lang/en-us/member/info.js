@@ -98,6 +98,8 @@ export const lang = {
 	saveSuccess: 'Successfully Saved!',
 	
 	cityCountyPlaceholder: 'City(with County) name',
+	'city, county': 'City, County',
+	californiaCityAlert: 'Please re-enter and repick California City with County.',
 	
 	
 }

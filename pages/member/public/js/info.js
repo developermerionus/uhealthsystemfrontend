@@ -50,6 +50,7 @@ export default {
 			form: [],
 			showLang:'',
 			cityListCA_string: [],
+			cityCountyFocusValue: false,
 		};
 	},
 	onLoad(option) {
@@ -147,7 +148,30 @@ export default {
 			  }
 			}
 			
-			if (isAllRequiredFieldFilled) {
+			// 检查加州城市及县名
+			let isCACityCountyNameCorrect = true;
+			
+			if (this.infoList.length>0 && this.infoList[2].value=='United States' && data.state==='California') {
+				
+				
+				console.log();
+					if (!this.cityListCA_string.includes(data.city)) 
+					{
+						this.$util.showToastLonger( 
+						{
+							title: this.$lang("californiaCityAlert"),
+						}, 3000);
+						this.cityCountyFocusValue = false;
+						this.$nextTick(function() {
+							this.cityCountyFocusValue = true;
+							});
+						isCACityCountyNameCorrect = false;
+					} 
+			}
+			
+			
+			// call API 保存更新信息
+			if (isAllRequiredFieldFilled && isCACityCountyNameCorrect) {
 				this.$api.sendRequest({
 					url: '/api/member/modifyMember',
 					data,

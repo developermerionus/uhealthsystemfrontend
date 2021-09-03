@@ -81,6 +81,7 @@ export default {
 			fillupName:"请您在地址栏中填写您的名字",
 			fillupPhonenum:"请您在地址栏中填写手机号",
 			usStateList: [],
+			cityListCA_string: [],
 		};
 		
 	},
@@ -903,23 +904,31 @@ export default {
 					this.usStateList = [];
 					if (res.code == 0) {
 						usStateListTemp = res.data;
-						console.log(typeof(usStateListTemp));
-						console.log(usStateListTemp);
 						for ( var i=0; i<usStateListTemp.length; i++) {
 							for (var j=0; j<usStateListTemp[i].data.length; j++) {
 								this.usStateList.push(usStateListTemp[i].data[j]);
 							}
 						}
 					}
-					console.log(this.usStateList);
 				},
 			})
+		},
+		getCityListCA() {
+			uni.request({
+			    url: 'https://www.cdtfa.ca.gov/dataportal/api/odata/Effective_Sales_Tax_Rates',
+				success: res => {
+					if (res.data.value) {
+						this.cityListCA_string = [];
+						for ( var i=0; i<res.data.value.length; i++) {
+							this.cityListCA_string.push(res.data.value[i].City + ", " + res.data.value[i].County);
+						}
+					}
+				}
+			});
 		},
 		// 显示选择支付方式弹框
 		openChoosePayment() {
 			//console.log('orderPaymentData',this.orderPaymentData);
-			
-			console.log("sssss", this.orderPaymentData.member_address);
 			
 			if(this.orderPaymentData&&this.orderPaymentData.member_address&&!this.orderPaymentData.member_address.mobile){
 				// this.$util.showToast({
@@ -939,7 +948,12 @@ export default {
 					if (!this.usStateList.includes(this.orderPaymentData.member_address.state)){
 						// this.showWaringCheck(4000, this.$lang('common.currencySymbol'));
 						this.showWaringCheck(4000, this.$lang('uscountryAlert'));
-					} else {
+					} else if (this.orderPaymentData.member_address.state==='California' 
+					&& !this.cityListCA_string.includes(this.orderPaymentData.member_address.city)) {
+						// 查看CityCounty名是否准确
+						this.showWaringCheck(4000, this.$lang('californiaCityAlert'));
+					}
+					else {
 						this.runPaymentPopup();
 					}
 				} 
@@ -1162,6 +1176,7 @@ export default {
 		this.getWrongChineseIdInfo();
 		this.$langConfig.refresh();
 		this.getUsStates(1);// 1: usa Country code;
+		this.getCityListCA();
 
 		if (uni.getStorageSync('addressBack')) {
 			uni.removeStorageSync('addressBack');

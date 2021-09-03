@@ -857,7 +857,6 @@
 						this.usStateList = [];
 						if (res.code == 0) {
 							usStateListTemp = res.data;
-							console.log(usStateListTemp);
 							for ( var i=0; i<usStateListTemp.length; i++) {
 								for (var j=0; j<usStateListTemp[i].data.length; j++) {
 									this.usStateList.push(usStateListTemp[i].data[j]);
