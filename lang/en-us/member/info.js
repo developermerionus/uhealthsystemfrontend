@@ -66,7 +66,7 @@ export const lang = {
 	alikeNickname: "与原昵称一致，无需修改",
 	noEmityNickname: "昵称不能为空",
 
-	updateSuccess: "修改成功",
+	updateSuccess: "Successfully Saved",
 
 	pleaseInputOldPassword: "请输入原始密码",
 	pleaseInputNewPassword: "请输入新密码",
@@ -96,6 +96,10 @@ export const lang = {
 	fieldsEmptyTips: "Can Not Be Empty!",
 	
 	saveSuccess: 'Successfully Saved!',
+	
+	cityCountyPlaceholder: 'City(with County) name',
+	'city, county': 'City, County',
+	californiaCityAlert: 'Please re-enter and repick California City with County.',
 	
 	
 }

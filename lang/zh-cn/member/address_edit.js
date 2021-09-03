@@ -15,8 +15,8 @@ export const lang = {
 	cityPlaceHolder: '请输入城市',
 	// address: 'Address',
 	
-	address: '详细地址',
-	addressPlaceholder: '详细地址不能为空',
+	address: '街道',
+	addressPlaceholder: '街道不能为空',
 	save: '保存',
 	idNumberPlaceholder: '请输入收货人身份证号码',
 	idNumber:'身份证号',
@@ -25,4 +25,5 @@ export const lang = {
 	state: '州/省',
 	californiaCityAlert: '请重新输入并选择城市名(包含县名).',
 	cityCountyPlaceholder: '请输入并选取城市及县名',
+	usStateAlert: '请重新选择美国州名(全称)。',
 }

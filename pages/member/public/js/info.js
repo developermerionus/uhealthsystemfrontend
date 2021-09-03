@@ -48,7 +48,9 @@ export default {
 			],
 			country: {},
 			form: [],
-			showLang:''
+			showLang:'',
+			cityListCA_string: [],
+			cityCountyFocusValue: false,
 		};
 	},
 	onLoad(option) {
@@ -60,10 +62,12 @@ export default {
 		this.getCaptcha();
 		this.getRegisterConfig();
 		this.getCountryList();
+		this.getCityListCA();
 		// this.pushAddresss = !disabled;
 		this.initLang();
 	},
 	onShow() {
+		this.getCityListCA();
 		this.getMemberConfig();
 	},
 	onHide() {
@@ -144,7 +148,30 @@ export default {
 			  }
 			}
 			
-			if (isAllRequiredFieldFilled) {
+			// 检查加州城市及县名
+			let isCACityCountyNameCorrect = true;
+			
+			if (this.infoList.length>0 && this.infoList[2].value=='United States' && data.state==='California') {
+				
+				
+				console.log();
+					if (!this.cityListCA_string.includes(data.city)) 
+					{
+						this.$util.showToastLonger( 
+						{
+							title: this.$lang("californiaCityAlert"),
+						}, 3000);
+						this.cityCountyFocusValue = false;
+						this.$nextTick(function() {
+							this.cityCountyFocusValue = true;
+							});
+						isCACityCountyNameCorrect = false;
+					} 
+			}
+			
+			
+			// call API 保存更新信息
+			if (isAllRequiredFieldFilled && isCACityCountyNameCorrect) {
 				this.$api.sendRequest({
 					url: '/api/member/modifyMember',
 					data,
@@ -184,6 +211,26 @@ export default {
 			}
 			
 		},
+		getCityListCA() {
+			uni.request({
+			    url: 'https://www.cdtfa.ca.gov/dataportal/api/odata/Effective_Sales_Tax_Rates',
+				success: res => {
+					if (res.data.value) {
+						this.cityListCA_string = [];
+						for ( var i=0; i<res.data.value.length; i++) {
+							this.cityListCA_string.push(res.data.value[i].City + ", " + res.data.value[i].County);
+						}
+						//this.cityListCA = res.data.value;
+					}
+				}
+			});
+		},
+		selectOneCity(city) {
+			this.form.forEach((item)=>{if (item.name=='city') {
+				item.value = city;
+			} })
+		},
+		
 		// 初始化语言
 		initLang() {
 			//获取语言列表

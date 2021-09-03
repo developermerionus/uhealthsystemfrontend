@@ -23,4 +23,5 @@ export const lang = {
 	state: 'State/Province',
 	californiaCityAlert: 'Please re-enter and repick California City with County.',
 	cityCountyPlaceholder: 'City(with County) name',
+	usStateAlert: 'Invalid US state name. Please re-select US state name(full name)',
 }

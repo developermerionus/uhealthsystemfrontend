@@ -28,12 +28,30 @@
 				</block>
 				<block v-for="(item, index) in form" :key='index+100'>
 					<view class="info-list-cell info-list-con" hover-class="cell-hover" @click="modifyInfo(item.name)">
-						<text class="cell-tit">{{ $lang( item.name) }}
+						<text class="cell-tit" v-if="item.name!='city' || infoList[2].value!='United States' 
+						 || form[8].value!='California'">{{ $lang( item.name) }}
 							<text style='color: #FF0000;' v-if="item.name!='joint_applicant'&&item.name!='company'
-							&&item.name!='nickname'">*</text></text>
-						<input v-if="item.name!='birthdate' || memberInfo.member_level>1" :disabled='locked(item.name)' class="cell-tip"
-							style="text-align:end; font-size: 24rpx;  width:350rpx; color:#606266;" maxlength="500px"
+							&&item.name!='nickname'">*</text>
+						</text>
+						<text class="cell-tit" v-if="item.name=='city' && infoList[2].value=='United States' 
+						 && form[8].value=='California'">{{ $lang(item.name + ', county') }}
+							<text style='color: #FF0000;' v-if="item.name!='joint_applicant'&&item.name!='company'
+							&&item.name!='nickname'">*</text>
+						</text>
+						<input v-if="(item.name!='birthdate' || memberInfo.member_level>1) && item.name!='city'" 
+						 :disabled='locked(item.name)' class="cell-tip" 
+						  style="text-align:end; font-size: 24rpx;  width:350rpx; color:#606266;" maxlength="500px"
 							:placeholder="$lang(item.name)" v-model="item.value" />
+						<input v-if="item.name=='city' && (infoList[2].value!=='United States' || form[8].value!='California')"
+						 class="cell-tip" style="text-align:end; font-size: 24rpx;  width:350rpx; color:#606266;" maxlength="500px"
+							:placeholder="$lang(item.name)" v-model="item.value" />
+						
+						<str-autocomplete v-if="item.name=='city' && infoList[2].value=='United States' && form[8].value=='California'"
+						  :importvalue="item.value" :list="cityListCA_string" @select="selectOneCity" 
+						  :placeholderValue="$lang('cityCountyPlaceholder')" :focusValue="cityCountyFocusValue" highlightColor="#FF0000" 
+						   style='min-width: 225px; margin-left: 10px;' class="cell-tip info-city-ca-autocomplete"></str-autocomplete>
+						  
+							<!-- <text v-if="item.name=='city'" @click="print(item.value)">ssssssss</text> -->
 						<picker v-if="item.name=='birthdate' && memberInfo.member_level==1" mode="date" :value="item.value" 
 						:start="startDate" :end="endDate" @change="bindDateChange">
 							<view class="uni-input" style='text-align: end;'>{{ item.value ? item.value 
@@ -161,6 +179,9 @@
 			goCenter() {
 				this.$util.redirectTo('/pages/member/index/index');
 			},
+			print(item) {
+				console.log(item);
+			}
 		}
 	};
 </script>
@@ -300,7 +321,7 @@
 			transform: rotate(135deg);
 		}
 
-
+		
 		&.info-btn_view {
 			padding: 20rpx 15rpx 40rpx;
 
@@ -316,6 +337,10 @@
 
 			}
 
+		}
+		
+		.info-city-ca-autocomplete {
+			text-align: end;
 		}
 
 

@@ -639,6 +639,8 @@
 		onLoad(option) {
 			this.getMemberInfo();
 			this.formData.id = option.id;
+			this.getUsStates(1);
+			this.getCityListCA();
 		},
 		onShow() {
 			this.checkSelfPickupExist();
