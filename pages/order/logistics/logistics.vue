@@ -115,7 +115,8 @@ export default {
 				shundaexpress_nmn:{url:"www.shundaexpress.com", realName: "顺达" , redirectUrl:'http://www.shundaexpress.com/select/?num='},
 				ups:{url:'www.ups.com/track?loc=en_US&requester=ST/', realName:"UPS",redirectUrl:''},
 				ezgo:{url:"www.t-cat.com.tw/Inquire/International.aspx", realName:"黑猫宅急便",redirectUrl:''},
-				baitong:{url:"www.buytong.cn/newindex/waybillquery", realName: '百通',redirectUrl:''}
+				baitong:{url:"www.buytong.cn/newindex/waybillquery", realName: '百通',redirectUrl:''},
+				fedex:{url:"www.fedex.com/en-us/home.html", realName: 'FedEx',redirectUrl:'https://www.fedex.com/fedextrack/no-results-found?trknbr='}
 			}
 		};
 	},
@@ -206,9 +207,21 @@ export default {
 
 <style lang="scss">
 @import '../public/css/logistics.scss';
+
 .order-nav {
 	margin-left:4%;
 }
+
+@media screen and (min-width: 1200px) and (max-width: 1400px){
+					.order-nav {
+						margin-left:8%;
+					}
+				}
+@media screen and (min-width: 1400px){
+					.order-nav {
+						margin-left:12%;
+					}
+				}
 .main {
 	margin:0 auto;
 	max-width: 1200px;
