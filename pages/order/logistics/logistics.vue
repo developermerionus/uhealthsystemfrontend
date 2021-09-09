@@ -207,9 +207,21 @@ export default {
 
 <style lang="scss">
 @import '../public/css/logistics.scss';
+
 .order-nav {
 	margin-left:4%;
 }
+
+@media screen and (min-width: 1200px) and (max-width: 1400px){
+					.order-nav {
+						margin-left:8%;
+					}
+				}
+@media screen and (min-width: 1400px){
+					.order-nav {
+						margin-left:12%;
+					}
+				}
 .main {
 	margin:0 auto;
 	max-width: 1200px;
