@@ -20,7 +20,7 @@
 				<view class="detail">
 					<view v-if = 'orderData.country_id == 172'>
 						<text class="font-size-base" >收货地址：{{ orderData.full_address }} {{ orderData.address }}</text>
-						<text class="font-size-base" >身份证号码：{{ member.id_number }}</text>
+						<text class="font-size-base" >身份证号码：{{ orderData.receiver_official_id}}</text>
 					</view>
 					<text class="font-size-base" v-else>Shipping Address：{{ orderData.address }}, {{ orderData.full_address }} </text>
 				</view>
