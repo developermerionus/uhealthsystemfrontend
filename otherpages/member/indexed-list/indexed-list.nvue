@@ -49,6 +49,9 @@
 					// console.log(this.country_id)
 					prevPage.updateStateProvince(e.item.name, this.country_id);
 				}
+				else if (prevPage.__page__.path == "/pages/order/payment/payment") {
+					prevPage.cardFormData.state = e.item.name;
+				}
 				uni.navigateBack({
 					delta: 1
 				})

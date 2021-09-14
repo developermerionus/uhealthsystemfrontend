@@ -1,10 +1,10 @@
 <template>
 	<view>
-		<view class="set-card" v-if="setCard">
-			<view class="empty-bar-view"></view>
-			<view class="edit-info-box">
+		<view  v-if="setCard">
+			<!-- <view class="empty-bar-view"></view> -->
+			<view class="edit-info-box out-focus" >
 				<text class="info-name">{{$lang('common.credit_card_no')}}</text>
-				<input class="uni-input info-content input-len" type="number" maxlength="30" :placeholder="$lang('common.input_card_no')" v-model="formData.number" />
+				<input :focus="focusFlag" class="focus uni-input info-content input-len" type="number" maxlength="30" :placeholder="$lang('common.input_card_no')" v-model="formData.number" />
 			</view>
 			<view class="edit-info-box">
 				<text class="info-name">{{$lang('common.credit_card_valid')}}</text>
@@ -30,12 +30,66 @@
 				<img src="https://img.icons8.com/color/48/000000/amex.png"/>
 				<img src="https://img.icons8.com/color/48/000000/discover.png"/>
 			</view>
+			<!-- <br> -->
+			<view class="edit-info-box">
+				<text>{{$lang('common.billingaddress')}}:</text>
+			</view>
+			<!-- <view class="edit-info-box">
+				<text class="info-name">{{$lang('common.country')}}</text>
+				<input class="uni-input info-content input-len" type="text" maxlength="30" :placeholder="$lang('common.country')" v-model="formData.country" />
+			</view> -->
+			<view class="edit-info-box" style='justify-content: flex-start;'>
+				<text class="info-name" >{{$lang('common.country')}}<!-- <text>*</text> --></text>
+				<picker @change="bindPickerChange" :value="index" :range="countryList" class="picker" range-key="name">
+					<text class="desc uni-input">{{ $lang(`common.${countryList[index].name}`)?  $lang(`common.${countryList[index].name}`):countryList[index].name}}</text>
+				</picker>
+			</view>
+			<!-- <view class="edit-info-box" v-show="localType !== 2">
+				<text class="info-name">{{$lang('common.state')}}</text>
+				<input  class="uni-input info-content input-len" type="text" maxlength="30" :placeholder="$lang('common.state')" v-model="formData.state" />
+			</view> -->
+			<view class="edit-info-box" >
+				<text class="info-name" >
+					{{$lang('common.state')}}
+				<!-- 	<text>*</text> -->
+				</text>
+				<input class="uni-input  info-content input-len" type="text" placeholder-class="placeholder-class" :placeholder="$lang('common.state')"
+				 maxlength="100" v-model="formData.state=cardFormData.state" @click="goState()"/>
+			</view>
+			
+			<view class="edit-info-box">
+				<text class="info-name">{{$lang('common.city')}}</text>
+				<input class="uni-input info-content input-len" type="text" maxlength="30" :placeholder="$lang('common.city')" v-model="formData.city" />
+			</view>
+			<view class="edit-info-box">
+				<text class="info-name">{{$lang('common.street')}}</text>
+				<input class="uni-input info-content input-len" type="text" maxlength="30" :placeholder="$lang('common.street')" v-model="formData.street" />
+			</view>
+			
+			
+			<view class="edit-info-box">
+				<text class="info-name">{{$lang('common.zipcode')}}</text>
+				<input class="uni-input info-content input-len" type="number" maxlength="30" :placeholder="$lang('common.zipcode')" v-model="formData.zip" />
+			</view>
+			<view class="edit-info-box">
+				<text class="info-name">{{$lang('common.phonenumber')}}</text>
+				<input class="uni-input info-content input-len" type="text" maxlength="30" :placeholder="$lang('common.phonenumber')" v-model="formData.phone" />
+			</view>
+			<view class="edit-info-box">
+				<text class="info-name">{{$lang('common.email')}}</text>
+				<input class="uni-input info-content input-len" type="email" maxlength="30" :placeholder="$lang('common.email')" v-model="formData.email" />
+			</view>
+			<!-- <view class="edit-info-box">
+				<text class="info-name">{{$lang('common.confirmemail')}}</text>
+				<input class="uni-input info-content input-len" type="text" maxlength="30" :placeholder="$lang('common.confirmemail')" v-model="formData.email" />
+			</view> -->
+			
 			<br>
 			<view class="save-item" @click="confirm(2)">
 				<button type="primary">{{$lang('common.confirm')}}</button>
 			</view>
 			<br>
-			<view class="save-item" @click="setCard = false">
+			<view class="save-item" @click="cancelHandler()">
 				<button type="default">{{$lang('common.cancel')}}</button>
 			</view>
 		</view>
@@ -88,6 +142,7 @@ import { Weixin } from 'common/js/wx-jssdk.js';
 // #endif
 
 export default {
+	
 	name: 'payment',
 	components: {
 		uniPopup,
@@ -105,10 +160,25 @@ export default {
 		payMoney: {
 			type: [Number, String],
 			default: 0
+		},
+		cardFormData: {
+			type: Object,
+			default:{state:''}
 		}
 	},
 	data() {
 		return {
+			tempCountryList:[],
+			name:'',
+			countryList: [
+				{
+					"id":0,
+					"name":"China"
+				},
+			],
+			index: 10,
+			setCard: false,
+			focusFlag: false,
 			isIphoneX: false,
 			payIndex: 0,
 			// #ifdef H5
@@ -142,30 +212,107 @@ export default {
 					name: '微信支付',
 					provider: 'wxpay',
 					icon: 'iconweixin1',
-					type: 'wechatpay'
+					type: 'wechatpay',	
 				}
 			],
 			// #endif
 			payInfo: {},
-			setCard:false,
+			
 			is_save : false,
 			formData: {
 				number:'',
 				exp_date:'',
 				cvc:'',
 				first_name:'',
-				last_name:''
+				last_name:'',
+				address:'',
+				city:'',
+				state:'',
+				zip:'',
+				country:'',
+				phone:'',
+				email:''
 			},
 		};
 	},
+	
+	
 	created() {
 		this.isIphoneX = this.$util.uniappIsIPhoneX();
 		
 		this.getPayType();
 		
 		this.getCardInfo();
+		
+		this.getCountryList();
 	},
 	methods: {
+		bindPickerChange(e) {
+				this.index = e.detail.value;
+				console.log(e.detail.value);
+				this.formData.country = this.countryList[this.index].name;
+		},
+		goState() {
+			uni.navigateTo({
+				url: `/otherpages/member/indexed-list/indexed-list?country=${this.countryList[this.index].id}&from=1`
+			});
+		},
+		getCountryList() {
+			this.$api.sendRequest({
+				url: '/api/address/country',
+				success: res => {
+					if (res.code >= 0 && res.data) {
+						console.log('res.data',res.data);
+						this.countryList = res.data.filter(item=> item.id!=0);
+						for (let v in this.countryList) {
+							this.tempCountryList.push(this.countryList[v].name);
+						}
+						
+					}
+				}
+			});
+		},
+		getUsStates() {
+			this.$api.sendRequest({
+				url: '/api/member/getUsStates',
+				data: {
+					pid: 1, // if USA, pid = 1
+				},
+				success: res => {
+				//	console.log(res);
+					let usStateListTemp = [];
+					this.usStateList = [];
+					if (res.code == 0) {
+						usStateListTemp = res.data;
+						for ( var i=0; i<usStateListTemp.length; i++) {
+							for (var j=0; j<usStateListTemp[i].data.length; j++) {
+								this.usStateList.push(usStateListTemp[i].data[j]);
+							}
+						}
+					}
+					//console.log(this.usStateList);
+				},
+			})
+		},
+		cancelHandler() {
+			this.setCard = false;
+			this.$emit('showHandler');
+		},
+		but(){
+		    
+			uni.createSelectorQuery().select('.focus').boundingClientRect(data=>{
+		    //目标位置的节点：类class或者id
+			uni.createSelectorQuery().select(".out-focus").boundingClientRect(res=>{
+		    //最外层盒子的节点：类class或者id
+			uni.pageScrollTo({
+		    
+			duration: 100,//过渡时间
+			//scrollTop:data.top+590 - res.top,//到达距离顶部的top值
+			scrollTop:data.top - res.top,//如果置顶
+					})
+				}).exec()
+			}).exec();
+		},
 		open() {
 			this.$refs.choosePaymentPopup.open();
 		},
@@ -188,6 +335,14 @@ export default {
 			
 			if(payType.type == 'authorizenetpay' && num == 1){
 				this.setCard = true;
+				this.focusFlag = false;
+				console.log('before focusFlag',this.focusFlag);
+				this.$nextTick(function() {
+					this.focusFlag = true;
+					console.log('focusFlag',this.focusFlag);
+					this.but();
+					this.$emit('showHandler');
+					});
 				this.close()
 				return false;
 			}
@@ -213,16 +368,53 @@ export default {
 				}
 				if (this.formData.first_name== '') {
 					this.$util.showToast({
-						title: this.$lang('common.input_last_name')
+						title: this.$lang('common.input_first_name')
 					});
 					return;
 				}
 				if (this.formData.last_name== '') {
 					this.$util.showToast({
-						title: this.$lang('common.input_first_name')
+						title: this.$lang('common.input_last_name')
 					});
 					return;
 				}
+				if (this.formData.country== '') {
+					this.$util.showToast({
+						title: this.$lang('common.input_country')
+					});
+					return;
+				}
+				if (this.formData.state== '') {
+					this.$util.showToast({
+						title: this.$lang('common.input_state')
+					});
+					return;
+				}
+				if (this.formData.city== '') {
+					this.$util.showToast({
+						title: this.$lang('common.input_city')
+					});
+					return;
+				}
+				if (this.formData.street== '') {
+					this.$util.showToast({
+						title: this.$lang('common.input_street')
+					});
+					return;
+				}
+				if (this.formData.phone== '') {
+					this.$util.showToast({
+						title: this.$lang('common.input_phone')
+					});
+					return;
+				}
+				if (this.formData.email== '') {
+					this.$util.showToast({
+						title: this.$lang('common.input_email')
+					});
+					return;
+				}
+				
 			}
 			
 			uni.showLoading({
@@ -291,8 +483,7 @@ export default {
 		pay() {
 			var payType = this.payTypeList[this.payIndex];
 			if (!payType) return;
-			let that = this;
-			
+			let that = this;         
 			if(payType.type == 'authorizenetpay'){
 					this.$api.sendRequest({
 						url: '/api/pay/pay',
@@ -302,7 +493,7 @@ export default {
 							authorizenetpay_param:JSON.stringify(this.formData)
 						},
 						success: res => {
-							// console.log(res);
+							 console.log(res);
 							uni.hideLoading();
 							if (res.code >= 0) {
 								this.checkPayStatus();

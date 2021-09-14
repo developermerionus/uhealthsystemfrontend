@@ -85,6 +85,12 @@ export const lang = {
 		input_cvc: "Please input cvc",
 		input_last_name: "Please input last name",
 		input_first_name: "Please input first name",
+		input_country: "Please input country",
+		input_state: "Please input state",
+		input_city: "Please input city",
+		input_street: "Please input street",
+		input_phone: "Please input phone",
+		input_email: "Please input email",
 		paying: "Paying...",
 		failed_pay: "Failed pay",
 		general: "General",
@@ -156,6 +162,15 @@ export const lang = {
 		day: "day",
 		points:" points",
 		activerequirement:"Active Requirement",
-		creditCardRequirement: "We only accept following major credit or debit cards"
+		creditCardRequirement: "We only accept following major credit or debit cards",
+		street:"Street",
+		city:"City",
+		country:"Country",
+		state:"State",
+		 zipcode:"Zipcode",
+		phonenumber:"Phone Number",
+		email:"Email",
+		confirmemail:"Confirm Email",
+		billingaddress: "Billing Address"
 	}
 }
