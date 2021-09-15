@@ -6,10 +6,10 @@
 			<!-- <view class="tip">{{$lang('address')}}</view> -->
 			<view class="edit-item">
 				<text class="tit">
-					{{ $lang('consignee') }}
+					{{ $lang('name') }}
 					<text>*</text>
 				</text>
-				<input class="uni-input" type="text" placeholder-class="placeholder-class" :placeholder="$lang('consignee')"
+				<input class="uni-input" type="text" placeholder-class="placeholder-class" :placeholder="$lang('name')"
 				 maxlength="30" name="name" v-model="formData.name" />
 			</view>
 		<!-- 	<view class="edit-item">

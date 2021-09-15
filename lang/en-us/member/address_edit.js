@@ -1,7 +1,7 @@
 export const lang = {
 	//title为每个页面的标题
 	title: 'Edit Address',
-	consignee: 'Consignee',
+	name: 'Name',
 	consigneePlaceholder: 'Consignee Name',
 	mobile: 'Mobile',
 	mobilePlaceholder: 'Mobile',
