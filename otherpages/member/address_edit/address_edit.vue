@@ -2,7 +2,8 @@
 	<view class="address-edit-content" :data-theme="themeStyle">
 		<view class="outer-container-wrap">
 				<view class="edit-wrap">
-			<navbar></navbar>
+					<navbar></navbar>
+			<!-- <view class="tip">{{$lang('address')}}</view> -->
 			<view class="edit-item">
 				<text class="tit">
 					{{ $lang('consignee') }}

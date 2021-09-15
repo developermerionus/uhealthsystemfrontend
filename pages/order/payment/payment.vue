@@ -1,8 +1,10 @@
 <template>
 	<view class="order-container" :class="{ 'safe-area': isIphoneX }" :data-theme="themeStyle">
+		
 		<!-- 选择地址 -->
 		<template v-if="orderPaymentData.is_virtual == 0">
 			<navbar></navbar>
+			<view v-if="!setCard">
 			<view class="address-box" v-if="orderPaymentData.delivery.delivery_type != 'store'">
 				<view class="info-wrap" v-if="orderPaymentData.member_address" @click="selectAddress">
 					<view class="icon-wrap"><text class="iconfont icondizhi"></text></view>
@@ -132,8 +134,9 @@
 				</view>
 				<view v-else class="empty">当前无自提门店，请选择其它配送方式</view>
 			</view>
+		    </view>
 		</template>
-
+		<view v-if="!setCard">
 		<!-- 虚拟商品展示手机号 -->
 		<view class="mobile-wrap" v-if="orderPaymentData.is_virtual == 1 && orderCreateData.member_address">
 			<view class="tips color-base-text">购买虚拟类商品需填写手机号，方便商家与您联系</view>
@@ -565,7 +568,7 @@
 				</view>
 			</view>
 		</uni-popup>
-
+     </view>
 		<!-- 选择支付方式弹窗 -->
 		<!-- <ns-payment ref="choosePaymentPopup" :isBalance="orderCreateData.is_balance" @useBalance="useBalance"
 			:isPayPassWord="orderPaymentData.member_account.is_pay_password"
@@ -573,15 +576,19 @@
 			:payMoney="orderPaymentData.pay_money" @confirm="orderCreate"></ns-payment> -->
 			<ns-payment
 				ref="choosePaymentPopup"
+				@cardFormDataHandler = "cardFormDataHandler"
+				:cardFormData = "cardFormData"
 				:isBalance="orderCreateData.is_balance"
 				@useBalance="useBalance"
 				:isPayPassWord="orderPaymentData.member_account.is_pay_password"
 				:balanceDeduct="orderPaymentData.order_money <= orderPaymentData.member_account.balance_total ? balanceDeduct : '0'"
 				:payMoney="orderPaymentData.pay_money"
 				@confirm="orderCreate"
+				@showHandler = "showHandler"
 			></ns-payment>
 
 		<loading-cover ref="loadingCover"></loading-cover>
+		
 	</view>
 </template>
 
@@ -595,6 +602,8 @@
 	export default {
 		data() {
 			return {
+				cardFormData:{state:''},
+				setCard: false,
 				formData: {
 					id: 0,
 					name: '',
@@ -647,6 +656,9 @@
 			
 		},
 		methods: {
+			showHandler() {
+				this.setCard=!this.setCard;
+			},
 			nameFormat(data) {
 							//this.formData.name = res.data.marketCountryId===172?res.data.surname + res.data.firstname:res.data.surname + ' ' + res.data.firstname;
 							if( data.marketCountryId === 172 || 

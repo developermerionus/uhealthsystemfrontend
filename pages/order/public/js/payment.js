@@ -2,6 +2,7 @@ var self;
 export default {
 	data() {
 		return {
+			setCard:false,
 			chineseIdCheckFlag:false,
 			avoidRepeatClick:[],
 			isIphoneX: false,
