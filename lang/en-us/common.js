@@ -171,6 +171,20 @@ export const lang = {
 		phonenumber:"Phone Number",
 		email:"Email",
 		confirmemail:"Confirm Email",
-		billingaddress: "Billing Address"
+		billingaddress: "Billing Address",
+		  '172':"China",
+		  '1': "United State",
+		  '10':"Macau",
+		  '62':"Indonesia",
+		  '82':"South Korea",
+		  '125':"France",
+		  '131':"Hong Kong Area",
+		  '139':"Japan",
+		  '144':"Malaysia",
+		  '153':"Canada",
+		  '157':"Australia",
+		  '174':"Costa Rica",
+		  '221':"Singapore",
+		  '228':"Taiwan"
 	}
 }

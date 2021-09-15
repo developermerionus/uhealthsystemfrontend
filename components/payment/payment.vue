@@ -22,6 +22,16 @@
 				<text class="info-name">{{$lang('common.first_name')}}</text>
 				<input class="uni-input info-content input-len" type="text" maxlength="30" :placeholder="$lang('common.first_name')" v-model="formData.last_name" />
 			</view>
+			<view class="edit-info-box" style='justify-content: flex-start;'>
+				<text class="info-name" >{{$lang('common.country')}}<!-- <text>*</text> --></text>
+				<picker @change="bindPickerChange" :value="index" :range="tempCountryList" class="picker" range-key="name">
+				<!-- 	<text class="desc uni-input">{{ $lang(`common.${countryList[index].name}`)?  $lang(`common.${countryList[index].name}`):countryList[index].name}}</text>
+				 -->
+				 <text class="desc uni-input">{{tempCountryList[index]}}</text>
+				 
+				 </picker>
+			</view>
+		
 			<view class="credit-card-icon-box">
 				<text>{{$lang('common.creditCardRequirement')}}:</text>
 				<br>
@@ -31,6 +41,7 @@
 				<img src="https://img.icons8.com/color/48/000000/discover.png"/>
 			</view>
 			<!-- <br> -->
+			<view v-show="billingAddressShow">
 			<view class="edit-info-box">
 				<text>{{$lang('common.billingaddress')}}:</text>
 			</view>
@@ -38,12 +49,7 @@
 				<text class="info-name">{{$lang('common.country')}}</text>
 				<input class="uni-input info-content input-len" type="text" maxlength="30" :placeholder="$lang('common.country')" v-model="formData.country" />
 			</view> -->
-			<view class="edit-info-box" style='justify-content: flex-start;'>
-				<text class="info-name" >{{$lang('common.country')}}<!-- <text>*</text> --></text>
-				<picker @change="bindPickerChange" :value="index" :range="countryList" class="picker" range-key="name">
-					<text class="desc uni-input">{{ $lang(`common.${countryList[index].name}`)?  $lang(`common.${countryList[index].name}`):countryList[index].name}}</text>
-				</picker>
-			</view>
+			
 			<!-- <view class="edit-info-box" v-show="localType !== 2">
 				<text class="info-name">{{$lang('common.state')}}</text>
 				<input  class="uni-input info-content input-len" type="text" maxlength="30" :placeholder="$lang('common.state')" v-model="formData.state" />
@@ -63,7 +69,7 @@
 			</view>
 			<view class="edit-info-box">
 				<text class="info-name">{{$lang('common.street')}}</text>
-				<input class="uni-input info-content input-len" type="text" maxlength="30" :placeholder="$lang('common.street')" v-model="formData.street" />
+				<input class="uni-input info-content input-len" type="text" maxlength="30" :placeholder="$lang('common.street')" v-model="formData.address" />
 			</view>
 			
 			
@@ -83,7 +89,7 @@
 				<text class="info-name">{{$lang('common.confirmemail')}}</text>
 				<input class="uni-input info-content input-len" type="text" maxlength="30" :placeholder="$lang('common.confirmemail')" v-model="formData.email" />
 			</view> -->
-			
+			</view>
 			<br>
 			<view class="save-item" @click="confirm(2)">
 				<button type="primary">{{$lang('common.confirm')}}</button>
@@ -176,7 +182,7 @@ export default {
 					"name":"China"
 				},
 			],
-			index: 10,
+			index: 0,
 			setCard: false,
 			focusFlag: false,
 			isIphoneX: false,
@@ -216,8 +222,9 @@ export default {
 				}
 			],
 			// #endif
+			billingAddressShow:true,
 			payInfo: {},
-			
+			showCountry:[1,153],
 			is_save : false,
 			formData: {
 				number:'',
@@ -229,7 +236,7 @@ export default {
 				city:'',
 				state:'',
 				zip:'',
-				country:'',
+				country:'United State',
 				phone:'',
 				email:''
 			},
@@ -242,15 +249,21 @@ export default {
 		
 		this.getPayType();
 		
-		this.getCardInfo();
+		//this.getCardInfo();
 		
 		this.getCountryList();
 	},
 	methods: {
 		bindPickerChange(e) {
 				this.index = e.detail.value;
-				console.log(e.detail.value);
+				console.log('index',e.detail.value);
 				this.formData.country = this.countryList[this.index].name;
+				if(this.showCountry.indexOf(this.countryList[this.index].id)<0) {
+					this.billingAddressShow = false;
+				}
+				else {
+					this.billingAddressShow = true;
+				}
 		},
 		goState() {
 			uni.navigateTo({
@@ -265,8 +278,9 @@ export default {
 						console.log('res.data',res.data);
 						this.countryList = res.data.filter(item=> item.id!=0);
 						for (let v in this.countryList) {
-							this.tempCountryList.push(this.countryList[v].name);
+							this.tempCountryList.push(this.$lang(`common.${this.countryList[v].id}`));
 						}
+						//console.log(this.tempCountryList);
 						
 					}
 				}
@@ -384,6 +398,7 @@ export default {
 					});
 					return;
 				}
+				if(billingAddressShow) {
 				if (this.formData.state== '') {
 					this.$util.showToast({
 						title: this.$lang('common.input_state')
@@ -413,6 +428,7 @@ export default {
 						title: this.$lang('common.input_email')
 					});
 					return;
+				}
 				}
 				
 			}
@@ -485,6 +501,7 @@ export default {
 			if (!payType) return;
 			let that = this;         
 			if(payType.type == 'authorizenetpay'){
+				console.log('show formdata', this.formData);
 					this.$api.sendRequest({
 						url: '/api/pay/pay',
 						data: {
