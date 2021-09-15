@@ -256,13 +256,25 @@ export default {
 	methods: {
 		bindPickerChange(e) {
 				this.index = e.detail.value;
-				console.log('index',e.detail.value);
+				//console.log('index',e.detail.value);
 				this.formData.country = this.countryList[this.index].name;
 				if(this.showCountry.indexOf(this.countryList[this.index].id)<0) {
 					this.billingAddressShow = false;
+					this.formData.address = '';
+					this.formData.city='';
+					this.cardFormData.state='';
+					this.formData.zip='';
+					this.formData.phone='';
+					this.formData.email='';
 				}
 				else {
 					this.billingAddressShow = true;
+					this.formData.address = '';
+					this.formData.city='';
+					this.cardFormData.state='';
+					this.formData.zip='';
+					this.formData.phone='';
+					this.formData.email='';
 				}
 		},
 		goState() {
@@ -275,7 +287,7 @@ export default {
 				url: '/api/address/country',
 				success: res => {
 					if (res.code >= 0 && res.data) {
-						console.log('res.data',res.data);
+						//console.log('res.data',res.data);
 						this.countryList = res.data.filter(item=> item.id!=0);
 						for (let v in this.countryList) {
 							this.tempCountryList.push(this.$lang(`common.${this.countryList[v].id}`));
@@ -350,10 +362,8 @@ export default {
 			if(payType.type == 'authorizenetpay' && num == 1){
 				this.setCard = true;
 				this.focusFlag = false;
-				console.log('before focusFlag',this.focusFlag);
 				this.$nextTick(function() {
 					this.focusFlag = true;
-					console.log('focusFlag',this.focusFlag);
 					this.but();
 					this.$emit('showHandler');
 					});
@@ -398,7 +408,7 @@ export default {
 					});
 					return;
 				}
-				if(billingAddressShow) {
+				if(this.billingAddressShow) {
 				if (this.formData.state== '') {
 					this.$util.showToast({
 						title: this.$lang('common.input_state')
@@ -485,23 +495,23 @@ export default {
 				}
 			});
 		},
-		getCardInfo() {
-			this.$api.sendRequest({
-				url: '/api/member/getCard',
-				success: res => {
-					if (res.code == 0) {
-						this.formData = res.data;
-					}
-				}
-			});
-		},
+		// getCardInfo() {
+		// 	this.$api.sendRequest({
+		// 		url: '/api/member/getCard',
+		// 		success: res => {
+		// 			if (res.code == 0) {
+		// 				this.formData = res.data;
+		// 			}
+		// 		}
+		// 	});
+		// },
 		// #ifdef H5
 		pay() {
 			var payType = this.payTypeList[this.payIndex];
 			if (!payType) return;
 			let that = this;         
 			if(payType.type == 'authorizenetpay'){
-				console.log('show formdata', this.formData);
+				console.log('formData', this.formData);
 					this.$api.sendRequest({
 						url: '/api/pay/pay',
 						data: {
@@ -510,7 +520,7 @@ export default {
 							authorizenetpay_param:JSON.stringify(this.formData)
 						},
 						success: res => {
-							 console.log(res);
+							// console.log(res);
 							uni.hideLoading();
 							if (res.code >= 0) {
 								this.checkPayStatus();
