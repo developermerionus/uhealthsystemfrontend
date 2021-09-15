@@ -1,7 +1,7 @@
 export const lang = {
 	//title为每个页面的标题
 	title: '编辑收货地址',
-	consignee: '姓名',
+	name: '姓名',
 	consigneePlaceholder: '收货人姓名',
 	mobile: '手机',
 	mobilePlaceholder: '收货人手机号',

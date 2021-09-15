@@ -511,7 +511,7 @@ export default {
 			if (!payType) return;
 			let that = this;         
 			if(payType.type == 'authorizenetpay'){
-				console.log('formData', this.formData);
+				//console.log('formData', this.formData);
 					this.$api.sendRequest({
 						url: '/api/pay/pay',
 						data: {
