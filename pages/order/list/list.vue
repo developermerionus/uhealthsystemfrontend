@@ -1,5 +1,6 @@
 <template>
 	<view class="order-container" :data-theme="themeStyle">
+		<view v-show="!setCard">
 		<mescroll-uni ref="mescroll" @getData="getListData" >
 			<block slot="list">
 				<navbar></navbar>
@@ -103,9 +104,9 @@
 		<view class="order-batch-action" :class="{ 'bottom-safe-area': isIphoneX }" v-if="mergePayOrder.length">
 			<view class="action-btn color-base-text color-base-border" @click="openChoosePaymentMerge()">合并付款</view>
 		</view>
-
+      </view>
 		<!-- 选择支付方式弹窗 -->
-		<ns-payment ref="choosePaymentPopup" :payMoney="payMoney" @confirm="pay"></ns-payment>
+		<ns-payment ref="choosePaymentPopup" @cancelOrder="cancelOrder" :cardFormData = "cardFormData" @showHandler = "showHandler" :payMoney="payMoney" @confirm="pay"></ns-payment>
 		<ns-payment ref="choosePaymentMergePopup" :payMoney="payMoneyMerge" @confirm="mergePay()"></ns-payment>
 
 		<loading-cover ref="loadingCover"></loading-cover>
@@ -121,6 +122,8 @@ import nsPayment from '@/components/payment/payment.vue';
 export default {
 	data() {
 		return {
+			cardFormData:{state:''},
+			setCard: false,
 			scrollInto: '',
 			orderStatus: 'all',
 			statusList: [],
@@ -162,6 +165,10 @@ export default {
 		}
 	},
 	methods: {
+	
+		showHandler() {
+			this.setCard=!this.setCard;
+		},
 		ontabtap(e) {
 			let index = e.target.dataset.current || e.currentTarget.dataset.current;
 			this.orderStatus = this.statusList[index].status;
@@ -251,6 +258,7 @@ export default {
 					this.orderPay(orderData);
 					break;
 				case 'orderClose': //关闭
+				   console.log('orderData.order_id',orderData.order_id);
 					this.orderClose(orderData.order_id, () => {
 						this.$refs.mescroll.refresh();
 					});
@@ -316,6 +324,7 @@ export default {
 		 * 合并支付
 		 */
 		mergePay() {
+			console.log('merg pay');
 			if (this.mergePayOrder.length) {
 				this.$api.sendRequest({
 					url: '/api/order/pay',

@@ -146,7 +146,7 @@ import nsSwitch from '@/components/ns-switch/ns-switch.vue';
 // #ifdef H5
 import { Weixin } from 'common/js/wx-jssdk.js';
 // #endif
-
+var self;
 export default {
 	
 	name: 'payment',
@@ -169,7 +169,10 @@ export default {
 		},
 		cardFormData: {
 			type: Object,
-			default:{state:''}
+			default:function() {
+				return {state:''}
+			}
+			
 		}
 	},
 	data() {
@@ -245,6 +248,7 @@ export default {
 	
 	
 	created() {
+		self = this;
 		this.isIphoneX = this.$util.uniappIsIPhoneX();
 		
 		this.getPayType();
@@ -506,7 +510,13 @@ export default {
 		// 	});
 		// },
 		// #ifdef H5
+		cancelOrder (){
+			console.log('hee canll function');
+			this.$emit('cancelOrder');
+		},
+		
 		pay() {
+			console.log('i am here be');
 			var payType = this.payTypeList[this.payIndex];
 			if (!payType) return;
 			let that = this;         
@@ -525,9 +535,22 @@ export default {
 							if (res.code >= 0) {
 								this.checkPayStatus();
 							}else {
+								console.log('i am here babe');
+								console.log('res data',res.data);
+								console.log(this.$lang('common.failed_pay'));
 								uni.showModal({
 									title: this.$lang('common.failed_pay'),
-									content: JSON.stringify(res.data)
+									content: "再试一次吗？",
+									success: function (res) {
+									        if (res.confirm) {
+									        
+												console.log('继续试');
+											
+									        } else if (res.cancel) {
+									            
+												self.$emit('cancelOrder');
+									        }
+									    }
 								})
 								
 							}

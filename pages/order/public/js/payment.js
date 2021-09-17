@@ -2,6 +2,7 @@ var self;
 export default {
 	data() {
 		return {
+			order_id:'',
 			setCard:false,
 			chineseIdCheckFlag:false,
 			avoidRepeatClick:[],
@@ -171,7 +172,7 @@ export default {
 					if (res.code >= 0) {
 						this.orderPaymentData = res.data;
 						let newArr = res.data;
-					//	console.log('newArr', newArr);
+						console.log('newArr', newArr);
 						
 						if (res.data.member_address){
 							if(res.data.member_address.country_id===0){
@@ -410,7 +411,7 @@ export default {
 		// 订单计算
 		orderCalculate() {
 			var data = this.$util.deepClone(this.orderCreateData);
-			
+			console.log('calculate', data);
 			data.delivery = JSON.stringify(data.delivery);
 			data.coupon = JSON.stringify(data.coupon);
 			if (this.orderCreateData.delivery.delivery_type == 'store') {
@@ -423,6 +424,7 @@ export default {
 				url: '/api/ordercreate/calculate',
 				data,
 				success: res => {
+					console.log('res',res);
 					if (res.code >= 0) {
 						this.orderPaymentData.member_address = res.data.member_address;
 						this.orderPaymentData.delivery_money = res.data.delivery_money;
@@ -488,17 +490,19 @@ export default {
 				}
 
 				this.$api.sendRequest({
-					url: '/api/ordercreate/create',
+					url: '/api/ordercreate/createTest',
 					data,
 					success: res => {
 						// uni.hideLoading();
+						console.log('find id',res.data.out_trade_no);
 						if (res.code >= 0) {
+							this.order_id = res.data.order_id;
 							if (this.orderPaymentData.pay_money == 0) {
 								this.$util.redirectTo('/pages/pay/result/result', {
-									code: res.data
+									code: res.data.out_trade_no
 								}, 'redirectTo');
 							} else {
-								this.$refs.choosePaymentPopup.getPayInfo(res.data);
+								this.$refs.choosePaymentPopup.getPayInfo(res.data.out_trade_no);
 								this.isSub = false;
 							}
 							// uni.removeStorage({
@@ -533,6 +537,30 @@ export default {
 				})
 			}
 		},
+		//取消订单
+		cancelOrder() {
+			console.log('getin cancel');
+			this.$api.sendRequest({
+				url: '/api/order/close',
+				data: {
+					'order_id':this.order_id
+				},
+				success: res => {
+					if (res.code >= 0) {
+						console.log('order cancelled')
+						uni.redirectTo({
+							url: '/pages/order/payment/payment'
+						});
+						// typeof callback == 'function' && callback();
+					} else {
+						this.$util.showToast({
+							title: '当前订单可能存在拼团，维权等操作，' + res.message + '不可以关闭哦!',
+							duration: 2000
+						})
+					}
+				}
+		})},
+		
 		// 订单验证
 		verify() {
 			if (this.orderPaymentData.is_virtual == 1) {
@@ -1199,8 +1227,8 @@ export default {
 	computed: {
 		// 余额抵扣
 		balanceDeduct() {
-			if (this.orderPaymentData.member_account.balance_total <= parseFloat(this.orderPaymentData.order_money).toFixed(2)) {
-				return parseFloat(this.orderPaymentData.member_account.balance_total).toFixed(2);
+			if (this.orderPaymentData.member_account.balance_money <= parseFloat(this.orderPaymentData.order_money).toFixed(2)) {
+				return parseFloat(this.orderPaymentData.member_account.balance_money).toFixed(2);
 			} else {
 				return parseFloat(this.orderPaymentData.order_money).toFixed(2);
 			}
