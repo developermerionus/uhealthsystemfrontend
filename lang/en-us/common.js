@@ -185,6 +185,7 @@ export const lang = {
 		  '157':"Australia",
 		  '174':"Costa Rica",
 		  '221':"Singapore",
-		  '228':"Taiwan"
+		  '228':"Taiwan",
+		  'try_again':"Try Again？"	  
 	}
 }

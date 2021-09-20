@@ -146,7 +146,6 @@ import nsSwitch from '@/components/ns-switch/ns-switch.vue';
 // #ifdef H5
 import { Weixin } from 'common/js/wx-jssdk.js';
 // #endif
-
 export default {
 	
 	name: 'payment',
@@ -169,7 +168,10 @@ export default {
 		},
 		cardFormData: {
 			type: Object,
-			default:{state:''}
+			default:function() {
+				return {state:''}
+			}
+			
 		}
 	},
 	data() {
@@ -323,6 +325,7 @@ export default {
 		cancelHandler() {
 			this.setCard = false;
 			this.$emit('showHandler');
+			this.$emit('cancelorder');
 		},
 		but(){
 		    
@@ -506,12 +509,12 @@ export default {
 		// 	});
 		// },
 		// #ifdef H5
+		
 		pay() {
 			var payType = this.payTypeList[this.payIndex];
 			if (!payType) return;
-			let that = this;         
+			let self = this;         
 			if(payType.type == 'authorizenetpay'){
-				//console.log('formData', this.formData);
 					this.$api.sendRequest({
 						url: '/api/pay/pay',
 						data: {
@@ -520,14 +523,20 @@ export default {
 							authorizenetpay_param:JSON.stringify(this.formData)
 						},
 						success: res => {
-							// console.log(res);
 							uni.hideLoading();
 							if (res.code >= 0) {
 								this.checkPayStatus();
 							}else {
 								uni.showModal({
 									title: this.$lang('common.failed_pay'),
-									content: JSON.stringify(res.data)
+									content: this.$lang('common.try_again'),
+									success: function (res) {
+									        if (res.confirm) {
+												console.log('继续试');
+									        } else if (res.cancel) {								
+											   self.$emit('cancelorder');
+									        }
+									    }
 								})
 								
 							}
@@ -643,7 +652,7 @@ export default {
 						pay_type: payType.type
 					},
 					success: res => {
-						console.log(res)
+						//console.log(res)
 						uni.hideLoading();
 						if (res.code >= 0) {
 							var payData = res.data.data;
