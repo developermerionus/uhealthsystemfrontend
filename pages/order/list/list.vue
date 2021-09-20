@@ -106,7 +106,7 @@
 		</view>
       </view>
 		<!-- 选择支付方式弹窗 -->
-		<ns-payment ref="choosePaymentPopup" @cancelOrder="cancelOrder" :cardFormData = "cardFormData" @showHandler = "showHandler" :payMoney="payMoney" @confirm="pay"></ns-payment>
+		<ns-payment ref="choosePaymentPopup" :cardFormData = "cardFormData" @showHandler = "showHandler"  :payMoney="payMoney" @confirm="pay" @cancelorder="cancelOrder"></ns-payment>
 		<ns-payment ref="choosePaymentMergePopup" :payMoney="payMoneyMerge" @confirm="mergePay()"></ns-payment>
 
 		<loading-cover ref="loadingCover"></loading-cover>
@@ -118,7 +118,6 @@ import uniLoadMore from '@/components/uni-load-more/uni-load-more.vue';
 import orderMethod from '../public/js/orderMethod.js';
 import globalConfig from '@/common/js/golbalConfig.js';
 import nsPayment from '@/components/payment/payment.vue';
-
 export default {
 	data() {
 		return {
@@ -165,7 +164,27 @@ export default {
 		}
 	},
 	methods: {
-	
+		cancelOrder() {
+			this.$api.sendRequest({
+				url: '/api/order/close',
+				data: {
+					'order_id':this.orderData.order_id
+				},
+				success: res => {
+					if (res.code >= 0) {
+					uni.redirectTo({
+						url: '/pages/order/list/list?status=waitpay'
+					});
+						// typeof callback == 'function' && callback();
+					} else {
+						this.$util.showToast({
+							title: '当前订单可能存在拼团，维权等操作，' + res.message + '不可以关闭哦!',
+							duration: 2000
+						})
+					}
+				}
+		})
+		},
 		showHandler() {
 			this.setCard=!this.setCard;
 		},
@@ -258,7 +277,6 @@ export default {
 					this.orderPay(orderData);
 					break;
 				case 'orderClose': //关闭
-				   console.log('orderData.order_id',orderData.order_id);
 					this.orderClose(orderData.order_id, () => {
 						this.$refs.mescroll.refresh();
 					});
@@ -324,7 +342,6 @@ export default {
 		 * 合并支付
 		 */
 		mergePay() {
-			console.log('merg pay');
 			if (this.mergePayOrder.length) {
 				this.$api.sendRequest({
 					url: '/api/order/pay',

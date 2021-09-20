@@ -5,7 +5,6 @@ export default {
 		 * @param {Object} out_trade_no
 		 */
 		orderPay(orderData) {
-			console.log('llallla');
 			if (orderData.adjust_money == 0) {
 				this.openChoosePayment();
 			} else {
@@ -21,7 +20,6 @@ export default {
 			}
 		},
 		pay() {
-			console.log('this pay');
 			this.$api.sendRequest({
 				url: '/api/order/pay',
 				data: {
@@ -38,10 +36,7 @@ export default {
 				}
 			})
 		},
-		cancelOrder() {
-			console.log('coole go');
-			//this.$refs.mescroll.refresh();
-			},
+		
 		/**
 		 * 关闭订单
 		 * @param {Object} order_id

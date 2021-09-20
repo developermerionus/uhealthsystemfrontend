@@ -597,7 +597,7 @@
 				:payMoney="orderPaymentData.pay_money"
 				@confirm="orderCreate"
 				@showHandler = "showHandler"
-				@cancelOrder="cancelOrder"
+				@cancelorder="cancelOrder"
 			></ns-payment>
 
 		<loading-cover ref="loadingCover"></loading-cover>

@@ -411,7 +411,6 @@ export default {
 		// 订单计算
 		orderCalculate() {
 			var data = this.$util.deepClone(this.orderCreateData);
-			console.log('calculate', data);
 			data.delivery = JSON.stringify(data.delivery);
 			data.coupon = JSON.stringify(data.coupon);
 			if (this.orderCreateData.delivery.delivery_type == 'store') {
@@ -424,7 +423,6 @@ export default {
 				url: '/api/ordercreate/calculate',
 				data,
 				success: res => {
-					console.log('res',res);
 					if (res.code >= 0) {
 						this.orderPaymentData.member_address = res.data.member_address;
 						this.orderPaymentData.delivery_money = res.data.delivery_money;
@@ -539,7 +537,6 @@ export default {
 		},
 		//取消订单
 		cancelOrder() {
-			console.log('getin cancel');
 			this.$api.sendRequest({
 				url: '/api/order/close',
 				data: {
@@ -547,7 +544,6 @@ export default {
 				},
 				success: res => {
 					if (res.code >= 0) {
-						console.log('order cancelled')
 						uni.redirectTo({
 							url: '/pages/order/payment/payment'
 						});
