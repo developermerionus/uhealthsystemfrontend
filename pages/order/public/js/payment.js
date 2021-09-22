@@ -1223,7 +1223,7 @@ export default {
 	computed: {
 		// 余额抵扣
 		balanceDeduct() {
-			if (this.orderPaymentData.member_account.balance_money <= parseFloat(this.orderPaymentData.order_money).toFixed(2)) {
+			if (parseFloat(this.orderPaymentData.member_account.balance_money) < parseFloat(this.orderPaymentData.order_money)) {	
 				return parseFloat(this.orderPaymentData.member_account.balance_money).toFixed(2);
 			} else {
 				return parseFloat(this.orderPaymentData.order_money).toFixed(2);

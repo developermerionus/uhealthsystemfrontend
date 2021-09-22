@@ -593,7 +593,7 @@
 				:isBalance="orderCreateData.is_balance"
 				@useBalance="useBalance"
 				:isPayPassWord="orderPaymentData.member_account.is_pay_password"
-				:balanceDeduct="orderPaymentData.order_money > 0 && orderPaymentData.member_account.balance_total > 0 ? balanceDeduct : '0'"
+				:balanceDeduct="orderPaymentData.order_money > 0 ? balanceDeduct : '0'"
 				:payMoney="orderPaymentData.pay_money"
 				@confirm="orderCreate"
 				@showHandler = "showHandler"
