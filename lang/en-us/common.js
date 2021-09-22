@@ -80,7 +80,7 @@ export const lang = {
 		last_name: "Last Name",
 		first_name: "First Name",
 		input_card_no: "Please input Card No.",
-		card_valid: "Valid period",
+		card_valid: "xx/xx",
 		last_3_digit: "Last 3 digits",
 		input_cvc: "Please input cvc",
 		input_last_name: "Please input last name",

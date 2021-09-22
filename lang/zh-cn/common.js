@@ -80,7 +80,7 @@ export const lang = {
 		last_name: "姓氏",
 		first_name: "名字",
 		input_card_no: "请输入信用卡号",
-		card_valid: "信用卡有效期",
+		card_valid: "xx/xx",
 		last_3_digit: "信用卡背面签字栏数字后3位",
 		input_cvc: "请输入cvc",
 		input_last_name: "请输入姓氏",
