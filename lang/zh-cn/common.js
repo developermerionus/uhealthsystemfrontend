@@ -79,7 +79,13 @@ export const lang = {
 		credit_card_valid: "有效期",
 		last_name: "姓氏",
 		first_name: "名字",
+		taxinfo:"2021报税信息核对，请如实填写",
 		input_card_no: "请输入信用卡号",
+		input_zipcode:"请输入邮编",
+		input_ein_number:"请输入EIN号码",
+		input_id_number:"请输入社安号码",
+			input_company: "请输入公司姓名",
+		input_address:"请输入街道",
 		card_valid: "xx/xx",
 		last_3_digit: "信用卡背面签字栏数字后3位",
 		input_cvc: "请输入cvc",
@@ -187,6 +193,13 @@ export const lang = {
 		  '174':"哥斯达黎加",
 		  '221':"新加坡",
 		  '228':"台湾",
-		  'try_again':"再试一次？"
+		  'try_again':"再试一次？",
+		  social_id:"社安号",
+		  personal: "个人",
+		  company: "公司",
+		  company_name: "公司名字",
+		  ein_id: "EIN 号码",
+		  city_county: "城市，县",
+		  
 	}
 }

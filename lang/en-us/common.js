@@ -81,6 +81,12 @@ export const lang = {
 		first_name: "First Name",
 		input_card_no: "Please input Card No.",
 		card_valid: "xx/xx",
+		taxinfo:"2021 Tax Personal Info Confirm",
+		input_company: "Please input company name",
+		input_zipcode:"Please input zip code",
+		input_address:"Please input street",
+		input_id_number:"Please input SSN",
+		input_ein_number:"Please input EIN number",
 		last_3_digit: "Last 3 digits",
 		input_cvc: "Please input cvc",
 		input_last_name: "Please input last name",
@@ -186,6 +192,13 @@ export const lang = {
 		  '174':"Costa Rica",
 		  '221':"Singapore",
 		  '228':"Taiwan",
-		  'try_again':"Try Again？"	  
+		  'try_again':"Try Again？"	,
+			social_id:"SSN",
+			personal: "Personal",
+			company: "Company",
+			company_name: "Company Name",
+			ein_id: "EIN Number",
+			city_county: "City, County"
+			
 	}
 }
