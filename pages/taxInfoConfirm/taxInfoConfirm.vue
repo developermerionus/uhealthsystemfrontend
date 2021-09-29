@@ -1,6 +1,6 @@
 <template>
 	<view>
-	    <navbar></navbar>
+	   <navbar></navbar>
 		<view class="content">
 			<!-- <view class="empty-bar-view"></view> -->
 			<view class="title">{{$lang("common.taxinfo")}}</view>
@@ -87,6 +87,8 @@
 	export default {
 		data() {
 			return {
+			id_number_container:'',
+			ein_number_container:'',
 			switchCityTag: false,
 			current: 'personal',
 			switchInfo: true,
@@ -136,19 +138,11 @@
 					async: false
 				});
 				if (res.code >= 0 && res.data) {
-					//self.token = uni.getStorageSync('token');
-					//this.memberInfo = res.data;
-					console.log('res',res.data);
-					// this.formData.firstname = res.data.firstname;
-					// this.formData.surname = res.data.surname;
-					// this.formData.id_number = res.data.id_number;
-					// this.formData.state = res.data.state;
-					// this.formData.city = res.data.city;
-					// this.formData.company = res.data.company;
-					// this.formData.ein_number = res.data.ein_number;
-					// this.formData.zipcode = res.data.zipcode;
-					// this.formData.address = res.data.address;
 					this.formData = {...res.data};
+					this.id_number_container = this.formData.id_number;
+					this.ein_number_container = this.formData.ein_number;
+					this.formData.id_number = '';
+					this.formData.ein_number = '';
 					if(this.formData.state==="California") {
 						this.switchCityTag = true;
 					}
@@ -157,15 +151,6 @@
 					}
 				}
 			
-				// 	uni.setStorageSync('userInfo', this.memberInfo);
-				// 	if (this.addonIsExit.supermember && this.memberInfo.member_level_type == 0) this
-				// 		.getMemberCardInfo();
-				// } else {
-				// 	this.initInfo();
-				// 	uni.removeStorageSync('token');
-				// 	uni.removeStorageSync('userInfo');
-				// }
-				// uni.stopPullDownRefresh();
 			},
 			checkState() {
 				if(this.formData.state==="California") {
@@ -176,6 +161,21 @@
 				}
 			},
 			verify() {
+				if (this.current==="company") {
+					if (this.formData.ein_number=='' ) {
+						this.$util.showToast({
+							title: this.$lang('common.input_ein_number')
+						});
+						return;
+					}
+					if (this.formData.company== '') {
+						this.$util.showToast({
+							title: this.$lang('common.input_company')
+						});
+						return;
+					}
+				}
+				else {
 				if (this.formData.firstname == '') {
 					this.$util.showToast({
 						title: this.$lang('common.input_first_name')
@@ -219,21 +219,6 @@
 					});
 					return;
 				}
-				if (this.current==="company") {
-					console.log('heee',this.formData.ein_number);
-					if (this.formData.ein_number=='' ) {
-						console.log('kkdfd');
-						this.$util.showToast({
-							title: this.$lang('common.input_ein_number')
-						});
-						return;
-					}
-					if (this.formData.company== '') {
-						this.$util.showToast({
-							title: this.$lang('common.input_company')
-						});
-						return;
-					}
 				}
 				
 				return true;
@@ -242,15 +227,19 @@
 			submit() {
 				if(this.verify()) {
 				this.formData.tax_info_check = 1;
-				console.log('formDATA',this.formData)
+				if(this.formData.id_number =='') {
+					this.formData.id_number = this.id_number_container;
+				}
+				if(this.formData.ein_number =='') {
+					this.formData.ein_number = this.ein_number_container;
+				}
 				this.$api.sendRequest({
 					url: '/api/member/modifyMemberTest',
 					data: this.formData,
 					success: res => {
-					 console.log(res)
 						if (res.code >= 0) {
-						//this.$util.redirectTo('/pages/member/index/index',{},'reLaunch');
-						}
+						 this.$util.redirectTo('/pages/member/index/index',{},'reLaunch');
+						 }
 					},
 				})
 				}
@@ -279,7 +268,7 @@
 	.save-item{
 		
 		
-		margin:20px auto;
+		margin:40px auto;
 		max-width:500px;
 	}
 	.title {
@@ -300,7 +289,7 @@
 		}
 .content {
 	width:90%;
-	margin: 40px auto;
+	margin: 20px auto;
 	max-width:400px;
 }
 .popup {
