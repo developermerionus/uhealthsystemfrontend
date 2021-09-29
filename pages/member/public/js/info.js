@@ -173,7 +173,7 @@ export default {
 			// call API 保存更新信息
 			if (isAllRequiredFieldFilled && isCACityCountyNameCorrect) {
 				this.$api.sendRequest({
-					url: '/api/member/modifyMemberTest',
+					url: '/api/member/modifyMember',
 					data,
 					success: res => {
 						// console.log(res)

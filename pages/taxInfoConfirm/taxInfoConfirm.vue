@@ -234,7 +234,7 @@
 					this.formData.ein_number = this.ein_number_container;
 				}
 				this.$api.sendRequest({
-					url: '/api/member/modifyMemberTest',
+					url: '/api/member/modifyMember',
 					data: this.formData,
 					success: res => {
 						if (res.code >= 0) {
