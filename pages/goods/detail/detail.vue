@@ -536,15 +536,15 @@
 				<ns-goods-action-icon :text="$lang('common.go_index')" icon="iconshouye1" @click="goHome" />
 
 				<!-- #ifdef MP -->
-				<ns-goods-action-icon :text="$lang('common.customer_service')" icon="iconkefu1" open-type="contact" :send-data="contactData" v-if="kefuConfig.weapp == 1" />
-				<ns-goods-action-icon :text="$lang('common.customer_service')" icon="iconkefu1" @click="goConnect" v-else-if="kefuConfig.system == 1" />
+				<!-- <ns-goods-action-icon :text="$lang('common.customer_service')" icon="iconkefu1" open-type="contact" :send-data="contactData" v-if="kefuConfig.weapp == 1" /> -->
+				<!-- <ns-goods-action-icon :text="$lang('common.customer_service')" icon="iconkefu1" @click="goConnect" v-else-if="kefuConfig.system == 1" /> -->
 				<!-- #endif -->
 				<!-- #ifndef MP -->
-				<ns-goods-action-icon :text="$lang('common.customer_service')" icon="iconkefu1" @click="goConnect" v-if="kefuConfig.open == 1" />
-				<ns-goods-action-icon :text="$lang('common.customer_service')" icon="iconkefu1" @click="goConnect" v-else-if="kefuConfig.system == 1" />
+				<!-- <ns-goods-action-icon :text="$lang('common.customer_service')" icon="iconkefu1" @click="goConnect" v-if="kefuConfig.open == 1" /> -->
+				<!-- <ns-goods-action-icon :text="$lang('common.customer_service')" icon="iconkefu1" @click="goConnect" v-else-if="kefuConfig.system == 1" /> -->
 				<!-- #endif -->
 
-				<ns-goods-action-icon :text="$lang('tabBar.cart')" icon="icongouwuche2" :corner-mark="cartCount > 0 ? cartCount + '' : ''" @click="goCart" />
+				<!-- <ns-goods-action-icon :text="$lang('tabBar.cart')" icon="icongouwuche2" :corner-mark="cartCount > 0 ? cartCount + '' : ''" @click="goCart" /> -->
 				<block v-if="goodsSkuDetail.stock == 0 && !goodsSkuDetail.sku_spec_format">
 					<ns-goods-action-button class="goods-action-button active3" :disabled-text="$lang('common.understock')" :disabled="true" />
 					<!-- <ns-goods-action-button v-if="goodsSkuDetail.sku_spec_format" class="goods-action-button active3" disabled-text="库存不足" :disabled="true" @click="joinCart" /> -->
@@ -554,14 +554,14 @@
 					<ns-goods-action-button class="goods-action-button active3" :disabled-text="$lang('common.purchase_limitation_reached')" :disabled="true" />
 				</block>
 				<block v-else>
-					<ns-goods-action-button
+					<!-- <ns-goods-action-button
 						class="goods-action-button"
 						:class="goodsSkuDetail.is_virtual == 0 ? 'active1' : ''"
 						:text="this.$lang('common.add_cart')"
 						background="color-join-cart"
 						@click="joinCart"
 						v-if="goodsSkuDetail.is_virtual == 0"
-					/>
+					/> -->
 					<ns-goods-action-button class="goods-action-button" :class="goodsSkuDetail.is_virtual == 0 ? 'active2' : 'active4'" :text="this.$lang('common.buy_now')" @click="buyNow" />
 				</block>
 			</template>
@@ -733,6 +733,7 @@ export default {
 	line-height: 36px;
 	border-top-left-radius: 36rpx;
 	border-bottom-left-radius: 36rpx;
+	border-radius: 36px;
 }
 
 /deep/ .goods-action-button.active2 .action-buttom-wrap {
@@ -740,6 +741,7 @@ export default {
 	line-height: 36px;
 	border-top-right-radius: 36rpx;
 	border-bottom-right-radius: 36rpx;
+	border-radius: 36px;
 }
 
 /deep/ .goods-action-button.active3 .action-buttom-wrap {
