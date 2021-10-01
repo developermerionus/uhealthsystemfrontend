@@ -180,12 +180,18 @@
 			// #ifdef MP
 			this.getCode(); 
 			// #endif
+			this.getMemberInfo();
 		},
 		onReady() {
 			if (this.$refs.loadingCover) this.$refs.loadingCover.hide();
 		},
 		methods: {
-			selectCountry() {
+			getMemberInfo() {
+				let memberInfo = uni.getStorageSync('userInfo');
+				//console.log('memberInfo',memberInfo);
+				this.formData.group_id = memberInfo.group_id;
+			},
+ 			selectCountry() {
 				uni.showActionSheet({
 					itemList: this.countryList.map((item) => {
 						return item.name
@@ -297,7 +303,8 @@
 						username: this.formData.account,
 						password: this.formData.password,
 						marketregion: this.formData.market,
-						market: this.countryList[this.index].id
+						market: this.countryList[this.index].id,
+						group_id: this.formData.group_id
 					};
 				} else {
 					var url = '/api/register/mobile',
