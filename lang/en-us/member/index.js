@@ -85,6 +85,7 @@ export const lang = {
 	lastweek: 'last week',
 	
 	electronicwallet:'WALLET',
+	bonus_history: 'BONUS HISTORY',
 	// 会员等级
 	'准会员' : 'Pre-Member',
 	'会员': 'Member',

@@ -15,6 +15,7 @@ export const lang = {
 	withdraw: '提现',
 	withdrawing: '提现中',
 	electronicwallet: '电子钱包',
+	bonus_history: '奖金历史',
 	 	tools: '工具', 
 	
 	// 会员中心入口
