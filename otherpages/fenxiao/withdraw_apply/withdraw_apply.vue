@@ -35,15 +35,14 @@
 					@click="withdraw">
 					{{ $lang(fenxiaoWords.withdraw) + $lang('buttonWords_toMasspay') }}
 				</view>
+				<view class="btn transfer_btn"
+					@click="$util.redirectTo('/otherpages/fenxiao/transferMToReferee_apply/transferMToReferee_apply')">
+					<image class="transfer-icon" src="../../../static/images/icons/transferMToReferee.png"></image>
+					{{ $lang('transfer_to_referee') }}		
+				</view>
 				<view class="withdraw-list btn"
 					@click="$util.redirectTo('/otherpages/fenxiao/withdraw_list/withdraw_list')">
 					<view class="color-tip">{{ $lang('withdrawal_details') }}</view>
-				</view>
-				<view class="btn transfer_btn"
-					@click="$util.redirectTo('/otherpages/fenxiao/transferMToReferee_apply/transferMToReferee_apply')"
-					>
-					<image class="transfer-icon" src="../../../static/images/icons/transferMToReferee.png"></image>
-					{{ $lang('transfer_to_referee') }}		
 				</view>
 				<view class="withdraw-list btn"
 					@click="$util.redirectTo('/otherpages/fenxiao/wallet_balance_detail/wallet_balance_detail')">
