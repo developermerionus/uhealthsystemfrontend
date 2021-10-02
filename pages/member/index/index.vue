@@ -44,25 +44,21 @@
 						</view>
 
 					</view>
-					<view class="wallet-button-container" v-if="token">
+					<view class="wallet-button-container" v-if="token && memberGroup=='0'">
 						<button class="wallet-button" type="default"
 						@click="redirectToLink(bonusPageObject.link, bonusPageObject.index)">
 							<image class="wallet-icon" src="../../../static/images/icons/wallet.png"></image>
 							{{ $lang('electronicwallet') }}
 						</button>
 					</view>
+					<view class="wallet-button-container" v-if="token && memberGroup=='1'">
+						<button class="wallet-button" type="default"
+						@click="$util.redirectTo('/pages/bonusDetail/bonusDetail')">
+							<image class="wallet-icon" src="../../../static/images/icons/wallet.png"></image>
+							{{ $lang('bonus_history') }}
+						</button>
+					</view>
 				</view>
-				
-				
-				<view class="transferToReferee-button-container" v-if="token">
-					<button class="transferToReferee-button" type="default"
-						@click="$util.redirectTo('/otherpages/fenxiao/transferMToReferee_apply/transferMToReferee_apply')"
-						>
-						<image class="wallet-icon" src="../../../static/images/icons/transferMToReferee.png"></image>
-						{{ $lang('common.transfer_to_referee') }}
-					</button>
-				</view>
-				
 				
 				<view class="member-body" v-if="token">
 					<!-- 订单模块 -->
@@ -262,6 +258,7 @@
 		},
 		data() {
 			return {
+				memberGroup:'',
 				token: '',
 				memberInfo: {
 					balance: 0,
@@ -870,6 +867,7 @@
 					this.getBonus();
 					self.token = uni.getStorageSync('token');
 					this.memberInfo = res.data;
+					this.memberGroup = this.memberInfo.group_id;
 
 					uni.setStorageSync('userInfo', this.memberInfo);
 					if (this.addonIsExit.supermember && this.memberInfo.member_level_type == 0) this
