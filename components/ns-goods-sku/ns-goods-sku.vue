@@ -86,16 +86,19 @@
 								<text v-else-if="maxBuy > 0" class="limit-txt color-base-text">(限购{{ maxBuy }}{{ goodsDetail.unit }})</text>
 								<text v-else-if="minBuy > 1" class="limit-txt color-base-text">({{ minBuy }}{{ goodsDetail.unit }}起售)</text>
 								<view class="number">
-									<button type="default" class="decrease color-line-border" @click="changeNum('-')">-</button>
+									<button type="default" class="decrease color-line-border" @click="changeNum('-')" 
+									:disabled="isContainKeyword">-</button>
 									<input
 										type="number"
 										class="uni-input color-line-border font-size-goods-tag"
 										@blur="blur"
 										v-model="number"
 										placeholder="0"
-										@input="keyInput(false)"
+										@input="keyInput(false)" 
+										:disabled="isContainKeyword"	
 									/>
-									<button type="default" class="increase color-line-border" @click="changeNum('+')">+</button>
+									<button type="default" class="increase color-line-border" @click="changeNum('+')" 
+									:disabled="isContainKeyword">+</button>
 								</view>
 							</view>
 						</view>
@@ -155,7 +158,8 @@ export default {
 			minNumber: 0,
 			//是否开启预览，0：不开启，1：开启
 			preview: 0,
-			cartNumber: 0 // 购物车中商品存在的数量
+			cartNumber: 0 ,// 购物车中商品存在的数量
+			isContainKeyword: false,
 		};
 	},
 	created() {
@@ -177,6 +181,7 @@ export default {
 	},
 	methods: {
 		show(type, callback) {
+			
 			this.callback = callback;
 			this.$refs.skuPopup.open(callback);
 			this.type = type;
@@ -191,6 +196,8 @@ export default {
 				this.number = 1;
 				this.minNumber = 1;
 			}
+			this.isContainKeyword = this.goodsDetail.goods_name.includes("套餐"); // 产品是否含有名字
+			
 			if (this.type == 'join_cart') this.getCartData();
 			this.$forceUpdate();
 		},
