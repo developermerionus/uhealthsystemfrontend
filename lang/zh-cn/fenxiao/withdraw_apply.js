@@ -22,4 +22,5 @@ export const lang = {
 	'提现' : '提现',
 	
 	wallet_balance_details: '钱包明细',
+	'transfer_to_referee' : '转账被推荐人',
 }

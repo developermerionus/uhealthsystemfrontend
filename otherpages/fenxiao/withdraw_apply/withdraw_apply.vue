@@ -35,6 +35,11 @@
 					@click="withdraw">
 					{{ $lang(fenxiaoWords.withdraw) + $lang('buttonWords_toMasspay') }}
 				</view>
+				<view class="btn transfer_btn"
+					@click="$util.redirectTo('/otherpages/fenxiao/transferMToReferee_apply/transferMToReferee_apply')">
+					<image class="transfer-icon" src="../../../static/images/icons/transferMToReferee.png"></image>
+					{{ $lang('transfer_to_referee') }}		
+				</view>
 				<view class="withdraw-list btn"
 					@click="$util.redirectTo('/otherpages/fenxiao/withdraw_list/withdraw_list')">
 					<view class="color-tip">{{ $lang('withdrawal_details') }}</view>
@@ -385,6 +390,18 @@
 	.withdraw_btn {
 		background: linear-gradient(to right, #10869c 0%, #118ca3 12%,
 				#139fb9 34%, #14a5c0 47%, #139fb9 67%, #118ca3 89%, #10869c 100%);
+	}
+	
+	.transfer_btn {
+		background: linear-gradient(to right, #10869c 0%, #118ca3 12%,
+				#139fb9 34%, #14a5c0 47%, #139fb9 67%, #118ca3 89%, #10869c 100%);
+		
+		.transfer-icon {
+			vertical-align: middle;
+			width: 25px;
+			height: 25px;
+			padding:0 5px;
+		}
 	}
 
 	.desc {

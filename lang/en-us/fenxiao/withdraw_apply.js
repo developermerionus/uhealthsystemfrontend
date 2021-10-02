@@ -24,4 +24,5 @@ export const lang = {
 	'提现' : 'Withdraw',
 	
 	wallet_balance_details: 'Wallet Balance Details',
+	'transfer_to_referee' : 'Transfer Money to Referee Member',
 }
