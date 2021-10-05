@@ -13,7 +13,7 @@
 				把原本可搭载客机邮寄的包裹改为货机渠道，导致所有货物都拥挤在海关港口，因此海关清关速度非常缓慢。 
 				同时海关严格执行"包包消毒检验"更影响了邮寄的时效。</p>
 				<p>另外，10月1日-10月7日为中国大陆的法定节假期,大陆地区物流时效会收到进一步严重影响。</p>
-				<button type="button" @click="$util.redirectTo('/pages/member/index/index')"
+				<button type="button" @click="$util.redirectTo('/pages/index/index/index')"
 					class="color-base-border color-base-bg newsAds-btn">{{ $lang('common.confirm')}} </button>
 			</view>
 			
