@@ -274,6 +274,17 @@
             }
             
         }
+        ,{
+            "path" : "pages/newsAds/newsAds",
+            "style" :                                                                                    
+            {
+				// #ifdef H5
+				"navigationStyle": "custom",
+				// #endif
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"subPackages": [{
 
