@@ -310,7 +310,6 @@
 						url,
 						data,
 						success: res => {
-						//	console.log(res)
 							if (res.code >= 0) {
 								uni.setStorage({
 									key: 'token',

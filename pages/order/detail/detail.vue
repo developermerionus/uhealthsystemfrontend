@@ -1,5 +1,6 @@
 <template>
 	<view class="detail-container" :class="{ 'safe-area': isIphoneX }" :data-theme="themeStyle">
+		<navbar></navbar>
 		<!-- 订单状态 -->
 		<view class="status-wrap color-base-bg" :style="{ backgroundImage: 'url(' + $util.img('upload/uniapp/order/status-wrap-bg.png') + ')' }">
 			<view class="order-status-left">

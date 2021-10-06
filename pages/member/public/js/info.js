@@ -153,8 +153,6 @@ export default {
 			
 			if (this.infoList.length>0 && this.infoList[2].value=='United States' && data.state==='California') {
 				
-				
-				console.log();
 					if (!this.cityListCA_string.includes(data.city)) 
 					{
 						this.$util.showToastLonger( 
@@ -269,8 +267,7 @@ export default {
 				// 	member_id,
 				// },
 				success: res => {
-					// console.log(res.data);
-					if (res.code == 0) {
+					if (res.code == 0 && res.data != null) {
 						let input = this.$lang('input');
 						this.indent = 'all';
 						this.memberInfo = res.data;
