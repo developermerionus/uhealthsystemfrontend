@@ -3,6 +3,9 @@
 		<view class="header-main">
 				<view class="top-bar">
 					<view class="top-bar-content">
+						<view class="showName">
+							<text >Hi,&nbsp;{{showName}}</text>
+						</view>
 						<!-- <view class="iconBackground" @click="modifyInfo('language')"> -->
 						<view  class="langSwitch" @click="modifyLanguage()">
 							<view class="iconBackground">
@@ -13,6 +16,7 @@
 							</view>
 							
 						</view>
+						
 					</view>
 				</view>
 				<view class="menu-main" >
@@ -37,11 +41,20 @@
 		data() {
 			return {
 				langIndex:0,
-				langList:[]
+				langList:[],
+				memberInfo:{},
+				showName:''
 			};
 		},
-		
+		created() {
+			this.getInfo();
+		},
 		methods: {
+			getInfo() {
+				this.memberInfo = uni.getStorageSync('userInfo');
+				this.showName = this.memberInfo.firstname;
+				//console.log('this.memberInfo',this.memberInfo);
+			},	
 			modifyLanguage () {
 				this.initLang(); 
 				let newArray = [];
@@ -88,6 +101,12 @@
 </script>
 
 <style lang="scss">
+.showName {
+	margin-top: 2px;
+	color:$color-sub;
+	font-size:14px;
+	margin-right:10px;
+}
 .test {
 	color:red;
 }

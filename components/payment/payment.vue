@@ -22,15 +22,7 @@
 				<text class="info-name">{{$lang('common.first_name')}}</text>
 				<input class="uni-input info-content input-len" type="text" maxlength="30" :placeholder="$lang('common.first_name')" v-model="formData.last_name" />
 			</view>
-			<view class="edit-info-box" style='justify-content: flex-start;'>
-				<text class="info-name" >{{$lang('common.country')}}<!-- <text>*</text> --></text>
-				<picker @change="bindPickerChange" :value="index" :range="tempCountryList" class="picker" range-key="name">
-				<!-- 	<text class="desc uni-input">{{ $lang(`common.${countryList[index].name}`)?  $lang(`common.${countryList[index].name}`):countryList[index].name}}</text>
-				 -->
-				 <text class="desc uni-input">{{tempCountryList[index]}}</text>
-				 
-				 </picker>
-			</view>
+			
 		
 			<view class="credit-card-icon-box">
 				<text>{{$lang('common.creditCardRequirement')}}:</text>
@@ -45,24 +37,26 @@
 			<view class="edit-info-box">
 				<text>{{$lang('common.billingaddress')}}:</text>
 			</view>
-			<!-- <view class="edit-info-box">
-				<text class="info-name">{{$lang('common.country')}}</text>
-				<input class="uni-input info-content input-len" type="text" maxlength="30" :placeholder="$lang('common.country')" v-model="formData.country" />
-			</view> -->
-			
-			<!-- <view class="edit-info-box" v-show="localType !== 2">
-				<text class="info-name">{{$lang('common.state')}}</text>
-				<input  class="uni-input info-content input-len" type="text" maxlength="30" :placeholder="$lang('common.state')" v-model="formData.state" />
-			</view> -->
+			<view class="fillingInfo" >
+				<ns-switch class="balance-switch" @change="changeFillingInfo" :checked="fillingInfo"><view></view></ns-switch>
+				<text class="fillingInfoName">{{$lang('common.fillingInfo')}}</text>
+			</view>
+			<view class="edit-info-box" style='justify-content: flex-start;'>
+				<text class="info-name" >{{$lang('common.country')}}<!-- <text>*</text> --></text>
+				<picker @change="bindPickerChange" :value="index" :range="tempCountryList" class="picker" range-key="name">
+				<!-- 	<text class="desc uni-input">{{ $lang(`common.${countryList[index].name}`)?  $lang(`common.${countryList[index].name}`):countryList[index].name}}</text>
+				 -->
+				 <text class="desc uni-input">{{tempCountryList[index]}}</text>
+				 
+				 </picker>
+			</view>
 			<view class="edit-info-box" >
 				<text class="info-name" >
 					{{$lang('common.state')}}
-				<!-- 	<text>*</text> -->
 				</text>
 				<input class="uni-input  info-content input-len" type="text" placeholder-class="placeholder-class" :placeholder="$lang('common.state')"
-				 maxlength="100" v-model="formData.state=cardFormData.state" @click="goState()"/>
+					 maxlength="100" v-model="formData.state" />
 			</view>
-			
 			<view class="edit-info-box">
 				<text class="info-name">{{$lang('common.city')}}</text>
 				<input class="uni-input info-content input-len" type="text" maxlength="30" :placeholder="$lang('common.city')" v-model="formData.city" />
@@ -176,6 +170,8 @@ export default {
 	},
 	data() {
 		return {
+			memberInfo:{},
+			fillingInfo:false,
 			tempCountryList:[],
 			name:'',
 			countryList: [
@@ -256,28 +252,65 @@ export default {
 		this.getCountryList();
 	},
 	methods: {
-		bindPickerChange(e) {
+		changeFillingInfo() {
+			
+			this.fillingInfo = !this.fillingInfo;
+			//console.log('this.fillingInfo',this.fillingInfo);
+			this.memberInfo = uni.getStorageSync('userInfo');
+			//console.log('this.memberInfo',this.memberInfo);
+			if(this.fillingInfo) {
+			this.formData.city = this.memberInfo.city;
+			this.formData.state= this.memberInfo.state;
+			this.formData.zip= this.memberInfo.zipcode;
+			//this.formData.country=';'
+			this.formData.phone= this.memberInfo.mobile;
+			this.formData.email= this.memberInfo.email;
+			this.formData.address= this.memberInfo.address;
+			this.findCountryIndex(this.memberInfo.marketCountryId);
+			}
+			else {
+				this.formData.city = '';
+				this.formData.state='';
+				this.formData.zip= '';
+				//this.formData.country=
+				this.formData.phone='' ;
+				this.formData.email= '';
+				this.formData.address= '';
+			}
+			
+		},
+ 		bindPickerChange(e) {
 				this.index = e.detail.value;
 				//console.log('index',e.detail.value);
+				this.fillingInfo=false;
 				this.formData.country = this.countryList[this.index].name;
 				if(this.showCountry.indexOf(this.countryList[this.index].id)<0) {
-					this.billingAddressShow = false;
+				//	this.billingAddressShow = false;
 					this.formData.address = '';
 					this.formData.city='';
-					this.cardFormData.state='';
+					//this.cardFormData.state='';
+					this.formData.state='';
 					this.formData.zip='';
 					this.formData.phone='';
 					this.formData.email='';
 				}
 				else {
-					this.billingAddressShow = true;
+					
+				//	this.billingAddressShow = true;
 					this.formData.address = '';
 					this.formData.city='';
-					this.cardFormData.state='';
+					//this.cardFormData.state='';
+					this.formData.state='';
 					this.formData.zip='';
 					this.formData.phone='';
 					this.formData.email='';
 				}
+		},
+		findCountryIndex(countryId) {
+			//console.log('this.countryList',this.countryList);
+			this.index = this.countryList.findIndex(x => x.id ===countryId);
+			//console.log('this.index',this.index);
+			
 		},
 		goState() {
 			uni.navigateTo({
@@ -713,7 +746,18 @@ export default {
 
 <style lang="scss">
 
-
+.fillingInfo {
+	margin-top: 20rpx;
+	display: flex;
+	align-items: center;
+	padding: 20rpx 40rpx;
+	min-height: 50rpx;
+	background-color: #fff;
+	justify-content: flex-start;
+}
+.fillingInfoName {
+	margin-left:10px;
+}
 .popup {
 	width: 75vw;
 	max-width: 700px;
