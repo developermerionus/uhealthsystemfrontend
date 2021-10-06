@@ -198,7 +198,8 @@ export const lang = {
 			company: "Company",
 			company_name: "Company Name",
 			ein_id: "EIN Number",
-			city_county: "City, County"
+			city_county: "City, County",
+			 fillingInfo: "Same with Personal Info"
 			
 	}
 }

@@ -200,6 +200,7 @@ export const lang = {
 		  company_name: "公司名字",
 		  ein_id: "EIN 号码",
 		  city_county: "城市，县",
+		  fillingInfo: "使用系统个人信息"
 		  
 	}
 }

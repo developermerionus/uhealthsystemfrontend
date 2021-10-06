@@ -385,7 +385,7 @@
 			this.toolsColumnNum = this.toolsFindColumnNum();
 			this.screenGreaterSixHundredPx = this.findTitleFormat();
 			//this.checkToken();
-			console.log("onloading");
+			//console.log("onloading");
 			uni.hideTabBar();
 			if (this.addonIsExit.memberwithdraw) {
 				this.getWithdrawConfig();
@@ -396,7 +396,7 @@
 			this.getEvaluateConfig();
 		},
 		async onReady() {
-			console.log("onreadying");
+			//console.log("onreadying");
 			if (this.addonIsExit.membersignin) {
 				await this.getSignState();
 			}
@@ -414,7 +414,7 @@
 				//console.log('变化后的窗口高度=' + res.size.windowHeight)
 			})
 			
-			console.log("onshowiiing");
+			//console.log("onshowiiing");
 
 			// 刷新多语言
 			this.$langConfig.refresh();
@@ -442,11 +442,10 @@
 		},
 		methods: {
 			checkToken() {
-				
 				self.token = uni.getStorageSync('token');
-				console.log('self token ',self.token);
+				//console.log('self token ',self.token);
 				if (!self.token) {
-					console.log('call token');
+					//console.log('call token');
 					uni.redirectTo({
 						url: '/pages/login/login/login'
 					});
@@ -557,7 +556,7 @@
 				}
 			},
 			redirectToList(url, value) {
-				console.log('check the value url', url, value);
+				//console.log('check the value url', url, value);
 				if (value > 0) {
 					// if (this.lastweek == 1) return this.$util.msg('上周明细近日上线，敬请期待');
 					this.$util.redirectTo(url + '&lastweek=' + this.lastweek);
