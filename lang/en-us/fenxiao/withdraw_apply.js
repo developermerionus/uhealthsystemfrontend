@@ -11,7 +11,7 @@ export const lang = {
 	withdrawal_details: 'Withdrawal Details',
 	verify_alerts_1: 'Please input the amount to withdraw',
 	verify_alerts_2: 'The withdrawal amount is over the current available Bonus',
-	verify_alerts_3: 'The withdrawal amount is over the limit',
+	verify_alerts_3: 'The withdrawal amount is over the limit $3000 each time',
 	verify_alerts_4: 'The withdrawal amount should larger than 0.',
 	withdraw_success: 'Success Apply to Withdraw',
 	

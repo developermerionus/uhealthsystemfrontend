@@ -9,7 +9,7 @@ export const lang = {
 	withdrawal_details: '提现明细',
 	verify_alerts_1: '请输入提现金额',
 	verify_alerts_2: '提现金额超出可提现金额',
-	verify_alerts_3: '提现金额超出限额',
+	verify_alerts_3: '单次提现金额上限为3000',
 	withdraw_success: '提现申请成功',
 	verify_alerts_4: '提现金额要大于0',
 
