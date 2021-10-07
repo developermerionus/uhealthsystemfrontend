@@ -32,7 +32,7 @@
 					<text>{{ $lang('wallet_description')}}</text>
 				</view>
 				<view class="btn withdraw_btn" :class="{ disabled: withdrawMoney == '' || withdrawMoney == 0 }"
-					@click="withdraw">
+					@click="withdraw" v-if="member_level>1">
 					{{ $lang(fenxiaoWords.withdraw) + $lang('buttonWords_toMasspay') }}
 				</view>
 				<view class="btn transfer_btn"
@@ -41,7 +41,8 @@
 					{{ $lang('transfer_to_referee') }}		
 				</view>
 				<view class="withdraw-list btn"
-					@click="$util.redirectTo('/otherpages/fenxiao/withdraw_list/withdraw_list')">
+					@click="$util.redirectTo('/otherpages/fenxiao/withdraw_list/withdraw_list')"
+					v-if="member_level>1">
 					<view class="color-tip">{{ $lang('withdrawal_details') }}</view>
 				</view>
 				<view class="withdraw-list btn"
@@ -71,6 +72,7 @@
 				withdrawMoney: '',
 				isSub: false,
 				balance: 0,
+				member_level: 0,
 				
 			};
 		},
@@ -114,7 +116,8 @@
 					},
 					success: res => {
 						if (res.code >= 0) {
-							this.balance = res.data[0].epoint_balance
+							this.balance = res.data[0].epoint_balance;
+							this.member_level = res.data[0].member_level;
 						}
 					}
 				})
