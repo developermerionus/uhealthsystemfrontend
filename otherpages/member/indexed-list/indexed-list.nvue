@@ -52,7 +52,7 @@
 				else if (prevPage.__page__.path == "/pages/order/payment/payment") {
 					prevPage.cardFormData.state = e.item.name;
 				}
-				else if (prevPage.__page__.path == "/pages/taxInfoConfirm/taxInfoConfirm") {
+				else if (prevPage.__page__.fullPath == "pages/taxInfoConfirm/taxInfoConfirm") {
 					prevPage.formData.state = e.item.name;
 				}
 				uni.navigateBack({
