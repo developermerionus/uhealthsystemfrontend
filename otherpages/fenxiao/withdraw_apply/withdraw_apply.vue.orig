@@ -163,7 +163,7 @@ export default {
 				this.$util.showToast({ title: '提现金额超出可提现金额' });
 				return false;
 			}
-			if (parseFloat(this.withdrawMoney) > 10000) {
+			if (parseFloat(this.withdrawMoney) > 3000) {
 				this.$util.showToast({ title: '提现金额超出限额' });
 				return false;
 			}

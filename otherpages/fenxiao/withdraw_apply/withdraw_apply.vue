@@ -208,7 +208,7 @@
 					});
 					return false;
 				}
-				if (parseFloat(this.withdrawMoney) > 10000) {
+				if (parseFloat(this.withdrawMoney) > 3000) {
 					this.$util.showToast({
 						title: this.$lang('verify_alerts_3') // '提现金额超出限额'
 					});
