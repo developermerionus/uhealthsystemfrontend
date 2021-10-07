@@ -1,5 +1,6 @@
 <template>
 	<view class="nc-modify-content" :data-theme="themeStyle">
+		<navbar></navbar>
 		<view class="modify">
 			<view>
 				<image v-if="newImg == ''" :src="memberImg ? $util.img(memberImg) : $util.getDefaultImage().default_headimg" @error="memberImg = $util.getDefaultImage().default_headimg"
@@ -162,6 +163,9 @@
 
 	.opection-box {
 		margin-top: 50rpx;
+		margin: 50rpx auto 10rpx;
+		max-width: 1200px;
+		width: 60%;
 	}
 
 	.opec {

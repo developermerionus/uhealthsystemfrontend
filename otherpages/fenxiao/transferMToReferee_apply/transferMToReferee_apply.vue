@@ -139,7 +139,7 @@
 					});
 					return false;
 				}
-				if (parseFloat(this.withdrawMoney) > 10000) {
+				if (parseFloat(this.transferMoney) > 10000) {
 					this.$util.showToast({
 						title: this.$lang('common.transfer_verify_alerts_3')
 					});
