@@ -548,12 +548,7 @@ export default {
 							url: '/pages/order/payment/payment'
 						});
 						// typeof callback == 'function' && callback();
-					} else {
-						this.$util.showToast({
-							title: '当前订单可能存在拼团，维权等操作，' + res.message + '不可以关闭哦!',
-							duration: 2000
-						})
-					}
+					} 
 				}
 		})},
 		

@@ -199,7 +199,18 @@ export const lang = {
 			company_name: "Company Name",
 			ein_id: "EIN Number",
 			city_county: "City, County",
-			 fillingInfo: "Same with Personal Info"
+			 fillingInfo: "Same with Personal Info",
+			check_agree_contract: "Please Select the Checkbox",
+			uploadfrontpage:"Please upload the front page of credit card",
+			uploadbackpage:"Please upload the back page of credit card",
+			uploadidphoto:"Please upload the front side of Photo ID issued by your government",
+			input_card_front_page:"Front Side of Credit Card",
+			input_card_back_page:"Back Side of Credit Card",
+			input_photo_id:"Photo ID Issued by Your Government",
 			
-	}
+			
+			
+			
+	}		
+	
 }

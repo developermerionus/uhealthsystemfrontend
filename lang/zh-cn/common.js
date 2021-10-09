@@ -200,7 +200,14 @@ export const lang = {
 		  company_name: "公司名字",
 		  ein_id: "EIN 号码",
 		  city_county: "城市，县",
-		  fillingInfo: "使用系统个人信息"
+		  fillingInfo: "使用本网站的个人信息",
+		  check_agree_contract: "请勾选同意方框",
+		  uploadfrontpage:"请上传你的银行卡正面",
+		  uploadbackpage:"请上传你的银行卡反面",
+		  uploadidphoto:"请上传你的身份证或者政府办法的ID",
+		  input_card_front_page:"银行卡正面",
+		  input_card_back_page:"银行卡背面",
+		  input_photo_id:"身份证或带有照片的政府颁发的证件",
 		  
 	}
 }

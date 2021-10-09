@@ -485,6 +485,7 @@ export default {
 	 */
 	getDefaultImage() {
 		let defaultImg = uni.getStorageSync('default_img');
+		console.log(defaultImg);
 		if (defaultImg) {
 			defaultImg = JSON.parse(defaultImg);
 			defaultImg.default_goods_img = this.img(defaultImg.default_goods_img);
