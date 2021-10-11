@@ -92,19 +92,16 @@
 					<input class="uni-input info-content input-len" type="email" maxlength="30"
 						:placeholder="$lang('common.email')" v-model="formData.email" />
 				</view>
-				<view class="agreeContract" v-show="group_id=='1'">
+				<view  v-show="group_id=='1'">
+					<view class="agreeContract">
 					<checkbox @click="checkboxChange" :checked="checkboxChecked" />
-					同意<button @click="readContract">授权书</button>
-				</view>
+					{{$lang('common.agree')}}<button @click="readContract">{{$lang('common.credit_card_agreement')}}</button>
+					</view>
+				
 				<view v-show="showContract">
 					<view class="textContent">
-						<text>I authorize the above named business to charge the credit card indicated in this
-							authorization form according to the terms outlined above. This payment authorization is for
-							the goods/services described above, for the amount indicated above only, and is valid for
-							one (1) time use only. I certify that I am an authorized user of this credit card and that I
-							will not dispute the payment with my credit card company; so long as the transaction
-							corresponds to the terms indicated in this form.</text>
-						<button type="primary" @click="agreeHandler">同意</button> <button @click="cancelHandler()">不同意</button>
+						<text>{{$lang('common.agreement')}}</text>
+						<button type="primary" @click="agreeHandler">{{$lang('common.agree')}}</button> <button @click="cancelHandler()">{{$lang('common.disagree')}}</button>
 					</view>
 				</view>
 				<!-- 照片上传 -->
@@ -128,7 +125,7 @@
 							<block v-else>
 								<view class="opec">
 								<!-- 	<button size="mini" type="primary" @click="save()">确认保存</button> -->
-									<button size="mini" type="primary" @click="chooseImage(index)">重新上传</button>
+									<button size="mini" type="primary" @click="chooseImage(index)">{{$lang('common.reupload')}}</button>
 								</view>
 							</block>
 						</view>
@@ -137,7 +134,7 @@
 					</block>
 					<img-cropping selWidth="400" selHeight="300" @upload="myUpload" ref="imgCropping"></img-cropping>
 				</view>
-
+                </view>
 			</view>
 			<br>
 			<view class="save-item" @click="confirm(2)">

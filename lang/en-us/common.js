@@ -207,6 +207,12 @@ export const lang = {
 			input_card_front_page:"Front Side of Credit Card",
 			input_card_back_page:"Back Side of Credit Card",
 			input_photo_id:"Photo ID Issued by Your Government",
+			reupload:"Upload Again",
+			agree:"Agree",
+			disagree:"Disagree",
+			credit_card_agreement:"AUTHORIZATION TO CHARGE ON CREDIT CARD",
+			agreement: "I authorize the above named business to charge the credit card indicated in this authorization form according to the terms outlined above. This payment authorization is for the goods/services described above, for the amount indicated above only, and is valid for one (1) time use only. I certify that I am an authorized user of this credit card and that I will not dispute the payment with my credit card company; so long as the transaction corresponds to the terms indicated in this form. Also, I agree the above named business keeps my credit card photos and ID photo in the system.  I know this is a special order. Since the order is completed, customers will not return or refund. I would like to follow this policy. ",
+			
 			
 			
 			

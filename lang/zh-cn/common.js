@@ -208,6 +208,12 @@ export const lang = {
 		  input_card_front_page:"银行卡正面",
 		  input_card_back_page:"银行卡背面",
 		  input_photo_id:"身份证或带有照片的政府颁发的证件",
+		  reupload:"重新上传",
+		  agree:"同意",
+		  disagree:"不同意",
+		  credit_card_agreement:"信用卡授权同意书",
+		  agreement:"我授权贵公司使用我的信用卡来支付此次的商品的价格。我保证我是此信用卡的持有者并且保证我不会在购买后拒付发起争议仲裁。同时我同意贵公司保留我的信用卡正反面照片和ID照片在系统中。其目的是确保是我本人使用信用卡，以免发生纠纷。我知悉本次订购是特别定制，付款后不退不换。并且我愿意遵守此协议 ",
+				  
 		  
 	}
 }
