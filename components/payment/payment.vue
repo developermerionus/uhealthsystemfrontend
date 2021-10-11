@@ -332,7 +332,7 @@
 			this.memberInfo = uni.getStorageSync('userInfo');
 			this.group_id = this.memberInfo.group_id;
 			this.member_id = this.memberInfo.member_id;
-			console.log('this.group_id', this.group_id);
+			//console.log('this.group_id', this.group_id);
 			//this.getCardInfo();
 
 			this.getCountryList();
@@ -347,8 +347,8 @@
 						const temp_photo_path = res.data.photo_path? JSON.parse(res.data.photo_path).data : '';
 						if (res.code == 0) {
 							this.imageArr = (temp_photo_path ? temp_photo_path : this.imageArr);
-							console.log('ff temp_photo_path', temp_photo_path);
-							console.log('ff this.imageArr', this.imageArr);
+							//console.log('ff temp_photo_path', temp_photo_path);
+							//console.log('ff this.imageArr', this.imageArr);
 
 						} else {
 							this.$util.showToast({
@@ -365,7 +365,7 @@
 			chooseImage(index) {
 				this.image_index = index;
 				this.$refs.imgCropping.fSelect();
-				console.log('cccc this.imageArr', this.imageArr);
+				//console.log('cccc this.imageArr', this.imageArr);
 			},
 			//上传返回图片
 			myUpload(rsp) {
@@ -385,7 +385,7 @@
 					responseType: 'text',
 					success: res => {
 						if (res.data.code == 0) {
-							console.log('res.data.data.pic_path',res.data.data.pic_path);
+							//console.log('res.data.data.pic_path',res.data.data.pic_path);
 							self.imageArr[self.image_index].newImg = res.data.data.pic_path;
 							self.save();
 						}
@@ -441,7 +441,7 @@
 			checkboxChange() {
 				this.checkboxChecked = !this.checkboxChecked;
 				this.showContract = false;
-				console.log('this.checkboxChecked', this.checkboxChecked);
+				//console.log('this.checkboxChecked', this.checkboxChecked);
 			},
 			changeFillingInfo() {
 
