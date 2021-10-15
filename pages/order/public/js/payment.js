@@ -492,7 +492,7 @@ export default {
 					data,
 					success: res => {
 						// uni.hideLoading();
-						console.log('find id',res.data.out_trade_no);
+						//console.log('find id',res.data.out_trade_no);
 						if (res.code >= 0) {
 							this.order_id = res.data.order_id;
 							if (this.orderPaymentData.pay_money == 0) {
