@@ -202,11 +202,11 @@ export default {
 					icon: 'iconzhifubaozhifu-',
 					type: 'alioverseaspay'
 				},
-				{
-					name: this.$lang('common.credit_card'),
-					icon: '2',
-					type: 'authorizenetpay'
-				}
+				// {
+				// 	name: this.$lang('common.credit_card'),
+				// 	icon: '2',
+				// 	type: 'authorizenetpay'
+				// }
 			],
 			timer: null,
 			// #endif
