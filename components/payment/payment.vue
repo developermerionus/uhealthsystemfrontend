@@ -801,7 +801,7 @@
 
 				} else {
 					this.$api.sendRequest({
-						url: '/api/pay/payTest',
+						url: '/api/pay/pay',
 						data: {
 							out_trade_no: this.payInfo.out_trade_no,
 							pay_type: payType.type,
