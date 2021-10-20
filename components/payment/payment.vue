@@ -273,11 +273,12 @@
 				isIphoneX: false,
 				payIndex: 0,
 				// #ifdef H5
-				payTypeList: [{
-						name: '支付宝支付',
-						icon: 'iconzhifubaozhifu-',
-						type: 'alipay'
-					},
+				payTypeList: [
+					// {
+					// 	name: '支付宝支付',
+					// 	icon: 'iconzhifubaozhifu-',
+					// 	type: 'alipay'
+					// },
 					// {
 					// 	name: '微信支付',
 					// 	icon: 'iconweixin1',
@@ -298,12 +299,12 @@
 				timer: null,
 				// #endif
 				// #ifdef MP-WEIXIN
-				payTypeList: [{
-					name: '微信支付',
-					provider: 'wxpay',
-					icon: 'iconweixin1',
-					type: 'wechatpay',
-				}],
+				// payTypeList: [{
+				// 	name: '微信支付',
+				// 	provider: 'wxpay',
+				// 	icon: 'iconweixin1',
+				// 	type: 'wechatpay',
+				// }],
 				// #endif
 				billingAddressShow: true,
 				payInfo: {},
