@@ -648,7 +648,7 @@
 							});
 							return;
 						}
-						if (this.formData.street == '') {
+						if (this.formData.address == '') {
 							this.$util.showToast({
 								title: this.$lang('common.input_street')
 							});
@@ -663,6 +663,12 @@
 						if (this.formData.email == '') {
 							this.$util.showToast({
 								title: this.$lang('common.input_email')
+							});
+							return;
+						}
+						if (this.formData.zip == '') {
+							this.$util.showToast({
+								title: this.$lang('common.input_zipcode')
 							});
 							return;
 						}
