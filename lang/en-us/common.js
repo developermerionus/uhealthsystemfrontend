@@ -34,6 +34,7 @@ export const lang = {
 		inputverifycode: 'Please input verification code',
 		verifycode: 'VerifyCode',
 		inputdynamiccode: 'Please input dynamic code',
+		input_zipcode: "Please input Zip Code",
 		total: 'Total ',
 		product_in_cart: " product(s)",
 		least_buy: "At least buy ",
