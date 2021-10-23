@@ -180,6 +180,7 @@ export const lang = {
 		email:"电子邮箱",
 		confirmemail:"确定邮件",
 		billingaddress: "信用卡的注册信息",
+		  defaultCountry:"国家/地区",
 		  '172':"中国",
 		  '1': "美国",
 		  '10':"澳门",
