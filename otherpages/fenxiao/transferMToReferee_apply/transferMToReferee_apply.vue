@@ -163,7 +163,7 @@
 			
 			sendData(){
 				this.$api.sendRequest({
-					url: '/api/member/transfer',
+					url: '/api/member/transferTest',
 					data: {
 						referee_id: this.referee_id, 
 						username: this.referee_username,
@@ -331,7 +331,10 @@
 	}
 	
 	.transfer_detail_btn {
-		background: #ccc;
+		//background: #ccc;
+		background: linear-gradient(to right, #10869c 0%, #118ca3 12%,
+			#139fb9 34%, #14a5c0 47%, #139fb9 67%, #118ca3 89%, #10869c 100%);
+		
 		border-color: #ccc;
 		color: #fff;
 	}
