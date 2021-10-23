@@ -179,6 +179,7 @@ export const lang = {
 		email:"Email",
 		confirmemail:"Confirm Email",
 		billingaddress: "Billing Address",
+		   defaultCountry:"Country/Area",
 		  '172':"China",
 		  '1': "United State",
 		  '10':"Macau",
