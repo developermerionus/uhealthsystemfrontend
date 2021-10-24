@@ -143,8 +143,8 @@ export const lang = {
 		lang: "Lang",
 		'transfer_to_referee' : 'Transfer Money to Other Member',
 		'transfer_money' : 'Transfer Money',
-		'referee_username' : 'Referee Username',
-		'referee_id' : 'Referee Memeber ID',
+		'referee_username' : 'To Username',
+		'referee_id' : 'To Memeber ID',
 		'transfer_amount' : 'Transfer Amount',
 		'transfer_amount_tip' : 'Balance is $',
 		'transfer_money_list' : 'Transfer Details',
@@ -201,7 +201,7 @@ export const lang = {
 			company_name: "Company Name",
 			ein_id: "EIN Number",
 			city_county: "City, County",
-			 fillingInfo: "Same with Personal Info"
-			
+			 fillingInfo: "Same with Personal Info",
+			transfer_success: "Transfered Successfully"
 	}
 }
