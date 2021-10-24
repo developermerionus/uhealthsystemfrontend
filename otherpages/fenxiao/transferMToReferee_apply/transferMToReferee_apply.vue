@@ -163,7 +163,7 @@
 			
 			sendData(){
 				this.$api.sendRequest({
-					url: '/api/member/transferTest',
+					url: '/api/member/transfer',
 					data: {
 						referee_id: this.referee_id, 
 						username: this.referee_username,
@@ -173,7 +173,7 @@
 					success: res => {
 						if (res.code >= 0) {
 							this.$util.showToast({
-								title: 'transfer success'
+								title: this.$lang('common.transfer_success')
 							});
 							setTimeout(() => {
 								this.$util.redirectTo('/otherpages/fenxiao/transferMToReferee_apply/transferMToReferee_apply', 
@@ -282,6 +282,7 @@
 		}
 		
 		.unit {
+			color:#606266;
 			font-size: 60rpx;
 			line-height: 1;
 		}
