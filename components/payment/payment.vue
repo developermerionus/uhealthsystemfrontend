@@ -106,7 +106,7 @@
 					</view>
 				</view>
 				<!-- 照片上传 -->
-				<view>
+		<!-- 		<view>
 					<block v-for="(item, index) in imageArr" :key="index">
 						<view class="id-card">
 						<text>{{item.title}}</text>
@@ -125,16 +125,14 @@
 									@click="chooseImage(index)">{{$lang('common.click_to_upload')}}</button></block>
 							<block v-else>
 								<view class="opec">
-								<!-- 	<button size="mini" type="primary" @click="save()">确认保存</button> -->
 									<button size="mini" type="primary" @click="chooseImage(index)">{{$lang('common.reupload')}}</button>
 								</view>
 							</block>
 						</view>
 					</view>
-						<!-- <loading-cover ref="loadingCover"></loading-cover> -->
 					</block>
 					<img-cropping selWidth="400" selHeight="300" @upload="myUpload" ref="imgCropping"></img-cropping>
-				</view>
+				</view> -->
                 </view>
 			</view>
 			<br>
@@ -681,28 +679,28 @@
 							});
 							return;
 						}
-						if (this.group_id == '1') {
-							let index = this.imageArr.findIndex(x => x.newImg === '');
-							if(index==0) {
-								this.$util.showToast({
-									title: this.$lang('common.uploadfrontpage')
-								});
-								return;
-							}
-							else if (index==1) {
-								this.$util.showToast({
-									title: this.$lang('common.uploadbackpage')
-								});
-								return;
-							}
-							else if (index==2) {
-								this.$util.showToast({
-									title: this.$lang('common.uploadidphoto')
-								});
-								return;
-							}
+						// if (this.group_id == '1') {
+						// 	let index = this.imageArr.findIndex(x => x.newImg === '');
+						// 	if(index==0) {
+						// 		this.$util.showToast({
+						// 			title: this.$lang('common.uploadfrontpage')
+						// 		});
+						// 		return;
+						// 	}
+						// 	else if (index==1) {
+						// 		this.$util.showToast({
+						// 			title: this.$lang('common.uploadbackpage')
+						// 		});
+						// 		return;
+						// 	}
+						// 	else if (index==2) {
+						// 		this.$util.showToast({
+						// 			title: this.$lang('common.uploadidphoto')
+						// 		});
+						// 		return;
+						// 	}
 							
-						}
+						// }
 					}
 
 				}
