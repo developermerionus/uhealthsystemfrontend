@@ -203,7 +203,10 @@ export const lang = {
 		  ein_id: "EIN 号码",
 		  city_county: "城市，县",
 		  fillingInfo: "使用系统个人信息",
-		  transfer_success:"转账成功"
-		  
+		  transfer_success:"转账成功",
+		  credit_card_agreement:"授权协议",
+		   agree: "同意" ,
+		   agreement:"我授权贵公司使用我的信用卡来支付此次购买的商品。我保证我是此信用卡的持有者并且保证我不会在购买后拒付发起争议仲裁。我知悉本次订购是特别定制，付款后不退不换。并且我愿意遵守此协议。",
+		  check_agree_contract:"请勾选同意授权",
 	}
 }
