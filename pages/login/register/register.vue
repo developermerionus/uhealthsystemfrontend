@@ -154,10 +154,12 @@
 		mixins: [auth, globalConfig],
 		onLoad(option) {
 			// a==1 代为注册
+		//	console.log(option);
 			this.title = option ? this.$lang('registered_representative') : this.$lang('registered')
 			if (option) {
 				this.represent = true;
 				this.item = JSON.parse(option.option);
+				// console.log(this.item);
 				// this.option = JSON.parse(option.option)
 			}
 
@@ -205,6 +207,7 @@
 			 * 获取国家
 			 */
 			getCountryList() {
+
 				this.$api.sendRequest({
 					url: '/api/address/country',
 					success: res => {
@@ -335,6 +338,7 @@
 						url,
 						data,
 						success: res => {
+							// console.log(res);
 							if (res.code >= 0) {
 								if (this.represent) {
 									this.isSub = false;
