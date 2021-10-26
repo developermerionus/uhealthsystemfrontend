@@ -1,6 +1,6 @@
 <template>
+
 	<view class="bill" :data-theme="themeStyle">
-	<!-- 	<navbar></navbar> -->
 		<mescroll-uni ref="mescroll" @getData="getData" class="member-point" :size="10" top="10px">
 			<block slot="list">
 				<view class="balances" v-if="accountList.length" v-for="item in accountList" :key="item.id">
@@ -8,14 +8,14 @@
 					<image v-else :src="$util.img('upload/uniapp/fenxiao/bill/withdraw.png')" mode="widthFix"></image>
 					<view class="balances-info">
 						<text v-if="showClass=='cv'">{{ item.type }} </text>
+						
 						<text v-if="item.type < 3">订单号: {{ item.order_no }}</text>
 						<text>{{$lang('common.member')}}ID: {{item.member_id}}</text>
 						<text>{{$lang('common.membername')}}: {{item.surname}}{{item.firstname}}</text>
-						<text v-if="showClass=='recommend'">{{ item.initial_package }} </text>
 						<text v-if="item.type == 3">左区总CV: {{item.lcv}}</text>
 						<text v-if="item.type == 3">右区总CV: {{item.rcv}}</text>
 					</view>
-					<view class="balances-num" v-if="showClass!='recommend'">
+					<view class="balances-num">
 						<text :class="item.bonus > 0 ? 'color-base-text' : ''">{{ item.bonus > 0 ? '+' + item.bonus :(item.bonus==0 ? '': '-'+item.bonus) }}</text>
 					</view>
 				</view>
@@ -42,6 +42,7 @@
 			};
 		},
 		onLoad(e) {
+		//	console.log(e)
 			this.showClass = e.class
 			this.branch = e.branch == 'L' ?  '左区-left' :  '右区-right'
 			this.bonusType = e.type
@@ -58,7 +59,7 @@
 				}
 				this.$api.sendRequest({
 					url: '/api/member/getBonusPageList',
-					data: {	
+					data: {
 						class: this.showClass,
 						bonusType: this.bonusType,
 						lastweek: this.lastweek,
@@ -67,6 +68,7 @@
 						page_size: mescroll.size
 					},
 					success: res => {
+					//	console.log(res);
 						let newArr = [];
 						let msg = res.message;
 						if (res.code == 0 && res.data ) {
@@ -101,14 +103,9 @@
 	/deep/ .member-point .mescroll-uni-content {
 		overflow: hidden;
 	}
-	.bill {
-		max-width: 1200px;
-		margin: 0 auto;
-	}
 
 	.balances {
 		width: calc(100% - 60rpx);
-		max-width: 1200px;
 		border-radius: 10rpx;
 		margin: 0 auto;
 		padding: 27rpx 27rpx;

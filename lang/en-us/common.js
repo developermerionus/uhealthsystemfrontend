@@ -34,6 +34,7 @@ export const lang = {
 		inputverifycode: 'Please input verification code',
 		verifycode: 'VerifyCode',
 		inputdynamiccode: 'Please input dynamic code',
+		input_zipcode: "Please input Zip Code",
 		total: 'Total ',
 		product_in_cart: " product(s)",
 		least_buy: "At least buy ",
@@ -140,10 +141,10 @@ export const lang = {
 		pay_time_bonus: "Payment Date",
 		seeBonusDetails: "View Bonus Histroy",
 		lang: "Lang",
-		'transfer_to_referee' : 'Transfer Money to Referee Member',
+		'transfer_to_referee' : 'Transfer Money to Other Member',
 		'transfer_money' : 'Transfer Money',
-		'referee_username' : 'Referee Username',
-		'referee_id' : 'Referee Memeber ID',
+		'referee_username' : 'To Username',
+		'referee_id' : 'To Memeber ID',
 		'transfer_amount' : 'Transfer Amount',
 		'transfer_amount_tip' : 'Balance is $',
 		'transfer_money_list' : 'Transfer Details',
@@ -178,6 +179,7 @@ export const lang = {
 		email:"Email",
 		confirmemail:"Confirm Email",
 		billingaddress: "Billing Address",
+		   defaultCountry:"Country/Area",
 		  '172':"China",
 		  '1': "United State",
 		  '10':"Macau",
@@ -199,7 +201,11 @@ export const lang = {
 			company_name: "Company Name",
 			ein_id: "EIN Number",
 			city_county: "City, County",
-			 fillingInfo: "Same with Personal Info"
-			
+			fillingInfo: "Same with Personal Info",
+			transfer_success: "Transfered Successfully",
+		    credit_card_agreement:"Letter of Authorization",
+			agree: 'Agree' ,
+			agreement:"I authorize the above named business to charge the credit card indicated in this authorization form according to the terms outlined above. This payment authorization is for the goods/services described above, for the amount indicated above only, and is valid for one time use only. I certify that I am an authorized user of this credit card and that I will not dispute the payment with my credit card company;  As long as the transaction corresponds to the terms indicated in this form. I know this is a special order. I promise I will not refund or return. ",
+			check_agree_contract:"Please Check the Agreement",
 	}
 }

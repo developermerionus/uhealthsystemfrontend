@@ -173,7 +173,7 @@
 					success: res => {
 						if (res.code >= 0) {
 							this.$util.showToast({
-								title: 'transfer success'
+								title: this.$lang('common.transfer_success')
 							});
 							setTimeout(() => {
 								this.$util.redirectTo('/otherpages/fenxiao/transferMToReferee_apply/transferMToReferee_apply', 
@@ -282,6 +282,7 @@
 		}
 		
 		.unit {
+			color:#606266;
 			font-size: 60rpx;
 			line-height: 1;
 		}
@@ -331,7 +332,10 @@
 	}
 	
 	.transfer_detail_btn {
-		background: #ccc;
+		//background: #ccc;
+		background: linear-gradient(to right, #10869c 0%, #118ca3 12%,
+			#139fb9 34%, #14a5c0 47%, #139fb9 67%, #118ca3 89%, #10869c 100%);
+		
 		border-color: #ccc;
 		color: #fff;
 	}

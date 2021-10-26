@@ -50,12 +50,13 @@
 				</view>
 				<view class="edit-info-box" style='justify-content: flex-start;'>
 					<text class="info-name">{{$lang('common.country')}}<!-- <text>*</text> --></text>
-					<picker @change="bindPickerChange" :value="index" :range="tempCountryList" class="picker"
+					<picker mode = "selector" @change="bindPickerChange" :value="index" :range="tempCountryList" class="picker"
 						range-key="name">
 						<!-- 	<text class="desc uni-input">{{ $lang(`common.${countryList[index].name}`)?  $lang(`common.${countryList[index].name}`):countryList[index].name}}</text>
 				 -->
-						<text class="desc uni-input">{{tempCountryList[index]}}</text>
-
+						<text v-show="index!=='nothing'" class="desc uni-input">{{tempCountryList[index]}}</text>
+						<input v-show="index=='nothing'" class="uni-input  info-content input-len" type="text" placeholder-class="placeholder-class"
+						:placeholder="$lang('common.defaultCountry')" maxlength="100" />
 					</picker>
 				</view>
 				<view class="edit-info-box">
@@ -267,17 +268,18 @@
 					"id": 0,
 					"name": "China"
 				}, ],
-				index: 0,
+				index: 'nothing',
 				setCard: false,
 				focusFlag: false,
 				isIphoneX: false,
 				payIndex: 0,
 				// #ifdef H5
-				payTypeList: [{
-						name: '支付宝支付',
-						icon: 'iconzhifubaozhifu-',
-						type: 'alipay'
-					},
+				payTypeList: [
+					// {
+					// 	name: '支付宝支付',
+					// 	icon: 'iconzhifubaozhifu-',
+					// 	type: 'alipay'
+					// },
 					// {
 					// 	name: '微信支付',
 					// 	icon: 'iconweixin1',
@@ -288,22 +290,22 @@
 						icon: 'iconzhifubaozhifu-',
 						type: 'alioverseaspay'
 					},
-					// {
-					// 	name: this.$lang('common.credit_card'),
-					// 	icon: '2',
-					// 	type: 'authorizenetpay'
-					// },
+					{
+						name: this.$lang('common.credit_card'),
+						icon: '2',
+						type: 'authorizenetpay'
+					},
 					
 				],
 				timer: null,
 				// #endif
 				// #ifdef MP-WEIXIN
-				payTypeList: [{
-					name: '微信支付',
-					provider: 'wxpay',
-					icon: 'iconweixin1',
-					type: 'wechatpay',
-				}],
+				// payTypeList: [{
+				// 	name: '微信支付',
+				// 	provider: 'wxpay',
+				// 	icon: 'iconweixin1',
+				// 	type: 'wechatpay',
+				// }],
 				// #endif
 				billingAddressShow: true,
 				payInfo: {},
@@ -454,7 +456,7 @@
 					this.formData.city = this.memberInfo.city;
 					this.formData.state = this.memberInfo.state;
 					this.formData.zip = this.memberInfo.zipcode;
-					//this.formData.country=';'
+					
 					this.formData.phone = this.memberInfo.mobile;
 					this.formData.email = this.memberInfo.email;
 					this.formData.address = this.memberInfo.address;
@@ -463,7 +465,8 @@
 					this.formData.city = '';
 					this.formData.state = '';
 					this.formData.zip = '';
-					//this.formData.country=
+					this.index = "nothing";
+					this.formData.country='';
 					this.formData.phone = '';
 					this.formData.email = '';
 					this.formData.address = '';
@@ -514,6 +517,7 @@
 						if (res.code >= 0 && res.data) {
 							//console.log('res.data',res.data);
 							this.countryList = res.data.filter(item => item.id != 0);
+							//this.countryList.unshift({id:0})
 							for (let v in this.countryList) {
 								this.tempCountryList.push(this.$lang(`common.${this.countryList[v].id}`));
 							}
@@ -647,7 +651,7 @@
 							});
 							return;
 						}
-						if (this.formData.street == '') {
+						if (this.formData.address == '') {
 							this.$util.showToast({
 								title: this.$lang('common.input_street')
 							});
@@ -662,6 +666,12 @@
 						if (this.formData.email == '') {
 							this.$util.showToast({
 								title: this.$lang('common.input_email')
+							});
+							return;
+						}
+						if (this.formData.zip == '') {
+							this.$util.showToast({
+								title: this.$lang('common.input_zipcode')
 							});
 							return;
 						}
@@ -743,11 +753,12 @@
 										payTypeList.push(this.payTypeList[i]);
 									}
 								}
-								payTypeList.push({
-									name: this.$lang('common.credit_card'),
-									icon: '2',
-									type: 'wechatpay'
-								});
+								//dwfood yuansfer creditcard
+								// payTypeList.push({
+								// 	name: this.$lang('common.credit_card'),
+								// 	icon: '2',
+								// 	type: 'wechatpay'
+								// });
 								this.payTypeList = payTypeList;
 							}
 						}
