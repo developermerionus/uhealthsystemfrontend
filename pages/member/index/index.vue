@@ -209,10 +209,12 @@
 						<view style="margin 30rpx, 30rpx;">
 							<uni-grid :column="columnNum" :show-border="false" :square="false">
 								<block v-for="(item, index) in infoList3" :key="index">
-									<uni-grid-item>
-										<text class="text memberInforLabel">{{ item.item }}</text>
-										<text class="text memberInforContent">{{ item.value}}</text>
-									</uni-grid-item>
+									<view @click="redirectToList(item.url, item.value)">
+										<uni-grid-item>
+											<text class="text memberInforLabel">{{ item.item }}</text>
+											<text class="text memberInforContent">{{ item.value}}</text>
+										</uni-grid-item>
+									</view>
 								</block>
 							</uni-grid>
 						</view>
@@ -556,11 +558,10 @@
 				}
 			},
 			redirectToList(url, value) {
-				//console.log('check the value url', url, value);
 				if (value > 0) {
 					// if (this.lastweek == 1) return this.$util.msg('上周明细近日上线，敬请期待');
 					this.$util.redirectTo(url + '&lastweek=' + this.lastweek);
-				}
+				}		
 			},
 
 			initInfo() {
@@ -595,7 +596,7 @@
 				});
 				if (res.code >= 0 && res.data[0]) {
 					this.bonus = res.data[0];
-					//console.log('this.bonus',this.bonus);
+					// console.log('this.bonus',this.bonus);
 					if (this.columnNum < 3) {
 						this.infoList1 = [];
 						this.infoList1.push({
@@ -671,7 +672,7 @@
 						this.infoList3 = [];
 						this.infoList3.push({
 							item: this.$lang('recommend_total'),
-							value: this.bonus.recommend_total
+							value: this.bonus.recommend_total,
 						})
 						this.infoList3.push({
 							item: this.$lang('epoint_balance'),
@@ -679,7 +680,8 @@
 						})
 						this.infoList3.push({
 							item: this.$lang('recommend_ltotal'),
-							value: this.bonus.recommend_ltotal
+							value: this.bonus.recommend_ltotal,
+							url: '/otherpages/member/bill/bill?class=recommend&branch=L'
 						})
 						this.infoList3.push({
 							item: this.$lang('lastweek_bonus'),
@@ -687,7 +689,8 @@
 						})
 						this.infoList3.push({
 							item: this.$lang('recommend_rtotal'),
-							value: this.bonus.recommend_rtotal
+							value: this.bonus.recommend_rtotal,
+							url: '/otherpages/member/bill/bill?class=recommend&branch=R'
 						})
 						this.infoList3.push({
 							item: this.$lang('bonus'),
@@ -799,15 +802,17 @@
 						this.infoList3 = [];
 						this.infoList3.push({
 							item: this.$lang('recommend_total'),
-							value: this.bonus.recommend_total
+							value: this.bonus.recommend_total,
 						})
 						this.infoList3.push({
 							item: this.$lang('recommend_ltotal'),
-							value: this.bonus.recommend_ltotal
+							value: this.bonus.recommend_ltotal,
+							url: '/otherpages/member/bill/bill?class=recommend&branch=L'
 						})
 						this.infoList3.push({
 							item: this.$lang('recommend_rtotal'),
-							value: this.bonus.recommend_rtotal
+							value: this.bonus.recommend_rtotal,
+							url: '/otherpages/member/bill/bill?class=recommend&branch=R'
 						})
 						this.infoList3.push({
 							item: this.$lang('bonus'),
