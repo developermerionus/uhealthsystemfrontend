@@ -149,24 +149,24 @@
 			<!-- 联系客服 -->
 			<view class="kefu">
 				<!-- #ifdef MP -->
-				<button type="default" hover-class="none" open-type="contact" v-if="kefuConfig.weapp == 1">
+				<!-- <button type="default" hover-class="none" open-type="contact" v-if="kefuConfig.weapp == 1">
 					<text class="iconfont iconziyuan"></text>
 					<text>{{$lang('customer_service')}}</text>
 				</button>
 				<view v-else-if="kefuConfig.system == 1" @click="goConnect">
 					<text class="iconfont iconziyuan"></text>
 					<text>{{$lang('customer_service')}}</text>
-				</view>
+				</view> -->
 				<!-- #endif -->
 				<!-- #ifndef MP -->
-				<view v-if="kefuConfig.open == 1" @click="goConnect">
+				<!-- <view v-if="kefuConfig.open == 1" @click="goConnect">
 					<text class="iconfont iconziyuan"></text>
 					<text>{{$lang('customer_service')}}</text>
 				</view>
 				<view v-else-if="kefuConfig.system == 1" @click="goConnect">
 					<text class="iconfont iconziyuan"></text>
 					<text>{{$lang('customer_service')}}</text>
-				</view>
+				</view> -->
 				<!-- #endif -->
 			</view>
 		</view>

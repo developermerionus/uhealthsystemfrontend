@@ -209,10 +209,12 @@
 						<view style="margin 30rpx, 30rpx;">
 							<uni-grid :column="columnNum" :show-border="false" :square="false">
 								<block v-for="(item, index) in infoList3" :key="index">
-									<uni-grid-item>
-										<text class="text memberInforLabel">{{ item.item }}</text>
-										<text class="text memberInforContent">{{ item.value}}</text>
-									</uni-grid-item>
+									<view @click="redirectToList(item.url, item.value)">
+										<uni-grid-item>
+											<text class="text memberInforLabel">{{ item.item }}</text>
+											<text class="text memberInforContent">{{ item.value}}</text>
+										</uni-grid-item>
+									</view>
 								</block>
 							</uni-grid>
 						</view>
@@ -679,7 +681,8 @@
 						})
 						this.infoList3.push({
 							item: this.$lang('recommend_ltotal'),
-							value: this.bonus.recommend_ltotal
+							value: this.bonus.recommend_ltotal,
+							url: '/otherpages/member/bill/bill?class=recommend&branch=L'
 						})
 						this.infoList3.push({
 							item: this.$lang('lastweek_bonus'),
@@ -687,7 +690,8 @@
 						})
 						this.infoList3.push({
 							item: this.$lang('recommend_rtotal'),
-							value: this.bonus.recommend_rtotal
+							value: this.bonus.recommend_rtotal,
+							url: '/otherpages/member/bill/bill?class=recommend&branch=R'
 						})
 						this.infoList3.push({
 							item: this.$lang('bonus'),
@@ -799,15 +803,18 @@
 						this.infoList3 = [];
 						this.infoList3.push({
 							item: this.$lang('recommend_total'),
-							value: this.bonus.recommend_total
+							value: this.bonus.recommend_total,
+							
 						})
 						this.infoList3.push({
 							item: this.$lang('recommend_ltotal'),
-							value: this.bonus.recommend_ltotal
+							value: this.bonus.recommend_ltotal,
+							url: '/otherpages/member/bill/bill?class=recommend&branch=L'
 						})
 						this.infoList3.push({
 							item: this.$lang('recommend_rtotal'),
-							value: this.bonus.recommend_rtotal
+							value: this.bonus.recommend_rtotal,
+							url: '/otherpages/member/bill/bill?class=recommend&branch=R'
 						})
 						this.infoList3.push({
 							item: this.$lang('bonus'),

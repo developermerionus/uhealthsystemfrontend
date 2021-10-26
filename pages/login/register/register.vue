@@ -207,7 +207,6 @@
 			 * 获取国家
 			 */
 			getCountryList() {
-
 				this.$api.sendRequest({
 					url: '/api/address/country',
 					success: res => {
