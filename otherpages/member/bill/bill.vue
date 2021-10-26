@@ -1,7 +1,7 @@
 <template>
 	<view class="bill" :data-theme="themeStyle">
-		<navbar></navbar>
-		<mescroll-uni ref="mescroll" @getData="getData" class="member-point" :size="10" top="85px">
+	<!-- 	<navbar></navbar> -->
+		<mescroll-uni ref="mescroll" @getData="getData" class="member-point" :size="10" top="10px">
 			<block slot="list">
 				<view class="balances" v-if="accountList.length" v-for="item in accountList" :key="item.id">
 					<image v-if="item.type == 'order'" :src="$util.img('upload/uniapp/fenxiao/bill/jiesuan.png')" mode="widthFix"></image>
