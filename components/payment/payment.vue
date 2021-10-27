@@ -56,7 +56,7 @@
 				 -->
 						<text v-show="index!=='nothing'" class="desc uni-input">{{tempCountryList[index]}}</text>
 						<input v-show="index=='nothing'" class="uni-input  info-content input-len" type="text" placeholder-class="placeholder-class"
-						:placeholder="$lang('common.defaultCountry')" maxlength="100" />
+						:placeholder="$lang('common.defaultCountry')" maxlength="100" v-model="formData.country=''" />
 					</picker>
 				</view>
 				<view class="edit-info-box">
