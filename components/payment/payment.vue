@@ -506,7 +506,7 @@
 				}
 			},
 			findCountryIndex(countryId) {
-				console.log('this.countryList',this.countryList);
+				//console.log('this.countryList',this.countryList);
 				this.index = this.countryList.findIndex(x => x.id === countryId);
 				//console.log('this.index',this.index);
 
@@ -521,7 +521,7 @@
 					url: '/api/address/country',
 					success: res => {
 						if (res.code >= 0 && res.data) {
-							console.log('res.data',res.data);
+							//console.log('res.data',res.data);
 							this.countryList = res.data.filter(item => item.id != 0);
 							//this.countryList.unshift({id:0})
 							for (let v in this.countryList) {
@@ -785,7 +785,7 @@
 			// #ifdef H5
 
 			pay() {
-				console.log('this.formData',this.formData);
+				//console.log('this.formData',this.formData);
 				var payType = this.payTypeList[this.payIndex];
 				if (!payType) return;
 				let self = this;
