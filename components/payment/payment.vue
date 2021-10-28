@@ -274,29 +274,7 @@
 				isIphoneX: false,
 				payIndex: 0,
 				// #ifdef H5
-				payTypeList: [
-					// {
-					// 	name: '支付宝支付',
-					// 	icon: 'iconzhifubaozhifu-',
-					// 	type: 'alipay'
-					// },
-					// {
-					// 	name: '微信支付',
-					// 	icon: 'iconweixin1',
-					// 	type: 'wechatpay'
-					// },
-					{
-						name: this.$lang('common.alipay'),
-						icon: 'iconzhifubaozhifu-',
-						type: 'alioverseaspay'
-					},
-					{
-						name: this.$lang('common.credit_card'),
-						icon: '2',
-						type: 'authorizenetpay'
-					},
-					
-				],
+				payTypeList:[], 
 				timer: null,
 				// #endif
 				// #ifdef MP-WEIXIN
@@ -333,8 +311,36 @@
 			this.isIphoneX = this.$util.uniappIsIPhoneX();
 			this.getPayType();
 			this.memberInfo = uni.getStorageSync('userInfo');
-			this.group_id = this.memberInfo.group_id;
 			this.member_id = this.memberInfo.member_id;
+			this.group_id = this.memberInfo.group_id;
+			this.payTypeList= this.group_id =='0'?[
+				// {
+				// 	name: '支付宝支付',
+				// 	icon: 'iconzhifubaozhifu-',
+				// 	type: 'alipay'
+				// },
+				// {
+				// 	name: '微信支付',
+				// 	icon: 'iconweixin1',
+				// 	type: 'wechatpay'
+				// },
+				
+				{
+					name: this.$lang('common.alipay'),
+					icon: 'iconzhifubaozhifu-',
+					type: 'alioverseaspay'
+				},
+				{
+					name: this.$lang('common.credit_card'),
+					icon: '2',
+					type: 'authorizenetpay'
+				},
+				
+			]:[{
+					name: this.$lang('common.credit_card'),
+					icon: '2',
+					type: 'wechatpay'
+				}];
 			//console.log('this.group_id', this.group_id);
 			//this.getCardInfo();
 
