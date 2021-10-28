@@ -194,6 +194,7 @@ export const lang = {
 		  '174':"Costa Rica",
 		  '221':"Singapore",
 		  '228':"Taiwan",
+		  "971":"United Arab Emirates",
 		  'try_again':"Try Again？"	,
 			social_id:"SSN",
 			personal: "Personal",
