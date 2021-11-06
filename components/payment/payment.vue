@@ -339,7 +339,13 @@
 						type: 'authorizenetpay'
 					},
 					
-				]:[{
+				]:[
+					{
+						name: this.$lang('common.alipay'),
+						icon: 'iconzhifubaozhifu-',
+						type: 'alioverseaspay'
+					},
+					{
 						name: this.$lang('common.credit_card'),
 						icon: '2',
 						type: 'wechatpay'
