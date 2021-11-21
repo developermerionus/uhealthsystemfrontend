@@ -3,9 +3,19 @@
 		<navbar></navbar>
 		<view class="tree">
 			<view 
-				class="tree-content" 
+				class="tree-content toShowPhone" 
 				@touchstart.stop="move"
 				@touchmove.stop="moving" 
+				:style="{'top':positionX+'px','left':positionY+'px',transform:'scale('+scale+')'}"
+				>
+				<tree-item :tree-data="list" :tree-first="true" @clickForward='handleclickForward'
+				@clickTreeInfoTap="handleclickTreeInfoTap"/>
+			
+			</view>
+			<view 
+				class="tree-content toShowPc" 
+				id = "drag"
+				@mousedown="handlemouse"
 				:style="{'top':positionX+'px','left':positionY+'px',transform:'scale('+scale+')'}"
 				>
 				<tree-item :tree-data="list" :tree-first="true" @clickForward='handleclickForward'
@@ -103,6 +113,48 @@
 			uni.$off('forward');
 		},
 		methods: {
+			handlemouse() {
+				  // 被拖动的那个元素
+				    var dragEle = document.getElementById('drag');
+				    // 给元素添加mousedown事件
+				    dragEle.onmousedown = function(e){
+				        e = e || event;
+				        // 阻止默认事件行为
+				        e.preventDefault();
+				        var x1 = e.clientX;
+				        var y1 = e.clientY;
+				        var l1 = dragEle.offsetLeft;
+				        var t1 = dragEle.offsetTop;
+				        // 鼠标按下后给 document 添加 mousemove 事件
+				        document.onmousemove = function(e) {
+				            e = e || event;
+				            var l = e.clientX - x1 + l1;
+				            var t = e.clientY - y1 + t1;
+				
+				            // 让元素不被拖出浏览器
+				//             if(l < 0 ) {
+				//                 l = 0;
+				//             } else if( l > document.documentElement.clientWidth - dragEle.offsetWidth) {
+				//                 l = document.documentElement.clientWidth - dragEle.offsetWidth;
+				//             }
+				
+				//             if( t < 0 ) {
+				//                 t = 0;
+				//             } else if (t > document.documentElement.clientHeight - dragEle.offsetHeight) {
+				//                 t = document.documentElement.clientHeight - dragEle.offsetHeight;
+				//             }
+				
+				            dragEle.style.left = l + "px";
+				            dragEle.style.top = t + "px";
+				        }
+				        // 同时也给 document 添加 mouseup 事件
+				        // 鼠标松开的时候 移除添加在 document 上的事件
+				        document.onmouseup = function(){
+				            document.onmousemove = null;
+				            document.onmouseup = null;
+				        }
+				    }
+			},
 			tapIcon(e){		
 				this.$api.sendRequest({
 					url: '/api/member/getPreviousID',
@@ -293,10 +345,28 @@
 	margin: auto;
 	
    .tree-content{
+	    cursor: grab;
 		min-height: 100%;
 		position: absolute;
 		top: 0;
 		left: 0;
     }
+}
+
+@media screen and (max-width: 768px) {
+    .toShowPhone {
+		display: unset;
+	} 
+	.toShowPc {
+		display: none;
+	} 
+}
+@media screen and (min-width: 769px) {
+    .toShowPhone {
+    	display: none;
+    } 
+    .toShowPc {
+    	display: unset;
+    } 
 }
 </style>
