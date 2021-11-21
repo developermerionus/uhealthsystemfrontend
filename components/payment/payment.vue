@@ -356,8 +356,10 @@
 					url: '/api/member/info',
 					success: res => {
 						//console.log('res',res);
+						this.memberInfo = {...res.data};
 						this.group_id = res.data.group_id; 
 						this.findShowPaymethod();
+						
 						const temp_photo_path = res.data.photo_path? JSON.parse(res.data.photo_path).data : '';
 						if (res.code == 0) {
 							this.imageArr = (temp_photo_path ? temp_photo_path : this.imageArr);
@@ -464,6 +466,7 @@
 
 
 				if (this.fillingInfo) {
+					//console.log('this.memberInfo',this.memberInfo);
 					this.formData.city = this.memberInfo.city;
 					this.formData.state = this.memberInfo.state;
 					this.formData.zip = this.memberInfo.zipcode;
