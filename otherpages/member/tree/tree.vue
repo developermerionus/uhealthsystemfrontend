@@ -338,18 +338,22 @@
 
 
 .tree{
-    min-height: 90vh;
-	max-width: 90vw;
-    position: relative;
-	overflow: auto;
-	margin: auto;
+    min-height: 85vh;
+	max-width: 1200px;
+	// min-height: 100%;
+	position: relative;
+	// overflow: hidden;
+	// border: solid 1px blue;
+	// transform: scale(1);
 	
    .tree-content{
+	   // border: solid 1px red;
 	    cursor: grab;
 		min-height: 100%;
 		position: absolute;
 		top: 0;
 		left: 0;
+		
     }
 }
 
@@ -368,5 +372,10 @@
     .toShowPc {
     	display: unset;
     } 
+	
+	.tree {
+		margin: auto;
+	}
 }
+
 </style>
