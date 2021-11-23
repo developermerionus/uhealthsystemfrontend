@@ -112,10 +112,10 @@ $extend:calc(#{$spacing} + 2px); //延长线
   position: absolute;
   border: solid 1px #666;
   border-radius: 100%;
-  bottom:-15rpx;
-  width: 24rpx;
-  height: 24rpx;
-  line-height: 20rpx;
+  bottom:-8px;
+  width: 12px;
+  height: 12px;
+  line-height: 10px;
   text-align: center;
   color:#666;
   z-index: 100;
@@ -124,6 +124,7 @@ $extend:calc(#{$spacing} + 2px); //延长线
   padding: 0;
   background-color: white;
   opacity: 1;
+  font-size: 13px;
 }
 
 .card{
@@ -176,8 +177,9 @@ $extend:calc(#{$spacing} + 2px); //延长线
 						align-items: center;
 						
 						view {
-							line-height: 1.25;
-							font-size: 12px;
+							line-height: 1.2;
+							// line-height: 12px;
+							font-size: 11px;
 						}
 					}
 					
