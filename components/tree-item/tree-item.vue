@@ -91,15 +91,15 @@
 </script>
 
 <style lang="scss" scoped>
-$line-length:21px; //线长
-$spacing:19px; //间距
+$line-length:12px; //线长
+$spacing:10px; //间距
 $extend:calc(#{$spacing} + 2px); //延长线
 
 // 线样式
 @mixin line{
     content: "";
     display: block;
-    width: 3px;
+    width: 2px;
     height: $line-length;
     position: absolute;
     left: 0;
@@ -144,9 +144,9 @@ $extend:calc(#{$spacing} + 2px); //延长线
                     align-items: center;
                     // width: 150rpx;
                     // height:100rpx;
-                    padding: 10px;
+                    padding: 5px;
 					border-radius: 5px;
-                    margin: $spacing;
+                    margin: $spacing $spacing/2;//$spacing;
                     // background: coral;
 					// background: white;
                     color: #fff;
@@ -176,10 +176,16 @@ $extend:calc(#{$spacing} + 2px); //延长线
 						align-items: center;
 						
 						view {
-							line-height: 1;
-							font-size: 24rpx;
+							line-height: 1.25;
+							font-size: 12px;
 						}
 					}
+					
+					button {
+						padding: 7px;
+						line-height: 1;
+					}
+					
 				
 				}
             }
@@ -205,7 +211,7 @@ $extend:calc(#{$spacing} + 2px); //延长线
         &::after{
             @include line();
             width: calc(50% + #{$spacing});
-            height: 3px;
+            height: 2px;
             left: calc(-50% - #{$extend});
             top: 0;
         }
@@ -215,7 +221,7 @@ $extend:calc(#{$spacing} + 2px); //延长线
         &::before{
             @include line();
             width: calc(50% + #{$spacing});
-            height: 3px;
+            height: 2px;
             right: calc(-50% - #{$extend});
             top: 0;
         }
@@ -223,11 +229,12 @@ $extend:calc(#{$spacing} + 2px); //延长线
 	
 	// 活跃用户
 	.item-name {
-		border: 3px solid #fd4c06;
+		border: 2px solid #fd4c06;
 	}
 	.item-active {
-		border: 3px solid rgb(6, 183, 253);
+		border: 2px solid rgb(6, 183, 253);
 
 	}
+
 }
 </style>
