@@ -248,6 +248,8 @@
 			
 			handleclickForward(item){
 				this.forward(item);
+				this.positionX=0;
+				this.positionY=0;
 			},
 			
 			handleclickTreeInfoTap(item) {
@@ -339,10 +341,11 @@
 
 .tree{
     min-height: 85vh;
+	// max-height: 100vh;
 	max-width: 1200px;
 	// min-height: 100%;
 	position: relative;
-	// overflow: hidden;
+	// overflow: scroll;
 	// border: solid 1px blue;
 	// transform: scale(1);
 	

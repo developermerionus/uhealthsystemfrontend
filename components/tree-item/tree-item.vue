@@ -185,6 +185,7 @@ $extend:calc(#{$spacing} + 2px); //延长线
 					
 					button {
 						padding: 7px;
+						font-size: 12px;
 						line-height: 1;
 					}
 					
