@@ -40,6 +40,11 @@
 			baitong <text class="copy" @click="$util.copy('baitong')">copy{{$lang('copy')}}</text>
 			fedex <text class="copy" @click="$util.copy('fedex')">copy{{$lang('copy')}}</text>
 			</view>
+			<view>
+			shunfeng <text class="copy" @click="$util.copy('shunfeng')">copy{{$lang('copy')}}</text>
+			bangde <text class="copy" @click="$util.copy('bangde')">copy{{$lang('copy')}}</text>
+			zhongtong <text class="copy" @click="$util.copy('zhongtong')">copy{{$lang('copy')}}</text>
+			</view>
 		</view>
 			</view>
 		</view>
