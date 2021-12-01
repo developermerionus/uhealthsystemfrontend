@@ -23,7 +23,7 @@
 										<text class="price color-base-text font-size-toolbar">{{ $lang('common.currencySymbol') }}{{ goodsDetail.exchange_price }}</text>
 									</block>
 								</view>
-								<view class="stock">{{$lang('common.stock')}}{{ goodsDetail.stock }}{{ goodsDetail.unit }}</view>
+								<!-- <view class="stock">{{$lang('common.stock')}}{{ goodsDetail.stock }}{{ goodsDetail.unit }}</view> -->
 							</block>
 							<block v-else>
 								<view class="price-wrap">
@@ -33,10 +33,10 @@
 									积分：
 									<text class="color-base-text">{{ goodsDetail.point }}</text>
 								</view>
-								<view class="stock">
+								<!-- <view class="stock">
 									{{$lang('common.stock')}}：
 									<text class="color-base-text">{{ goodsDetail.stock }}{{ goodsDetail.unit }}</text>
-								</view>
+								</view> -->
 							</block>
 						</block>
 						<block v-else>
@@ -44,8 +44,9 @@
 								<text class="unit color-base-text font-size-tag">$</text>
 								<text class="price color-base-text font-size-toolbar">{{ goodsDetail.show_price }}</text>
 							</view>
-							<view class="stock">{{$lang('common.stock')}}{{ goodsDetail.stock }}{{ goodsDetail.unit }}</view>
-						</block>
+							<!-- <view class="stock">{{$lang('common.stock')}}{{ goodsDetail.stock }}{{ goodsDetail.unit }}</view>
+						 -->
+						 </block>
 
 						<view class="sku-name font-size-tag" v-if="goodsDetail.sku_spec_format">
 							<text class="color-tip">已选规格：</text>
