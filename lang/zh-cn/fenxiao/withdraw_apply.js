@@ -5,6 +5,7 @@ export const lang = {
 	wallet_description: '申请后3-7个工作日内可提现到Masspay钱包，钱包中的金额可自行转到会员自己的银行卡上。',
 	wallet_title: '提现奖金到Masspay钱包',
 	wallet_bottom_tip: '可提现奖金',
+	wallet_coupon_tip: '代金券金额',
 	buttonWords_toMasspay: '到Masspay钱包',
 	withdrawal_details: '提现明细',
 	verify_alerts_1: '请输入提现金额',

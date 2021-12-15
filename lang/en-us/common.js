@@ -208,5 +208,11 @@ export const lang = {
 			agree: 'Agree' ,
 			agreement:"I authorize the above named business to charge the credit card indicated in this authorization form according to the terms outlined above. This payment authorization is for the goods/services described above, for the amount indicated above only, and is valid for one time use only. I certify that I am an authorized user of this credit card and that I will not dispute the payment with my credit card company;  As long as the transaction corresponds to the terms indicated in this form. I know this is a special order. I promise I will not refund or return. ",
 			check_agree_contract:"Please Check the Agreement",
+			
+			use_coupon:'Use Coupon',
+			use_account_balance:'Use Account Balance',
+			coupon_deduct: 'Coupon Deduct',
+			balance_deduct: 'Balance Deduct',
+			available: "Available ",
 	}
 }

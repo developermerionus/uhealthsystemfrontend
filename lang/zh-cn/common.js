@@ -209,5 +209,11 @@ export const lang = {
 		  agree: "同意" ,
 		  agreement:"我授权贵公司使用我的信用卡来支付此次购买的商品。我保证我是此信用卡的持有者并且保证我不会在购买后拒付发起争议仲裁。我知悉本次订购是特别定制，付款后不退不换。并且我愿意遵守此协议。",
 		  check_agree_contract:"请勾选同意授权",
+		  
+		  use_coupon:'使用代金券',
+		  use_account_balance:'使用余额',
+		  coupon_deduct: '代金券抵扣',
+		  balance_deduct: '余额抵扣',
+		  available: "可用",
 	}
 }
