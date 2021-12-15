@@ -255,8 +255,18 @@
 					</text>
 				</view>
 			</view>
+			<view class="order-cell" v-if="orderData.new_coupon_cost > 0">
+				<text class="tit">{{$lang('common.use_coupon')}}</text>
+				<view class="box align-right">
+					<text class="color-base-text">
+						<text class="operator">-</text>
+						<text class="font-size-goods-tag">{{ $lang('common.currencySymbol') }}</text>
+						<text>{{ orderData.new_coupon_cost }}</text>
+					</text>
+				</view>
+			</view>
 			<view class="order-cell" v-if="orderData.balance_money > 0">
-				<text class="tit">使用余额</text>
+				<text class="tit">{{$lang('common.use_account_balance')}}</text>
 				<view class="box align-right">
 					<text class="color-base-text">
 						<text class="operator">-</text>

@@ -159,12 +159,21 @@
 						<!-- <text class="unit">{{ $lang('common.currencySymbol') }}</text> -->
 						<text class="money">{{$lang('common.pay_amount')}}{{ payMoney | moneyFormat }}</text>
 					</view>
-
+					
+					<view class="payment-item" v-if="couponDeduct > 0">
+						<view class="iconfont iconyue"></view>
+						<view class="info-wrap">
+							<text class="name">{{$lang('common.coupon_deduct')}}</text>
+							<view class="money">{{$lang('common.available')}}${{ couponDeduct }}</view>
+						</view>
+						<ns-switch class="balance-switch" @change="useNewCoupon" :checked="is_newCoupon == 1"></ns-switch>
+					</view>
+					
 					<view class="payment-item" v-if="balanceDeduct > 0">
 						<view class="iconfont iconyue"></view>
 						<view class="info-wrap">
-							<text class="name">余额抵扣</text>
-							<view class="money">可用${{ balanceDeduct }}</view>
+							<text class="name">{{$lang('common.balance_deduct')}}</text>
+							<view class="money">{{$lang('common.available')}}${{ balanceDeduct }}</view>
 						</view>
 						<ns-switch class="balance-switch" @change="useBalance" :checked="isBalance == 1"></ns-switch>
 					</view>
@@ -217,7 +226,15 @@
 				type: [Number, String],
 				default: ''
 			},
+			couponDeduct: {
+				type: [Number, String],
+				default: ''
+			},
 			isBalance: {
+				type: Number,
+				default: 0
+			},
+			is_newCoupon: {
 				type: Number,
 				default: 0
 			},
@@ -593,6 +610,10 @@
 			useBalance() {
 				this.$emit('useBalance');
 			},
+			// 使用will代金券
+			useNewCoupon() {
+				this.$emit('useNewCoupon');
+			},
 			confirm(num) {
 				if (this.payTypeList.length == 0 && this.payMoney > 0) {
 					this.$util.showToast({
@@ -795,6 +816,7 @@
 			pay() {
 				//console.log('this.formData',this.formData);
 				var payType = this.payTypeList[this.payIndex];
+				console.log('payType ',payType);
 				if (!payType) return;
 				let self = this;
 				if (payType.type == 'authorizenetpay') {

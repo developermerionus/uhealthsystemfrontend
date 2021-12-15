@@ -24,6 +24,9 @@
 							<text class="color-tip">
 								{{ $lang('wallet_bottom_tip') }}：{{ $lang('common.currencySymbol') }}{{ balance | moneyFormat }}
 							</text>
+							<text class="color-tip coupon-tip">
+								{{ $lang('wallet_coupon_tip') }}：{{ $lang('common.currencySymbol') }}{{ coupon }}
+							</text>
 						</view>
 					</view>
 				</view>
@@ -73,6 +76,7 @@
 				isSub: false,
 				balance: 0,
 				member_level: 0,
+				coupon:0,
 				
 			};
 		},
@@ -82,6 +86,7 @@
 			this.getBonus();
 		},
 		onShow() {
+			this.getCoupon();
 			if (this.$refs.loadingCover) this.$refs.loadingCover.hide();
 			// if (!this.addonIsExit.fenxiao) {
 			// 	this.$util.showToast({
@@ -108,6 +113,17 @@
 			// }
 		},
 		methods: {
+			getCoupon() {
+				this.$api.sendRequest({
+					url: '/api/member/getCouponInfo',
+					success: res => {
+						console.log('res', res);
+						if (res.code >= 0) {
+							this.coupon = res.data[0].coupon;
+						}
+					}
+				})
+			},
 			getBonus() {
 				this.$api.sendRequest({
 					url: '/api/member/bonus',
@@ -300,6 +316,9 @@
 </script>
 
 <style lang="scss">
+	.coupon-tip {
+		margin-left:40px;
+	}
 	.container {
 		width: 100vw;
 		height: 100vh;

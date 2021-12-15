@@ -2,6 +2,7 @@ var self;
 export default {
 	data() {
 		return {
+			newCoupon:'',
 			order_id:'',
 			setCard:false,
 			chineseIdCheckFlag:false,
@@ -419,8 +420,8 @@ export default {
 				data.member_address = JSON.stringify(data.member_address);
 			}
 			this.$api.sendRequest({
-				// url: '/api/ordercreate/calculateTest',
-				url: '/api/ordercreate/calculate',
+				 url: '/api/ordercreate/calculate',
+				//url: '/api/ordercreate/calculate',
 				data,
 				success: res => {
 					if (res.code >= 0) {
@@ -432,6 +433,7 @@ export default {
 						this.orderPaymentData.promotion_money = res.data.promotion_money;
 						this.orderPaymentData.order_money = res.data.order_money;
 						this.orderPaymentData.balance_money = res.data.balance_money;
+						this.orderPaymentData.new_coupon_cost_money = res.data.new_coupon_cost_money;
 						this.orderPaymentData.pay_money = res.data.pay_money;
 						this.orderPaymentData.goods_money = res.data.goods_money;
 						this.orderPaymentData.point_money = res.data.point_money;
@@ -472,6 +474,7 @@ export default {
 		 * @param {String} pay_password 支付密码
 		 */
 		orderCreate(pay_password) {
+			console.log('confirm');
 			if (this.verify()) {
 				if (this.isSub) return;
 				this.isSub = true;
@@ -500,6 +503,7 @@ export default {
 									code: res.data.out_trade_no
 								}, 'redirectTo');
 							} else {
+							    console.log('out_trade_no',res.data.out_trade_no);
 								this.$refs.choosePaymentPopup.getPayInfo(res.data.out_trade_no);
 								this.isSub = false;
 							}
@@ -769,6 +773,13 @@ export default {
 		useBalance() {
 			if (this.orderCreateData.is_balance) this.orderCreateData.is_balance = 0;
 			else this.orderCreateData.is_balance = 1;
+			this.orderCalculate();
+			this.$forceUpdate();
+		},
+		// 使用will代金券
+		useNewCoupon() {
+			if (this.orderCreateData.is_newCoupon) this.orderCreateData.is_newCoupon = 0;
+			else this.orderCreateData.is_newCoupon = 1;
 			this.orderCalculate();
 			this.$forceUpdate();
 		},
@@ -1178,11 +1189,23 @@ export default {
 			this.orderCreateData.member_card_unit = key;
 			Object.assign(this.orderPaymentData, this.orderCreateData);
 			this.orderCalculate();
-		}
+		},
+		getNewCoupon() {
+			this.$api.sendRequest({
+				url: '/api/member/getCouponInfo',
+				success: res => {
+					console.log('res', res);
+					if (res.code >= 0) {
+						this.newCoupon = res.data[0].coupon;
+					}
+				}
+			})
+		},
 	},
 	onShow() {
 		// 刷新多语言
 		self = this;
+		this.getNewCoupon();
 		this.getWrongChineseIdInfo();
 		this.$langConfig.refresh();
 		this.getUsStates(1);// 1: usa Country code;
@@ -1207,13 +1230,33 @@ export default {
 	},
 	computed: {
 		// 余额抵扣
+		// balanceDeduct() {
+		// 	if (parseFloat(this.orderPaymentData.member_account.balance_money) < parseFloat(this.orderPaymentData.order_money)) {	
+		// 		return parseFloat(this.orderPaymentData.member_account.balance_money).toFixed(2);
+		// 	} else {
+		// 		return parseFloat(this.orderPaymentData.order_money).toFixed(2);
+		// 	}
+		// },
+		couponDeduct() {
+				if (parseFloat(this.newCoupon) < parseFloat(this.orderPaymentData.order_money)) {
+					return parseFloat(this.newCoupon).toFixed(2);
+				} else {
+					return parseFloat(this.orderPaymentData.order_money).toFixed(2);
+				}
+		},
 		balanceDeduct() {
-			if (parseFloat(this.orderPaymentData.member_account.balance_money) < parseFloat(this.orderPaymentData.order_money)) {	
-				return parseFloat(this.orderPaymentData.member_account.balance_money).toFixed(2);
-			} else {
-				return parseFloat(this.orderPaymentData.order_money).toFixed(2);
+			if((this.orderPaymentData.order_money-this.newCoupon) > 0) {
+				if (parseFloat(this.orderPaymentData.member_account.balance_money) < parseFloat(this.orderPaymentData.order_money-this.newCoupon)) {
+					return parseFloat(this.orderPaymentData.member_account.balance_money).toFixed(2);
+				} else {
+					return parseFloat(this.orderPaymentData.order_money-this.newCoupon).toFixed(2);
+				}
+			}
+			else {
+				return 0;
 			}
 		},
+		
 		promotionExits() {
 			return this.orderPaymentData.shop_goods_list.promotion && Object.keys(this.orderPaymentData.shop_goods_list.promotion)
 				.length > 0;
