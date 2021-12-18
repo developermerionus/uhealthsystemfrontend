@@ -8,14 +8,20 @@
 					<view class="balances-info">
 						<text v-if="showClass=='cv'">{{ item.type }} </text>
 						<text v-if="item.type < 3">订单号: {{ item.order_no }}</text>
-						<text>{{$lang('common.member')}}ID: {{item.member_id}}</text>
-						<text>{{$lang('common.membername')}}: {{item.surname}}{{item.firstname}}</text>
+						<text v-if="showClass !=='past_n_week_qv'">{{$lang('common.member')}}ID: {{item.member_id}}</text>
+						<text v-if="showClass !=='past_n_week_qv'">{{$lang('common.membername')}}: {{item.surname}}{{item.firstname}}</text>
 						<text v-if="showClass=='recommend'">{{ item.initial_package }} </text>
-						<text v-if="item.type == 3">左区总CV: {{item.lcv}}</text>
-						<text v-if="item.type == 3">右区总CV: {{item.rcv}}</text>
+						<text v-if="item.type == 3">左区总CV: {{item.lcv}}  右区总CV: {{item.rcv}}</text>
+						<text v-if="showClass=='past_n_week_qv'">{{ item.yearweek }}周 </text>
+						<text v-if="showClass=='past_n_week_qv' && item.lqv_past6weeks">左区过去8周总和 {{ item.lqv_past6weeks }} </text>
+						<text v-if="showClass=='past_n_week_qv' && item.rqv_past6weeks">右区过去8周总和 {{ item.rqv_past6weeks }} </text>
 					</view>
-					<view class="balances-num" v-if="showClass!='recommend'">
+					<view class="balances-num" v-if="showClass!='recommend' && showClass!='past_n_week_qv' ">
 						<text :class="item.bonus > 0 ? 'color-base-text' : ''">{{ item.bonus > 0 ? '+' + item.bonus :(item.bonus==0 ? '': '-'+item.bonus) }}</text>
+					</view>
+					<view class="balances-num" v-if="showClass =='past_n_week_qv' ">
+						<text class= "color-norm-text" v-if="showClass=='past_n_week_qv' && item.LQV_WEEK>=0 ">{{ item.LQV_WEEK }}</text>
+						<text class= "color-norm-text" v-if="showClass=='past_n_week_qv' && item.RQV_WEEK>=0 ">{{ item.RQV_WEEK }}</text>
 					</view>
 				</view>
 				<ns-empty v-if="!accountList.length && showEmpty" text="暂无奖金信息" :isIndex="!1"></ns-empty>
@@ -67,7 +73,6 @@
 						page_size: mescroll.size
 					},
 					success: res => {
-					//	console.log(res);
 						let newArr = [];
 						let msg = res.message;
 						if (res.code == 0 && res.data ) {
@@ -101,6 +106,10 @@
 
 	/deep/ .member-point .mescroll-uni-content {
 		overflow: hidden;
+	}
+	.color-norm-text {
+		font-size: $font-size-tag;
+		color: $color-tip;
 	}
 	.bill {
 		max-width: 1200px;

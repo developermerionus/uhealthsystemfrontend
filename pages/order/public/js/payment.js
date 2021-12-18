@@ -474,7 +474,6 @@ export default {
 		 * @param {String} pay_password 支付密码
 		 */
 		orderCreate(pay_password) {
-			console.log('confirm');
 			if (this.verify()) {
 				if (this.isSub) return;
 				this.isSub = true;
@@ -503,7 +502,7 @@ export default {
 									code: res.data.out_trade_no
 								}, 'redirectTo');
 							} else {
-							    console.log('out_trade_no',res.data.out_trade_no);
+							    //console.log('out_trade_no',res.data.out_trade_no);
 								this.$refs.choosePaymentPopup.getPayInfo(res.data.out_trade_no);
 								this.isSub = false;
 							}
@@ -1194,7 +1193,6 @@ export default {
 			this.$api.sendRequest({
 				url: '/api/member/getCouponInfo',
 				success: res => {
-					console.log('res', res);
 					if (res.code >= 0) {
 						this.newCoupon = res.data[0].coupon;
 					}
