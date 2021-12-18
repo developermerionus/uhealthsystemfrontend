@@ -377,17 +377,17 @@
 						this.group_id = res.data.group_id; 
 						this.findShowPaymethod();
 						
-						const temp_photo_path = res.data.photo_path? JSON.parse(res.data.photo_path).data : '';
-						if (res.code == 0) {
-							this.imageArr = (temp_photo_path ? temp_photo_path : this.imageArr);
-							//console.log('ff temp_photo_path', temp_photo_path);
-							//console.log('ff this.imageArr', this.imageArr);
+						// const temp_photo_path = res.data.photo_path? JSON.parse(res.data.photo_path).data : '';
+						// if (res.code == 0) {
+						// 	this.imageArr = (temp_photo_path ? temp_photo_path : this.imageArr);
+						// 	//console.log('ff temp_photo_path', temp_photo_path);
+						// 	//console.log('ff this.imageArr', this.imageArr);
 
-						} else {
-							this.$util.showToast({
-								title: res.message
-							});
-						}
+						// } else {
+						// 	this.$util.showToast({
+						// 		title: res.message
+						// 	});
+						// }
 						if (this.$refs.loadingCover) this.$refs.loadingCover.hide();
 					},
 					fail: res => {
@@ -814,9 +814,7 @@
 			// #ifdef H5
 
 			pay() {
-				//console.log('this.formData',this.formData);
 				var payType = this.payTypeList[this.payIndex];
-				console.log('payType ',payType);
 				if (!payType) return;
 				let self = this;
 				if (payType.type == 'authorizenetpay') {
