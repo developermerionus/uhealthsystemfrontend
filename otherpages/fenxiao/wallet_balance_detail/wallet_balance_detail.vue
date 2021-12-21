@@ -25,10 +25,15 @@
 									<text :style="amountColorByType(item.wallet_detail_status, item.amount)">{{ item.memo }}</text>
 									<view class="desc-info-time">{{ item.trans_time }}</view>
 								</view>
-								<view class="desc-money" :style="{ color : item.amount>=0 ? 'rgb(17, 189, 100)' : 'rgb(255, 69, 68)'}">
-								<!-- <view class="desc-money" :style="amountColorByType(item.wallet_detail_status, item.amount)"> -->
-									<!-- <view class="desc-money" :style="transferState[item.status].color"> -->
-									${{ item.amount }}
+								<view class="desc-money-container">
+									<view class="desc-money" :style="{ color : item.amount>=0 ? 'rgb(17, 189, 100)' : 'rgb(255, 69, 68)'}">
+									<!-- <view class="desc-money" :style="amountColorByType(item.wallet_detail_status, item.amount)"> -->
+										<!-- <view class="desc-money" :style="transferState[item.status].color"> -->
+										${{ item.amount }}
+									</view>
+									<view class="desc-money">
+										${{ item.balance? item.balance : 'NULL' }}
+									</view>
 								</view>
 							</view>
 						</view>
@@ -97,6 +102,7 @@
 				};
 				
 				this.$api.sendRequest({
+					// url: '/api/member/wallet_balance_detail_testsch',
 					url: '/api/member/wallet_balance_detail',
 					data: {
 						page_size: mescroll.size,
@@ -171,6 +177,7 @@
 						});
 						 
 						this.walletBalanceDetailList = this.walletBalanceDetailList.slice().reverse();
+						
 						if (this.$refs.loadingCover) this.$refs.loadingCover.hide();
 					},
 					fail: res => {
