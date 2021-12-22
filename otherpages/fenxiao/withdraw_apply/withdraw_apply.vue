@@ -117,7 +117,6 @@
 				this.$api.sendRequest({
 					url: '/api/member/getCouponInfo',
 					success: res => {
-						console.log('res', res);
 						if (res.code >= 0) {
 							this.coupon = res.data[0].coupon;
 						}
