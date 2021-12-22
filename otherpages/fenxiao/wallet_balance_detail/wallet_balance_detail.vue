@@ -32,7 +32,7 @@
 										${{ item.amount }}
 									</view>
 									<view class="desc-money">
-										${{ item.balance? item.balance : 'NULL' }}
+										{{ item.balance? '$' + item.balance : '' }}
 									</view>
 								</view>
 							</view>
