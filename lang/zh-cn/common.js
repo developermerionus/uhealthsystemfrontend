@@ -142,6 +142,8 @@ export const lang = {
 		pay_time_bonus: "付款日期",
 		seeBonusDetails:"查看奖金历史",
 		lang: "语言",
+		inactive: '不活跃',
+		active: '活跃',
 		'transfer_to_referee' : '转账',
 		'transfer_money' : '转账',
 		'referee_username' : '被转人用户名',

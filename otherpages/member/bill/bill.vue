@@ -5,12 +5,11 @@
 				<view class="balances" v-if="accountList.length" v-for="item in accountList" :key="item.id">
 					<image v-if="item.type == 'order'" :src="$util.img('upload/uniapp/fenxiao/bill/jiesuan.png')" mode="widthFix"></image>
 					<image v-else :src="$util.img('upload/uniapp/fenxiao/bill/withdraw.png')" mode="widthFix"></image>
-					<view class="balances-info">
+					<view class="balances-info" v-if="showClass!=='recommend'">
 						<text v-if="showClass=='cv'">{{ item.type }} </text>
 						<text v-if="item.type < 3">订单号: {{ item.order_no }}</text>
 						<text v-if="showClass !=='past_n_week_qv'">{{$lang('common.member')}}ID: {{item.member_id}}</text>
 						<text v-if="showClass !=='past_n_week_qv'">{{$lang('common.membername')}}: {{item.surname}}{{item.firstname}}</text>
-						<text v-if="showClass=='recommend'">{{ item.initial_package }} </text>
 						<text v-if="item.type == 3">左区总CV: {{item.lcv}}  右区总CV: {{item.rcv}}</text>
 						<text v-if="showClass=='past_n_week_qv'">{{ item.yearweek }}周 </text>
 						<text v-if="showClass=='past_n_week_qv' && item.lqv_past6weeks">左区过去8周总和 {{ item.lqv_past6weeks }} </text>
@@ -22,6 +21,11 @@
 					<view class="balances-num" v-if="showClass =='past_n_week_qv' ">
 						<text class= "color-norm-text" v-if="showClass=='past_n_week_qv' && item.LQV_WEEK>=0 ">{{ item.LQV_WEEK }}</text>
 						<text class= "color-norm-text" v-if="showClass=='past_n_week_qv' && item.RQV_WEEK>=0 ">{{ item.RQV_WEEK }}</text>
+					</view>
+					<view class="balances-info" v-if="showClass=='recommend'">
+						<text>{{$lang('common.member')}}ID: {{item.member_id}}</text>
+						<text>{{$lang('common.membername')}}: {{item.surname}}{{item.firstname}}</text>
+						<text :isActive="item.actived">{{ item.actived==1 ? $lang('common.active') : $lang('common.inactive')}} </text>
 					</view>
 				</view>
 				<ns-empty v-if="!accountList.length && showEmpty" text="暂无奖金信息" :isIndex="!1"></ns-empty>
@@ -159,6 +163,12 @@
 					margin-top: 19rpx;
 					color: $color-tip;
 				}
+			}
+			text[isActive='1'] {
+				color: #1767b3;
+			}
+			text[isActive='0'] {
+				color: #fc354f;
 			}
 		}
 

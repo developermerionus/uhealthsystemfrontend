@@ -141,6 +141,8 @@ export const lang = {
 		pay_time_bonus: "Payment Date",
 		seeBonusDetails: "View Bonus Histroy",
 		lang: "Lang",
+		inactive: 'Inactive',
+		active: 'Active',
 		'transfer_to_referee' : 'Transfer Money to Other Member',
 		'transfer_money' : 'Transfer Money',
 		'referee_username' : 'To Username',
