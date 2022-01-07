@@ -13,7 +13,7 @@
 							<view class="user-info-box" v-if="token">
 								<view @click="$util.redirectTo('/pages/member/info/info')" class="user-head">
 									<image
-											:src="$util.getDefaultImage().default_headimg"
+											:src="memberImg ? $util.img(memberImg) : $util.getDefaultImage().default_headimg"
 											mode="aspectFill"
 											@error="memberInfo.headimg = $util.getDefaultImage().default_headimg"></image>
 								</view>
@@ -260,6 +260,7 @@
 		},
 		data() {
 			return {
+				memberImg:'',
 				memberGroup:'',
 				token: '',
 				memberInfo: {
@@ -382,12 +383,10 @@
 		
 
 		onLoad() {
-			//self = this;
+			this.getMemberInfo();
 			this.columnNum = this.findColumnNum();
 			this.toolsColumnNum = this.toolsFindColumnNum();
 			this.screenGreaterSixHundredPx = this.findTitleFormat();
-			//this.checkToken();
-			//console.log("onloading");
 			uni.hideTabBar();
 			if (this.addonIsExit.memberwithdraw) {
 				this.getWithdrawConfig();
@@ -407,17 +406,14 @@
 		},
 		async onShow() {
 			self = this;
+			this.initGetHeading();
 			uni.onWindowResize((res) => {
 				this.columnNum = res.size.windowWidth >= 800 ? 3 : 2;
 				this.toolsColumnNum = res.size.windowWidth >= 800 ? 4 : 2;
 				this.findTitleFormat = res.size.windowWidth >= 600;
-				//console.log('this.columnNum', this.columnNum );
-				//console.log('变化后的窗口宽度=' + res.size.windowWidth);
-				//console.log('变化后的窗口高度=' + res.size.windowHeight)
 			})
 			
-			//console.log("onshowiiing");
-
+	
 			// 刷新多语言
 			this.$langConfig.refresh();
 
@@ -443,6 +439,16 @@
 			}
 		},
 		methods: {
+			initGetHeading() {
+				this.$api.sendRequest({
+					url: '/api/member/info',
+					success: res => {
+						if (res.code == 0) {
+							this.memberImg = res.data.headimg;
+						} 
+					}
+				});
+			},
 			checkToken() {
 				self.token = uni.getStorageSync('token');
 				//console.log('self token ',self.token);
