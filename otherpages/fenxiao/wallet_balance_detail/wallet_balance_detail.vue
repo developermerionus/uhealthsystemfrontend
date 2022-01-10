@@ -31,7 +31,7 @@
 										<!-- <view class="desc-money" :style="transferState[item.status].color"> -->
 										${{ item.amount }}
 									</view>
-									<view class="desc-money">
+									<view class="desc-money-balance">
 										{{ item.balance ? '$' + item.balance : '' }}
 									</view>
 								</view>
@@ -131,6 +131,7 @@
 						const newArray = this.walletBalanceDetailList.filter((value, index) => {
 						    if (value.status == 0) return true;
 						});
+						// console.log(this.walletBalanceDetailList);
 					
 						this.walletBalanceDetailList.forEach((item, index) => {
 							switch (item.status) {
@@ -289,6 +290,18 @@
 					}
 			
 					.desc-info-time {
+						margin-bottom: 10rpx;
+						font-size: $font-size-tag;
+						color: $color-tip;
+					}
+				}
+				
+				.desc-money-container {
+					display: flex;
+					flex-direction: column;
+					justify-content: space-between;
+					
+					.desc-money-balance {
 						margin-bottom: 10rpx;
 						font-size: $font-size-tag;
 						color: $color-tip;
