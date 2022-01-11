@@ -565,7 +565,7 @@
 			},
 			redirectToList(url, value) {
 				//console.log('check the value url', url, value);
-				if (value > 0) {
+				if (value > 0||url == '/otherpages/member/bill/bill?class=recommend&branch=L'||url == '/otherpages/member/bill/bill?class=recommend&branch=R') {
 					// if (this.lastweek == 1) return this.$util.msg('上周明细近日上线，敬请期待');
 					this.$util.redirectTo(url + '&lastweek=' + this.lastweek);
 				}
