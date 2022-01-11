@@ -969,24 +969,30 @@ export default {
 				// this.$util.showToast({
 				// 	title: "请您在地址栏中填写手机号"
 				// });
-				this.showWaringCheck(4000,this.fillupPhonenum)
+				this.showWarningCheck(4000,this.fillupPhonenum)
 			}
 			else if (this.orderPaymentData&&this.orderPaymentData.member_address&&this.orderPaymentData.member_address.name==='') {
 				// this.$util.showToast({
 				// 	title: "请您在地址栏中填写姓名"
 				// });
-				this.showWaringCheck(4000,this.fillupName)
+				this.showWarningCheck(4000,this.fillupName)
+			}
+			else if (!this.checkboxChecked) {
+				this.$util.showToastLonger({
+					title: this.$lang('common.phurchaseagreement'),
+				},4000);
+				this.showFocus();
 			}
 			else {
 				if (this.orderPaymentData.member_address&&this.orderPaymentData.member_address.country_id===1) {
 					// Country USA
 					if (!this.usStateList.includes(this.orderPaymentData.member_address.state)){
-						// this.showWaringCheck(4000, this.$lang('common.currencySymbol'));
-						this.showWaringCheck(4000, this.$lang('uscountryAlert'));
+						// this.showWarningCheck(4000, this.$lang('common.currencySymbol'));
+						this.showWarningCheck(4000, this.$lang('uscountryAlert'));
 					} else if (this.orderPaymentData.member_address.state==='California' 
 					&& !this.cityListCA_string.includes(this.orderPaymentData.member_address.city)) {
 						// 查看CityCounty名是否准确
-						this.showWaringCheck(4000, this.$lang('californiaCityAlert'));
+						this.showWarningCheck(4000, this.$lang('californiaCityAlert'));
 					}
 					else {
 						this.runPaymentPopup();
@@ -1041,10 +1047,10 @@ export default {
 					}
 					else if (res.data && res.data.length === 1&& res.data[0].idName!==idName) {
 						console.log('the name is not right for this chinese id');
-						this.showWaringCheck(5000,this.warningCheckChineseId);
+						this.showWarningCheck(5000,this.warningCheckChineseId);
 					}
 					else {
-						this.showWaringCheck(5000,this.warningCheckChineseId);
+						this.showWarningCheck(5000,this.warningCheckChineseId);
 					}
 					this.chineseIdCheckFlag=false;
 				},
@@ -1056,13 +1062,13 @@ export default {
 			for(let item of self.avoidRepeatClick) {
 				if(item.idName===idName && item.idNumber===idNumber){
 					console.log('this is repeated mistakes');
-					this.showWaringCheck(5000,this.warningCheckChineseId);
+					this.showWarningCheck(5000,this.warningCheckChineseId);
 					return false
 				}
 			}
 			return true;
 		},
-		showWaringCheck(time,text) {
+		showWarningCheck(time,text) {
 			this.$refs.loadingCover.hide();
 			let addressId = this.orderPaymentData.member_address.id;
 				this.$util.showToastLonger({
@@ -1072,7 +1078,7 @@ export default {
 					this.fillupAddressInfo(addressId);
 				}, time);
 		},
-		//this.showWaringCheck(5000,this.warningCheckChineseId); 
+		//this.showWarningCheck(5000,this.warningCheckChineseId); 
 		// showWaringChineseIdCheck() {
 		// 	let time = 5000;
 		// 	let addressId = this.orderPaymentData.member_address.id;
@@ -1100,7 +1106,7 @@ export default {
 						this.setWrongChineseIdInfo(self.avoidRepeatClick);
 						this.$refs.loadingCover.hide();
 						console.log('chinese id and name did not pass alibaba check');
-						this.showWaringCheck(5000,this.warningCheckChineseId);
+						this.showWarningCheck(5000,this.warningCheckChineseId);
 					}
 					else if(res.code === "0" && res.result && res.result.description==="一致") {
 						console.log('name and chinese id pass alibaba  check');
@@ -1111,14 +1117,14 @@ export default {
 						self.avoidRepeatClick.push({idName:idName,idNumber:idNumber, message:res.result.description})
 						this.setWrongChineseIdInfo(self.avoidRepeatClick);
 						//console.log('hee',res.result.description!=="一致");
-						this.showWaringCheck(5000,this.warningCheckChineseId);
+						this.showWarningCheck(5000,this.warningCheckChineseId);
 					}
 					else {
 						// this.$refs.loadingCover.hide();
 						// this.$util.showToast({
 						// 	title: res.message
 						// });
-						this.showWaringCheck(5000,this.warningCheckChineseId);
+						this.showWarningCheck(5000,this.warningCheckChineseId);
 					}
 					this.chineseIdCheckFlag=false;
 				},

@@ -349,6 +349,20 @@
 			<view class="submit-btn"><button type="primary" size="mini"
 					@click="openChoosePayment()">{{$lang('common.submit_payment')}}</button></view>
 		</view>
+		
+		<view class="out-focus">
+		<view class="agreeContract focus" :focus="focusFlag">
+			<checkbox @click="checkboxChange" :checked="checkboxChecked" />
+			{{$lang('common.agree')}}<button @click="readContract">{{$lang('common.buy_agreement')}}</button>
+			</view>
+		
+		<view v-show="showContract">
+			<view class="textContent">
+				<text>{{$lang('common.agreement')}}</text>
+				<button type="primary" @click="agreeHandler">{{$lang('common.agree')}}</button> <button @click="cancelHandler()">{{$lang('common.disagree')}}</button>
+			</view>
+		</view>
+		</view>
 
 		<!-- 发票弹窗 -->
 		<uni-popup ref="invoicePopup" type="bottom">
@@ -618,6 +632,9 @@
 	export default {
 		data() {
 			return {
+				focusFlag: false,
+				showContract: false,
+				checkboxChecked: false,
 				cardFormData:{state:''},
 				setCard: false,
 				formData: {
@@ -672,6 +689,40 @@
 			
 		},
 		methods: {
+			showFocus() {
+				this.focusFlag = false;
+				this.$nextTick(function() {
+					this.focusFlag = true;
+					this.but();
+				});
+			},
+			but() {
+			
+				uni.createSelectorQuery().select('.focus').boundingClientRect(data => {
+					//目标位置的节点：类class或者id
+					uni.createSelectorQuery().select(".out-focus").boundingClientRect(res => {
+						//最外层盒子的节点：类class或者id
+						uni.pageScrollTo({
+			
+							duration: 100, //过渡时间
+							scrollTop:data.top+590 - res.top,//到达距离顶部的top值
+							//scrollTop: data.top - res.top, //如果置顶
+						})
+					}).exec()
+				}).exec();
+			},
+			readContract() {
+				this.showContract = !this.showContract;
+			},
+			agreeHandler() {
+				this.showContract = false;
+				this.checkboxChecked = true;
+			},
+			checkboxChange() {
+				this.checkboxChecked = !this.checkboxChecked;
+				this.showContract = false;
+				//console.log('this.checkboxChecked', this.checkboxChecked);
+			},
 			showHandler() {
 				this.setCard=!this.setCard;
 			},
@@ -835,6 +886,22 @@
 
 <style lang="scss">
 	@import './../../../common/css/order_parment.scss';
+	.textContent {
+		width: 80%;
+		margin: 0 auto;
+		button{
+			margin-top:15px;
+			}
+	}
+	.agreeContract {
+		margin-top: 20rpx;
+		display: flex;
+		align-items: center;
+		padding: 20rpx 40rpx;
+		min-height: 50rpx;
+		background-color: #fff;
+		justify-content: flex-start;
+	}
     .order-container {
 		max-width: 1200px;
 		margin:0 auto;

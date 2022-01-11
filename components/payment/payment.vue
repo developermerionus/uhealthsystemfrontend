@@ -272,7 +272,6 @@
 					defaultImgPath:'upload/1/idphoto/defaultImg/idphoto.png'
 				}],
 				member_id: '',
-				showContract: '',
 				name: 'payment',
 				group_id: '0',
 				showContract: false,
