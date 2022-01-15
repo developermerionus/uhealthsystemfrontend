@@ -353,7 +353,10 @@
 		<view class="out-focus">
 		<view class="agreeContract focus" :focus="focusFlag">
 			<checkbox @click="checkboxChange" :checked="checkboxChecked" />
-			{{$lang('common.agree')}}<button @click="readContract">{{$lang('common.buy_agreement')}}</button>
+			{{$lang('common.agree')}}
+			<!-- <button @click="readContract">{{$lang('common.buy_agreement')}}</button> -->
+			<button @click="openPopup">{{$lang('common.buy_agreement')}}</button>
+			
 			</view>
 		
 		<view v-show="showContract">
@@ -362,6 +365,21 @@
 				<button type="primary" @click="agreeHandler">{{$lang('common.agree')}}</button> <button @click="cancelHandler()">{{$lang('common.disagree')}}</button>
 			</view>
 		</view>
+		</view>
+		
+		<view @touchmove.prevent>
+			<uni-popup ref="agrementPopup" type="center" :maskClick="false">
+				<view class="conten-box">
+					<text class="iconfont iconclose" @click="toClose"></text>
+					<view class="title">{{ buyAgreement.title }}</view>
+					<view class="con">
+						<scroll-view scroll-y="true" class="con">
+							<rich-text :nodes="buyAgreement.content">
+							</rich-text>
+						</scroll-view>
+					</view>
+				</view>
+			</uni-popup>
 		</view>
 
 		<!-- 发票弹窗 -->
@@ -632,6 +650,11 @@
 	export default {
 		data() {
 			return {
+				buyAgreement: {
+					// 注册协议
+					title: '',
+					content: ''
+				},
 				focusFlag: false,
 				showContract: false,
 				checkboxChecked: false,
@@ -683,12 +706,35 @@
 			this.formData.id = option.id;
 			this.getUsStates(1);
 			this.getCityListCA();
+			this.getRegisiterAggrement();
 		},
 		onShow() {
 			this.checkSelfPickupExist();
 			
 		},
 		methods: {
+			/**
+			 * 展示注册协议
+			 */
+			openPopup() {
+				this.$refs.agrementPopup.open();
+			},
+			/**
+			 * 点击关闭协议
+			 */
+			toClose() {
+				this.$refs.agrementPopup.close();
+			},
+			getRegisiterAggrement() {
+				this.$api.sendRequest({
+					url: '/api/register/buyAggrement',
+					success: res => {
+						if (res.code >= 0) {
+							this.buyAgreement = res.data;
+						}
+					}
+				});
+			},
 			showFocus() {
 				this.focusFlag = false;
 				this.$nextTick(function() {
@@ -886,6 +932,61 @@
 
 <style lang="scss">
 	@import './../../../common/css/order_parment.scss';
+	.conten-box {
+		background-color: #ffff;
+		padding: 0 30rpx;
+		box-sizing: border-box;
+		height: 812rpx;
+		width: 580rpx;
+		border-radius: 10rpx;
+	
+		text {
+			margin-top: 25rpx;
+			float: right;
+			line-height: 1;
+		}
+	
+		.title {
+			width: 100%;
+			font-size: 36rpx;
+			font-weight: bold;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			border-bottom: 1px solid #e0e0e0;
+			line-height: 1;
+			padding-bottom: 28rpx;
+		}
+	
+		.content-con {
+			width: 100%;
+			height: 680rpx;
+			box-sizing: border-box;
+		}
+	
+		.con {
+			width: 100%;
+			height: 100%;
+		}
+	
+		.sure {
+			width: 100%;
+			height: 100rpx;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+	
+			.sure-btn {
+				width: 100%;
+				height: 60rpx;
+				border-radius: 60rpx;
+				color: #ffffff;
+				text-align: center;
+				line-height: 60rpx;
+			}
+		}
+	}
+	
 	.textContent {
 		width: 80%;
 		margin: 0 auto;
