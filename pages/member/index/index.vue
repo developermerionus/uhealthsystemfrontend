@@ -564,11 +564,14 @@
 				}
 			},
 			redirectToList(url, value) {
-				//console.log('check the value url', url, value);
-				if (value > 0||url == '/otherpages/member/bill/bill?class=recommend&branch=L'||url == '/otherpages/member/bill/bill?class=recommend&branch=R') {
+				// console.log('check the value url', url, value);
+				if (value > 0||url == '/otherpages/member/bill/bill?class=recommend&branch=L'
+				||url == '/otherpages/member/bill/bill?class=recommend&branch=R'
+				||url=='/otherpages/member/bill/bill?class=UFP10') { 
 					// if (this.lastweek == 1) return this.$util.msg('上周明细近日上线，敬请期待');
 					this.$util.redirectTo(url + '&lastweek=' + this.lastweek);
 				}
+				
 			},
 
 			initInfo() {
@@ -601,9 +604,10 @@
 					},
 					async: false
 				});
+				// console.log(res);
 				if (res.code >= 0 && res.data[0]) {
 					this.bonus = res.data[0];
-					//console.log('this.bonus',this.bonus);
+					// console.log('this.bonus',this.bonus);
 					if (this.columnNum < 3) {
 						this.infoList1 = [];
 						this.infoList1.push({
@@ -704,6 +708,13 @@
 						this.infoList3.push({
 							item: this.$lang('bonus'),
 							value: this.bonus.bonus
+						})
+						this.infoList3.push({
+							item: this.$lang('ufp10'), //"ufp10 UFP Dividend 创始分红权益",
+							value: this.memberInfo.UFP10>0? (this.memberInfo.UFP10_Prime>0? this.$lang('prime') 
+							: this.$lang('basic') ) : this.$lang('未参与'), 
+							url: this.memberInfo.UFP10>0 && (this.memberInfo.UFP10_leftNum>0 || 
+							this.memberInfo.UFP_rightNum>0) ? '/otherpages/member/bill/bill?class=UFP10' : null
 						})
 						// console.log(this.infoList3);
 						this.infoList4 = [];
@@ -838,6 +849,13 @@
 							item: this.$lang('epoint_balance'),
 							value: this.bonus.epoint_balance
 						})
+						this.infoList3.push({
+							item: this.$lang('ufp10'), //"ufp10 UFP Dividend 创始分红权益",
+							value: this.memberInfo.UFP10>0? (this.memberInfo.UFP10_Prime>0? this.$lang('prime') 
+							: this.$lang('basic') ) : this.$lang('未参与'), 
+							url: this.memberInfo.UFP10>0 && (this.memberInfo.UFP10_leftNum>0 || 
+							this.memberInfo.UFP_rightNum>0) ? '/otherpages/member/bill/bill?class=UFP10' : null
+						})
 						// console.log(this.infoList3);
 						this.infoList4 = [];
 						this.infoList4.push({
@@ -880,6 +898,7 @@
 					async: false
 				});
 				if (res.code >= 0 && res.data) {
+					// console.log(res.data);
 					this.getBonus();
 					self.token = uni.getStorageSync('token');
 					this.memberInfo = res.data;
