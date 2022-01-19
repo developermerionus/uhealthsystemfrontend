@@ -366,22 +366,31 @@
 			</view>
 		</view>
 		</view>
-		
 		<view @touchmove.prevent>
 			<uni-popup ref="agrementPopup" type="center" :maskClick="false">
-				<view class="conten-box">
+				<view class="conten-box"  v-show ="lang=='zh-cn'">
 					<text class="iconfont iconclose" @click="toClose"></text>
-					<view class="title">{{ buyAgreement.title }}</view>
+					<view class="title">{{ buyAgreement_zh.title }}</view>
+					<view class="con" >
+						<scroll-view scroll-y="true" class="con">
+							<rich-text :nodes="buyAgreement_zh.content">
+							</rich-text>
+						</scroll-view>
+					</view>
+				</view>
+				<view class="conten-box" v-show ="lang=='en-us'">
+					<text class="iconfont iconclose" @click="toClose"></text>
+					<view class="title">{{ buyAgreement_en.title }}</view>
 					<view class="con">
 						<scroll-view scroll-y="true" class="con">
-							<rich-text :nodes="buyAgreement.content">
+							<rich-text :nodes="buyAgreement_en.content">
 							</rich-text>
 						</scroll-view>
 					</view>
 				</view>
 			</uni-popup>
 		</view>
-
+		
 		<!-- 发票弹窗 -->
 		<uni-popup ref="invoicePopup" type="bottom">
 			<view :style="orderCreateData.is_invoice == 1 ? 'height: 83vh;' : 'height: 48vh;'"
@@ -650,8 +659,12 @@
 	export default {
 		data() {
 			return {
-				buyAgreement: {
-					// 注册协议
+				lang:'',
+				buyAgreement_zh: {
+					title: '',
+					content: ''
+				},
+				buyAgreement_en: {
 					title: '',
 					content: ''
 				},
@@ -714,10 +727,11 @@
 		},
 		methods: {
 			/**
-			 * 展示注册协议
+			 * 展示购买协议
 			 */
 			openPopup() {
 				this.$refs.agrementPopup.open();
+				this.lang = uni.getStorageSync("lang");
 			},
 			/**
 			 * 点击关闭协议
@@ -727,14 +741,24 @@
 			},
 			getRegisiterAggrement() {
 				this.$api.sendRequest({
-					url: '/api/register/buyAggrement',
+					url: '/api/register/buyAggrement_zh',
 					success: res => {
 						if (res.code >= 0) {
-							this.buyAgreement = res.data;
+							this.buyAgreement_zh = res.data;
 						}
 					}
 				});
+				this.$api.sendRequest({
+					url: '/api/register/buyAggrement_en',
+					success: res => {
+						if (res.code >= 0) {
+							this.buyAgreement_en = res.data;
+						}
+					}
+				});
+				
 			},
+			
 			showFocus() {
 				this.focusFlag = false;
 				this.$nextTick(function() {
