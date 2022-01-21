@@ -31,6 +31,7 @@
 						<text>{{$lang('common.member')}}ID: {{item.member_id}}</text>
 						<text>{{$lang('common.membername')}}: {{item.surname}}{{item.firstname}}</text>
 						<text>{{ item.source_member_branch }}</text>
+						<text :isActive="item.actived">{{ item.actived==1 ? $lang('common.active') : $lang('common.inactive')}} </text>
 					</view>
 				</view>
 				<ns-empty v-if="!accountList.length && showEmpty" text="暂无信息" :isIndex="!1"></ns-empty>
@@ -166,6 +167,11 @@
 					font-size: $font-size-tag;
 					margin-top: 19rpx;
 					color: $color-tip;
+				}
+				
+				&:nth-child(4) {
+					font-size: $font-size-tag;
+					margin-top: 19rpx;
 				}
 			}
 			text[isActive='1'] {
