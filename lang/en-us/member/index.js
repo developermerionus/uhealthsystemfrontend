@@ -58,7 +58,7 @@ export const lang = {
 	restRCV: 'Carryover Right CV',
 	activedLQV: '6 Week Rolling Left Leg QV',
 	activedRQV: '6 Week Rolling Right Leg QV',
-	c7bonus: 'U4 - 7 Level Ranking Bonus',
+	c7bonus: '7 Level Ranking Bonus',
 	
 	recommend_total: 'Total Personally Enrolled Active Member',
 	recommend_ltotal: 'Personally Enrolled Active Member in  Left Leg',
@@ -108,5 +108,13 @@ export const lang = {
 	'活跃' : 'Active',
 	'不活跃' : 'Non-Active',
 	
-	'待结算' : 'Pending'
+	'待结算' : 'Pending',
+	
+	// UFP创始分红
+	ufp10: 'UFP Dividend',
+	'未参与': 'Nonparticipation',
+	prime : 'Prime',
+	basic : 'Basic'
+	
+	
 }
