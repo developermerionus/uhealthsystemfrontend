@@ -114,12 +114,13 @@ export default {
 				shundaexpress:{url:"www.postalinkex.com", realName:"POSTALINK" ,redirectUrl:'https://www.postalinkex.com/SelectOrder.aspx?OrderNum='},
 				shundaexpress_nmn:{url:"www.shundaexpress.com", realName: "顺达" , redirectUrl:'http://www.shundaexpress.com/select/?num='},
 				ups:{url:'www.ups.com/track?loc=en_US&requester=ST/', realName:"UPS",redirectUrl:''},
-				ezgo:{url:"www.t-cat.com.tw/Inquire/International.aspx", realName:"黑猫宅急便",redirectUrl:''},
+				ezgo:{url:"www.t-cat.com.tw/Inquire/International.aspx", realName:"EZGOEX",redirectUrl:'https://www.ezgoex.com/TrackingInfo?TrackginNO='},
 				baitong:{url:"www.buytong.cn/newindex/waybillquery", realName: '百通',redirectUrl:''},
 				fedex:{url:"www.fedex.com/en-us/home.html", realName: 'FedEx',redirectUrl:'https://www.fedex.com/fedextrack/no-results-found?trknbr='},
 				zhongtong:{url:"www.zto.com", realName: '中通快递',redirectUrl:''},
 				bangde:{url:"www.deppon.com", realName: '邦德快递',redirectUrl:''},
-				shunfeng:{url:"www.sf-international.com", realName: '顺风快递',redirectUrl:''}
+				shunfeng:{url:"www.sf-international.com", realName: '顺风快递',redirectUrl:''},
+				mingtong:{url:"www.tnjex.com", realName: '明通快递',redirectUrl:'http://www.tnjex.com/index/courier&sn='}
 				
 			}
 		};
