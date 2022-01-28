@@ -853,7 +853,7 @@
 							value: this.memberInfo.UFP10>0? (this.memberInfo.UFP10_Prime>0? this.$lang('prime') 
 							: this.$lang('basic') ) : this.$lang('未参与'), 
 							url: this.memberInfo.UFP10>0 && (this.memberInfo.UFP10_leftNum>0 || 
-							this.memberInfo.UFP_rightNum>0) ? '/otherpages/member/bill/bill?class=UFP10' : null
+							this.memberInfo.UFP10_rightNum>0) ? '/otherpages/member/bill/bill?class=UFP10' : null
 						})
 						// console.log(this.infoList3);
 						this.infoList4 = [];
