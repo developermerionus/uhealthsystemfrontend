@@ -119,7 +119,8 @@ export default {
 				fedex:{url:"www.fedex.com/en-us/home.html", realName: 'FedEx',redirectUrl:'https://www.fedex.com/fedextrack/no-results-found?trknbr='},
 				zhongtong:{url:"www.zto.com", realName: '中通快递',redirectUrl:''},
 				bangde:{url:"www.deppon.com", realName: '邦德快递',redirectUrl:''},
-				shunfeng:{url:"www.sf-international.com", realName: '顺风快递',redirectUrl:''}
+				shunfeng:{url:"www.sf-international.com", realName: '顺风快递',redirectUrl:''},
+				sanqianli:{url:"www.highsince.com", realName: '三千里快递',redirectUrl:'http://www.highsince.com/track?track_number='}
 				
 			}
 		};
