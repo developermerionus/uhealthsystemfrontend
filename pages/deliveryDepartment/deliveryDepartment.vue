@@ -45,6 +45,7 @@
 			bangde <text class="copy" @click="$util.copy('bangde')">copy{{$lang('copy')}}</text>
 			zhongtong <text class="copy" @click="$util.copy('zhongtong')">copy{{$lang('copy')}}</text>
 			sanqianli <text class="copy" @click="$util.copy('sanqianli')">copy{{$lang('copy')}}</text>
+			mingtong <text class="copy" @click="$util.copy('mingtong')">copy{{$lang('copy')}}</text>
 			</view>
 		</view>
 			</view>
