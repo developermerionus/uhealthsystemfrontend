@@ -94,7 +94,9 @@
 						mescroll.endSuccess(newArr.length);
 						//设置列表数据
 						if (mescroll.num == 1) this.accountList = []; //如果是第一页需手动制空列表
-						this.accountList = this.accountList.concat(newArr); //追加新数据
+						// console.log(this.showClass);
+						this.accountList = newArr; 
+						
 						if (this.$refs.loadingCover) this.$refs.loadingCover.hide();
 					},
 					fail: res => {
