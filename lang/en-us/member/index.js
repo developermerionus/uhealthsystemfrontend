@@ -58,6 +58,8 @@ export const lang = {
 	restRCV: 'Carryover Right CV',
 	activedLQV: '6 Week Rolling Left Leg QV',
 	activedRQV: '6 Week Rolling Right Leg QV',
+	lqv_past6weeks: '8 Week Rolling Left Leg QV',
+	lqv_past6weeks: '8 Week Rolling Right Leg QV',
 	c7bonus: '7 Level Ranking Bonus',
 	
 	recommend_total: 'Total Personally Enrolled Active Member',

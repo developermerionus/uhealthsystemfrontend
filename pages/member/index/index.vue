@@ -547,6 +547,7 @@
 							bonusObject.index = index;
 						}
 					});
+					// console.log(this.defaultInfo.menuList);
 					this.bonusPageObject = bonusObject;
 					this.defaultInfo.insertGap = res.data.insertGap;
 					this.defaultInfo.level = res.data.level || 1;
@@ -667,13 +668,13 @@
 						})
 
 						this.infoList2.push({
-							item: this.$lang('activedLQV'),
-							value: this.bonus.activedLQV,
+							item: this.$lang('lqv_past6weeks'),
+							value: this.bonus.lqv_past6weeks,
 							url: '/otherpages/member/bill/bill?class=past_n_week_qv&branch=L'
 						})
 						this.infoList2.push({
-							item: this.$lang('activedRQV'),
-							value: this.bonus.activedRQV,
+							item: this.$lang('rqv_past6weeks'),
+							value: this.bonus.rqv_past6weeks,
 							url: '/otherpages/member/bill/bill?class=past_n_week_qv&branch=R'
 						})
 						this.infoList2.push({

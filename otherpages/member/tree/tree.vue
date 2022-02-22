@@ -217,6 +217,7 @@
 				this.list = [];
 				this.$api.sendRequest({
 					url: '/api/member/getTeamTree',
+					// url: '/api/member/getTeamTreeTestsch',
 					data: {
 						member_id,
 					},
@@ -293,7 +294,7 @@
 				  this.distance = distance
 				  this.scale = newScale
 			    }
-				console.log(this.scale)
+				// console.log(this.scale)
 			},
 			// 拖拽移动
 			move(e) {
