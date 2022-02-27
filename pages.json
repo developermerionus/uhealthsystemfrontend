@@ -1121,6 +1121,15 @@
 					}
                 
                 }
+                ,{
+                    "path" : "mstock_details/mstock_details",
+                    "style" :                                                                                    
+                {
+                    "navigationStyle": "custom",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
             ]
 		}
 	],
