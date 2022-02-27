@@ -65,7 +65,7 @@
 		border-left: 1px #d0dee5 solid;
 		text-align: center;
 		color: #555c60;
-		font-size: 28upx;
+		font-size: 14px;
 
 	}
 </style>

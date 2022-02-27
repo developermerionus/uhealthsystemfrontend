@@ -118,5 +118,10 @@ export const lang = {
 	ufp10 : '创始分红权益',
 	'未参与': '未参与',
 	prime : '高级',
-	basic : '基础'
+	basic : '基础',
+	
+	// mstock 千万股票活动
+	mstock_preGivenFromLevel: '级别奖励股',
+	mstock_preGivenFromCompany: '辛勤奖股',
+	mstock_eventTotalBonus_lastweek: '股票活动总股（截至上周）',
 }

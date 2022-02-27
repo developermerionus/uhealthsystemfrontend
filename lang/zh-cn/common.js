@@ -219,5 +219,15 @@ export const lang = {
 		  balance_deduct: '余额抵扣',
 		  available: "可用",
 		  phurchaseagreement:"请勾选同意购买协议书",
+		  
+		  
+		  // mstock more_detail
+		  mstockDetailReport: "股票活动报告",
+		  mstockEventTotalBonus: "活动股票总数",
+		  yourMStock:"您的股票",
+		  mstock_sumBonus: "周总股票",
+		  mstock_newMemberBonus:"新人套奖股",
+		  mstock_activeMemberBonus:"直推活跃下线奖股",
+		  mstock_teamBonus:"团队对碰奖股",
 	}
 }

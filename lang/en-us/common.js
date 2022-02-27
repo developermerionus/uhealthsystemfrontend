@@ -218,6 +218,15 @@ export const lang = {
 			balance_deduct: 'Balance Deduct',
 			available: "Available ",
 			phurchaseagreement:"Please check the purchase agreement",
+			
+			// mstock more_detail
+			mstockDetailReport: "Stock Report",
+			mstockEventTotalBonus: "Total Event Stock",
+			yourMStock:"Your Event Stock",
+			mstock_sumBonus: "Weekly Total Stock",
+			mstock_newMemberBonus:"New Member Stock",
+			mstock_activeMemberBonus:"Active Referees Stock",
+			mstock_teamBonus:"TeamBonus Stock",
 	},
 	
 }

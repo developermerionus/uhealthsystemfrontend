@@ -114,7 +114,10 @@ export const lang = {
 	ufp10: 'UFP Dividend',
 	'未参与': 'Nonparticipation',
 	prime : 'Prime',
-	basic : 'Basic'
+	basic : 'Basic',
 	
-	
+	// mstock 千万股票活动
+	mstock_preGivenFromLevel: 'High Level Bonus Stock ',
+	mstock_preGivenFromCompany: 'Arduous Bonus Stock',
+	mstock_eventTotalBonus_lastweek: 'Total Event Stock(Till Lastweek)',
 }

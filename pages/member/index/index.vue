@@ -564,7 +564,10 @@
 				}
 			},
 			redirectToList(url, value) {
-				// console.log('check the value url', url, value);
+				// console.log('check the value url', url, value); 
+				if (value > 0 && url=='/otherpages/mstock_details/mstock_details') {
+					this.$util.redirectTo(url);
+				}
 				if (value > 0||url == '/otherpages/member/bill/bill?class=recommend&branch=L'
 				||url == '/otherpages/member/bill/bill?class=recommend&branch=R'
 				||url=='/otherpages/member/bill/bill?class=UFP10') { 
@@ -715,6 +718,23 @@
 							url: this.memberInfo.UFP10>0 && (this.memberInfo.UFP10_leftNum>0 || 
 							this.memberInfo.UFP10_rightNum>0) ? '/otherpages/member/bill/bill?class=UFP10' : null
 						})
+						if (this.memberInfo.mstock_preGivenFromCompany>0) {
+						this.infoList3.push({
+								item: this.$lang('mstock_preGivenFromCompany'), 
+								value: this.memberInfo.mstock_preGivenFromCompany
+							})
+						}
+						if (this.memberInfo.mstock_preGivenFromLevel>0) {
+							this.infoList3.push({
+								item: this.$lang('mstock_preGivenFromLevel'), 
+								value: this.memberInfo.mstock_preGivenFromLevel
+							}) 
+						}
+						this.infoList3.push({
+								item: this.$lang('mstock_eventTotalBonus_lastweek'), 
+								value: this.bonus.mstock_eventTotalBonus_lastweek,
+								url:'/otherpages/mstock_details/mstock_details'
+							})
 						// console.log(this.infoList3);
 						this.infoList4 = [];
 						this.infoList4.push({
@@ -855,6 +875,24 @@
 							url: this.memberInfo.UFP10>0 && (this.memberInfo.UFP10_leftNum>0 || 
 							this.memberInfo.UFP10_rightNum>0) ? '/otherpages/member/bill/bill?class=UFP10' : null
 						})
+						if (this.memberInfo.mstock_preGivenFromCompany>0) {
+						this.infoList3.push({
+								item: this.$lang('mstock_preGivenFromCompany'), 
+								value: this.memberInfo.mstock_preGivenFromCompany
+							})
+						}
+						if (this.memberInfo.mstock_preGivenFromLevel>0) {
+							this.infoList3.push({
+								item: this.$lang('mstock_preGivenFromLevel'), 
+								value: this.memberInfo.mstock_preGivenFromLevel
+							}) 
+						}
+						this.infoList3.push({
+								item: this.$lang('mstock_eventTotalBonus_lastweek'), 
+								value: this.bonus.mstock_eventTotalBonus_lastweek,
+								url:'/otherpages/mstock_details/mstock_details'
+							})
+						
 						// console.log(this.infoList3);
 						this.infoList4 = [];
 						this.infoList4.push({
