@@ -118,6 +118,6 @@ export const lang = {
 	
 	// mstock 千万股票活动
 	mstock_preGivenFromLevel: 'High Level Bonus Stock ',
-	mstock_preGivenFromCompany: 'Arduous Bonus Stock',
+	mstock_preGivenFromCompany: 'Honeybee Bonus Stock',
 	mstock_eventTotalBonus_lastweek: 'Total Event Stock(Till Lastweek)',
 }
