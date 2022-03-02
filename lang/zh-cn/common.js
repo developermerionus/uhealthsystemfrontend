@@ -222,7 +222,7 @@ export const lang = {
 		  
 		  
 		  // mstock more_detail
-		  mstockDetailReport: "股票活动报告",
+		  mstockDetailReport: "千万股票活动报告",
 		  mstockEventTotalBonus: "活动股票总数",
 		  yourMStock:"您的股票",
 		  mstock_sumBonus: "周总股票",

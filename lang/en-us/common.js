@@ -220,7 +220,7 @@ export const lang = {
 			phurchaseagreement:"Please check the purchase agreement",
 			
 			// mstock more_detail
-			mstockDetailReport: "Stock Report",
+			mstockDetailReport: "10M Stock Report",
 			mstockEventTotalBonus: "Total Event Stock",
 			yourMStock:"Your Event Stock",
 			mstock_sumBonus: "Weekly Total Stock",

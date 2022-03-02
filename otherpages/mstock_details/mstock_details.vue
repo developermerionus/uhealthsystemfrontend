@@ -7,7 +7,7 @@
 				<text>{{$lang('common.mstockDetailReport')}}</text>	
 			</view>
 			<view class="mstocktotal">
-				<text class="eventTotalBonusText">{{$lang('common.mstockEventTotalBonus')}}：${{mstockEventTotalBonus}}</text>	
+				<text class="eventTotalBonusText">{{$lang('common.mstockEventTotalBonus')}}: {{mstockEventTotalBonus}}</text>	
 			</view>
 			<view class="wrap">
 				<scroll-view scroll-x="true" class="kite-classify-scroll">
