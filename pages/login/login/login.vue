@@ -331,8 +331,9 @@
 												if (res.code == 0) {
 													let goUrl = res.data
 														.member_level == 1 ?
-														'/pages/member/info/info' :
-													res.data.marketCountryId ==1 && res.data.tax_info_check==0?'/pages/taxInfoConfirm/taxInfoConfirm':'/pages/member/index/index'
+														'/pages/member/info/info' : 
+													// res.data.marketCountryId ==1 && res.data.tax_info_check==0?'/pages/taxInfoConfirm/taxInfoConfirm':
+													'/pages/member/index/index';
 													uni.reLaunch({
 														url: goUrl,
 														success: () => {
