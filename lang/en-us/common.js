@@ -185,6 +185,8 @@ export const lang = {
 		  '172':"China",
 		  '1': "United State",
 		  '10':"Macau",
+		  '31':"Netherlands",
+		  '34':"Spain",
 		  '62':"Indonesia",
 		  '82':"South Korea",
 		  '125':"France",
