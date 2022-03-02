@@ -24,6 +24,7 @@
 								<t-th>{{$lang('common.mstock_newMemberBonus')}}</t-th>
 								<t-th>{{$lang('common.mstock_activeMemberBonus')}}</t-th>
 								<t-th>{{$lang('common.mstock_teamBonus')}}</t-th>
+								<t-th>{{$lang('common.mstock_week_coef')}}</t-th>
 							</t-tr>
 							
 							<view class="dividLine"></view>
@@ -35,6 +36,7 @@
 								<t-td>{{ item.mstock_newMemberBonus }}</t-td>
 								<t-td>{{ item.mstock_activeMemberBonus }}</t-td>
 								<t-td>{{ item.mstock_teamBonus }}</t-td>
+								<t-td>{{ item.mstock_week_coef }}</t-td>
 							</t-tr>
 						</t-table>
 					</view>

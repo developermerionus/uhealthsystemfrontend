@@ -229,6 +229,7 @@ export const lang = {
 			mstock_newMemberBonus:"New Member Stock",
 			mstock_activeMemberBonus:"Active Referees Stock",
 			mstock_teamBonus:"TeamBonus Stock",
+			mstock_week_coef:"Week Coefficient for New Member Stock ",
 	},
 	
 }
