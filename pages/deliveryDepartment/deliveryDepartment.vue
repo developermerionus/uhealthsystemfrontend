@@ -37,6 +37,7 @@
 			shundaexpress_nmn <text class="copy" @click="$util.copy('shundaexpress_nmn')">copy{{$lang('copy')}}</text>
 			ups <text class="copy" @click="$util.copy('ups')">copy{{$lang('copy')}}</text>
 			ezgo <text class="copy" @click="$util.copy('ezgo')">copy{{$lang('copy')}}</text>
+			fafa <text class="copy" @click="$util.copy('fafa')">copy{{$lang('copy')}}</text>
 			baitong <text class="copy" @click="$util.copy('baitong')">copy{{$lang('copy')}}</text>
 			fedex <text class="copy" @click="$util.copy('fedex')">copy{{$lang('copy')}}</text>
 			</view>
