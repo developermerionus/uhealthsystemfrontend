@@ -232,6 +232,6 @@ export const lang = {
 		  mstock_newMemberPackageBonus:"购买新人套奖股",
 		  mstock_activeMemberBonus:"直推活跃下线奖股",
 		  mstock_teamBonus:"团队对碰奖股",
-		  mstock_week_coef:"新人套奖股周系数",
+		  mstock_week_coef:"推荐新人奖股周系数",
 	}
 }
