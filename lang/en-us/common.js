@@ -226,10 +226,11 @@ export const lang = {
 			mstockEventTotalBonus: "Total Event Stock",
 			yourMStock:"Your Event Stock",
 			mstock_sumBonus: "Weekly Total Stock",
-			mstock_newMemberBonus:"New Member Stock",
+			mstock_newMemberBonus:"Active New Member Stock",
+			mstock_newMemberPackageBonus:"New Member Package Stock",
 			mstock_activeMemberBonus:"Active Referees Stock",
 			mstock_teamBonus:"TeamBonus Stock",
-			mstock_week_coef:"Week Coefficient for New Member Stock ",
+			mstock_week_coef:"Week Coefficient for Active New Member Stock ",
 	},
 	
 }
