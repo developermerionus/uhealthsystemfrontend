@@ -121,7 +121,7 @@ export const lang = {
 	basic : '基础',
 	
 	// mstock 千万股票活动
-	mstock_preGivenFromLevel: '级别奖励股',
-	mstock_preGivenFromCompany: '小蜜蜂奖励股',
-	mstock_eventTotalBonus_lastweek: '千万股票活动总股（截至上周）',
+	mstock_preGivenFromLevel: '级别贡献奖股票',
+	mstock_preGivenFromCompany: '小蜜蜂奖股票',
+	mstock_eventTotalBonus_lastweek: '千万股票活动股票（截至上周）',
 }
