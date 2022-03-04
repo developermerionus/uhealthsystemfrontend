@@ -229,7 +229,7 @@ export const lang = {
 		  yourMStock:"您的股票",
 		  mstock_sumBonus: "周总股票",
 		  mstock_newMemberBonus:"推荐新人奖股",
-		  mstock_newMemberPackageBonus:"购买新人套奖股",
+		  mstock_newMemberPackageBonus:"购买新人套餐奖股",
 		  mstock_activeMemberBonus:"直推活跃下线奖股",
 		  mstock_teamBonus:"团队对碰奖股",
 		  mstock_week_coef:"推荐新人奖股周系数",
