@@ -45,7 +45,7 @@
 									{{$lang('common.deliveryNumber')}}：
 									<text class="color-tip">{{ deliveryNumItem}}</text>
 								</text>
-								<text class="copy" @click="$util.copy(deliveryNumItem)">{{$lang('common.copy')}}</text>
+								<!-- <text class="copy" @click="$util.copy(deliveryNumItem)">{{$lang('common.copy')}}</text> -->
 								<text class="copy" @click="findDeliveryDetail( deliveryNumItem)">{{$lang('common.search')}}</text>
 							</view>
 						</view>
@@ -116,7 +116,7 @@ export default {
 				shundaexpress_nmn:{url:"www.shundaexpress.com", realName: "顺达" , redirectUrl:'http://www.shundaexpress.com/select/?num='},
 				ups:{url:'www.ups.com/track?loc=en_US&requester=ST/', realName:"UPS",redirectUrl:''},
 				ezgo:{url:"www.ezgoex.com", realName:"ezgo",redirectUrl:'https://www.ezgoex.com/TrackingInfo?TrackginNO='},
-				fafa:{url:"www.88shipping.com", realName:"全民发发",redirectUrl:'http://www.88shipping.com/track'},
+				fafa:{url:"www.88shipping.com", realName:"全民发发",redirectUrl:'http://www.88shipping.com/track?num='},
 				baitong:{url:"www.buytong.cn/newindex/waybillquery", realName: '百通',redirectUrl:''},
 				fedex:{url:"www.fedex.com/en-us/home.html", realName: 'FedEx',redirectUrl:'https://www.fedex.com/fedextrack/no-results-found?trknbr='},
 				zhongtong:{url:"www.zto.com", realName: '中通快递',redirectUrl:''},
@@ -148,9 +148,9 @@ export default {
 			let companyName = self.packageList[0].express_company_name;
 			let url = this.companyInfo[companyName].redirectUrl;
 			url += deliveryNo;
-			if (companyName=='fafa') {
-				url=this.companyInfo[companyName].redirectUrl;
-			}
+			// if (companyName=='fafa') {
+			// 	url=this.companyInfo[companyName].redirectUrl;
+			// }
 			return url;
 		},
  		findDeliveryDetail(deliveryNo) {
