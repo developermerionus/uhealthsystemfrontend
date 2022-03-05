@@ -141,6 +141,7 @@ export const lang = {
 		cash_bonus: "全球现金奖",
 		pay_time_bonus: "付款日期",
 		seeBonusDetails:"查看奖金历史",
+		active_status: '活跃状态',
 		lang: "语言",
 		inactive: '不活跃',
 		active: '活跃',
