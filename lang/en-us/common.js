@@ -140,6 +140,7 @@ export const lang = {
 		cash_bonus: "Cash Bonus",
 		pay_time_bonus: "Payment Date",
 		seeBonusDetails: "View Bonus Histroy",
+		active_status: 'Active Status',
 		lang: "Lang",
 		inactive: 'Inactive',
 		active: 'Active',

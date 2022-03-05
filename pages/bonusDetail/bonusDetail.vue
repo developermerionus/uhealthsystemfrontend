@@ -34,6 +34,7 @@
 		                    <t-th>{{$lang('common.start_bonus')}}</t-th>
 		                    <t-th>{{$lang('common.end_bonus')}}</t-th>
 		                  <!--  <t-th>{{$lang('common.retail_bonus')}}</t-th> -->
+							<t-th>{{$lang('common.active_status')}}</t-th>
 						    <t-th>{{$lang('common.week_bonus')}}</t-th>
 							<t-th>{{$lang('common.fast_bonus')}}</t-th>
 							<t-th>{{$lang('common.leadership_bonus')}}</t-th>
@@ -49,6 +50,7 @@
 		                    <t-td>{{ item.start}}</t-td>
 		                    <t-td>{{ item.end}}</t-td>
 							<!-- <t-td>{{ item.retail_bonus }}</t-td> -->
+							<t-td>{{ item.actived==1? $lang('common.active'):$lang('common.inactive') }}</t-td>
 							<t-td>{{ item.bonus }}</t-td>
 		                    <t-td>{{ item.fast_bonus }}</t-td>
 							<t-td>{{ item.leadership_bonus }}</t-td>
@@ -188,7 +190,7 @@
 						success(res) {
 							let newArr=[];
 							// alert("关闭1")
-						//	console.log('res detail', res);
+							// console.log('res detail', res);
 							if (res.code >= 0 && res.data && res.data.length!==0) {
 								 newArr = res.data;
 								 _self.showListOption = newArr;
