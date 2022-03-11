@@ -234,5 +234,19 @@ export const lang = {
 		  mstock_activeMemberBonus:"直推活跃下线奖股",
 		  mstock_teamBonus:"团队对碰奖股",
 		  mstock_week_coef:"推荐新人奖股周系数",
+		  
+		  // ufp10 details
+		  ufp10_bonus_detail: '创始分红奖金',
+		  yourUFP10Bonus:'您的创始分红',
+		  peroid_start: '周期开始',
+		  peroid_end: '周期结束',
+		  peroid_activedWeek: '活跃周数',
+		  ufp10_basic_bonus: '创始分红基础奖金',
+		  ufp10_actived_recommends_total: '活跃直推下线-总高级人数',
+		  ufp10_actived_recommends_right: '活跃直推下线-右边高级人数',
+		  ufp10_actived_recommends_left: '活跃直推下线-左边高级人数',
+		  ufp10_prime_bonus: '创始分红高级奖金',
+		  
+		  
 	}
 }

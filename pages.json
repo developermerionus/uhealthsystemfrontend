@@ -1130,6 +1130,15 @@
                 }
                 
                 }
+                ,{
+                    "path" : "ufp10_details/ufp10_details",
+                    "style" :                                                                                    
+                {
+                    "navigationStyle": "custom",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
             ]
 		}
 	],
