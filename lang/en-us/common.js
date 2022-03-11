@@ -232,6 +232,18 @@ export const lang = {
 			mstock_activeMemberBonus:"Active Referees Stock",
 			mstock_teamBonus:"TeamBonus Stock",
 			mstock_week_coef:"Week Coefficient for Active New Member Stock ",
+			
+			// ufp10 details
+			ufp10_bonus_detail: 'UFP Dividend Bonus Details',
+			yourUFP10Bonus:'Your UFP Dividend Bonus',
+			peroid_start: 'Period Start',
+			peroid_end: 'Period End',
+			peroid_activedWeek: 'Actived Weeks',
+			ufp10_basic_bonus: 'UFP Dividend Basic Bonus',
+			ufp10_actived_recommends_total: 'Total Actived Referees',
+			ufp10_actived_recommends_right: 'Actived Referees - Right Side',
+			ufp10_actived_recommends_left: 'Actived Referees - Left Side',
+			ufp10_prime_bonus: 'UFP Dividend Prime Bonus',
 	},
 	
 }

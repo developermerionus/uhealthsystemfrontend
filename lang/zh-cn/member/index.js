@@ -119,6 +119,8 @@ export const lang = {
 	'未参与': '未参与',
 	prime : '高级',
 	basic : '基础',
+	ufp10_bonus_details: '创始分红奖金',
+	check_details: '查看详情',
 	
 	// mstock 千万股票活动
 	mstock_preGivenFromLevel: '级别贡献奖股票',
