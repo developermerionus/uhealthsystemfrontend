@@ -18,10 +18,11 @@
 								<t-th>{{$lang('common.peroid_end')}}</t-th>
 								<t-th>{{$lang('common.peroid_activedWeek')}}</t-th>
 								<t-th>{{$lang('common.ufp10_basic_bonus')}}</t-th>
+								<t-th v-if="isPrime>0">{{$lang('common.ufp10_prime_bonus')}}</t-th>
 								<t-th v-if="isPrime>0">{{$lang('common.ufp10_actived_recommends_total')}}</t-th>
 								<t-th v-if="isPrime>0">{{$lang('common.ufp10_actived_recommends_right')}}</t-th>
 								<t-th v-if="isPrime>0">{{$lang('common.ufp10_actived_recommends_left')}}</t-th>
-								<t-th v-if="isPrime>0">{{$lang('common.ufp10_prime_bonus')}}</t-th>
+								
 							</t-tr>
 							
 							<view class="dividLine"></view>
@@ -30,10 +31,11 @@
 								<t-td>{{ item.end.slice(0,10)}}</t-td>
 								<t-td>{{ item.actived_week }}</t-td>
 								<t-td>{{ item.ufp10_basic_bonus }}</t-td>
+								<t-td v-if="isPrime>0">{{ item.ufp10_prime_bonus }}</t-td>
 								<t-td v-if="isPrime>0">{{ item.recommend_total }}</t-td>
 								<t-td v-if="isPrime>0">{{ item.recommend_rtotal }}</t-td>
 								<t-td v-if="isPrime>0">{{ item.recommend_ltotal }}</t-td>
-								<t-td v-if="isPrime>0">{{ item.ufp10_prime_bonus }}</t-td>
+								
 							</t-tr>
 						</t-table>
 					</view>
