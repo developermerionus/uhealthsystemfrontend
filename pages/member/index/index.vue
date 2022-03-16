@@ -721,11 +721,13 @@
 							url: this.memberInfo.UFP10>0 && (this.memberInfo.UFP10_leftNum>0 || 
 							this.memberInfo.UFP10_rightNum>0) ? '/otherpages/member/bill/bill?class=UFP10' : null
 						})
-						this.infoList3.push({
-							item: this.$lang('ufp10_bonus_details'),
-							value: this.$lang('check_details'),
-							url:'/otherpages/ufp10_details/ufp10_details'
-						})
+						if (this.memberInfo.UFP10>0) {
+							this.infoList3.push({
+								item: this.$lang('ufp10_bonus_details'),
+								value: this.$lang('check_details'),
+								url:'/otherpages/ufp10_details/ufp10_details'
+							})
+						}
 						if (this.memberInfo.mstock_preGivenFromCompany>0) {
 						this.infoList3.push({
 								item: this.$lang('mstock_preGivenFromCompany'), 
@@ -883,11 +885,13 @@
 							url: this.memberInfo.UFP10>0 && (this.memberInfo.UFP10_leftNum>0 || 
 							this.memberInfo.UFP10_rightNum>0) ? '/otherpages/member/bill/bill?class=UFP10' : null
 						}) 
-						this.infoList3.push({
-							item: this.$lang('ufp10_bonus_details'),
-							value: this.$lang('check_details'),
-							url:'/otherpages/ufp10_details/ufp10_details'
-						})
+						if (this.memberInfo.UFP10>0) {
+							this.infoList3.push({
+								item: this.$lang('ufp10_bonus_details'),
+								value: this.$lang('check_details'),
+								url:'/otherpages/ufp10_details/ufp10_details'
+							})
+						}
 						if (this.memberInfo.mstock_preGivenFromCompany>0) {
 						this.infoList3.push({
 								item: this.$lang('mstock_preGivenFromCompany'), 
