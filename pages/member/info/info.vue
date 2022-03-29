@@ -51,7 +51,6 @@
 						  :placeholderValue="$lang('cityCountyPlaceholder')" :focusValue="cityCountyFocusValue" highlightColor="#FF0000" 
 						   style='min-width: 225px; margin-left: 10px;' class="cell-tip info-city-ca-autocomplete"></str-autocomplete>
 						  
-							<!-- <text v-if="item.name=='city'" @click="print(item.value)">ssssssss</text> -->
 						<picker v-if="item.name=='birthdate' && memberInfo.member_level==1" mode="date" :value="item.value" 
 						:start="startDate" :end="endDate" @change="bindDateChange">
 							<view class="uni-input" style='text-align: end;'>{{ item.value ? item.value 

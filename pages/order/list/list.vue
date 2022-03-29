@@ -39,7 +39,7 @@
 										<view class="sku" v-if="goodsItem.sku_spec_format">
 											<view class="goods-spec">
 												<block v-for="(x, i) in goodsItem.sku_spec_format" :key="i">
-													{{ x.spec_value_name }} {{ i < goodsItem.sku_spec_format.length - 1 ? '; ' : '' }}
+													{{ x.spec_value_name }} {{  (goodsItem.sku_spec_format.length - 1)>i ? '; ' : '' }}
 												</block>
 											</view>
 										</view>

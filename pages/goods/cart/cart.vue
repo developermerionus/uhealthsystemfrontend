@@ -29,7 +29,7 @@
 									<view class="sku" v-if="item.sku_spec_format">
 										<view class="goods-spec">
 											<block v-for="(x, i) in item.sku_spec_format" :key="i">
-												{{ x.spec_value_name }} {{ i < item.sku_spec_format.length - 1 ? ';' : '' }}
+												{{ x.spec_value_name }} {{  (item.sku_spec_format.length - 1)>i ? ';' : '' }}
 											</block>
 										</view>
 									</view>
@@ -107,7 +107,7 @@
 									<view class="sku" v-if="goodsItem.sku_spec_format">
 										<view class="goods-spec">
 											<block v-for="(x, i) in goodsItem.sku_spec_format" :key="i">
-												{{ x.spec_value_name }} {{ i < goodsItem.sku_spec_format.length - 1 ? '; ' : '' }}
+												{{ x.spec_value_name }} {{ (goodsItem.sku_spec_format.length - 1)>i ? '; ' : '' }}
 											</block>
 										</view>
 									</view>
@@ -189,6 +189,7 @@ export default {
 			cartData: [], // 购物车
 			checkAll: true,
 			totalPrice: '0.00',
+			totalWeight: '0.00',
 			totalCount: 0,
 			modifyFlag: false,
 			isSub: false,
@@ -365,9 +366,9 @@ export default {
 		calculationTotalPrice() {
 			if (this.cartData.length) {
 				let totalPrice = 0,
+					totalWeight = 0,
 					totalCount = 0,
 					siteAllElectionCount = 0;
-
 				this.cartData.forEach(siteItem => {
 					let siteGoodsCount = 0;
 					siteItem.cartList.forEach(item => {
@@ -379,6 +380,7 @@ export default {
 							} else {
 								totalPrice += item.discount_price * item.num;
 							}
+							totalWeight += item.weight * item.num;
 						}
 					});
 					if (siteItem.cartList.length == siteGoodsCount) {
@@ -389,10 +391,12 @@ export default {
 					}
 				});
 				this.totalPrice = totalPrice.toFixed(2);
+				this.totalWeight = totalWeight;
 				this.totalCount = totalCount;
 				this.checkAll = this.cartData.length == siteAllElectionCount;
 			} else {
 				this.totalPrice = '0.00';
+				this.totalWeight = '0.00';
 				this.totalCount = 0;
 			}
 			this.modifyFlag = false;
@@ -510,7 +514,8 @@ export default {
 				uni.setStorage({
 					key: 'orderCreateData',
 					data: {
-						cart_ids: cart_ids.toString()
+						cart_ids: cart_ids.toString(),
+						// cart_total_weight: this.totalWeight,
 					},
 					success: () => {
 						this.$util.redirectTo('/pages/order/payment/payment');
@@ -595,8 +600,10 @@ export default {
 		},
 		// 重置编辑状态
 		resetEditStatus() {
-			for (var i = 0; i < this.cartData[0].cartList.length; i++) {
-				this.cartData[0].cartList[i].edit = false;
+			if (this.cartData[0]) {
+				for (var i = 0; i < this.cartData[0].cartList.length; i++) {
+					this.cartData[0].cartList[i].edit = false;
+				}
 			}
 			this.$forceUpdate();
 		},
@@ -627,6 +634,7 @@ export default {
 	justify-content: space-between;
 	line-height: 40rpx;
 	background: #fff;
+	max-width:1200px;
 	&.fixed {
 		height: 28px;
 		position: absolute;
