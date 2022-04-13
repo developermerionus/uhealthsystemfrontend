@@ -246,6 +246,15 @@ export const lang = {
 		  ufp10_actived_recommends_right: '活跃直推下线-右边高级人数',
 		  ufp10_actived_recommends_left: '活跃直推下线-左边高级人数',
 		  ufp10_prime_bonus: '创始分红高级奖金',
+		  loadingwords: '请不要离开',
+		  unionpay: '银联卡',
+		  微信支付:'银联卡支付',
+		  信用卡支付:"Credit Card Pay",
+		  余额支付: "Bonus Pay",
+		  alioverseaspay:"支付宝海外版支付",
+		  "支付宝(国际)":"支付宝(国际)",
+		  "支付宝支付(国际版)":"支付宝支付(国际版)",
+		  电汇至1385:"电汇至1385"
 		  
 		  
 	}

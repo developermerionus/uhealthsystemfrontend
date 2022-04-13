@@ -244,6 +244,15 @@ export const lang = {
 			ufp10_actived_recommends_right: 'Actived Referees - Right Side',
 			ufp10_actived_recommends_left: 'Actived Referees - Left Side',
 			ufp10_prime_bonus: 'UFP Dividend Prime Bonus',
+			loadingwords: 'Please Do not leave',
+			unionpay: 'UnionPay',
+			微信支付:'UnionPay',
+			信用卡支付:"Credit Card Pay",
+			余额支付: "Bonus Pay",
+			alioverseaspay:"Alioverseaspay",
+			"支付宝(国际)":"Alioverseaspay",
+			"支付宝支付(国际版)":"Alioverseaspay",
+			电汇至1385:"电汇至1385"
 	},
 	
 }

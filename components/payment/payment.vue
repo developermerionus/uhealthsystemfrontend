@@ -254,6 +254,7 @@
 		},
 		data() {
 			return {
+				query: '',
 				image_index: 0,
 				imageArr: [{
 					newImg: '',
@@ -332,7 +333,7 @@
 		},
 		methods: {
 			findShowPaymethod () {
-				this.payTypeList= this.group_id =='0'?[
+				this.payTypeList= [
 					// {
 					// 	name: '支付宝支付',
 					// 	icon: 'iconzhifubaozhifu-',
@@ -343,6 +344,7 @@
 					// 	icon: 'iconweixin1',
 					// 	type: 'wechatpay'
 					// },
+					// },
 					
 					// {
 					// 	name: this.$lang('common.alipay'),
@@ -350,23 +352,17 @@
 					// 	type: 'alioverseaspay'
 					// },
 					{
+						name: this.$lang('common.unionpay'),
+						icon: 'unionpay',
+						type: 'wechatpay'
+					},
+					{
 						name: this.$lang('common.credit_card'),
 						icon: '2',
 						type: 'authorizenetpay'
 					}
 					// ,
-				]:[
-					// {
-					// 	name: this.$lang('common.alipay'),
-					// 	icon: 'iconzhifubaozhifu-',
-					// 	type: 'alioverseaspay'
-					// },
-					{
-						name: this.$lang('common.credit_card'),
-						icon: '2',
-						type: 'wechatpay'
-					},
-					];
+				];
 			},
 			initGetHeading() {
 				this.$api.sendRequest({
@@ -856,6 +852,7 @@
 								'/pages/pay/result/result?code=' + this.payInfo.out_trade_no)
 						},
 						success: res => {
+							this.queryNumber = res.data.split('=')[1];
 							uni.hideLoading();
 							if (res.code >= 0) {
 								switch (payType.type) {
@@ -873,8 +870,6 @@
 										break;
 									case 'authorizenetpay':
 										this.checkPayStatus();
-
-
 										break;
 
 									case 'wechatpay':
@@ -961,6 +956,7 @@
 					});
 				}, 1000);
 			},
+			
 			// #endif
 			// #ifdef MP-WEIXIN
 			pay() {
@@ -1050,6 +1046,14 @@
 </script>
 
 <style lang="scss">
+	
+	.unionpay {
+		background:url('https://api.iconify.design/logos/unionpay.svg') no-repeat center center / contain;
+	}
+	.unionpay:before {
+		content:'\a7d9';
+	}
+	
 	.container {
 		margin:25px auto 0 auto;
 		display: flex;

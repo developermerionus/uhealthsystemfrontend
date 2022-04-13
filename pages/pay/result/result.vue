@@ -76,22 +76,62 @@ export default {
 			paySource: '',
 			consumeInfo: {},
 			consumeStatus:0,
+			payment_instance_token:'',
 		};
 	},
 	mixins: [globalConfig],
 	onLoad(option) {
+		//https://localhost:8080/h5/pay/result/result?code=2204041112001088881&transactionNo={transaction_id}&status={notify_result}&amount={amount}&time={time}&reference={reference}&note={note}&partner_name=sandbox_ams_test&merchant_reference=2204041112001088881&payment_method=upop&payment_instance_token=40aa4623e44404c1814776ebf&partner_id=392&currency=USD&amount=38325
+		
 		if (option.code) this.outTradeNo = option.code;
-
+		if (option.payment_method&&option.payment_method=='upop') {
+			if (option.payment_instance_token) this.payment_instance_token = option.payment_instance_token;
+			this.checkUnionPayStatus(this.payment_instance_token);
+		}
 		this.paySource = uni.getStorageSync('paySource');
 	},
 	onShow() {
 		// 刷新多语言
 		this.$langConfig.refresh();
 		if (uni.getStorageSync('token')) this.token = uni.getStorageSync('token');
-		this.getPayInfo();
+		//this.getPayInfo();
 		this.getConsume();
 	},
 	methods: {
+		checkUnionPayStatus(queryNumber) {
+				this.$api.sendRequest({
+					url: '/api/pay/unionPayStatus',
+					data: {
+						query_number: queryNumber
+					},
+					success: res => {
+						if (res.notify_result == 'success') {
+								this.updatePayStatus(res.reference,res.payment_method,res.transaction_id);
+						} else {
+							this.getPayInfo();
+						}
+					}
+				});
+			
+		},
+		updatePayStatus(reference,payment_method,transaction_id) {
+			this.$api.sendRequest({
+				url: '/api/pay/updatePayStatus',
+				data: {
+					out_trade_no: reference,
+					pay_type:'wechatpay',
+					trade_no:transaction_id,
+					pay_addon:payment_method
+				},
+				success: res => {
+					if (res.code == '当前单据已支付'||'0') {
+							this.getPayInfo();
+					} else {
+						this.getPayInfo();
+					}
+				}
+			});
+		},
 		consume(type) {
 			switch(type){
 				case 'point':
