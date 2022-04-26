@@ -115,12 +115,12 @@ export default {
 					type: 'wechatpay'
 				},
 				{
-					name: '支付宝支付'),
+					name: '支付宝支付',
 					icon: 'iconzhifubaozhifu-',
 					type: 'alioverseaspay'
 				},
 				{
-					name: '信用卡支付'),
+					name: '信用卡支付',
 					icon: '2',
 					type: 'authorizenetpay'
 				}

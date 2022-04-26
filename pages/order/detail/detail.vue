@@ -106,7 +106,7 @@
 				<view class="order-cell">
 					<text class="tit">{{$lang('common.pay_method')}}：</text>
 					<view class="box">
-						<text class="color-title">{{ orderData.pay_type_name }}</text>
+						<text class="color-title">{{ $lang('common.'+ orderData.pay_type_name) }}</text>
 					</view>
 				</view>
 				<view class="order-cell">
@@ -116,12 +116,12 @@
 					</view>
 				</view>
 			</block>
-			<view class="order-cell" v-if="orderData.delivery_type_name">
+			<!-- <view class="order-cell" v-if="orderData.delivery_type_name">
 				<text class="tit">{{$lang('delivery_type')}}：</text>
 				<view class="box">
 					<text class="color-title">{{ orderData.delivery_type_name }}</text>
 				</view>
-			</view>
+			</view> -->
 			<view class="order-cell" v-if="orderData.buyer_message != ''">
 				<text class="tit">买家留言：</text>
 				<view class="box">
@@ -460,7 +460,7 @@ export default {
 				},
 				
 				success: res => {
-					console.log(res);
+					//console.log(res);
 					uni.stopPullDownRefresh();
 					if (res.code >= 0) {
 						this.orderData = res.data;

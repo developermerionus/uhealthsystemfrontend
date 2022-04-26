@@ -1,6 +1,7 @@
 <template>
 	<view class="loading-layer" v-show="isShow">
 		<view class="loading-anim">
+			<view>{{$lang('common.loadingwords')}}</view>
 			<view class="box item"><view class="border out item color-base-border-top color-base-border-left"></view></view>
 		</view>
 	</view>
