@@ -88,6 +88,9 @@ export default {
 			if (option.payment_instance_token) this.payment_instance_token = option.payment_instance_token;
 			this.checkUnionPayStatus(this.payment_instance_token);
 		}
+		else {
+			this.getPayInfo();
+		}
 		this.paySource = uni.getStorageSync('paySource');
 	},
 	onShow() {
