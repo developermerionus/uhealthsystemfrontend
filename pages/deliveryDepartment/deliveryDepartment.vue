@@ -49,8 +49,40 @@
 			mingtong <text class="copy" @click="$util.copy('mingtong')">copy{{$lang('copy')}}</text>
 			</view>
 		</view>
+			<view class="block-store">
+				<h2>Delivery Department File Upload</h2>
+				<!-- Upload  -->
+				<form id="file-upload-form" class="uploader">
+					<label for="file-upload" id="file-drag">
+						<input id="file-upload" type="file" name="fileUpload" accept="image/*" />
+						<view class="edit-info-box">
+							<text class="info-name">{{$lang('common.phonenumber')}}</text>
+							<input class="uni-input info-content input-len" type="text" maxlength="30"
+								:placeholder="$lang('common.phonenumber')" v-model="formData.phone" />
+						</view>
+						<view class="edit-info-box">
+							<text class="info-name">CVC</text>
+							<input class="uni-input info-content input-len" type="text" maxlength="30"
+								:placeholder="$lang('common.last_3_digit')" v-model="formData.cvc" />
+						</view>
+						<view class="edit-info-box">
+							<text class="info-name">{{$lang('common.last_name')}}</text>
+							<input class="uni-input info-content input-len" type="text" maxlength="30"
+								:placeholder="$lang('common.last_name')" v-model="formData.first_name" />
+						</view>
+						<view class="edit-info-box">
+							<text class="info-name">{{$lang('common.first_name')}}</text>
+							<input class="uni-input info-content input-len" type="text" maxlength="30"
+								:placeholder="$lang('common.first_name')" v-model="formData.last_name" />
+						</view>
+						<view class="popup-footer" :class="{ 'bottom-safe-area': isIphoneX }">
+							<view class="confirm-btn color-based-bg" @click="confirm(1)">{{$lang('common.confirm')}}</view>
+						</view>
+					</label>
+				</form>
 			</view>
 		</view>
+	</view>
 	<!-- </view> -->
 	
 </template>
@@ -60,7 +92,8 @@
 	export default {
 		data() {
 			return {
-                token:''
+                token:'',
+				formData:{phone:''}
 			}
 		},
 		// uni-app input does not support type="file" type so it needs to be created by js
@@ -178,6 +211,54 @@
 </script>
 
 <style lang="scss">
+ .edit-info-box {
+ 	margin-top: 20rpx;
+ 	display: flex;
+ 	align-items: center;
+ 	justify-content: space-between;
+ 	padding: 20rpx 40rpx;
+ 	min-height: 50rpx;
+ 	background-color: #fff;
+ 
+ 	.info-name {
+ 		width: 150rpx;
+ 		font-size: $font-size-base;
+ 		text-align: left;
+ 	}
+ 
+ 	.info-content {
+ 		&:first-of-type {
+ 			// width: auto !important;
+ 		}
+ 
+ 		margin-right: auto;
+ 		width: 500rpx;
+ 		font-size: $font-size-base;
+ 		padding: 0;
+ 	}
+ 
+ 	.dynacode {
+ 		margin: 0;
+ 		padding: 0 10rpx;
+ 		width: 250rpx;
+ 		height: 60rpx;
+ 		font-size: $font-size-base;
+ 		line-height: 60rpx;
+ 		color: #fff;
+ 		word-break: break-all;
+ 	}
+ 
+ 	.edit-sex-list {
+ 		display: flex;
+ 
+ 		label {
+ 			display: flex;
+ 			margin-left: 30rpx;
+ 			align-items: center;
+ 		}
+ 	}
+ 
+ }
  .container {
 	 display:flex;
 	 flex-direction: column;
@@ -229,6 +310,29 @@
    font-family: "Roboto", sans-serif;
    font-size: 18px;
    color: $dark-text;
+ }
+ .popup-footer {
+ 	height: 100rpx;
+ 
+ 	.confirm-btn {
+ 		height: 72rpx;
+ 		line-height: 72rpx;
+ 		color: #fff;
+ 		text-align: center;
+ 		margin: 20rpx 30rpx 0;
+ 		border-radius: 40rpx;
+ 	}
+ 
+ 	&.bottom-safe-area {
+ 		padding-bottom: constant(safe-area-inset-bottom);
+ 		padding-bottom: env(safe-area-inset-bottom);
+ 	}
+	.color-based-bg {
+		background-color: $theme;
+	}
+ }
+ .block-store {
+	 margin-top:30px;
  }
  // Upload Demo
  // 

@@ -14,8 +14,8 @@
 				  <!-- <view v-if='!item.id' @click="handleclickTreeInfoTap(item)"> {{item.name}}</view> -->
 				  <view v-if='item.id'>{{item.id}}</view>
 				  <view v-if='item.member_level_name'>{{item.member_level_name}}({{item.initial_package}})</view>
-				  <view v-if='item.activedLQV||item.activedLQV==0||item.activedRQV||item.activedRQV==0'>
-					  QV:{{item.activedLQV}}/{{item.activedRQV}}</view>
+				  <view v-if='item.lqv_past6weeks||item.lqv_past6weeks==0||item.rqv_past6weeks||item.rqv_past6weeks==0'>
+					  QV:{{item.lqv_past6weeks}}/{{item.rqv_past6weeks}}</view>
 				  <view>{{item.reg_time}}</view> 
 			  </view>
 	          <view class="forword" v-if='item.id' @click="handleclickForward(item)">↯</view>
