@@ -674,12 +674,12 @@
 
 						this.infoList2.push({
 							item: this.$lang('activedLQV'),
-							value: this.bonus.activedLQV,
+							value: this.bonus.lqv_past6weeks,
 							url: '/otherpages/member/bill/bill?class=past_n_week_qv&branch=L'
 						})
 						this.infoList2.push({
 							item: this.$lang('activedRQV'),
-							value: this.bonus.activedRQV,
+							value: this.bonus.rqv_past6weeks,
 							url: '/otherpages/member/bill/bill?class=past_n_week_qv&branch=R'
 						})
 						this.infoList2.push({
@@ -837,12 +837,12 @@
 						})
 						this.infoList2.push({
 							item: this.$lang('activedLQV'),
-							value: this.bonus.activedLQV,
+							value: this.bonus.lqv_past6weeks,
 							url: '/otherpages/member/bill/bill?class=past_n_week_qv&branch=L'
 						})
 						this.infoList2.push({
 							item: this.$lang('activedRQV'),
-							value: this.bonus.activedRQV,
+							value: this.bonus.rqv_past6weeks,
 							url: '/otherpages/member/bill/bill?class=past_n_week_qv&branch=R'
 						})
 						this.infoList2.push({
