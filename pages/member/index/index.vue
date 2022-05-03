@@ -673,14 +673,22 @@
 						})
 
 						this.infoList2.push({
-							item: this.$lang('activedLQV'),
+							item: this.$lang('past8weeksLQV'),
 							value: this.bonus.lqv_past6weeks,
 							url: '/otherpages/member/bill/bill?class=past_n_week_qv&branch=L'
 						})
 						this.infoList2.push({
-							item: this.$lang('activedRQV'),
+							item: this.$lang('past8weeksRQV'),
 							value: this.bonus.rqv_past6weeks,
 							url: '/otherpages/member/bill/bill?class=past_n_week_qv&branch=R'
+						})
+						this.infoList2.push({
+							item: this.$lang('activedLQV'),
+							value: this.bonus.activedLQV,
+						})
+						this.infoList2.push({
+							item: this.$lang('activedRQV'),
+							value: this.bonus.activedRQV,
 						})
 						this.infoList2.push({
 							item: this.$lang('c7bonus'),
@@ -836,12 +844,12 @@
 							value: this.bonus.restRCV == -1 ? this.$lang('待结算') : this.bonus.restRCV
 						})
 						this.infoList2.push({
-							item: this.$lang('activedLQV'),
+							item: this.$lang('past8weeksLQV'),
 							value: this.bonus.lqv_past6weeks,
 							url: '/otherpages/member/bill/bill?class=past_n_week_qv&branch=L'
 						})
 						this.infoList2.push({
-							item: this.$lang('activedRQV'),
+							item: this.$lang('past8weeksRQV'),
 							value: this.bonus.rqv_past6weeks,
 							url: '/otherpages/member/bill/bill?class=past_n_week_qv&branch=R'
 						})
@@ -849,6 +857,15 @@
 							item: this.$lang('c7bonus'),
 							value: this.bonus.c7bonus == -1 ? 0 : this.bonus.c7bonus
 						})
+						this.infoList2.push({
+							item: this.$lang('activedLQV'),
+							value: this.bonus.activedLQV,
+						})
+						this.infoList2.push({
+							item: this.$lang('activedRQV'),
+							value: this.bonus.activedRQV,
+						})
+						
 						// console.log(this.infoList2);
 						this.infoList3 = [];
 						this.infoList3.push({
