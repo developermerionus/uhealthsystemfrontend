@@ -61,8 +61,10 @@ export const lang = {
 	RCV: '右区总CV',
 	addedRCV: '右区新增CV',
 	restRCV: '右区剩余CV',
-	activedLQV: '左区8周QV',
-	activedRQV: '右区8周QV',
+	past8weeksLQV: '左区8周QV',
+	past8weeksRQV: '右区8周QV',
+	activedLQV: '历史累计左区QV',
+	activedRQV: '历史累计右区QV',
 	c7bonus: '7代奖金权益',
 	
 	recommend_total: '直推活跃总人数',
