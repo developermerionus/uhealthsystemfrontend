@@ -254,7 +254,16 @@ export const lang = {
 		  alioverseaspay:"支付宝海外版支付",
 		  "支付宝(国际)":"支付宝(国际)",
 		  "支付宝支付(国际版)":"支付宝支付(国际版)",
-		  电汇至1385:"电汇至1385"
+		  电汇至1385:"电汇至1385",
+		  orderNo:"订单号码",
+		  status:"状态",
+		  deliveryNo:"邮寄号码",
+		  nmn:"NMN",
+		  np:"NP",
+		  cq:"CQ",
+		  cr:"CR",
+		  adminName:"库管员",
+		  memo:"Memo"
 		  
 		  
 	}

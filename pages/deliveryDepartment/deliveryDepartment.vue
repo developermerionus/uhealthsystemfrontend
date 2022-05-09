@@ -50,33 +50,79 @@
 			</view>
 		</view>
 			<view class="block-store">
-				<h2>Delivery Department File Upload</h2>
+				<h2 class="title">出入库 库存调整</h2>
 				<!-- Upload  -->
 				<form id="file-upload-form" class="uploader">
 					<label for="file-upload" id="file-drag">
-						<input id="file-upload" type="file" name="fileUpload" accept="image/*" />
 						<view class="edit-info-box">
-							<text class="info-name">{{$lang('common.phonenumber')}}</text>
+							<text class="info-name">{{$lang('common.status')}}</text>
+					<view class="container_dropdown uni-input info-content input-len">
+						<view class="uni-input-wrapper makecenter">
+							<view class="status_warp  input-placeholder" @click="changeSaleStatus">
+								  <text>{{ good_status }}</text>
+								  <text class="triangleIncon" :style="{ transform: transformStyle }"></text>
+							</view>
+							<!-- 下拉菜单start -->
+								<view class="dropdown" :class="{ show: dropdown.show }">
+								  <view class="" @click="closeDropdown"></view>
+								  <view class="dropdown-list">
+									<view
+									  v-for="(title, key) of dropdown.options"
+									  :key="key"
+									  class="dropdown-list-cell"
+									  :class="{ active: dropdown.value === key }"
+									  @click="changeDropdown(key)"
+									  >{{ title.value }}</view
+									>
+								  </view>
+								</view>
+							</view>
+								<!-- 下拉菜单end-->
+						</view>
+					</view>
+						
+						<view class="edit-info-box">
+							<text class="info-name">{{$lang('common.deliveryNo')}}</text>
 							<input class="uni-input info-content input-len" type="text" maxlength="30"
-								:placeholder="$lang('common.phonenumber')" v-model="formData.phone" />
+								:placeholder="$lang('common.deliveryNo')" v-model="formData.deliveryNo" />
 						</view>
 						<view class="edit-info-box">
-							<text class="info-name">CVC</text>
+							<text class="info-name">{{$lang('common.orderNo')}}</text>
 							<input class="uni-input info-content input-len" type="text" maxlength="30"
-								:placeholder="$lang('common.last_3_digit')" v-model="formData.cvc" />
+								:placeholder="$lang('common.orderNo')" v-model="formData.orderNo" />
 						</view>
 						<view class="edit-info-box">
-							<text class="info-name">{{$lang('common.last_name')}}</text>
+							<text class="info-name">{{$lang('common.nmn')}}</text>
 							<input class="uni-input info-content input-len" type="text" maxlength="30"
-								:placeholder="$lang('common.last_name')" v-model="formData.first_name" />
+								:placeholder="$lang('common.nmn')" v-model="formData.nmn" />
 						</view>
 						<view class="edit-info-box">
-							<text class="info-name">{{$lang('common.first_name')}}</text>
+							<text class="info-name">{{$lang('common.np')}}</text>
 							<input class="uni-input info-content input-len" type="text" maxlength="30"
-								:placeholder="$lang('common.first_name')" v-model="formData.last_name" />
+								:placeholder="$lang('common.np')" v-model="formData.np" />
 						</view>
-						<view class="popup-footer" :class="{ 'bottom-safe-area': isIphoneX }">
-							<view class="confirm-btn color-based-bg" @click="confirm(1)">{{$lang('common.confirm')}}</view>
+						<view class="edit-info-box">
+							<text class="info-name">{{$lang('common.cq')}}</text>
+							<input class="uni-input info-content input-len" type="text" maxlength="30"
+								:placeholder="$lang('common.cq')" v-model="formData.cq" />
+						</view>
+						<view class="edit-info-box">
+							<text class="info-name">{{$lang('common.cr')}}</text>
+							<input class="uni-input info-content input-len" type="text" maxlength="30"
+								:placeholder="$lang('common.cr')" v-model="formData.cr" />
+						</view>
+						<view class="edit-info-box">
+							<text class="info-name">{{$lang('common.adminName')}}</text>
+							<input class="uni-input info-content input-len" type="text" maxlength="30"
+								:placeholder="$lang('common.adminName')" v-model="formData.adminName" />
+						</view>
+						<view class="edit-info-box">
+							<text class="info-name">{{$lang('common.memo')}}</text>
+							<input class="uni-input info-content input-len" type="text" maxlength="30"
+								:placeholder="$lang('common.memo')" v-model="formData.memo" />
+						</view>
+						<view class="save-item" @click="submitInfo">
+							<button class="buttonColor">Submit</button>
 						</view>
 					</label>
 				</form>
@@ -92,8 +138,30 @@
 	export default {
 		data() {
 			return {
+				dropdown: {
+				        show: false,
+				        options: [
+							{num:'4',value:"批量入库"},
+							{num:'3',value:"退单入库"}, 
+							{num:'5',value:"无订单号出库"},
+							{num:'6',value:"有订单号出库"},
+							],
+				        value: 0,
+				      },
+				      good_status: "批量入库",
+				      transformStyle: "rotate(0deg)",
                 token:'',
-				formData:{phone:''}
+				formData:{
+					status:'4',
+				    orderNo:'',
+					deliveryNo:'',
+					nmn:'',
+					np:'',
+					cq:'',
+					cr:'',
+					adminName:'',
+					memo:''
+				}
 			}
 		},
 		// uni-app input does not support type="file" type so it needs to be created by js
@@ -114,6 +182,70 @@
 		},
 		//Upload
 		methods: {
+			 // 打开下拉框
+			    changeSaleStatus() {
+					console.log('changeSaleStatus');
+			      this.dropdown.show = !this.dropdown.show;
+			      console.log(this.dropdown.show);
+			      this.transformStyle = this.dropdown.show
+			        ? "rotate(180deg)"
+			        : "rotate(0deg)";
+			    },
+			    // 关闭下拉列表
+			    closeDropdown() {
+					console.log('clicke');
+			      this.dropdown.show = false;
+			      this.transformStyle = this.dropdown.show
+			        ? "rotate(180deg)"
+			        : "rotate(0deg)";
+			    },
+			    // 选择销售中/下架选项
+			    changeDropdown(key) {
+			      console.log(key);
+			      this.dropdown.value = key;
+			      this.good_status = this.dropdown.options[key].value;
+				  this.formData.status = this.dropdown.options[key].num;
+			      this.closeDropdown();
+			      uni.showToast({
+			        title: this.good_status,
+			        duration: 2000,
+			      });
+				 },
+			submitInfo() {
+				console.log({
+						...this.formData
+					});
+				this.$api.sendRequest({
+					url: '/api/order/modifyGoodsStockByBaseComponents_test',
+					data: {
+						...this.formData
+					},
+					success: res => {
+						console.log(res);
+						// if (res.code >= 0 && res.data) {
+						// 	console.log(res);
+							
+						// } else {
+						// 	// this.$util.showToast({
+						// 	// 	title: '未获取到支付信息！'
+						// 	// });
+						// 	// setTimeout(() => {
+						// 	// 	this.$util.redirectTo('/pages/index/index/index', {}, 'reLaunch');
+						// 	// }, 1500);
+						// }
+						if (res === 'success') {
+							_self.$util.showToastLonger({
+								title: '数据更新成功'
+							}, 3000);
+						}
+						else {
+							_self.$util.showToastLonger({
+								title: '数据更新失败'
+							}, 3000);
+						}
+					}
+				});
+			},
 			checkToken() {		
 				_self.token = uni.getStorageSync('token');
 				console.log('self token ',_self.token);
@@ -211,6 +343,19 @@
 </script>
 
 <style lang="scss">
+	.save-item{
+		margin-top:20px;
+	}
+	.uni-input-placeholder{
+		font-size:13px !important;
+	}
+	.title {
+		margin-bottom:10px;
+	}
+ .buttonColor {
+	 background-color: #454cad;
+	 color:white;
+ }
  .edit-info-box {
  	margin-top: 20rpx;
  	display: flex;
@@ -311,6 +456,104 @@
    font-size: 18px;
    color: $dark-text;
  }
+ .container_dropdown{
+	 position: relative;
+ }
+ .makecenter{
+	 display:flex;
+	 align-items: center;
+ }
+// 这是tab栏的样式  (不重要)
+.status_warp {
+  padding: 0 30px;
+  width: 100%;
+  text-align: center;
+  height: 50px;
+  line-height: 50px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #eeeeee;;
+  .triangleIncon {
+    margin-left: 14rpx;
+    width: 14px;
+    height: 14px;
+    background-size: contain;
+    transition: all 0.25s ease-in-out 1;
+   background: url("../../static/triangle.png") no-repeat;
+   background-size: contain;
+  }
+  
+}
+   
+/*  下拉遮罩层 (这里才是最重要的) */
+ .dropdown {
+    display:none;
+	justify-content: center;
+   z-index: 999;
+   position: absolute;
+   top: 60px; //这是相对于tab栏的高度做的定位
+   left: 0;
+   width: 100%;
+   height: 100%;
+   transition-duration: 0.25s;
+   &.show {
+	   display:flex;
+     visibility: visible;
+     .dropdown-mask {
+       opacity: 1;
+     }
+     .dropdown-list {
+      
+	   display:block;
+     }
+   }
+   // 全遮罩层
+   .dropdown-mask {
+     position: fixed;
+     width: 100vw;
+     height: 100vh;
+    // background-color: rgba(0, 0, 0, 0.4);
+     transition-property: opacity;
+     transition-duration: 0.4s;
+     opacity: 0;
+     top: 70rpx;
+     left: 0;
+   }
+   // 下拉框样式
+   .dropdown-list {
+     position: relative;
+     top: 201px;
+     background-color: #eeeeee;
+     transition-property: transform, opacity;
+     transition-duration: 0.4s;
+     display: none;
+     width: 100%;
+	 height:210px;
+     transform: translateY(-100%);
+     .dropdown-list-cell {
+       line-height: 50px;
+       color: #333;
+       padding: 0 30rpx;
+       border-bottom: 1rpx solid #eee;
+       position: relative;
+       &.active::after {
+         content: "";
+         position: absolute;
+         //right: 30rpx;
+         top: 50%;
+         width: 32px;
+         height: 32px;
+         transform: translateY(-50%);
+         background: url("../../static/checkmark3.png") no-repeat;
+         background-size: contain;
+       }
+     }
+   }
+ }
+ 
+ 
  .popup-footer {
  	height: 100rpx;
  
