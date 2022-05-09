@@ -50,7 +50,7 @@
 			</view>
 		</view>
 			<view class="block-store">
-				<h2 class="title">出库入口调整</h2>
+				<h2 class="title">出入库 库存调整</h2>
 				<!-- Upload  -->
 				<form id="file-upload-form" class="uploader">
 					<label for="file-upload" id="file-drag">
@@ -80,15 +80,16 @@
 								<!-- 下拉菜单end-->
 						</view>
 					</view>
-						<view class="edit-info-box">
-							<text class="info-name">{{$lang('common.orderNo')}}</text>
-							<input class="uni-input info-content input-len" type="text" maxlength="30"
-								:placeholder="$lang('common.orderNo')" v-model="formData.orderNo" />
-						</view>
+						
 						<view class="edit-info-box">
 							<text class="info-name">{{$lang('common.deliveryNo')}}</text>
 							<input class="uni-input info-content input-len" type="text" maxlength="30"
 								:placeholder="$lang('common.deliveryNo')" v-model="formData.deliveryNo" />
+						</view>
+						<view class="edit-info-box">
+							<text class="info-name">{{$lang('common.orderNo')}}</text>
+							<input class="uni-input info-content input-len" type="text" maxlength="30"
+								:placeholder="$lang('common.orderNo')" v-model="formData.orderNo" />
 						</view>
 						<view class="edit-info-box">
 							<text class="info-name">{{$lang('common.nmn')}}</text>
@@ -488,7 +489,7 @@
    
 /*  下拉遮罩层 (这里才是最重要的) */
  .dropdown {
-    display:flex;
+    display:none;
 	justify-content: center;
    z-index: 999;
    position: absolute;
@@ -498,6 +499,7 @@
    height: 100%;
    transition-duration: 0.25s;
    &.show {
+	   display:flex;
      visibility: visible;
      .dropdown-mask {
        opacity: 1;
