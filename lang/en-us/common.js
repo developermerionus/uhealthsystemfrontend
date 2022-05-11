@@ -261,7 +261,8 @@ export const lang = {
 			cq:"CQ",
 			cr:"CR",
 			adminName:"Inventory Keeper",
-			memo:"Memo"
+			memo:"Memo",
+			checkinfo:"Please Check Your Credit Card Info"
 	},
 	
 }
