@@ -828,11 +828,13 @@
 							} else {
 								uni.showModal({
 									title: this.$lang('common.failed_pay'),
-									content: this.$lang('common.try_again'),
+									content: this.$lang('common.checkinfo'),
 									success: function(res) {
 										if (res.confirm) {
-											console.log('继续试');
-										} else if (res.cancel) {
+											self.$emit('cancelorder');
+											//console.log('继续试');
+										} 
+										else if (res.cancel) {
 											self.$emit('cancelorder');
 										}
 									}

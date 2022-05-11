@@ -263,7 +263,8 @@ export const lang = {
 		  cq:"CQ",
 		  cr:"CR",
 		  adminName:"库管员",
-		  memo:"Memo"
+		  memo:"Memo",
+		  checkinfo:"请核对您银行卡的信息"
 		  
 		  
 	}
