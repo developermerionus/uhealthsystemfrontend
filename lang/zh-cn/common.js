@@ -250,7 +250,7 @@ export const lang = {
 		  unionpay: '银联卡',
 		  微信支付:'银联卡支付',
 		  信用卡支付:"Credit Card Pay",
-		  余额支付: "Bonus Pay",
+		  余额支付: "余额支付",
 		  alioverseaspay:"支付宝海外版支付",
 		  "支付宝(国际)":"支付宝(国际)",
 		  "支付宝支付(国际版)":"支付宝支付(国际版)",
