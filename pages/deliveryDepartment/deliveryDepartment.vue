@@ -179,6 +179,10 @@
 							num: '6',
 							value: "有订单号出库"
 						},
+						{
+							num: '7',
+							value: "修改库存(入库+,出库-)"
+						},
 					],
 					value: 0,
 				},
@@ -606,8 +610,10 @@
 			transition-duration: 0.4s;
 			display: none;
 			width: 100%;
-			height: 210px;
+			height: 270px;
 			transform: translateY(-100%);
+			border: solid 1px red;
+			overflow-y: scroll;
 
 			.dropdown-list-cell {
 				line-height: 50px;
