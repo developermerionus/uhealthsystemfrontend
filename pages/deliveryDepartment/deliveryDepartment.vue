@@ -51,6 +51,7 @@
 				zhongtong <text class="copy" @click="$util.copy('zhongtong')">copy{{$lang('copy')}}</text>
 				sanqianli <text class="copy" @click="$util.copy('sanqianli')">copy{{$lang('copy')}}</text>
 				mingtong <text class="copy" @click="$util.copy('mingtong')">copy{{$lang('copy')}}</text>
+				kuaidi101 <text class="copy" @click="$util.copy('kuaidi101')">copy{{$lang('copy')}}</text>
 			</view>
 		</view>
 		<view class='stock-table-container'>
