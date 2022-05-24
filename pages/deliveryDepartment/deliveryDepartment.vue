@@ -182,7 +182,7 @@
 						},
 						{
 							num: '7',
-							value: "修改库存(入库+,出库-)"
+							value: "修改库存(入库+ 出库-)"
 						},
 					],
 					value: 0,
@@ -252,6 +252,20 @@
 					duration: 2000,
 				});
 			},
+			refresh(){
+				this.getGoodsBaseComponentsStock();
+				this.formData =  {
+					status: '4',
+					orderNo: '',
+					deliveryNo: '',
+					nmn: 0,
+					np: 0,
+					cq: 0,
+					cr: 0,
+					adminName: '',
+					memo: ''
+				}
+			},
 			submitInfo() {
 				this.$api.sendRequest({
 					url: '/api/order/modifyGoodsStockByBaseComponents',
@@ -272,6 +286,7 @@
 							_self.$util.showToastLonger({
 								title: '数据更新成功'
 							}, 3000);
+							this.refresh();
 						} else {
 							_self.$util.showToastLonger({
 								title: '数据更新失败'
@@ -605,7 +620,7 @@
 		// 下拉框样式
 		.dropdown-list {
 			position: relative;
-			top: 201px;
+			top: 262px;
 			background-color: #eeeeee;
 			transition-property: transform, opacity;
 			transition-duration: 0.4s;
@@ -613,7 +628,6 @@
 			width: 100%;
 			height: 270px;
 			transform: translateY(-100%);
-			border: solid 1px red;
 			overflow-y: scroll;
 
 			.dropdown-list-cell {
