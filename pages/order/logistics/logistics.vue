@@ -123,7 +123,8 @@ export default {
 				bangde:{url:"www.deppon.com", realName: '邦德快递',redirectUrl:''},
 				shunfeng:{url:"www.sf-international.com", realName: '顺风快递',redirectUrl:''},
 				sanqianli:{url:"www.highsince.com", realName: '三千里快递',redirectUrl:'http://www.highsince.com/track?track_number='},
-				mingtong:{url:"www.tnjex.com", realName: 'mingtong',redirectUrl:'http://www.tnjex.com/index/courier&sn='}
+				mingtong:{url:"www.tnjex.com", realName: 'mingtong',redirectUrl:'http://www.tnjex.com/index/courier&sn='},
+				kuaidi101:{url:"www.kuaidi-101.com", realName: '快递101',redirectUrl:'https://kuaidi-101.com/SelectOrder.aspx?OrderNum='}
 			}
 		};
 	},
