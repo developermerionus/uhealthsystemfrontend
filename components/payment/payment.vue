@@ -619,8 +619,7 @@
 				}
 
 				var payType = this.payTypeList[this.payIndex];
-
-				if (payType.type == 'authorizenetpay' && num == 1) {
+				if (payType.type == 'authorizenetpay' && num == 1 && this.payMoney > 0) {
 					this.setCard = true;
 					this.focusFlag = false;
 					this.$nextTick(function() {
