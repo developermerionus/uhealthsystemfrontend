@@ -963,9 +963,13 @@ export default {
 		},
 		// 显示选择支付方式弹框
 		openChoosePayment() {
-			//console.log('orderPaymentData',this.orderPaymentData);
+			// console.log('orderPaymentData',this.orderPaymentData);
 			
-			if(this.orderPaymentData&&this.orderPaymentData.member_address&&!this.orderPaymentData.member_address.mobile){
+			// 防止108888购买产品
+			if (this.orderPaymentData&&this.orderPaymentData.member_id==108888) {
+				// console.log(this.orderPaymentData.member_id);
+			} 
+			else if(this.orderPaymentData&&this.orderPaymentData.member_address&&!this.orderPaymentData.member_address.mobile){
 				// this.$util.showToast({
 				// 	title: "请您在地址栏中填写手机号"
 				// });
