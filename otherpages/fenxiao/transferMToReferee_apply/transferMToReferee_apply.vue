@@ -27,12 +27,14 @@
 								v-model="transferMoney"/>
 							</view>
 						</view>
-						<!-- <view class="btn withdraw_btn" :class="{ disabled: withdrawMoney == '' || withdrawMoney == 0 }"
-							@click="withdraw"> -->
+						
+						<!-- 转账按钮  -->
 						<view class="btn transfer_btn" :class="{ disabled: transferMoney == '' || transferMoney == 0 }"
 							@click="transfer">
 							{{ $lang('common.transfer_money') }}
 						</view>
+						<!-- 转账按钮 结束 -->
+						
 						<view class="btn transfer_detail_btn" @click="$util.redirectTo('/otherpages/fenxiao/transferMToReferee_list/transferMToReferee_list')">
 							{{ $lang('common.transfer_money_list') }}
 						</view>
