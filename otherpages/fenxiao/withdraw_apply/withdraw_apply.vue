@@ -34,15 +34,19 @@
 					<!-- <text>申请3-7个工作日内可提现到Masspay钱包，钱包中的金额可自行转到会员自己的银行卡上。</text> -->
 					<text>{{ $lang('wallet_description')}}</text>
 				</view>
-				<view class="btn withdraw_btn" :class="{ disabled: withdrawMoney == '' || withdrawMoney == 0 }"
+				
+				<!--  提现按钮和转账按钮-->
+<!-- 				<view class="btn withdraw_btn" :class="{ disabled: withdrawMoney == '' || withdrawMoney == 0 }"
 					@click="withdraw" v-if="member_level>1">
-					{{ $lang(fenxiaoWords.withdraw) + $lang('buttonWords_toMasspay') }}
-				</view>
+					{{ $lang(fenxiaoWords.withdraw) + $lang('buttonWords_toMasspay') }} 
+					</view>  -->
 				<view class="btn transfer_btn"
 					@click="$util.redirectTo('/otherpages/fenxiao/transferMToReferee_apply/transferMToReferee_apply')">
 					<image class="transfer-icon" src="../../../static/images/icons/transferMToReferee.png"></image>
 					{{ $lang('transfer_to_referee') }}		
 				</view>
+				<!--  提现按钮和转账按钮 结束-->
+				
 				<view class="withdraw-list btn"
 					@click="$util.redirectTo('/otherpages/fenxiao/withdraw_list/withdraw_list')"
 					v-if="member_level>1">
