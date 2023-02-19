@@ -253,7 +253,8 @@
 			},
 			
 			handleclickTreeInfoTap(item) {
-				this.treeInfoTap(item);
+				// 取消加号增加新人按钮监控
+				// this.treeInfoTap(item);
 			},
 			
 			

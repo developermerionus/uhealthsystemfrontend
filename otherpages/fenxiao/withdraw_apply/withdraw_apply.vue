@@ -40,11 +40,11 @@
 					@click="withdraw" v-if="member_level>1">
 					{{ $lang(fenxiaoWords.withdraw) + $lang('buttonWords_toMasspay') }} 
 					</view>  -->
-				<view class="btn transfer_btn"
+				<!-- <view class="btn transfer_btn"
 					@click="$util.redirectTo('/otherpages/fenxiao/transferMToReferee_apply/transferMToReferee_apply')">
 					<image class="transfer-icon" src="../../../static/images/icons/transferMToReferee.png"></image>
 					{{ $lang('transfer_to_referee') }}		
-				</view>
+				</view> -->
 				<!--  提现按钮和转账按钮 结束-->
 				
 				<view class="withdraw-list btn"

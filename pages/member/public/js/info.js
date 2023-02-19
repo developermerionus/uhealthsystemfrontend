@@ -362,8 +362,9 @@ export default {
 				
 				    break;
 				case "password":
-					this.indent = item;
-					this.customNavTitle = this.$lang(item);
+				// 跳转修改密码
+					// this.indent = item;
+					// this.customNavTitle = this.$lang(item);
 					break;
 				default:
 					break;
