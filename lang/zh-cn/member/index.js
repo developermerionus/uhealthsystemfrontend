@@ -128,4 +128,7 @@ export const lang = {
 	mstock_preGivenFromLevel: '级别贡献奖股票',
 	mstock_preGivenFromCompany: '小蜜蜂奖股票',
 	mstock_eventTotalBonus_lastweek: '千万股票活动股票（截至上周）',
+	
+	// treelife
+	treelifeActivate: '生命树跳转注册',
 }

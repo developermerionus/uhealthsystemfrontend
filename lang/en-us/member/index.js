@@ -124,4 +124,7 @@ export const lang = {
 	mstock_preGivenFromLevel: 'High Level Bonus Stock ',
 	mstock_preGivenFromCompany: 'Honeybee Bonus Stock',
 	mstock_eventTotalBonus_lastweek: 'Total Event Stock(Till Lastweek)',
+	
+	// treelife
+	treelifeActivate: 'Treelife Sign up',
 }
