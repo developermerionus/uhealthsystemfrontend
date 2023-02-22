@@ -50,6 +50,9 @@
 							<image class="wallet-icon" src="../../../static/images/icons/wallet.png"></image>
 							{{ $lang('electronicwallet') }}
 						</button>
+						<button class="wallet-button" type="default" @click="LinkToTreeLife()">
+							{{ $lang('treelifeActivate') }}
+						</button>
 					</view>
 					<view class="wallet-button-container" v-if="token && memberGroup=='1'">
 						<button class="wallet-button" type="default"
@@ -1114,6 +1117,24 @@
 						if (res.code == 0 && res.data) {
 							this.membercard = res.data;
 						}
+					}
+				});
+			},
+			
+			LinkToTreeLife() {
+				let treelifeLinkPassword = '';
+				let treelifeURL='https://www.treelifeglobal.com/Uhealth/verify/'+this.memberInfo.member_id+'-';
+				
+				this.$api.sendRequest({
+					url: '/api/member/getTreelifeLinkPassword',
+					success: res => {
+						if (res.code == 0 && res.data[0]) {
+							if (res.data[0].password) {
+								treelifeLinkPassword = res.data[0].password;
+							}
+						}
+						treelifeURL = treelifeURL+treelifeLinkPassword;
+						window.open(treelifeURL,'winopen');
 					}
 				});
 			}
